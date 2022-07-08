@@ -27,6 +27,7 @@ import {
   Footer,
 } from './styles';
 import {HeaderComponent} from '../../components/HeaderComponent';
+import { PhotoSlider } from '../../components/PhotoSlider';
 
 interface ListRestaurantProps {
   food_types: ListFoodType[];
@@ -179,10 +180,7 @@ export function Home() {
           }}
           ListHeaderComponent={
             <>
-              <BannerWrapper>
-                <Banner source={theme.images.banner} />
-                <Banner source={theme.images.banner} />
-              </BannerWrapper>
+              <PhotoSlider />
 
               <TitleWrapper>
                 <Title>Categoria</Title>
