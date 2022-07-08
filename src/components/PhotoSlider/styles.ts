@@ -1,6 +1,6 @@
-import { Dimensions } from 'react-native';
-import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
-import styled from 'styled-components/native';
+import styled from "styled-components/native";
+import { Dimensions } from "react-native";
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 interface PhotoIndexProps {
   active: boolean;
@@ -11,7 +11,7 @@ export const Container = styled.View``;
 export const Banners = styled.View`
   padding-bottom: ${RFValue(7)}px;
   margin-top: ${RFValue(10)}px;
-  width: ${Dimensions.get('window').width}px;
+  width: ${Dimensions.get("window").width}px;
 `;
 
 export const Banner = styled.Image`
