@@ -18,8 +18,6 @@ import {Category} from '../../components/CategoryButton';
 import {
   Container,
   Content,
-  BannerWrapper,
-  Banner,
   TitleWrapper,
   Title,
   CategorySelect,
@@ -27,7 +25,7 @@ import {
   Footer,
 } from './styles';
 import {HeaderComponent} from '../../components/HeaderComponent';
-import { PhotoSlider } from '../../components/PhotoSlider';
+import {PhotoSlider} from '../../components/PhotoSlider';
 
 interface ListRestaurantProps {
   food_types: ListFoodType[];

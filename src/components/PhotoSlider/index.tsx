@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { FlatList, ViewToken } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { RFValue } from 'react-native-responsive-fontsize';
-import { useAuth } from '../../global/Context';
-import { useFetch } from '../../global/services/get';
-import { Banner } from '../Banner';
-import { Container, PhotoIndexes, PhotoIndex, Banners } from './styles';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useEffect, useRef, useState} from 'react';
+import {FlatList, ViewToken} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {RFValue} from 'react-native-responsive-fontsize';
+import {useAuth} from '../../global/Context';
+import {useFetch} from '../../global/services/get';
+import {Banner} from '../Banner';
+import {Container, PhotoIndexes, PhotoIndex, Banners} from './styles';
 interface ChangePhotoProps {
   viewableItems: ViewToken[];
   changed: ViewToken[];
@@ -45,10 +46,10 @@ export function PhotoSlider() {
     setPhotoIndex(index);
   });
 
-  const { token } = useAuth();
+  const {token} = useAuth();
   const navigation = useNavigation();
 
-  const { data: dataGetBanners, fetchData: fetchDataBanners } =
+  const {data: dataGetBanners, fetchData: fetchDataBanners} =
     useFetch<BannersResponse>('/restaurantPromotion?page=0&quantity=x', {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -80,12 +81,12 @@ export function PhotoSlider() {
     <Container>
       <Banners>
         <FlatList
-          contentContainerStyle={{ paddingHorizontal: RFValue(4) }}
+          contentContainerStyle={{paddingHorizontal: RFValue(4)}}
           horizontal
           showsHorizontalScrollIndicator={false}
           data={dataGetBanners.content}
-          keyExtractor={(item) => item?.id.toString()}
-          renderItem={({ item }) => (
+          keyExtractor={item => item?.id.toString()}
+          renderItem={({item}) => (
             <Banner
               onPressed={() => {
                 handleRestaurant(
@@ -101,7 +102,7 @@ export function PhotoSlider() {
             />
           )}
           onViewableItemsChanged={indexChanged.current}
-          viewabilityConfig={{ viewAreaCoveragePercentThreshold: 50 }}
+          viewabilityConfig={{viewAreaCoveragePercentThreshold: 50}}
         />
       </Banners>
       <PhotoIndexes>
