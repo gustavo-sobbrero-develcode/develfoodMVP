@@ -22,15 +22,9 @@ export function Banner({ src, onPressed }: BannerProps) {
 
   const { token } = useAuth();
 
-  const [photos, setPhotos] = useState<Photos[]>([]);
-
-  function onSuccessLoad(data?: any) {
-    setPhotos([...photos, ...(data as Photos[])]);
-  }
-
   useEffect(() => {
-    (async () => await fetchData(onSuccessLoad))();
-  }, []);
+    (async () => await fetchData())();
+  }, [src]);
 
   const { data, fetchData } = useFetch<Photos>(src, {
     headers: {

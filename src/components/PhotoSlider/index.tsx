@@ -62,7 +62,7 @@ export function PhotoSlider() {
   function handleRestaurant(
     id: number,
     name: string,
-    photo_url: any,
+    photo_url: string,
     food_types: string,
   ) {
     navigation.navigate(
