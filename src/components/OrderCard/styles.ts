@@ -48,12 +48,12 @@ export const StatusOrder = styled.Text`
   font-size: ${RFValue(10)}px;
   font-weight: 700;
   color: ${({theme}) => theme.colors.text_gray};
-  left: ${RFValue(20)}px;
+  left: ${RFValue(18)}px;
   bottom: ${RFValue(6)}px;
 `;
 
 export const OrderN = styled.Text`
-  left: ${RFValue(30)}px;
+  left: ${RFValue(25)}px;
   bottom: ${RFValue(6)}px;
   font-size: ${RFValue(10)}px;
   font-weight: 700;
@@ -64,7 +64,7 @@ export const OrderNumber = styled.Text`
   font-size: ${RFValue(10)}px;
   font-weight: 400;
   color: ${({theme}) => theme.colors.text_gray};
-  left: ${RFValue(30)}px;
+  left: ${RFValue(25)}px;
   bottom: ${RFValue(6)}px;
 `;
 

@@ -149,6 +149,17 @@ export function Orders() {
           }
           orderNumber={item.id}
           foodName={listItems(item)}
+          source={
+            item.status === 'PEDIDO_REALIZADO'
+              ? theme.icons.waitingorder
+              : item.status === 'PEDIDO_EM_REALIZAÇÃO'
+              ? theme.icons.doingorder
+              : item.status === 'PEDIDO_À_CAMINHO'
+              ? theme.icons.deliveryorder
+              : item.status === 'PEDIDO_FINALIZADO'
+              ? theme.icons.checkorder
+              : null
+          }
         />
       </Content>
     ) : null;

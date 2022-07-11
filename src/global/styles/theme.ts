@@ -64,6 +64,10 @@ export default {
     cleanUp: require('../assets/Icons/cleanUp.png'),
     checkOrders: require('../assets/Icons/checkOrders.png'),
     map: require('../assets/Icons/map.png'),
+    checkorder: require('../assets/Icons/checkorder.png'),
+    deliveryorder: require('../assets/Icons/deliveryorder.png'),
+    doingorder: require('../assets/Icons/doingorder.png'),
+    waitingorder: require('../assets/Icons/waitingorder.png'),
   },
 
   images: {
