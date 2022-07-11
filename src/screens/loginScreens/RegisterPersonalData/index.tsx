@@ -42,8 +42,8 @@ interface FormData {
 const schema = Yup.object().shape({
   name: Yup.string().required('Nome é obrigatório.'),
   lastName: Yup.string().required('Sobrenome é obrigatório.'),
-  cpf: Yup.string().test('is-cpf', 'CPF inválido.', (value: any) =>
-    cpf.isValid(value),
+  cpf: Yup.string().test('is-cpf', 'CPF inválido.', value =>
+    cpf.isValid(value!),
   ),
   phone: Yup.string()
     .required('Telefone é obrigatório.')

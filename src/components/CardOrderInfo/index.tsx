@@ -23,7 +23,7 @@ interface Photos {
 }
 
 interface ṔlateProps {
-  name: any;
+  name: string;
   description: string;
   price: number;
   source: string;
