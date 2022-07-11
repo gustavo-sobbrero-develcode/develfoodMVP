@@ -13,7 +13,6 @@ export const Container = styled.TouchableOpacity`
   margin-right: ${RFValue(8)}px;
   justify-content: center;
   align-items: center;
-  border-radius: 25px;
   background-color: ${({ theme }) => theme.colors.background_red};
 `;
 
