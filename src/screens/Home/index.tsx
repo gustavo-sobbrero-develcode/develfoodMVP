@@ -1,24 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useCallback, useEffect, useLayoutEffect, useState } from "react";
+import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
 import {
   ActivityIndicator,
   Dimensions,
   StatusBar,
   StyleSheet,
-} from "react-native";
-import { StyleSheetManager, useTheme } from "styled-components";
-import { Input } from "../../components/Input";
-import { useAuth } from "../../global/Context";
-import { useFetch } from "../../global/services/get";
-import { RFValue } from "react-native-responsive-fontsize";
-import { useDebouncedCallback } from "use-debounce";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import { ListEmptyComponent } from "../../components/ListEmptyComponent";
-import { FlatList } from "react-native-gesture-handler";
+} from 'react-native';
+import {StyleSheetManager, useTheme} from 'styled-components';
+import {Input} from '../../components/Input';
+import {useAuth} from '../../global/Context';
+import {useFetch} from '../../global/services/get';
+import {RFValue} from 'react-native-responsive-fontsize';
+import {useDebouncedCallback} from 'use-debounce';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {ListEmptyComponent} from '../../components/ListEmptyComponent';
+import {FlatList} from 'react-native-gesture-handler';
 
-import { Restaurants } from "../../components/Restaurants";
-import { Category } from "../../components/CategoryButton";
+import {Restaurants} from '../../components/Restaurants';
+import {Category} from '../../components/CategoryButton';
 
 import {
   Container,
@@ -30,9 +30,9 @@ import {
   CategorySelect,
   RestaurantListWrapper,
   Footer,
-} from "./styles";
-import { HeaderComponent } from "../../components/HeaderComponent";
-import theme from "../../global/styles/theme";
+} from './styles';
+import {HeaderComponent} from '../../components/HeaderComponent';
+import theme from '../../global/styles/theme';
 
 interface ListRestaurantProps {
   food_types: ListFoodType[];
@@ -50,15 +50,15 @@ interface ListFoodType {
 }
 
 const CardMargins =
-  (Dimensions.get("screen").width - RFValue(312)) / RFValue(3.5);
+  (Dimensions.get('screen').width - RFValue(312)) / RFValue(3.5);
 
 export function Home() {
   const theme = useTheme();
 
-  const { token } = useAuth();
+  const {token} = useAuth();
 
   const [isFiltred, setIsFiltred] = useState({
-    text: "",
+    text: '',
     page: 0,
   });
 
@@ -66,9 +66,9 @@ export function Home() {
 
   const [categories, setCategories] = useState<ListFoodType[]>([]);
 
-  const [foodType, setFoodType] = useState<string>("");
+  const [foodType, setFoodType] = useState<string>('');
 
-  const [activeButton, setActiveButton] = useState<string>("");
+  const [activeButton, setActiveButton] = useState<string>('');
 
   const [restaurants, setRestaurants] = useState<ListRestaurantProps[]>([]);
 
@@ -78,26 +78,26 @@ export function Home() {
     id: number,
     name: string,
     photo_url: string,
-    food_types: string
+    food_types: string,
   ) {
     navigation.navigate(
-      "RestaurantProfile" as never,
-      { id, name, photo_url, food_types } as never
+      'RestaurantProfile' as never,
+      {id, name, photo_url, food_types} as never,
     );
   }
 
-  const { data, fetchData } = useFetch<ListRestaurantResponse>(
+  const {data, fetchData} = useFetch<ListRestaurantResponse>(
     `/restaurant/filter?${
-      foodType !== "" ? `foodType=${foodType}&` : null
+      foodType !== '' ? `foodType=${foodType}&` : null
     }name=${isFiltred.text}&page=${isFiltred.page}&quantity=10`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    }
+    },
   );
 
-  const { data: datafoodtype, fetchData: fetchfoodtype } = useFetch<
+  const {data: datafoodtype, fetchData: fetchfoodtype} = useFetch<
     ListFoodType[]
   >(`/foodType`, {
     headers: {
@@ -117,7 +117,7 @@ export function Home() {
 
   async function handleLoadOnEnd() {
     if (data.totalPages !== isFiltred.page) {
-      setIsFiltred({ ...isFiltred, page: isFiltred.page + 1 });
+      setIsFiltred({...isFiltred, page: isFiltred.page + 1});
     }
   }
 
@@ -125,19 +125,19 @@ export function Home() {
     setIsLoading(true);
     if (value.length > 1) {
       setRestaurants([]);
-      setIsFiltred({ text: value, page: 0 });
+      setIsFiltred({text: value, page: 0});
     } else {
       setRestaurants([]);
-      setIsFiltred({ text: "", page: 0 });
+      setIsFiltred({text: '', page: 0});
     }
     setIsLoading(false);
   }
 
-  const debounced = useDebouncedCallback((value) => {
+  const debounced = useDebouncedCallback(value => {
     handleSearch(value);
   }, 1500);
 
-  const renderItem = ({ item }: { item: ListRestaurantProps }) => {
+  const renderItem = ({item}: {item: ListRestaurantProps}) => {
     return (
       <RestaurantListWrapper>
         <Restaurants
@@ -146,7 +146,7 @@ export function Home() {
               item.id,
               item.name,
               item.photo_url,
-              item.food_types.length > 0 ? item.food_types[0].name : ""
+              item.food_types.length > 0 ? item.food_types[0].name : '',
             )
           }
           name={item.name}
@@ -155,7 +155,7 @@ export function Home() {
             item.food_types.length > 0
               ? item.food_types[0]?.name.charAt(0).toUpperCase() +
                 item.food_types[0]?.name.slice(1).toLowerCase()
-              : ""
+              : ''
           }
           avaliation={item.id}
           source={item.photo_url ? item.photo_url : theme.images.noImage}
@@ -166,16 +166,16 @@ export function Home() {
 
   const onPress = (item: ListFoodType) => {
     activeButton === item.name
-      ? setActiveButton("")
+      ? setActiveButton('')
       : setActiveButton(item.name);
     setRestaurants([]);
-    foodType === item.name ? setFoodType("") : setFoodType(item.name);
-    console.log(item.name, " pressed");
+    foodType === item.name ? setFoodType('') : setFoodType(item.name);
+    console.log(item.name, ' pressed');
   };
 
   const renderCategories =
     categories.length > 1 &&
-    categories?.map((item) => {
+    categories?.map(item => {
       return (
         <Category
           key={item.id}
@@ -190,7 +190,7 @@ export function Home() {
   useFocusEffect(
     useCallback(() => {
       loadRestaurants();
-    }, [isFiltred])
+    }, [isFiltred]),
   );
 
   useEffect(() => {
@@ -209,7 +209,7 @@ export function Home() {
     <>
       <Container>
         <StatusBar
-          barStyle={"light-content"}
+          barStyle={'light-content'}
           translucent={false}
           backgroundColor={theme.colors.background_red}
         />
@@ -224,15 +224,15 @@ export function Home() {
 
         <FlatList
           data={restaurants}
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={item => item.id.toString()}
           numColumns={2}
           columnWrapperStyle={{
-            justifyContent: "space-between",
+            justifyContent: 'space-between',
             paddingHorizontal: RFValue(CardMargins),
             paddingBottom: 10,
           }}
           contentContainerStyle={{
-            width: "100%",
+            width: '100%',
           }}
           ListHeaderComponent={
             <>
@@ -247,8 +247,7 @@ export function Home() {
 
               <CategorySelect
                 horizontal={true}
-                showsHorizontalScrollIndicator={false}
-              >
+                showsHorizontalScrollIndicator={false}>
                 {renderCategories}
               </CategorySelect>
 
@@ -257,7 +256,7 @@ export function Home() {
                   source={theme.icons.search}
                   placeholder="Buscar restaurantes"
                   keyboardType="email-address"
-                  onChangeText={(value) => debounced(value)}
+                  onChangeText={value => debounced(value)}
                 />
               </Content>
             </>
@@ -269,7 +268,7 @@ export function Home() {
           )}
           renderItem={renderItem}
           style={{
-            width: "100%",
+            width: '100%',
             marginTop: 10,
             margin: 20,
           }}
