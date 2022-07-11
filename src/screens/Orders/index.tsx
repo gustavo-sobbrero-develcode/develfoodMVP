@@ -108,8 +108,18 @@ export function Orders() {
     setIsLoading(false);
   }
 
-  function handlerOrderInfo(name: string, photo_url: string, id: number) {
-    navigation.navigate('OrderInfo' as never, {name, photo_url, id} as never);
+  function handlerOrderInfo(
+    name: string,
+    photo_url: string,
+    id: number,
+    totalValue: number,
+    date: Date,
+    status: string,
+  ) {
+    navigation.navigate(
+      'OrderInfo' as never,
+      {name, photo_url, id, totalValue, date, status} as never,
+    );
   }
 
   const renderItem = ({item}: {item: OrderProps}) => {
@@ -122,6 +132,9 @@ export function Orders() {
               item.restaurant.name,
               item.restaurant.photo_url,
               item.id,
+              item.totalValue,
+              item.date,
+              item.status,
             )
           }
           photo_url={item.restaurant.photo_url}
@@ -135,44 +148,7 @@ export function Orders() {
               .replace('_', ' ')
           }
           orderNumber={item.id}
-          foodName={`${
-            item.requestItems[0].quantity > 1
-              ? item.requestItems[0].quantity
-              : ''
-          } ${item.requestItems[0].plateDTO.name} ${
-            item.requestItems[1]
-              ? ` + ${
-                  item.requestItems[1].quantity > 1
-                    ? item.requestItems[1].quantity
-                    : ''
-                } ${item.requestItems[1].plateDTO.name}`
-              : ''
-          } ${
-            item.requestItems[2]
-              ? ` + ${
-                  item.requestItems[2].quantity > 1
-                    ? item.requestItems[2].quantity
-                    : ''
-                } ${item.requestItems[2].plateDTO.name}`
-              : ''
-          } ${
-            item.requestItems[3]
-              ? ` + ${
-                  item.requestItems[3].quantity > 1
-                    ? item.requestItems[3].quantity
-                    : ''
-                } ${item.requestItems[3].plateDTO.name}`
-              : ''
-          } ${
-            item.requestItems[4]
-              ? ` + ${
-                  item.requestItems[4].quantity > 1
-                    ? item.requestItems[4].quantity
-                    : ''
-                } ${item.requestItems[4].plateDTO.name}`
-              : ''
-          } 
-          ${item.requestItems[5] ? '...' : ''}`}
+          foodName={listItems(item)}
         />
       </Content>
     ) : null;
@@ -196,6 +172,23 @@ export function Orders() {
     });
     setOrderSections(orderFormatted);
   }
+
+  const listItems = (item: OrderProps) => {
+    let quantityVisible = item.requestItems.map(
+      (requestItem: RequestItemsResponse, index) => {
+        if (requestItem.quantity > 1) {
+          return index !== 0
+            ? ' + ' + requestItem.quantity + ' ' + requestItem.plateDTO.name
+            : requestItem.quantity + ' ' + requestItem.plateDTO.name;
+        } else {
+          return index !== 0
+            ? ' + ' + requestItem?.plateDTO.name
+            : requestItem?.plateDTO.name;
+        }
+      },
+    );
+    return quantityVisible;
+  };
 
   async function handleLoadOnEnd() {
     if (data.totalPages !== filter) {

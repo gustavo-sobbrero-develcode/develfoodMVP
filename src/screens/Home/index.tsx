@@ -37,6 +37,7 @@ interface ListRestaurantProps {
 interface ListRestaurantResponse {
   content: ListRestaurantProps[];
   totalPages: number;
+  totalElements: number;
 }
 interface ListFoodType {
   id: number;
@@ -226,7 +227,7 @@ export function Home() {
             handleLoadOnEnd();
           }}
           ListEmptyComponent={
-            !isLoading ? (
+            !isLoading && data.totalElements === 0 ? (
               <ListEmptyComponent
                 source={theme.images.notFound}
                 title="Nenhum restaurante encontrado"

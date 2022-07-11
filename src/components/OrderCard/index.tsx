@@ -22,7 +22,7 @@ interface OrderProps {
   restaurantName: string;
   statusOrder: string;
   orderNumber: number;
-  foodName: string;
+  foodName: string[];
   onPress: () => void;
   restaurantID: number;
 }
@@ -73,7 +73,7 @@ export function OrderCard({
             <OrderN>N° </OrderN>
             <OrderNumber>{orderNumber}</OrderNumber>
           </WrapperInfoPoduct>
-          <FoodOrderName>{foodName}</FoodOrderName>
+          <FoodOrderName numberOfLines={3}>{foodName}</FoodOrderName>
         </WrapperRestaurantInfo>
       </Container>
     </TouchableOpacity>

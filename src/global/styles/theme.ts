@@ -6,6 +6,7 @@ export default {
     header: '#C20C18',
     button: '#C20C18',
     card: '#F0F0F5',
+    cardRemove: '#FF0000',
     favorite_border: '#DEDCDC',
 
     text_white: '#FFFFFF',
@@ -83,5 +84,6 @@ export default {
     doing: require('../assets/Images/doing.png'),
     inRoute: require('../assets/Images/inRoute.png'),
     delivered: require('../assets/Images/delivered.png'),
+    pin: require('../assets/Images/pin.png'),
   },
 };

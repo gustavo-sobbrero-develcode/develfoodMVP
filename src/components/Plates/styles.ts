@@ -5,6 +5,13 @@ export interface CartStyleProps {
   insideCart: number;
 }
 
+export const ContentContainer = styled.View`
+  width: 100%;
+  height: ${RFValue(103)}px;
+  background-color: ${({theme}) => theme.colors.cardRemove};
+  border-radius: ${RFValue(8)}px;
+`;
+
 export const Container = styled.View.attrs({
   elevation: 10,
 })`
