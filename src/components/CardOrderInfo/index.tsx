@@ -69,7 +69,7 @@ export function CardOrderInfo({
 
       <WrapperPlateInfo>
         <PlateTitle>{name}</PlateTitle>
-        <PlateInfo>{description}</PlateInfo>
+        <PlateInfo numberOfLines={3}>{description}</PlateInfo>
 
         <WrapperAdvancedInfo>
           <PriceWrapper>

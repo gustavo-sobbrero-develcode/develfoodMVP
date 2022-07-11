@@ -136,7 +136,7 @@ export function Plates({
 
           <WrapperPlateInfo>
             <PlateTitle>{name}</PlateTitle>
-            <PlateInfo>{description}</PlateInfo>
+            <PlateInfo numberOfLines={3}>{description}</PlateInfo>
 
             <WrapperAdvancedInfo>
               <PriceWrapper>
@@ -205,7 +205,7 @@ export function Plates({
 
       <WrapperPlateInfo>
         <PlateTitle>{name}</PlateTitle>
-        <PlateInfo>{description}</PlateInfo>
+        <PlateInfo numberOfLines={3}>{description}</PlateInfo>
 
         <WrapperAdvancedInfo>
           <PriceWrapper>
