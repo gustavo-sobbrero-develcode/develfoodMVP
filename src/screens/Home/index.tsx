@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   Dimensions,
   StatusBar,
   StyleSheet,
 } from 'react-native';
-import {StyleSheetManager, useTheme} from 'styled-components';
+import {useTheme} from 'styled-components';
 import {Input} from '../../components/Input';
 import {useAuth} from '../../global/Context';
 import {useFetch} from '../../global/services/get';
@@ -16,7 +16,6 @@ import {useDebouncedCallback} from 'use-debounce';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {ListEmptyComponent} from '../../components/ListEmptyComponent';
 import {FlatList} from 'react-native-gesture-handler';
-
 import {Restaurants} from '../../components/Restaurants';
 import {Category} from '../../components/CategoryButton';
 
@@ -166,8 +165,8 @@ export function Home() {
 
   const onPress = (item: ListFoodType) => {
     activeButton === item.name
-      ? (setActiveButton(''), console.log(item.name, ' unpressed'))
-      : (setActiveButton(item.name), console.log(item.name, ' pressed'));
+      ? (setActiveButton(''))
+      : (setActiveButton(item.name));
     setRestaurants([]);
     foodType === item.name ? setFoodType('') : setFoodType(item.name);
     setIsFiltred({...isFiltred, page: 0});
@@ -244,7 +243,9 @@ export function Home() {
 
               <CategorySelect
                 horizontal={true}
-                showsHorizontalScrollIndicator={false}>
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{paddingLeft: RFValue(10)}}
+                >
                 {renderCategories}
               </CategorySelect>
 

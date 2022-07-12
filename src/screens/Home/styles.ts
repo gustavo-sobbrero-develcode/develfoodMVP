@@ -44,7 +44,6 @@ export const Title = styled.Text`
 export const CategorySelect = styled.ScrollView`
   flex-direction: row;
   margin-top: ${RFValue(18)}px;
-  padding-left: ${RFValue(14)}px;
 `;
 
 export const Content = styled.View`
