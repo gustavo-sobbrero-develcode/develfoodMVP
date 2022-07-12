@@ -1,6 +1,6 @@
-import styled from "styled-components/native";
-import { Dimensions } from "react-native";
-import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import styled from 'styled-components/native';
+import {Dimensions} from 'react-native';
+import {RFPercentage, RFValue} from 'react-native-responsive-fontsize';
 
 interface PhotoIndexProps {
   active: boolean;
@@ -11,7 +11,7 @@ export const Container = styled.View``;
 export const Banners = styled.View`
   padding-bottom: ${RFValue(7)}px;
   margin-top: ${RFValue(10)}px;
-  width: ${Dimensions.get("window").width}px;
+  width: ${Dimensions.get('window').width}px;
 `;
 
 export const Banner = styled.Image`
@@ -32,9 +32,9 @@ export const PhotoIndexes = styled.View`
 `;
 
 export const PhotoIndex = styled.View<PhotoIndexProps>`
-  height: ${({ active }) => (active ? 6 : 4)}px;
-  width: ${({ active }) => (active ? 6 : 4)}px;
-  background-color: ${({ theme, active }) =>
+  height: ${({active}) => (active ? 6 : 4)}px;
+  width: ${({active}) => (active ? 6 : 4)}px;
+  background-color: ${({theme, active}) =>
     active ? theme.colors.background_red : theme.colors.icon_slider};
   border-radius: 6px;
   margin: 0 5px;
