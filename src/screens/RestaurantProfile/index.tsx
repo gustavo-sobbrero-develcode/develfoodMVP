@@ -33,7 +33,7 @@ import {
   PlatesWrapper,
 } from './styles';
 
-interface Plate {
+export interface Plate {
   id: number;
   name: string;
   description: string;
@@ -95,6 +95,7 @@ export function RestaurantProfile({route}: RouteParams) {
 
   function onSuccess(response: Plate[]) {
     setPlate([...plate, ...response]);
+    console.log(response);
   }
 
   async function loadPlates() {

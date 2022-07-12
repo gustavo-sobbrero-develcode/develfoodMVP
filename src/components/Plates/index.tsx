@@ -7,6 +7,7 @@ import {useTheme} from 'styled-components';
 import {useAuth} from '../../global/Context';
 import {useCreateCart} from '../../global/Context/Cart';
 import {useFetch} from '../../global/services/get';
+import {usePut} from '../../global/services/put';
 
 import {
   Container,
@@ -32,6 +33,8 @@ import {
   CleanUpButton,
   CleanUpImage,
   CleanUpTitle,
+  FavoriteButton,
+  FavoriteImage,
 } from './styles';
 
 interface ListPlatesProps {
@@ -40,11 +43,11 @@ interface ListPlatesProps {
   description: string;
   price: number;
   source: string;
-  restaurantID: number;
+  restaurantID?: number;
   restaurantFoodTypes?: string;
   restaurantName?: string;
   inside: boolean;
-  photoRestaurant: string;
+  photoRestaurant?: string;
   Swipe: boolean;
 }
 
@@ -123,6 +126,27 @@ export function Plates({
     fetchData();
   }, [source]);
 
+  const favoriteWhite = require('../../global/assets/Icons/favoriteRestaurant.png');
+  interface FavoriteResponse {
+    id: number;
+  }
+
+  function favoritePlate(id: number) {
+    handlerPut();
+  }
+
+  const {
+    data: dataPut,
+    handlerPut,
+    error,
+  } = usePut<any>(`/plate/favorite/${id}`, undefined, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  // dataPut && console.log('data', dataPut);
+  // error && console.log('erro', error);
+
   return Swipe ? (
     <Swipeable renderLeftActions={leftSwipe}>
       <Container>
@@ -190,6 +214,10 @@ export function Plates({
     </Swipeable>
   ) : (
     <Container>
+      <FavoriteButton onPress={() => favoritePlate(id)}>
+        <FavoriteImage source={favoriteWhite} />
+      </FavoriteButton>
+
       <WrapperImage>
         <PlateImage
           source={data.code ? {uri: `${data.code}`} : theme.images.noImage}
