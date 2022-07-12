@@ -1,8 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useCallback, useState} from 'react';
-import {ActivityIndicator, Dimensions, StatusBar} from 'react-native';
-import {useTheme} from 'styled-components';
+import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
+import {
+  ActivityIndicator,
+  Dimensions,
+  StatusBar,
+  StyleSheet,
+} from 'react-native';
+import {StyleSheetManager, useTheme} from 'styled-components';
 import {Input} from '../../components/Input';
 import {useAuth} from '../../global/Context';
 import {useFetch} from '../../global/services/get';
@@ -27,6 +32,7 @@ import {
   Footer,
 } from './styles';
 import {HeaderComponent} from '../../components/HeaderComponent';
+import theme from '../../global/styles/theme';
 
 interface ListRestaurantProps {
   food_types: ListFoodType[];
@@ -59,6 +65,12 @@ export function Home() {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const [categories, setCategories] = useState<ListFoodType[]>([]);
+
+  const [foodType, setFoodType] = useState<string>('');
+
+  const [activeButton, setActiveButton] = useState<string>('');
+
   const [restaurants, setRestaurants] = useState<ListRestaurantProps[]>([]);
 
   const navigation = useNavigation();
@@ -76,13 +88,23 @@ export function Home() {
   }
 
   const {data, fetchData} = useFetch<ListRestaurantResponse>(
-    `/restaurant/filter?name=${isFiltred.text}&page=${isFiltred.page}&quantity=10`,
+    `/restaurant/filter?${
+      foodType !== '' ? `foodType=${foodType}&` : null
+    }name=${isFiltred.text}&page=${isFiltred.page}&quantity=10`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     },
   );
+
+  const {data: datafoodtype, fetchData: fetchfoodtype} = useFetch<
+    ListFoodType[]
+  >(`/foodType`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   function onSuccess(response: ListRestaurantResponse) {
     setRestaurants([...restaurants, ...response.content]);
@@ -143,11 +165,46 @@ export function Home() {
     );
   };
 
+  const onPress = (item: ListFoodType) => {
+    activeButton === item.name
+      ? setActiveButton('')
+      : setActiveButton(item.name);
+    setRestaurants([]);
+    foodType === item.name ? setFoodType('') : setFoodType(item.name);
+    console.log(item.name, ' pressed');
+  };
+
+  const renderCategories =
+    categories.length > 1 &&
+    categories?.map(item => {
+      return (
+        <Category
+          key={item.id}
+          title={item.name}
+          style={activeButton === item.name && styles.activeButton}
+          textStyle={activeButton === item.name && styles.activeText}
+          onPress={() => onPress(item)}
+        />
+      );
+    });
+
   useFocusEffect(
     useCallback(() => {
       loadRestaurants();
     }, [isFiltred]),
   );
+
+  useEffect(() => {
+    (async () => await fetchfoodtype())();
+  }, []);
+
+  useEffect(() => {
+    datafoodtype && setCategories(datafoodtype);
+  }, [datafoodtype]);
+
+  useLayoutEffect(() => {
+    loadRestaurants();
+  }, [foodType]);
 
   return (
     <>
@@ -192,14 +249,7 @@ export function Home() {
               <CategorySelect
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}>
-                <Category title="Pizza" />
-                <Category title="Churrasco" />
-                <Category title="Almoço" />
-                <Category title="Massas" />
-                <Category title="Coreana" />
-                <Category title="Japonesa" />
-                <Category title="Tailandesa" />
-                <Category title="Chinesa" />
+                {renderCategories}
               </CategorySelect>
 
               <Content>
@@ -239,3 +289,14 @@ export function Home() {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  activeButton: {
+    backgroundColor: theme.colors.background,
+    borderWidth: 2,
+    borderColor: theme.colors.background_red,
+  },
+  activeText: {
+    color: theme.colors.background_red,
+  },
+});
