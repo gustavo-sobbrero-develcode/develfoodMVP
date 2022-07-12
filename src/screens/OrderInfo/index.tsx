@@ -64,9 +64,9 @@ interface OrderProps {
   date: Date;
   totalValue: number;
   status: string;
-  requestItems: Props[];
+  requestItems: RequestiItemsProps[];
 }
-interface Props {
+interface RequestiItemsProps {
   id: number;
   plateDTO: {
     id: number;
@@ -91,7 +91,7 @@ export function OrderInfo({route}: RouteParams) {
 
   const {name, photo_url, id, totalValue, date, status} = route.params;
 
-  const [order, setOrder] = useState<Props[]>([]);
+  const [order, setOrder] = useState<RequestiItemsProps[]>([]);
 
   const navigation = useNavigation();
 
@@ -119,7 +119,7 @@ export function OrderInfo({route}: RouteParams) {
     },
   });
 
-  const renderItem = ({item}: {item: Props}) => {
+  const renderItem = ({item}: {item: RequestiItemsProps}) => {
     return item ? (
       <WrapperCartPlates>
         <CardOrderInfo
