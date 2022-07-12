@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StatusBar, View} from 'react-native';
+import {ActivityIndicator, StatusBar, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {BackButton} from '../../components/BackButton';
@@ -18,6 +18,7 @@ import {
   Content,
   FavoriteIcon,
   FavoriteIconWrapper,
+  Footer,
   Header,
   IconButton,
 } from './styles';
@@ -122,7 +123,6 @@ export function Favorites() {
           source={theme.icons.arrow}
         />
       </View>
-
       <FlatList
         ListHeaderComponent={
           <View style={{marginBottom: RFValue(30)}}>
@@ -154,6 +154,11 @@ export function Favorites() {
         onEndReached={() => {
           handleLoadOnEnd();
         }}
+        ListFooterComponent={() => (
+          <Footer>
+            <ActivityIndicator color={theme.colors.background_red} />
+          </Footer>
+        )}
       />
     </Container>
   );

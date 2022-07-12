@@ -38,3 +38,10 @@ export const Content = styled.View`
   margin: 0 ${RFValue(12)}px;
   margin-top: ${RFValue(12)}px;
 `;
+
+export const Footer = styled.View`
+  width: 100%;
+  height: ${RFValue(100)}px;
+  align-items: center;
+  top: ${RFValue(20)}px;
+`;

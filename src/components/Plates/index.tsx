@@ -130,6 +130,7 @@ export function Plates({
   interface FavoriteResponse {
     id: number;
   }
+  // const itemFound = favoritePlates.find((product: Plate) => product.id === item.id);
 
   function favoritePlate(id: number) {
     handlerPut();
