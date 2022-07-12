@@ -88,7 +88,7 @@ export function Home() {
 
   const {data, fetchData} = useFetch<ListRestaurantResponse>(
     `/restaurant/filter?${
-      foodType !== '' ? `foodType=${foodType}&` : null
+      foodType !== '' ? `foodType=${foodType}&` : ''
     }name=${isFiltred.text}&page=${isFiltred.page}&quantity=10`,
     {
       headers: {
@@ -166,11 +166,11 @@ export function Home() {
 
   const onPress = (item: ListFoodType) => {
     activeButton === item.name
-      ? setActiveButton('')
-      : setActiveButton(item.name);
+      ? (setActiveButton(''), console.log(item.name, ' unpressed'))
+      : (setActiveButton(item.name), console.log(item.name, ' pressed'));
     setRestaurants([]);
     foodType === item.name ? setFoodType('') : setFoodType(item.name);
-    console.log(item.name, ' pressed');
+    setIsFiltred({...isFiltred, page: 0});
   };
 
   const renderCategories =
@@ -190,20 +190,17 @@ export function Home() {
   useFocusEffect(
     useCallback(() => {
       loadRestaurants();
-    }, [isFiltred]),
+    }, [isFiltred, foodType]),
   );
 
   useEffect(() => {
-    (async () => await fetchfoodtype())();
+
+    (async () => { await fetchfoodtype() })();
   }, []);
 
   useEffect(() => {
     datafoodtype && setCategories(datafoodtype);
   }, [datafoodtype]);
-
-  useLayoutEffect(() => {
-    loadRestaurants();
-  }, [foodType]);
 
   return (
     <>
