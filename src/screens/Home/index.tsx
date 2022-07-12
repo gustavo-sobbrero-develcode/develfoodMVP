@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
@@ -7,7 +8,7 @@ import {
   StatusBar,
   StyleSheet,
 } from 'react-native';
-import {StyleSheetManager, useTheme} from 'styled-components';
+import {useTheme} from 'styled-components';
 import {Input} from '../../components/Input';
 import {useAuth} from '../../global/Context';
 import {useFetch} from '../../global/services/get';
@@ -100,7 +101,7 @@ export function Home() {
 
   const {data: datafoodtype, fetchData: fetchfoodtype} = useFetch<
     ListFoodType[]
-  >(`/foodType`, {
+  >('/foodType', {
     headers: {
       Authorization: `Bearer ${token}`,
     },
