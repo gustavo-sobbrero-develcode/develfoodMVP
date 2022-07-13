@@ -38,11 +38,18 @@ export interface Plate {
   name: string;
   description: string;
   price: number;
+  foodType: FoodType;
+  restaurantName: string;
   photo_url: string;
+  favorite: boolean;
 }
 interface Photo {
   id: number;
   code: string;
+}
+interface FoodType {
+  id: number;
+  name: string;
 }
 
 interface RouteParams {
@@ -95,7 +102,6 @@ export function RestaurantProfile({route}: RouteParams) {
 
   function onSuccess(response: Plate[]) {
     setPlate([...plate, ...response]);
-    console.log(response);
   }
 
   async function loadPlates() {
@@ -143,6 +149,7 @@ export function RestaurantProfile({route}: RouteParams) {
           restaurantFoodTypes={food_types}
           restaurantName={name}
           photoRestaurant={photo_url}
+          favorite={item.favorite}
         />
       </PlatesWrapper>
     );

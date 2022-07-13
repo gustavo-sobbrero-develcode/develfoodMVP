@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Swipeable} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -8,7 +8,6 @@ import {useAuth} from '../../global/Context';
 import {useCreateCart} from '../../global/Context/Cart';
 import {useFavorites} from '../../global/Context/Favorites';
 import {useFetch} from '../../global/services/get';
-import {usePut} from '../../global/services/put';
 
 import {
   Container,
@@ -50,6 +49,7 @@ interface ListPlatesProps {
   inside: boolean;
   photoRestaurant?: string;
   Swipe: boolean;
+  favorite?: boolean;
 }
 
 interface Photos {
@@ -83,6 +83,7 @@ export function Plates({
   photoRestaurant,
   inside,
   Swipe,
+  favorite,
 }: ListPlatesProps) {
   const theme = useTheme();
 
@@ -130,26 +131,12 @@ export function Plates({
   }, [source]);
 
   const favoriteWhite = require('../../global/assets/Icons/favoriteRestaurant.png');
+
+  const [isPressed, setIsPressed] = useState(false);
+
   interface FavoriteResponse {
     id: number;
   }
-  // const itemFound = favoritePlates.find((product: Plate) => product.id === item.id);
-
-  // function favoritePlate(id: number) {
-  //   handlerPut();
-  // }
-
-  // const {
-  //   data: dataPut,
-  //   handlerPut,
-  //   error,
-  // } = usePut<any>(`/plate/favorite/${id}`, undefined, {
-  //   headers: {
-  //     Authorization: `Bearer ${token}`,
-  //   },
-  // });
-  // dataPut && console.log('data', dataPut);
-  // error && console.log('erro', error);
 
   return Swipe ? (
     <Swipeable renderLeftActions={leftSwipe}>
@@ -218,8 +205,15 @@ export function Plates({
     </Swipeable>
   ) : (
     <Container>
-      <FavoriteButton onPress={() => favoritePlate(id)}>
-        <FavoriteImage source={favoriteWhite} />
+      <FavoriteButton
+        onPress={() => {
+          favoritePlate(id, favorite), setIsPressed(!isPressed);
+        }}>
+        <FavoriteImage
+          source={favoriteWhite}
+          style={favorite && {tintColor: 'red'}}
+          // style={favorite && isPressed && {tintColor: 'red'}}
+        />
       </FavoriteButton>
 
       <WrapperImage>

@@ -83,5 +83,6 @@ export default {
     doing: require('../assets/Images/doing.png'),
     inRoute: require('../assets/Images/inRoute.png'),
     delivered: require('../assets/Images/delivered.png'),
+    noFavorites: require('../assets/Images/noFavorites.png'),
   },
 };

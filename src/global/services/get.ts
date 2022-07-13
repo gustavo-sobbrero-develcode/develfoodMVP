@@ -2,9 +2,9 @@ import axios, {AxiosRequestConfig} from 'axios';
 import {useState} from 'react';
 
 const api = axios.create({
-  baseURL: 'https://develfood-3.herokuapp.com',
+  baseURL: 'https://405d-179-235-88-84.ngrok.io',
 });
-
+// 'https://405d-179-235-88-84.ngrok.io'
 export function useFetch<T = unknown>(
   url: string,
   options?: AxiosRequestConfig,

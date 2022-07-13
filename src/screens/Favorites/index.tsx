@@ -2,10 +2,11 @@ import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, StatusBar, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
-import {BackButton} from '../../components/BackButton';
+import {useDebouncedCallback} from 'use-debounce';
 import {Category} from '../../components/CategoryButton';
 import {HeaderComponent} from '../../components/HeaderComponent';
 import {Input} from '../../components/Input';
+import {ListEmptyComponent} from '../../components/ListEmptyComponent';
 import {Plates} from '../../components/Plates';
 import {useAuth} from '../../global/Context';
 import {useFetch} from '../../global/services/get';
@@ -13,74 +14,56 @@ import theme from '../../global/styles/theme';
 import {CategorySelect} from '../Home/styles';
 import {Plate} from '../RestaurantProfile';
 import {PlatesWrapper} from '../RestaurantProfile/styles';
-import {
-  Container,
-  Content,
-  FavoriteIcon,
-  FavoriteIconWrapper,
-  Footer,
-  Header,
-  IconButton,
-} from './styles';
+import {Container, Content, Footer} from './styles';
 
 interface FavoritesResponse {
-  content: FavoritePlate[];
+  content: Plate[];
   totalPages: number;
-}
-interface FavoritePlate {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  foodType: FoodType;
-  restaurantName: string;
-  photo_url: string;
-}
-
-interface FoodType {
-  id: number;
-  name: string;
 }
 
 export function Favorites() {
   const [isLoading, setIsLoading] = useState(false);
+
   const {token} = useAuth();
+
   const [isFiltred, setIsFiltred] = useState({
+    text: '',
     page: 0,
   });
+
+  // `/plate/favoritePlates?page=${isFiltred.page}&quantity=10`,
+
   const {
     data: dataFavorites,
     fetchData,
     loading: loadingFavorite,
   } = useFetch<FavoritesResponse>(
-    `/plate/favoritePlates?page=${isFiltred.page}&quantity=10`,
+    `/plate/favoritePlates/search?page=${isFiltred.page}&quantity=10&plateName=${isFiltred.text}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     },
   );
-
-  const [favoritePlates, setFavoritePlates] = useState<FavoritePlate[]>([]);
+  const [favoritePlates, setFavoritePlates] = useState<Plate[]>([]);
 
   function onSuccess(dataFavorites: FavoritesResponse) {
     setFavoritePlates([...favoritePlates, ...dataFavorites.content]);
   }
-
-  // console.log(data);
 
   async function handleLoadOnEnd() {
     if (dataFavorites.totalPages !== isFiltred.page) {
       setIsFiltred({...isFiltred, page: isFiltred.page + 1});
     }
   }
+
   useEffect(() => {
     fetchData();
   }, []);
 
   useEffect(() => {
     loadRestaurants();
-  }, [isFiltred.page]);
+  }, [isFiltred]);
 
   async function loadRestaurants() {
     setIsLoading(true);
@@ -88,6 +71,21 @@ export function Favorites() {
     setIsLoading(false);
   }
 
+  function handleSearch(value: string) {
+    setIsLoading(true);
+    if (value.length > 1) {
+      setFavoritePlates([]);
+      setIsFiltred({text: value, page: 0});
+    } else {
+      setFavoritePlates([]);
+      setIsFiltred({text: '', page: 0});
+    }
+    setIsLoading(false);
+  }
+
+  const debounced = useDebouncedCallback(value => {
+    handleSearch(value);
+  }, 1500);
   const renderItem = ({item}: {item: Plate}) => {
     return (
       <PlatesWrapper>
@@ -100,6 +98,7 @@ export function Favorites() {
           source={item.photo_url}
           // restaurantID={id}
           id={item.id}
+          favorite={item.favorite}
           // restaurantFoodTypes={food_types}
           // restaurantName={name}
           // photoRestaurant={photo_url}
@@ -131,7 +130,7 @@ export function Favorites() {
                 source={theme.icons.search}
                 placeholder="Buscar restaurante"
                 keyboardType="email-address"
-                onChangeText={() => {}}
+                onChangeText={value => debounced(value)}
               />
             </Content>
             <CategorySelect
@@ -154,11 +153,21 @@ export function Favorites() {
         onEndReached={() => {
           handleLoadOnEnd();
         }}
-        ListFooterComponent={() => (
-          <Footer>
-            <ActivityIndicator color={theme.colors.background_red} />
-          </Footer>
-        )}
+        ListFooterComponent={() =>
+          isLoading ? (
+            <Footer>
+              <ActivityIndicator color={theme.colors.background_red} />
+            </Footer>
+          ) : null
+        }
+        // ListEmptyComponent={
+        //   !isLoading ? (
+        //     <ListEmptyComponent
+        //       source={theme.images.noFavorites}
+        //       title="Você não possui favoritos"
+        //     />
+        //   ) : null
+        // }
       />
     </Container>
   );

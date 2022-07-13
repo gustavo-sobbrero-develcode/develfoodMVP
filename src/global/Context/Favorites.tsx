@@ -2,16 +2,20 @@
 import React, {createContext, useContext, useState} from 'react';
 import {useEffect} from 'react';
 import {useAuth} from '.';
+import {useDelete} from '../services/delete';
 import {usePut} from '../services/put';
 
 interface AuthProviderProps {
   children: React.ReactNode;
 }
-
 interface Props {
   favoritePlate: Function;
 }
 
+interface Favorites {
+  id: number;
+  favorite: boolean;
+}
 const FavoritesContext = createContext({} as Props);
 
 function FavoritesProvider({children}: AuthProviderProps) {
@@ -19,9 +23,25 @@ function FavoritesProvider({children}: AuthProviderProps) {
 
   const [idPlate, setIdPlate] = useState<number>();
 
-  function favoritePlate(id: number) {
+  function favoritePlate({id, favorite}: Favorites) {
     setIdPlate(id);
+
+    if (favorite) {
+      handlerDelete();
+    } else {
+      handlerPut();
+    }
   }
+
+  const {
+    data: dataDelete,
+    handlerDelete,
+    error: errorDelete,
+  } = useDelete<any>(`/plate/favorite/${idPlate}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   const {
     data: dataPut,
@@ -32,12 +52,8 @@ function FavoritesProvider({children}: AuthProviderProps) {
       Authorization: `Bearer ${token}`,
     },
   });
-  dataPut && console.log('data', dataPut);
-  error && console.log('erro', error);
 
-  useEffect(() => {
-    handlerPut();
-  }, [idPlate]);
+  useEffect(() => {}, [idPlate]);
 
   return (
     <FavoritesContext.Provider
