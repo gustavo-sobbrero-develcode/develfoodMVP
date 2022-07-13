@@ -22,7 +22,7 @@ import {
   StepBar,
   SectionStepSelected,
 } from './styles';
-import {useAuth} from '../../../../global/Context';
+import {useAuth} from '../../../../global/context';
 import {Input} from '../../../../components/Input';
 import {ContinueButton} from '../../../../components/ContinueButton';
 import {HeaderComponent} from '../../../../components/HeaderComponent';

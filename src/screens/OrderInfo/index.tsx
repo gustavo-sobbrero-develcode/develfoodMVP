@@ -9,7 +9,7 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
 import {CardOrderInfo} from '../../components/CardOrderInfo';
 import {HeaderComponent} from '../../components/HeaderComponent';
-import {useAuth} from '../../global/Context';
+import {useAuth} from '../../global/context';
 import {useFetch} from '../../global/services/get';
 import moment from 'moment';
 import 'moment/locale/pt-br';

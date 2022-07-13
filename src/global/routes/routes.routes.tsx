@@ -9,7 +9,7 @@ import {useTheme} from 'styled-components';
 import {useNavigation} from '@react-navigation/native';
 import {Platform} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
-import {useCreateCart} from '../Context/Cart';
+import {useCreateCart} from '../context/Cart';
 import {CartComponent} from '../../components/CartComponent';
 import {Orders} from '../../screens/Orders';
 

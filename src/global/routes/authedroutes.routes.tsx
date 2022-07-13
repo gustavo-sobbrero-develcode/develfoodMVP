@@ -6,7 +6,7 @@ import {CartComponent} from '../../components/CartComponent';
 import {Checkout} from '../../screens/Checkout';
 import {CheckoutSuccess} from '../../screens/CheckoutSuccess';
 import {OrderInfo} from '../../screens/OrderInfo';
-import {CartProvider} from '../Context/Cart';
+import {CartProvider} from '../context/Cart';
 
 const {Navigator, Screen} = createNativeStackNavigator();
 

@@ -9,16 +9,16 @@ import {
   StyleSheet,
 } from 'react-native';
 import {useTheme} from 'styled-components';
-import {Input} from '../../components/Input';
-import {useAuth} from '../../global/Context';
-import {useFetch} from '../../global/services/get';
+import {Input} from '@components/Input';
+import {useAuth} from '../../global/context';
+import {useFetch} from '@services/get';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useDebouncedCallback} from 'use-debounce';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import {ListEmptyComponent} from '../../components/ListEmptyComponent';
+import {ListEmptyComponent} from '@components/ListEmptyComponent';
 import {FlatList} from 'react-native-gesture-handler';
-import {Restaurants} from '../../components/Restaurants';
-import {Category} from '../../components/CategoryButton';
+import {Restaurants} from '@components/Restaurants';
+import {Category} from '@components/CategoryButton';
 
 import {
   Container,
@@ -29,9 +29,9 @@ import {
   RestaurantListWrapper,
   Footer,
 } from './styles';
-import {HeaderComponent} from '../../components/HeaderComponent';
-import {PhotoSlider} from '../../components/PhotoSlider';
-import theme from '../../global/styles/theme';
+import {HeaderComponent} from '@components/HeaderComponent';
+import {PhotoSlider} from '@components/PhotoSlider';
+import theme from '@styles/theme';
 
 interface ListRestaurantProps {
   food_types: ListFoodType[];

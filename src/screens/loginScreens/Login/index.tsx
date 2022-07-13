@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {Controller, useForm} from 'react-hook-form';
 import {RFPercentage, RFValue} from 'react-native-responsive-fontsize';
-import {useAuth} from '../../../global/Context';
+import {useAuth} from '../../../global/context';
 import {useNavigation} from '@react-navigation/native';
 import {Input} from '../../../components/Input';
 

@@ -10,7 +10,7 @@ import {Controller, useForm} from 'react-hook-form';
 import {ContinueButton} from '../../../components/ContinueButton';
 import {cpf} from 'cpf-cnpj-validator';
 import {InputMask} from '../../../components/InputMask';
-import {useCreateUser} from '../../../global/Context/createUserAuth';
+import {useCreateUser} from '../../../global/context/createUserAuth';
 
 import {
   Image,

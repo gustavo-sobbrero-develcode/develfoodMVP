@@ -11,8 +11,8 @@ import {CartComponent} from '../../components/CartComponent';
 import {Input} from '../../components/Input';
 import {ListEmptyComponent} from '../../components/ListEmptyComponent';
 import {Plates} from '../../components/Plates';
-import {useAuth} from '../../global/Context';
-import {useCreateCart} from '../../global/Context/Cart';
+import {useAuth} from '../../global/context';
+import {useCreateCart} from '../../global/context/Cart';
 import {useFetch} from '../../global/services/get';
 
 import {

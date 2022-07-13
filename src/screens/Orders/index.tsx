@@ -6,7 +6,7 @@ import {ActivityIndicator, SectionList, StatusBar} from 'react-native';
 import {useTheme} from 'styled-components';
 import {ListEmptyComponent} from '../../components/ListEmptyComponent';
 import {OrderCard} from '../../components/OrderCard';
-import {useAuth} from '../../global/Context';
+import {useAuth} from '../../global/context';
 import {useFetch} from '../../global/services/get';
 import moment from 'moment';
 import 'moment/locale/pt-br';

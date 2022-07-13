@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
 import {useTheme} from 'styled-components';
-import {useAuth} from '../../global/Context';
+import {useAuth} from '../../global/context';
 import {useFetch} from '../../global/services/get';
 import {
   Wrapper,
