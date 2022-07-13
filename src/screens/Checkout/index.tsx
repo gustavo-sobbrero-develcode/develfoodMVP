@@ -12,7 +12,7 @@ import {ListEmptyComponent} from '../../components/ListEmptyComponent';
 import {Plates} from '../../components/Plates';
 import {useAuth} from '../../global/context';
 import {useCreateCart} from '../../global/context/Cart';
-import {useFetch} from '@services/get';
+import {useFetch} from '../../global/services/get';
 
 import {
   Container,

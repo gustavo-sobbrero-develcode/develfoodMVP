@@ -11,7 +11,7 @@ import {
 import {useTheme} from 'styled-components';
 import {Input} from '@components/Input';
 import {useAuth} from '../../global/context';
-import {useFetch} from '@services/get';
+import {useFetch} from '@global/services/get';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useDebouncedCallback} from 'use-debounce';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
@@ -29,9 +29,9 @@ import {
   RestaurantListWrapper,
   Footer,
 } from './styles';
-import {HeaderComponent} from '@components/HeaderComponent';
-import {PhotoSlider} from '@components/PhotoSlider';
-import theme from '@styles/theme';
+import {HeaderComponent} from '../../components/HeaderComponent';
+import {PhotoSlider} from '../../components/PhotoSlider';
+import theme from '../../global/styles/theme';
 
 interface ListRestaurantProps {
   food_types: ListFoodType[];
