@@ -6,6 +6,7 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
 import {useAuth} from '../../global/Context';
 import {useCreateCart} from '../../global/Context/Cart';
+import {useFavorites} from '../../global/Context/Favorites';
 import {useFetch} from '../../global/services/get';
 import {usePut} from '../../global/services/put';
 
@@ -95,6 +96,8 @@ export function Plates({
     cleanUpSamePlates,
   } = useCreateCart();
 
+  const {favoritePlate} = useFavorites();
+
   const itemCount = cart.find((item: ItemProps) => item?.id === id)?.quantity;
 
   const {data, fetchData} = useFetch<Photos>(source, {
@@ -132,19 +135,19 @@ export function Plates({
   }
   // const itemFound = favoritePlates.find((product: Plate) => product.id === item.id);
 
-  function favoritePlate(id: number) {
-    handlerPut();
-  }
+  // function favoritePlate(id: number) {
+  //   handlerPut();
+  // }
 
-  const {
-    data: dataPut,
-    handlerPut,
-    error,
-  } = usePut<any>(`/plate/favorite/${id}`, undefined, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  // const {
+  //   data: dataPut,
+  //   handlerPut,
+  //   error,
+  // } = usePut<any>(`/plate/favorite/${id}`, undefined, {
+  //   headers: {
+  //     Authorization: `Bearer ${token}`,
+  //   },
+  // });
   // dataPut && console.log('data', dataPut);
   // error && console.log('erro', error);
 
