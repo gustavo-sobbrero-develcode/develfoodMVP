@@ -12,7 +12,6 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import {useCreateCart} from '../Context/Cart';
 import {CartComponent} from '../../components/CartComponent';
 import {Orders} from '../../screens/Orders';
-// import {TabBar} from '../../components/TabBar';
 
 const Tabs = createBottomTabNavigator();
 
@@ -62,10 +61,11 @@ export function Routes() {
           name="Favoritos"
           component={Favorites}
           options={{
+            unmountOnBlur: true,
             tabBarIcon: ({focused}) => (
               <TabBarButton
                 isPressed={focused}
-                name={'Favotitos'}
+                name={'Favoritos'}
                 source={theme.icons.favorite}
                 onPressed={() => navigation.navigate('Favoritos' as never)}
               />
@@ -76,6 +76,7 @@ export function Routes() {
           name="Orders"
           component={Orders}
           options={{
+            unmountOnBlur: true,
             tabBarIcon: ({focused}) => (
               <TabBarButton
                 isPressed={focused}

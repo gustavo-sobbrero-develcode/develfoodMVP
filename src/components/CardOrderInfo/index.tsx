@@ -5,6 +5,8 @@ import {useAuth} from '../../global/Context';
 import {useFetch} from '../../global/services/get';
 import {
   Container,
+  NumberOfQuantityWrapper,
+  Number,
   PlateImage,
   PlateInfo,
   PlateTitle,
@@ -25,10 +27,16 @@ interface ṔlateProps {
   description: string;
   price: number;
   source: string;
-  orderID: number;
+  quantity: number;
 }
 
-export function CardOrderInfo({source, name, description, price}: ṔlateProps) {
+export function CardOrderInfo({
+  source,
+  name,
+  description,
+  price,
+  quantity,
+}: ṔlateProps) {
   const {token} = useAuth();
 
   const theme = useTheme();
@@ -61,12 +69,15 @@ export function CardOrderInfo({source, name, description, price}: ṔlateProps) 
 
       <WrapperPlateInfo>
         <PlateTitle>{name}</PlateTitle>
-        <PlateInfo>{description}</PlateInfo>
+        <PlateInfo numberOfLines={3}>{description}</PlateInfo>
 
         <WrapperAdvancedInfo>
           <PriceWrapper>
             <Price>R$ {priceFormatted}</Price>
           </PriceWrapper>
+          <NumberOfQuantityWrapper>
+            <Number>{quantity}</Number>
+          </NumberOfQuantityWrapper>
         </WrapperAdvancedInfo>
       </WrapperPlateInfo>
     </Container>

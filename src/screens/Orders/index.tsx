@@ -108,11 +108,33 @@ export function Orders() {
     setIsLoading(false);
   }
 
-  function handlerOrderInfo(name: string, photo_url: string, id: number) {
-    navigation.navigate('OrderInfo' as never, {name, photo_url, id} as never);
+  function handlerOrderInfo(
+    name: string,
+    photo_url: string,
+    id: number,
+    totalValue: number,
+    date: Date,
+    status: string,
+  ) {
+    navigation.navigate(
+      'OrderInfo' as never,
+      {name, photo_url, id, totalValue, date, status} as never,
+    );
+  }
+
+  function getStatusImage(status: string) {
+    const statusImage = {
+      PEDIDO_REALIZADO: theme.icons.waitingorder,
+      PEDIDO_EM_REALIZAÇÃO: theme.icons.doingorder,
+      PEDIDO_À_CAMINHO: theme.icons.deliveryorder,
+      PEDIDO_FINALIZADO: theme.icons.checkorder,
+    }[status];
+    return statusImage;
   }
 
   const renderItem = ({item}: {item: OrderProps}) => {
+    const statusImage = getStatusImage(item.status);
+
     return item ? (
       <Content>
         <OrderCard
@@ -122,6 +144,9 @@ export function Orders() {
               item.restaurant.name,
               item.restaurant.photo_url,
               item.id,
+              item.totalValue,
+              item.date,
+              item.status,
             )
           }
           photo_url={item.restaurant.photo_url}
@@ -135,44 +160,8 @@ export function Orders() {
               .replace('_', ' ')
           }
           orderNumber={item.id}
-          foodName={`${
-            item.requestItems[0].quantity > 1
-              ? item.requestItems[0].quantity
-              : ''
-          } ${item.requestItems[0].plateDTO.name} ${
-            item.requestItems[1]
-              ? ` + ${
-                  item.requestItems[1].quantity > 1
-                    ? item.requestItems[1].quantity
-                    : ''
-                } ${item.requestItems[1].plateDTO.name}`
-              : ''
-          } ${
-            item.requestItems[2]
-              ? ` + ${
-                  item.requestItems[2].quantity > 1
-                    ? item.requestItems[2].quantity
-                    : ''
-                } ${item.requestItems[2].plateDTO.name}`
-              : ''
-          } ${
-            item.requestItems[3]
-              ? ` + ${
-                  item.requestItems[3].quantity > 1
-                    ? item.requestItems[3].quantity
-                    : ''
-                } ${item.requestItems[3].plateDTO.name}`
-              : ''
-          } ${
-            item.requestItems[4]
-              ? ` + ${
-                  item.requestItems[4].quantity > 1
-                    ? item.requestItems[4].quantity
-                    : ''
-                } ${item.requestItems[4].plateDTO.name}`
-              : ''
-          } 
-          ${item.requestItems[5] ? '...' : ''}`}
+          foodName={listItems(item)}
+          source={statusImage}
         />
       </Content>
     ) : null;
@@ -197,22 +186,24 @@ export function Orders() {
     setOrderSections(orderFormatted);
   }
 
+  const listItems = (item: OrderProps) => {
+    const quantityVisible = item.requestItems.map(
+      (requestItem: RequestItemsResponse, index) => {
+        if (requestItem.quantity > 1 && index !== 0) {
+          return ' + ' + requestItem.quantity + ' ' + requestItem.plateDTO.name;
+        } else {
+          return index !== 0
+            ? ' + ' + requestItem?.plateDTO.name
+            : requestItem?.plateDTO.name;
+        }
+      },
+    );
+    return quantityVisible;
+  };
+
   async function handleLoadOnEnd() {
     if (data.totalPages !== filter) {
       setFilter(filter + 1);
-    }
-  }
-
-  function handlerRefreshPage() {
-    if (filter !== 0) {
-      setOrder([]);
-      setOrderSections([]);
-      setFilter(0);
-      setIsLoading(true);
-    } else {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 500);
     }
   }
 
@@ -259,7 +250,6 @@ export function Orders() {
             handleLoadOnEnd();
           }}
           refreshing={isLoading}
-          onRefresh={() => handlerRefreshPage()}
           ListEmptyComponent={
             !isLoading ? (
               <ListEmptyComponent

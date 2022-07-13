@@ -12,6 +12,12 @@ export const WrapperInfo = styled.View`
   flex-direction: row;
 `;
 
+export const PinImage = styled.Image`
+  position: absolute;
+  z-index: 1;
+  margin: ${RFValue(35)}px ${RFValue(35)}px;
+`;
+
 export const MapImage = styled.Image`
   width: ${RFValue(54)}px;
   height: ${RFValue(54)}px;
