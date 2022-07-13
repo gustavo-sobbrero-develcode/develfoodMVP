@@ -31,7 +31,6 @@ export const List = styled.FlatList`
 `;
 
 export const TitleWrapper = styled.View`
-  margin-top: ${RFValue(50)}px;
   margin-left: ${RFValue(14)}px;
 `;
 
