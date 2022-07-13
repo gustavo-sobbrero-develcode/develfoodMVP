@@ -11,14 +11,7 @@ import {useFetch} from '../../global/services/get';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
-import {
-  Container,
-  Content,
-  OrderDate,
-  SubTitle,
-  WrapperInfo,
-  Footer,
-} from './styles';
+import {Container, OrderDate, SubTitle, WrapperInfo, Footer} from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {HeaderComponent} from '../../components/HeaderComponent';
 
@@ -136,34 +129,28 @@ export function Orders() {
     const statusImage = getStatusImage(item.status);
 
     return item ? (
-      <Content>
-        <OrderCard
-          restaurantID={item.restaurant.id}
-          onPress={() =>
-            handlerOrderInfo(
-              item.restaurant.name,
-              item.restaurant.photo_url,
-              item.id,
-              item.totalValue,
-              item.date,
-              item.status,
-            )
-          }
-          photo_url={item.restaurant.photo_url}
-          restaurantName={item.restaurant.name}
-          statusOrder={
-            item.status.charAt(0).toUpperCase() +
-            item.status
-              .slice(1)
-              .toLowerCase()
-              .replace('_', ' ')
-              .replace('_', ' ')
-          }
-          orderNumber={item.id}
-          foodName={listItems(item)}
-          source={statusImage}
-        />
-      </Content>
+      <OrderCard
+        restaurantID={item.restaurant.id}
+        onPress={() =>
+          handlerOrderInfo(
+            item.restaurant.name,
+            item.restaurant.photo_url,
+            item.id,
+            item.totalValue,
+            item.date,
+            item.status,
+          )
+        }
+        photo_url={item.restaurant.photo_url}
+        restaurantName={item.restaurant.name}
+        statusOrder={
+          item.status.charAt(0).toUpperCase() +
+          item.status.slice(1).toLowerCase().replace('_', ' ').replace('_', ' ')
+        }
+        orderNumber={item.id}
+        foodName={listItems(item)}
+        source={statusImage}
+      />
     ) : null;
   };
 
@@ -187,10 +174,12 @@ export function Orders() {
   }
 
   const listItems = (item: OrderProps) => {
-    const quantityVisible = item.requestItems.map(
+    let quantityVisible = item.requestItems.map(
       (requestItem: RequestItemsResponse, index) => {
-        if (requestItem.quantity > 1 && index !== 0) {
-          return ' + ' + requestItem.quantity + ' ' + requestItem.plateDTO.name;
+        if (requestItem.quantity > 1) {
+          return index !== 0
+            ? ' + ' + requestItem.quantity + ' ' + requestItem.plateDTO.name
+            : requestItem.quantity + ' ' + requestItem.plateDTO.name;
         } else {
           return index !== 0
             ? ' + ' + requestItem?.plateDTO.name
@@ -230,10 +219,6 @@ export function Orders() {
       />
 
       <>
-        <WrapperInfo>
-          <SubTitle>Historico</SubTitle>
-        </WrapperInfo>
-
         <SectionList
           sections={orderSections}
           keyExtractor={item => item.id.toString()}
@@ -241,11 +226,20 @@ export function Orders() {
           renderSectionHeader={({section: {title}}) => (
             <OrderDate>{moment(title).format('llll').slice(0, -9)}</OrderDate>
           )}
-          ListFooterComponent={() => (
-            <Footer>
-              <ActivityIndicator color={theme.colors.background_red} />
-            </Footer>
-          )}
+          ListHeaderComponent={
+            data.totalPages > 0 ? (
+              <WrapperInfo>
+                <SubTitle>Historico</SubTitle>
+              </WrapperInfo>
+            ) : null
+          }
+          ListFooterComponent={() =>
+            isLoading ? (
+              <Footer>
+                <ActivityIndicator color={theme.colors.background_red} />
+              </Footer>
+            ) : null
+          }
           onEndReached={() => {
             handleLoadOnEnd();
           }}
