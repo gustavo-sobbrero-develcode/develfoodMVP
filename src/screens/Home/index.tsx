@@ -1,7 +1,10 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react-native/no-inline-styles */
-import React, {useCallback, useState} from 'react';
-import {ActivityIndicator, Dimensions, StatusBar} from 'react-native';
+import React, {useCallback, useEffect, useState} from 'react';
+import {
+  ActivityIndicator,
+  Dimensions,
+  StatusBar,
+  StyleSheet,
+} from 'react-native';
 import {useTheme} from 'styled-components';
 import {Input} from '../../components/Input';
 import {useAuth} from '../../global/Context';
@@ -11,7 +14,6 @@ import {useDebouncedCallback} from 'use-debounce';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {ListEmptyComponent} from '../../components/ListEmptyComponent';
 import {FlatList} from 'react-native-gesture-handler';
-
 import {Restaurants} from '../../components/Restaurants';
 import {Category} from '../../components/CategoryButton';
 
@@ -26,6 +28,7 @@ import {
 } from './styles';
 import {HeaderComponent} from '../../components/HeaderComponent';
 import {PhotoSlider} from '../../components/PhotoSlider';
+import theme from '../../global/styles/theme';
 
 interface ListRestaurantProps {
   food_types: ListFoodType[];
@@ -57,6 +60,12 @@ export function Home() {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const [categories, setCategories] = useState<ListFoodType[]>([]);
+
+  const [foodType, setFoodType] = useState<string>('');
+
+  const [activeButton, setActiveButton] = useState<string>('');
+
   const [restaurants, setRestaurants] = useState<ListRestaurantProps[]>([]);
 
   const navigation = useNavigation();
@@ -74,13 +83,23 @@ export function Home() {
   }
 
   const {data, fetchData} = useFetch<ListRestaurantResponse>(
-    `/restaurant/filter?name=${isFiltred.text}&page=${isFiltred.page}&quantity=10`,
+    `/restaurant/filter?${foodType !== '' ? `foodType=${foodType}&` : ''}name=${
+      isFiltred.text
+    }&page=${isFiltred.page}&quantity=10`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     },
   );
+
+  const {data: datafoodtype, fetchData: fetchfoodtype} = useFetch<
+    ListFoodType[]
+  >(`/foodType`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   function onSuccess(response: ListRestaurantResponse) {
     setRestaurants([...restaurants, ...response.content]);
@@ -141,11 +160,44 @@ export function Home() {
     );
   };
 
+  const onPress = (item: ListFoodType) => {
+    activeButton === item.name
+      ? setActiveButton('')
+      : setActiveButton(item.name);
+    setRestaurants([]);
+    foodType === item.name ? setFoodType('') : setFoodType(item.name);
+    setIsFiltred({...isFiltred, page: 0});
+  };
+
+  const renderCategories =
+    categories.length > 1 &&
+    categories?.map(item => {
+      return (
+        <Category
+          key={item.id}
+          title={item.name}
+          style={activeButton === item.name && styles.activeButton}
+          textStyle={activeButton === item.name && styles.activeText}
+          onPress={() => onPress(item)}
+        />
+      );
+    });
+
   useFocusEffect(
     useCallback(() => {
       loadRestaurants();
-    }, [isFiltred]),
+    }, [isFiltred, foodType]),
   );
+
+  useEffect(() => {
+    (async () => {
+      await fetchfoodtype();
+    })();
+  }, []);
+
+  useEffect(() => {
+    datafoodtype && setCategories(datafoodtype);
+  }, [datafoodtype]);
 
   return (
     <>
@@ -186,15 +238,9 @@ export function Home() {
 
               <CategorySelect
                 horizontal={true}
-                showsHorizontalScrollIndicator={false}>
-                <Category title="Pizza" />
-                <Category title="Churrasco" />
-                <Category title="Almoço" />
-                <Category title="Massas" />
-                <Category title="Coreana" />
-                <Category title="Japonesa" />
-                <Category title="Tailandesa" />
-                <Category title="Chinesa" />
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{paddingLeft: RFValue(10)}}>
+                {renderCategories}
               </CategorySelect>
 
               <Content>
@@ -234,3 +280,14 @@ export function Home() {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  activeButton: {
+    backgroundColor: theme.colors.background,
+    borderWidth: 2,
+    borderColor: theme.colors.background_red,
+  },
+  activeText: {
+    color: theme.colors.background_red,
+  },
+});
