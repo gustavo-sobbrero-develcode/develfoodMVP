@@ -6,6 +6,7 @@ export default {
     header: '#C20C18',
     button: '#C20C18',
     card: '#F0F0F5',
+    cardRemove: '#FF0000',
     favorite_border: '#DEDCDC',
 
     text_white: '#FFFFFF',
@@ -64,6 +65,10 @@ export default {
     cleanUp: require('../assets/Icons/cleanUp.png'),
     checkOrders: require('../assets/Icons/checkOrders.png'),
     map: require('../assets/Icons/map.png'),
+    checkorder: require('../assets/Icons/checkorder.png'),
+    deliveryorder: require('../assets/Icons/deliveryorder.png'),
+    doingorder: require('../assets/Icons/doingorder.png'),
+    waitingorder: require('../assets/Icons/waitingorder.png'),
   },
 
   images: {
@@ -84,5 +89,6 @@ export default {
     doing: require('../assets/Images/doing.png'),
     inRoute: require('../assets/Images/inRoute.png'),
     delivered: require('../assets/Images/delivered.png'),
+    pin: require('../assets/Images/pin.png'),
   },
 };

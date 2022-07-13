@@ -36,8 +36,8 @@ export const FavoriteIconWrapper = styled.View`
 export const IconButton = styled.TouchableOpacity`
   width: ${RFValue(42)}px;
   height: ${RFValue(44)}px;
-  margin-top: ${RFValue(10)}px;
   align-items: center;
+  justify-content: center;
 `;
 
 export const FavoriteIcon = styled.Image`

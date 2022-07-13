@@ -6,21 +6,6 @@ export const Container = styled.View`
   background-color: ${({theme}) => theme.colors.background};
 `;
 
-export const Header = styled.View`
-  width: 100%;
-  height: ${RFValue(100)}px;
-  background-color: ${({theme}) => theme.colors.header};
-  flex-direction: row;
-  align-items: center;
-  padding-top: ${RFValue(30)}px;
-`;
-
-export const Title = styled.Text`
-  font-size: ${RFValue(14)}px;
-  font-weight: 500;
-  color: ${({theme}) => theme.colors.text_white};
-  left: ${RFValue(110)}px;
-`;
 export const Wrapper = styled.View`
   flex: 1;
   align-items: center;
