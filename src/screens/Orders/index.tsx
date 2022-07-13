@@ -125,7 +125,7 @@ export function Orders() {
   function getStatusImage(status: string) {
     var statusImage = {
       PEDIDO_REALIZADO: theme.icons.waitingorder,
-      PEDIDO_EM_REALIZAÇÃO: theme.icons.deliveryorder,
+      PEDIDO_EM_REALIZAÇÃO: theme.icons.doingorder,
       PEDIDO_À_CAMINHO: theme.icons.deliveryorder,
       PEDIDO_FINALIZADO: theme.icons.checkorder,
     }[status];
