@@ -7,6 +7,10 @@ import {Register} from '../../screens/loginScreens/Register';
 import {RegisterLocale} from '../../screens/loginScreens/RegisterLocale';
 import {RegisterSuccess} from '../../screens/loginScreens/RegisterSuccess';
 import {RegisterPersonalData} from '../../screens/loginScreens/RegisterPersonalData';
+import {ForgotPassword} from '../../screens/loginScreens/RedefinePasswordScreens/ForgotPassword';
+import {AuthCode} from '../../screens/loginScreens/RedefinePasswordScreens/AuthCode/index';
+import {RedefinePassword} from '../../screens/loginScreens/RedefinePasswordScreens/RedefinePassword';
+import {RedefineSuccess} from '../../screens/loginScreens/RedefinePasswordScreens/RedefineSuccess';
 
 const {Navigator, Screen} = createStackNavigator();
 
@@ -23,6 +27,10 @@ export function AuthRoutes() {
         <Screen name="RegisterPersonalData" component={RegisterPersonalData} />
         <Screen name="RegisterLocale" component={RegisterLocale} />
         <Screen name="RegisterSuccess" component={RegisterSuccess} />
+        <Screen name="ForgotPassword" component={ForgotPassword} />
+        <Screen name="AuthCode" component={AuthCode} />
+        <Screen name="RedefinePassword" component={RedefinePassword} />
+        <Screen name="RedefineSuccess" component={RedefineSuccess} />
       </Navigator>
     </>
   );

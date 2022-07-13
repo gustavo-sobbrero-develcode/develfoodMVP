@@ -1,5 +1,6 @@
 import React from 'react';
 import {StatusBar} from 'react-native';
+import theme from '../../global/styles/theme';
 import {Container, Header} from './styles';
 
 export function Settings() {
@@ -7,8 +8,7 @@ export function Settings() {
     <Container>
       <StatusBar
         barStyle={'light-content'}
-        translucent
-        backgroundColor="transparent"
+        backgroundColor={theme.colors.background_red}
       />
       <Header />
     </Container>

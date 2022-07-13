@@ -18,7 +18,7 @@ export default {
     icon_white: '#FFFFFF',
     icon_red: '#C20C18',
     icon_dark: '#2B2B2E',
-    icon_slider: '#C4C4C4'
+    icon_slider: '#C4C4C4',
   },
 
   fonts: {
@@ -89,6 +89,10 @@ export default {
     doing: require('../assets/Images/doing.png'),
     inRoute: require('../assets/Images/inRoute.png'),
     delivered: require('../assets/Images/delivered.png'),
+    authEmail: require('../assets/RedefinePasswordImages/auth-email.png'),
+    forgotPassword: require('../assets/RedefinePasswordImages/forgot_password.png'),
+    lock: require('../assets/RedefinePasswordImages/lock.png'),
+    redefineSuccess: require('../assets/RedefinePasswordImages/redefine-success.png'),
     pin: require('../assets/Images/pin.png'),
   },
 };

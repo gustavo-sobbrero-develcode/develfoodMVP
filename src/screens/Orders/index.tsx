@@ -207,19 +207,6 @@ export function Orders() {
     }
   }
 
-  function handlerRefreshPage() {
-    if (filter !== 0) {
-      setOrder([]);
-      setOrderSections([]);
-      setFilter(0);
-      setIsLoading(true);
-    } else {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 500);
-    }
-  }
-
   useEffect(() => {
     loadOrder();
   }, [filter]);
@@ -263,7 +250,6 @@ export function Orders() {
             handleLoadOnEnd();
           }}
           refreshing={isLoading}
-          onRefresh={() => handlerRefreshPage()}
           ListEmptyComponent={
             !isLoading ? (
               <ListEmptyComponent
