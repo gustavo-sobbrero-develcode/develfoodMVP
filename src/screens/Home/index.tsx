@@ -1,13 +1,11 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react-native/no-inline-styles */
-import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   Dimensions,
   StatusBar,
   StyleSheet,
 } from 'react-native';
-import {StyleSheetManager, useTheme} from 'styled-components';
+import {useTheme} from 'styled-components';
 import {Input} from '../../components/Input';
 import {useAuth} from '../../global/Context';
 import {useFetch} from '../../global/services/get';
@@ -16,7 +14,6 @@ import {useDebouncedCallback} from 'use-debounce';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {ListEmptyComponent} from '../../components/ListEmptyComponent';
 import {FlatList} from 'react-native-gesture-handler';
-
 import {Restaurants} from '../../components/Restaurants';
 import {Category} from '../../components/CategoryButton';
 
@@ -88,7 +85,7 @@ export function Home() {
 
   const {data, fetchData} = useFetch<ListRestaurantResponse>(
     `/restaurant/filter?${
-      foodType !== '' ? `foodType=${foodType}&` : null
+      foodType !== '' ? `foodType=${foodType}&` : ''
     }name=${isFiltred.text}&page=${isFiltred.page}&quantity=10`,
     {
       headers: {
@@ -166,11 +163,11 @@ export function Home() {
 
   const onPress = (item: ListFoodType) => {
     activeButton === item.name
-      ? setActiveButton('')
-      : setActiveButton(item.name);
+      ? (setActiveButton(''))
+      : (setActiveButton(item.name));
     setRestaurants([]);
     foodType === item.name ? setFoodType('') : setFoodType(item.name);
-    console.log(item.name, ' pressed');
+    setIsFiltred({...isFiltred, page: 0});
   };
 
   const renderCategories =
@@ -190,20 +187,17 @@ export function Home() {
   useFocusEffect(
     useCallback(() => {
       loadRestaurants();
-    }, [isFiltred]),
+    }, [isFiltred, foodType]),
   );
 
   useEffect(() => {
-    (async () => await fetchfoodtype())();
+
+    (async () => { await fetchfoodtype() })();
   }, []);
 
   useEffect(() => {
     datafoodtype && setCategories(datafoodtype);
   }, [datafoodtype]);
-
-  useLayoutEffect(() => {
-    loadRestaurants();
-  }, [foodType]);
 
   return (
     <>
@@ -247,7 +241,9 @@ export function Home() {
 
               <CategorySelect
                 horizontal={true}
-                showsHorizontalScrollIndicator={false}>
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{paddingLeft: RFValue(10)}}
+                >
                 {renderCategories}
               </CategorySelect>
 
