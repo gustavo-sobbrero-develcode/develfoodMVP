@@ -10,6 +10,7 @@ export const ContentContainer = styled.View`
   height: ${RFValue(103)}px;
   background-color: ${({theme}) => theme.colors.cardRemove};
   border-radius: ${RFValue(8)}px;
+  margin-bottom: ${RFValue(18)}px;
 `;
 
 export const Container = styled.View.attrs({
