@@ -24,7 +24,7 @@ import {
   RegisterSimpleTitle,
   RegisterButtonTitle,
   ButtonTitle,
-} from './styled';
+} from './styles';
 import {ContinueButton} from '../../../components/ContinueButton';
 
 interface FormData {
@@ -120,7 +120,10 @@ export function Login() {
               name="password"
             />
 
-            <FogotPassButton>
+            <FogotPassButton
+              onPress={() => {
+                navigation.navigate('ForgotPassword' as never);
+              }}>
               <ForgotPass>Esqueci minha senha</ForgotPass>
             </FogotPassButton>
 
