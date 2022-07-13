@@ -121,7 +121,7 @@ export function OrderInfo({route}: RouteParams) {
   });
 
   function getStatus(status: string) {
-    var statusText = {
+    const statusText = {
       PEDIDO_REALIZADO: 'Aguardando aprovação',
       PEDIDO_EM_REALIZAÇÃO: 'Em Preparo',
       PEDIDO_À_CAMINHO: 'Em Rota',
@@ -133,7 +133,7 @@ export function OrderInfo({route}: RouteParams) {
   const statusText = getStatus(status);
 
   function getStatusImage(status: string) {
-    var statusImage = {
+    const statusImage = {
       PEDIDO_REALIZADO: theme.images.waiting,
       PEDIDO_EM_REALIZAÇÃO: theme.images.doing,
       PEDIDO_À_CAMINHO: theme.images.inRoute,

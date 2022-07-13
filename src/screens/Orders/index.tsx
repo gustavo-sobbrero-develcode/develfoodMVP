@@ -123,7 +123,7 @@ export function Orders() {
   }
 
   function getStatusImage(status: string) {
-    var statusImage = {
+    const statusImage = {
       PEDIDO_REALIZADO: theme.icons.waitingorder,
       PEDIDO_EM_REALIZAÇÃO: theme.icons.doingorder,
       PEDIDO_À_CAMINHO: theme.icons.deliveryorder,
@@ -187,12 +187,10 @@ export function Orders() {
   }
 
   const listItems = (item: OrderProps) => {
-    let quantityVisible = item.requestItems.map(
+    const quantityVisible = item.requestItems.map(
       (requestItem: RequestItemsResponse, index) => {
-        if (requestItem.quantity > 1) {
-          return index !== 0
-            ? ' + ' + requestItem.quantity + ' ' + requestItem.plateDTO.name
-            : requestItem.quantity + ' ' + requestItem.plateDTO.name;
+        if (requestItem.quantity > 1 && index !== 0) {
+          return ' + ' + requestItem.quantity + ' ' + requestItem.plateDTO.name;
         } else {
           return index !== 0
             ? ' + ' + requestItem?.plateDTO.name
