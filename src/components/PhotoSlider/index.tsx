@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from "react";
 import { FlatList, ViewToken } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -60,40 +59,17 @@ export function PhotoSlider() {
     (async () => await fetchDataBanners())();
   }, []);
 
-  function handleRestaurant(
-    id: number,
-    name: string,
-    photo_url: string,
-    food_types: string
-  ) {
+  function handleRestaurant(item: Restaurant) {
     navigation.navigate(
       "RestaurantProfile" as never,
       {
-        id,
-        name,
-        photo_url,
-        food_types,
+        id: item.id,
+        name: item.name,
+        photo_url: item.photo_url,
+        food_types: item.food_types.length > 0 ? item.food_types[0].name : "",
       } as never
     );
   }
-
-  const renderItem = ({ item }: { item: BannerData }) => {
-    return (
-      <Banner
-        onPressed={() => {
-          handleRestaurant(
-            item.restaurant.id,
-            item.restaurant.name,
-            item.restaurant.photo_url,
-            item.restaurant.food_types.length > 0
-              ? item.restaurant.food_types[0].name
-              : ""
-          );
-        }}
-        src={item.photo_url}
-      />
-    );
-  };
 
   return (
     <Container>
@@ -104,7 +80,12 @@ export function PhotoSlider() {
           showsHorizontalScrollIndicator={false}
           data={dataGetBanners.content}
           keyExtractor={(item) => item?.id.toString()}
-          renderItem={renderItem}
+          renderItem={({ item }) => (
+            <Banner
+              onPressed={() => handleRestaurant(item.restaurant)}
+              src={item.photo_url}
+            />
+          )}
           onViewableItemsChanged={indexChanged.current}
           viewabilityConfig={{ viewAreaCoveragePercentThreshold: 50 }}
         />
