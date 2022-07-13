@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
 import {RouteProp, useNavigation} from '@react-navigation/native';
@@ -119,6 +120,30 @@ export function OrderInfo({route}: RouteParams) {
     },
   });
 
+  function getStatus(status: string) {
+    var statusText = {
+      PEDIDO_REALIZADO: 'Aguardando aprovação',
+      PEDIDO_EM_REALIZAÇÃO: 'Em Preparo',
+      PEDIDO_À_CAMINHO: 'Em Rota',
+      PEDIDO_FINALIZADO: 'Entregue',
+    }[status];
+    return statusText;
+  }
+
+  const statusText = getStatus(status);
+
+  function getStatusImage(status: string) {
+    var statusImage = {
+      PEDIDO_REALIZADO: theme.images.waiting,
+      PEDIDO_EM_REALIZAÇÃO: theme.images.doing,
+      PEDIDO_À_CAMINHO: theme.images.inRoute,
+      PEDIDO_FINALIZADO: theme.images.delivered,
+    }[status];
+    return statusImage;
+  }
+
+  const statusImage = getStatusImage(status);
+
   const renderItem = ({item}: {item: RequestiItemsProps}) => {
     return item ? (
       <WrapperCartPlates>
@@ -196,32 +221,10 @@ export function OrderInfo({route}: RouteParams) {
           <RestaurantName>{name}</RestaurantName>
         </WrapperName>
         <WrapperOrderInfo>
-          <StatusImage
-            source={
-              status === 'PEDIDO_REALIZADO'
-                ? theme.images.waiting
-                : status === 'PEDIDO_EM_REALIZAÇÃO'
-                ? theme.images.doing
-                : status === 'PEDIDO_À_CAMINHO'
-                ? theme.images.inRoute
-                : status === 'PEDIDO_FINALIZADO'
-                ? theme.images.delivered
-                : null
-            }
-          />
+          <StatusImage source={statusImage} />
 
           <WrapperText>
-            <StatusText>
-              {status === 'PEDIDO_REALIZADO'
-                ? 'Aguardando aprovação'
-                : status === 'PEDIDO_EM_REALIZAÇÃO'
-                ? 'Em Preparo'
-                : status === 'PEDIDO_À_CAMINHO'
-                ? 'Em Rota'
-                : status === 'PEDIDO_FINALIZADO'
-                ? 'Entregue'
-                : null}
-            </StatusText>
+            <StatusText>{statusText}</StatusText>
           </WrapperText>
         </WrapperOrderInfo>
       </WrapperRestaurantInfo>
