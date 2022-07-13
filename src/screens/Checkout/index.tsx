@@ -33,6 +33,7 @@ import {
   TitleCart,
   WrapperCartPlates,
   FooterComponent,
+  PinImage,
 } from './styles';
 
 interface PlateProps {
@@ -127,6 +128,8 @@ export function Checkout({
       {cart.length > 0 ? (
         <>
           <WrapperInfo>
+            <PinImage source={theme.images.pin} />
+
             <MapImage source={theme.images.mapImage} />
 
             <WrapperAddresInfo>

@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useCallback, useEffect, useState} from 'react';
 import {
   ActivityIndicator,
@@ -39,6 +42,7 @@ interface ListRestaurantProps {
 interface ListRestaurantResponse {
   content: ListRestaurantProps[];
   totalPages: number;
+  totalElements: number;
 }
 interface ListFoodType {
   id: number;
@@ -95,7 +99,7 @@ export function Home() {
 
   const {data: datafoodtype, fetchData: fetchfoodtype} = useFetch<
     ListFoodType[]
-  >(`/foodType`, {
+  >('/foodType', {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -268,7 +272,7 @@ export function Home() {
             handleLoadOnEnd();
           }}
           ListEmptyComponent={
-            !isLoading ? (
+            !isLoading && data.totalElements === 0 ? (
               <ListEmptyComponent
                 source={theme.images.notFound}
                 title="Nenhum restaurante encontrado"

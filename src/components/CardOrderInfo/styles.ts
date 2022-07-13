@@ -61,3 +61,19 @@ export const Price = styled.Text`
   font-weight: 700;
   color: ${({theme}) => theme.colors.text_dark};
 `;
+
+export const NumberOfQuantityWrapper = styled.View`
+  width: ${RFValue(20)}px;
+  height: ${RFValue(20)}px;
+  background-color: ${({theme}) => theme.colors.background_red};
+  border-radius: ${RFValue(4)}px;
+  align-items: center;
+  justify-content: center;
+  margin-left: ${RFValue(45)}px;
+`;
+
+export const Number = styled.Text`
+  font-size: ${RFValue(12)}px;
+  font-weight: 700;
+  color: ${({theme}) => theme.colors.text_white};
+`;
