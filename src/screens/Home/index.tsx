@@ -20,8 +20,6 @@ import {Category} from '../../components/CategoryButton';
 import {
   Container,
   Content,
-  BannerWrapper,
-  Banner,
   TitleWrapper,
   Title,
   CategorySelect,
@@ -29,6 +27,7 @@ import {
   Footer,
 } from './styles';
 import {HeaderComponent} from '../../components/HeaderComponent';
+import {PhotoSlider} from '../../components/PhotoSlider';
 import theme from '../../global/styles/theme';
 
 interface ListRestaurantProps {
@@ -84,9 +83,9 @@ export function Home() {
   }
 
   const {data, fetchData} = useFetch<ListRestaurantResponse>(
-    `/restaurant/filter?${
-      foodType !== '' ? `foodType=${foodType}&` : ''
-    }name=${isFiltred.text}&page=${isFiltred.page}&quantity=10`,
+    `/restaurant/filter?${foodType !== '' ? `foodType=${foodType}&` : ''}name=${
+      isFiltred.text
+    }&page=${isFiltred.page}&quantity=10`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -163,8 +162,8 @@ export function Home() {
 
   const onPress = (item: ListFoodType) => {
     activeButton === item.name
-      ? (setActiveButton(''))
-      : (setActiveButton(item.name));
+      ? setActiveButton('')
+      : setActiveButton(item.name);
     setRestaurants([]);
     foodType === item.name ? setFoodType('') : setFoodType(item.name);
     setIsFiltred({...isFiltred, page: 0});
@@ -191,8 +190,9 @@ export function Home() {
   );
 
   useEffect(() => {
-
-    (async () => { await fetchfoodtype() })();
+    (async () => {
+      await fetchfoodtype();
+    })();
   }, []);
 
   useEffect(() => {
@@ -230,10 +230,7 @@ export function Home() {
           }}
           ListHeaderComponent={
             <>
-              <BannerWrapper>
-                <Banner source={theme.images.banner} />
-                <Banner source={theme.images.banner} />
-              </BannerWrapper>
+              <PhotoSlider />
 
               <TitleWrapper>
                 <Title>Categoria</Title>
@@ -242,8 +239,7 @@ export function Home() {
               <CategorySelect
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{paddingLeft: RFValue(10)}}
-                >
+                contentContainerStyle={{paddingLeft: RFValue(10)}}>
                 {renderCategories}
               </CategorySelect>
 
