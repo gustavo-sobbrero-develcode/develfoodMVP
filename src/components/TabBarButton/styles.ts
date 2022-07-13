@@ -12,9 +12,10 @@ export const ButtonIcon = styled.TouchableOpacity``;
 export const IconImage = styled.Image``;
 
 export const Title = styled.Text`
-  font-size: ${RFValue(12)}px;
+  font-size: ${RFValue(10)}px;
   text-align: center;
   color: ${({theme}) => theme.colors.icon_gray};
   font-family: ${({theme}) => theme.fonts.primaryReg};
   bottom: ${RFValue(3)}px;
+  margin-top: ${RFValue(2)}px;
 `;

@@ -65,7 +65,7 @@ export function Routes() {
             tabBarIcon: ({focused}) => (
               <TabBarButton
                 isPressed={focused}
-                name={'Favotitos'}
+                name={'Favoritos'}
                 source={theme.icons.favorite}
                 onPressed={() => navigation.navigate('Favoritos' as never)}
               />

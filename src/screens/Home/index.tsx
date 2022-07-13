@@ -23,8 +23,6 @@ import {Category} from '../../components/CategoryButton';
 import {
   Container,
   Content,
-  BannerWrapper,
-  Banner,
   TitleWrapper,
   Title,
   CategorySelect,
@@ -32,6 +30,7 @@ import {
   Footer,
 } from './styles';
 import {HeaderComponent} from '../../components/HeaderComponent';
+import {PhotoSlider} from '../../components/PhotoSlider';
 import theme from '../../global/styles/theme';
 
 interface ListRestaurantProps {
@@ -235,10 +234,7 @@ export function Home() {
           }}
           ListHeaderComponent={
             <>
-              <BannerWrapper>
-                <Banner source={theme.images.banner} />
-                <Banner source={theme.images.banner} />
-              </BannerWrapper>
+              <PhotoSlider />
 
               <TitleWrapper>
                 <Title>Categoria</Title>

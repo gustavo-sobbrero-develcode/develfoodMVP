@@ -18,6 +18,7 @@ export default {
     icon_white: '#FFFFFF',
     icon_red: '#C20C18',
     icon_dark: '#2B2B2E',
+    icon_slider: '#C4C4C4'
   },
 
   fonts: {
