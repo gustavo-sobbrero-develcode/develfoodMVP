@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useTheme} from 'styled-components';
 import RNBootSplash from 'react-native-bootsplash';
 import * as Yup from 'yup';
@@ -23,7 +23,6 @@ import {
   SectionStepSelected,
   SectionStep,
 } from './styles';
-import {useAuth} from '@global/context';
 import {Input} from '@components/Input';
 import {ContinueButton} from '@components/ContinueButton';
 import {HeaderComponent} from '@components/HeaderComponent';
@@ -49,7 +48,7 @@ export function ForgotPassword() {
 
   const navigation = useNavigation();
 
-  const {loading} = useAuth();
+  const [loading, setLoading] = useState(false);
 
   const {setToken} = useRedefinePassword();
 
@@ -61,8 +60,9 @@ export function ForgotPassword() {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (value: FormData) => {
-    api
+  const onSubmit = async (value: FormData) => {
+    setLoading(true);
+    await api
       .post(`reset-password?email=${value.email}`)
       .then(response => {
         setToken(response.data.slice(39)),
@@ -71,6 +71,7 @@ export function ForgotPassword() {
       .catch(() => {
         Alert.alert('Email não encontrado.');
       });
+    setLoading(false);
   };
 
   return (

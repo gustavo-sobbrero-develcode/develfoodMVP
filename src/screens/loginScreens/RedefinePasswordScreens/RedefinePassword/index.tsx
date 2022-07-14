@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useTheme} from 'styled-components';
 import RNBootSplash from 'react-native-bootsplash';
 import * as Yup from 'yup';
@@ -22,7 +22,6 @@ import {
   StepBar,
   SectionStepSelected,
 } from './styles';
-import {useAuth} from '@global/context';
 import {Input} from '@components/Input';
 import {ContinueButton} from '@components/ContinueButton';
 import {HeaderComponent} from '@components/HeaderComponent';
@@ -56,7 +55,7 @@ export function RedefinePassword() {
 
   const navigation = useNavigation();
 
-  const {loading} = useAuth();
+  const [loading, setLoading] = useState(false);
 
   const {
     control,
@@ -66,8 +65,9 @@ export function RedefinePassword() {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (value: FormData) => {
-    api
+  const onSubmit = async (value: FormData) => {
+    setLoading(true);
+    await api
       .put(`reset-password/change-password`, {
         token: value.token,
         password: value.password,
@@ -78,6 +78,7 @@ export function RedefinePassword() {
       .catch(() => {
         Alert.alert('Token incorreto.');
       });
+    setLoading(false);
   };
 
   return (
