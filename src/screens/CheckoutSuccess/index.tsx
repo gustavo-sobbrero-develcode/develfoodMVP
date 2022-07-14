@@ -2,8 +2,8 @@ import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StatusBar} from 'react-native';
 import {useTheme} from 'styled-components';
-import {ContinueButton} from '../../components/ContinueButton';
-import {HeaderComponent} from '../../components/HeaderComponent';
+import {ContinueButton} from '@components/ContinueButton';
+import {HeaderComponent} from '@components/HeaderComponent';
 import {
   Container,
   Wrapper,

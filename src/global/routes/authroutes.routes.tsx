@@ -2,15 +2,15 @@ import React, {useEffect} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import RNBootSplash from 'react-native-bootsplash';
-import {Login} from '../../screens/loginScreens/Login';
-import {Register} from '../../screens/loginScreens/Register';
-import {RegisterLocale} from '../../screens/loginScreens/RegisterLocale';
-import {RegisterSuccess} from '../../screens/loginScreens/RegisterSuccess';
-import {RegisterPersonalData} from '../../screens/loginScreens/RegisterPersonalData';
-import {ForgotPassword} from '../../screens/loginScreens/RedefinePasswordScreens/ForgotPassword';
-import {AuthCode} from '../../screens/loginScreens/RedefinePasswordScreens/AuthCode/index';
-import {RedefinePassword} from '../../screens/loginScreens/RedefinePasswordScreens/RedefinePassword';
-import {RedefineSuccess} from '../../screens/loginScreens/RedefinePasswordScreens/RedefineSuccess';
+import {Login} from '@screens/loginScreens/Login';
+import {Register} from '@screens/loginScreens/Register';
+import {RegisterLocale} from '@screens/loginScreens/RegisterLocale';
+import {RegisterSuccess} from '@screens/loginScreens/RegisterSuccess';
+import {RegisterPersonalData} from '@screens/loginScreens/RegisterPersonalData';
+import {ForgotPassword} from '@screens/loginScreens/RedefinePasswordScreens/ForgotPassword';
+import {AuthCode} from '@screens/loginScreens/RedefinePasswordScreens/AuthCode/index';
+import {RedefinePassword} from '@screens/loginScreens/RedefinePasswordScreens/RedefinePassword';
+import {RedefineSuccess} from '@screens/loginScreens/RedefinePasswordScreens/RedefineSuccess';
 
 const {Navigator, Screen} = createStackNavigator();
 

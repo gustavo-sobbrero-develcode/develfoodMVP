@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
   ActivityIndicator,
   Dimensions,
@@ -9,16 +9,20 @@ import {
   StyleSheet,
 } from 'react-native';
 import {useTheme} from 'styled-components';
-import {Input} from '../../components/Input';
-import {useAuth} from '../../global/Context';
-import {useFetch} from '../../global/services/get';
+import {Input} from '@components/Input';
+import {useAuth} from '@global/context';
+import {useFetch} from '@global/services/get';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useDebouncedCallback} from 'use-debounce';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import {ListEmptyComponent} from '../../components/ListEmptyComponent';
+import {
+  useFocusEffect,
+  useNavigation,
+  useScrollToTop,
+} from '@react-navigation/native';
+import {ListEmptyComponent} from '@components/ListEmptyComponent';
 import {FlatList} from 'react-native-gesture-handler';
-import {Restaurants} from '../../components/Restaurants';
-import {Category} from '../../components/CategoryButton';
+import {Restaurants} from '@components/Restaurants';
+import {Category} from '@components/CategoryButton';
 
 import {
   Container,
@@ -29,9 +33,9 @@ import {
   RestaurantListWrapper,
   Footer,
 } from './styles';
-import {HeaderComponent} from '../../components/HeaderComponent';
-import {PhotoSlider} from '../../components/PhotoSlider';
-import theme from '../../global/styles/theme';
+import {HeaderComponent} from '@components/HeaderComponent';
+import {PhotoSlider} from '@components/PhotoSlider';
+import theme from '@global/styles/theme';
 
 interface ListRestaurantProps {
   food_types: ListFoodType[];
@@ -187,6 +191,10 @@ export function Home() {
       );
     });
 
+  const ref = useRef<FlatList>(null);
+
+  useScrollToTop(ref);
+
   useFocusEffect(
     useCallback(() => {
       loadRestaurants();
@@ -221,6 +229,7 @@ export function Home() {
         />
 
         <FlatList
+          ref={ref}
           data={restaurants}
           keyExtractor={item => item.id.toString()}
           numColumns={2}

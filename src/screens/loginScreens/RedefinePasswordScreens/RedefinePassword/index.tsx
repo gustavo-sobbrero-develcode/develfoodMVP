@@ -22,11 +22,11 @@ import {
   StepBar,
   SectionStepSelected,
 } from './styles';
-import {useAuth} from '../../../../global/Context';
-import {Input} from '../../../../components/Input';
-import {ContinueButton} from '../../../../components/ContinueButton';
-import {HeaderComponent} from '../../../../components/HeaderComponent';
-import api from '../../../../global/services/api';
+import {useAuth} from '@global/context';
+import {Input} from '@components/Input';
+import {ContinueButton} from '@components/ContinueButton';
+import {HeaderComponent} from '@components/HeaderComponent';
+import api from '@global/services/api';
 
 interface FormData {
   token: string;

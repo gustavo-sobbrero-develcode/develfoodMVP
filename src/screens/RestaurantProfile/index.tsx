@@ -6,14 +6,14 @@ import {ActivityIndicator, StatusBar, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {useTheme} from 'styled-components';
 import {useDebouncedCallback} from 'use-debounce';
-import {BackButton} from '../../components/BackButton';
-import {CartComponent} from '../../components/CartComponent';
-import {Input} from '../../components/Input';
-import {ListEmptyComponent} from '../../components/ListEmptyComponent';
-import {Plates} from '../../components/Plates';
-import {useAuth} from '../../global/Context';
-import {useCreateCart} from '../../global/Context/Cart';
-import {useFetch} from '../../global/services/get';
+import {BackButton} from '@components/BackButton';
+import {CartComponent} from '@components/CartComponent';
+import {Input} from '@components/Input';
+import {ListEmptyComponent} from '@components/ListEmptyComponent';
+import {Plates} from '@components/Plates';
+import {useAuth} from '@global/context';
+import {useCreateCart} from '@global/context/Cart';
+import {useFetch} from '@global/services/get';
 
 import {
   Container,

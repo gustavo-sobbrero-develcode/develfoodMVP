@@ -1,7 +1,7 @@
 import React from 'react';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
-import {useCreateCart} from '../../global/Context/Cart';
+import {useCreateCart} from '@global/context/Cart';
 import {
   Container,
   WrapperCartComponent,
