@@ -2,7 +2,7 @@ import axios, {AxiosRequestConfig} from 'axios';
 import {useState} from 'react';
 
 const api = axios.create({
-  baseURL: 'https://develfood-3.herokuapp.com',
+  baseURL: 'https://28f8-179-235-88-84.ngrok.io',
 });
 
 export const useDelete = <TResponse = unknown>(

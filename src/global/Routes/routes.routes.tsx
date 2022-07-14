@@ -62,6 +62,7 @@ export function Routes() {
           name="Favoritos"
           component={Favorites}
           options={{
+            unmountOnBlur: true,
             tabBarIcon: ({focused}) => (
               <TabBarButton
                 isPressed={focused}

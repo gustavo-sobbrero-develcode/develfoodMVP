@@ -134,10 +134,6 @@ export function Plates({
 
   const [isPressed, setIsPressed] = useState(false);
 
-  interface FavoriteResponse {
-    id: number;
-  }
-
   return Swipe ? (
     <Swipeable renderLeftActions={leftSwipe}>
       <Container>
@@ -207,12 +203,12 @@ export function Plates({
     <Container>
       <FavoriteButton
         onPress={() => {
-          favoritePlate(id, favorite), setIsPressed(!isPressed);
+          favoritePlate({id, favorite});
         }}>
         <FavoriteImage
           source={favoriteWhite}
+          // style={favorite && {tintColor: 'red'}}
           style={favorite && {tintColor: 'red'}}
-          // style={favorite && isPressed && {tintColor: 'red'}}
         />
       </FavoriteButton>
 

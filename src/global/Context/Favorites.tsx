@@ -8,6 +8,7 @@ import {usePut} from '../services/put';
 interface AuthProviderProps {
   children: React.ReactNode;
 }
+
 interface Props {
   favoritePlate: Function;
 }
@@ -16,6 +17,7 @@ interface Favorites {
   id: number;
   favorite: boolean;
 }
+
 const FavoritesContext = createContext({} as Props);
 
 function FavoritesProvider({children}: AuthProviderProps) {
@@ -28,8 +30,10 @@ function FavoritesProvider({children}: AuthProviderProps) {
 
     if (favorite) {
       handlerDelete();
+      console.log('deletado');
     } else {
       handlerPut();
+      console.log('adicionado');
     }
   }
 

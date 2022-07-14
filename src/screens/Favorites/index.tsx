@@ -31,8 +31,6 @@ export function Favorites() {
     page: 0,
   });
 
-  // `/plate/favoritePlates?page=${isFiltred.page}&quantity=10`,
-
   const {
     data: dataFavorites,
     fetchData,
@@ -160,14 +158,14 @@ export function Favorites() {
             </Footer>
           ) : null
         }
-        // ListEmptyComponent={
-        //   !isLoading ? (
-        //     <ListEmptyComponent
-        //       source={theme.images.noFavorites}
-        //       title="Você não possui favoritos"
-        //     />
-        //   ) : null
-        // }
+        ListEmptyComponent={
+          !isLoading ? (
+            <ListEmptyComponent
+              source={theme.images.noFavorites}
+              title="Você não possui favoritos"
+            />
+          ) : null
+        }
       />
     </Container>
   );
