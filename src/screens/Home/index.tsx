@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
   ActivityIndicator,
   Dimensions,
@@ -14,7 +14,11 @@ import {useAuth} from '@global/context';
 import {useFetch} from '@global/services/get';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useDebouncedCallback} from 'use-debounce';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {
+  useFocusEffect,
+  useNavigation,
+  useScrollToTop,
+} from '@react-navigation/native';
 import {ListEmptyComponent} from '@components/ListEmptyComponent';
 import {FlatList} from 'react-native-gesture-handler';
 import {Restaurants} from '@components/Restaurants';
@@ -187,6 +191,10 @@ export function Home() {
       );
     });
 
+  const ref = useRef<FlatList>(null);
+
+  useScrollToTop(ref);
+
   useFocusEffect(
     useCallback(() => {
       loadRestaurants();
@@ -221,6 +229,7 @@ export function Home() {
         />
 
         <FlatList
+          ref={ref}
           data={restaurants}
           keyExtractor={item => item.id.toString()}
           numColumns={2}

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {ActivityIndicator, SectionList, StatusBar} from 'react-native';
 import {useTheme} from 'styled-components';
 import {ListEmptyComponent} from '@components/ListEmptyComponent';
@@ -19,7 +19,7 @@ import {
   WrapperInfo,
   Footer,
 } from './styles';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useScrollToTop} from '@react-navigation/native';
 import {HeaderComponent} from '@components/HeaderComponent';
 
 interface PlateDTOResponse {
@@ -207,6 +207,10 @@ export function Orders() {
     }
   }
 
+  const ref = useRef<SectionList>(null);
+
+  useScrollToTop(ref);
+
   useEffect(() => {
     loadOrder();
   }, [filter]);
@@ -235,6 +239,7 @@ export function Orders() {
         </WrapperInfo>
 
         <SectionList
+          ref={ref}
           sections={orderSections}
           keyExtractor={item => item.id.toString()}
           renderItem={({item}) => renderItem({item})}
