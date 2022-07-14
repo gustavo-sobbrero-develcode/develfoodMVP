@@ -66,6 +66,15 @@ interface SectionListData {
   data: OrderProps[];
 }
 
+interface HandleOrderInfoProps {
+  name: string;
+  photo_url: string;
+  id: number;
+  totalValue: number;
+  date: Date;
+  status: string;
+}
+
 export function Orders() {
   const {token} = useAuth();
 
@@ -101,14 +110,14 @@ export function Orders() {
     setIsLoading(false);
   }
 
-  function handlerOrderInfo(
-    name: string,
-    photo_url: string,
-    id: number,
-    totalValue: number,
-    date: Date,
-    status: string,
-  ) {
+  function handlerOrderInfo({
+    name,
+    photo_url,
+    id,
+    totalValue,
+    date,
+    status,
+  }: HandleOrderInfoProps) {
     navigation.navigate(
       'OrderInfo' as never,
       {name, photo_url, id, totalValue, date, status} as never,
@@ -132,14 +141,14 @@ export function Orders() {
       <OrderCard
         restaurantID={item.restaurant.id}
         onPress={() =>
-          handlerOrderInfo(
-            item.restaurant.name,
-            item.restaurant.photo_url,
-            item.id,
-            item.totalValue,
-            item.date,
-            item.status,
-          )
+          handlerOrderInfo({
+            name: item.restaurant.name,
+            photo_url: item.restaurant.photo_url,
+            id: item.id,
+            totalValue: item.totalValue,
+            date: item.date,
+            status: item.status,
+          })
         }
         photo_url={item.restaurant.photo_url}
         restaurantName={item.restaurant.name}
