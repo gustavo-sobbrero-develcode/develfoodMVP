@@ -181,7 +181,7 @@ export function OrderInfo({route}: RouteParams) {
 
       <HeaderComponent
         backgroudColor={theme.colors.background_red}
-        name={`Pedido N° ${id}`}
+        name={`Pedido N.° ${id}`}
         source={theme.icons.exitWhite}
         iconColor={theme.colors.icon_white}
         Textcolor={theme.colors.text_white}

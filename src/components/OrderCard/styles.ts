@@ -4,12 +4,13 @@ import styled from 'styled-components/native';
 export const Container = styled.View.attrs({
   elevation: 10,
 })`
-  width: 100%;
+  width: 90%;
   height: ${RFValue(103)}px;
   background-color: ${({theme}) => theme.colors.card};
   border-radius: ${RFValue(8)}px;
   margin-top: ${RFValue(10)}px;
   margin-bottom: ${RFValue(10)}px;
+  align-self: center;
 `;
 
 export const RestaurantPhoto = styled.Image`
