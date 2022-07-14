@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect} from 'react';
 import {useTheme} from 'styled-components';
-import {useAuth} from '../../global/Context';
-import {useFetch} from '../../global/services/get';
+import {useAuth} from '@global/context';
+import {useFetch} from '@global/services/get';
 import {
   Container,
   NumberOfQuantityWrapper,

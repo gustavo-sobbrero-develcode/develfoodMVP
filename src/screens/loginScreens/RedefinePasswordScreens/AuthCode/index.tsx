@@ -20,9 +20,9 @@ import {
   SectionStep,
   AuthText,
 } from './styles';
-import {ContinueButton} from '../../../../components/ContinueButton';
-import {HeaderComponent} from '../../../../components/HeaderComponent';
-import {useRedefinePassword} from '../../../../global/Context/RedefinePassword';
+import {ContinueButton} from '@components/ContinueButton';
+import {HeaderComponent} from '@components/HeaderComponent';
+import {useRedefinePassword} from '@global/context/RedefinePassword';
 
 export function AuthCode() {
   useEffect(() => {

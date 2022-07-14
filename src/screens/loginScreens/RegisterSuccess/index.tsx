@@ -2,8 +2,8 @@ import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {useForm} from 'react-hook-form';
 import {useTheme} from 'styled-components';
-import {BackButton} from '../../../components/BackButton';
-import {ContinueButton} from '../../../components/ContinueButton';
+import {BackButton} from '@components/BackButton';
+import {ContinueButton} from '@components/ContinueButton';
 import {
   Container,
   Header,
