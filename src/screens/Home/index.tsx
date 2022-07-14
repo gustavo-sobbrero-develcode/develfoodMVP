@@ -120,7 +120,7 @@ export function Home() {
   }
 
   async function handleLoadOnEnd() {
-    if (data.totalPages !== isFiltred.page) {
+    if (isFiltred.page + 1 < data.totalPages) {
       setIsFiltred({...isFiltred, page: isFiltred.page + 1});
     }
   }
@@ -195,11 +195,9 @@ export function Home() {
 
   useScrollToTop(ref);
 
-  useFocusEffect(
-    useCallback(() => {
-      loadRestaurants();
-    }, [isFiltred, foodType]),
-  );
+  useEffect(() => {
+    loadRestaurants();
+  }, [isFiltred, foodType]);
 
   useEffect(() => {
     (async () => {
@@ -268,7 +266,9 @@ export function Home() {
           }
           ListFooterComponent={() => (
             <Footer>
-              <ActivityIndicator color={theme.colors.background_red} />
+              {isLoading && (
+                <ActivityIndicator color={theme.colors.background_red} />
+              )}
             </Footer>
           )}
           renderItem={renderItem}
