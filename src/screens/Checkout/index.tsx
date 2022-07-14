@@ -6,13 +6,13 @@ import {StatusBar} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
-import {CheckoutComponent} from '../../components/CheckoutComponent';
-import {HeaderComponent} from '../../components/HeaderComponent';
-import {ListEmptyComponent} from '../../components/ListEmptyComponent';
-import {Plates} from '../../components/Plates';
-import {useAuth} from '../../global/context';
-import {useCreateCart} from '../../global/context/Cart';
-import {useFetch} from '../../global/services/get';
+import {CheckoutComponent} from '@components/CheckoutComponent';
+import {HeaderComponent} from '@components/HeaderComponent';
+import {ListEmptyComponent} from '@components/ListEmptyComponent';
+import {Plates} from '@components/Plates';
+import {useAuth} from '@global/context';
+import {useCreateCart} from '@global/context/Cart';
+import {useFetch} from '@global/services/get';
 
 import {
   Container,

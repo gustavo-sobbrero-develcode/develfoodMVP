@@ -11,8 +11,8 @@ import {
 } from 'react-native';
 
 import {Container, Content, Title, Description} from './styles';
-import {ContinueButton} from '../../../../components/ContinueButton';
-import {HeaderComponent} from '../../../../components/HeaderComponent';
+import {ContinueButton} from '@components/ContinueButton';
+import {HeaderComponent} from '@components/HeaderComponent';
 
 export function RedefineSuccess() {
   useEffect(() => {

@@ -23,12 +23,12 @@ import {
   SectionStepSelected,
   SectionStep,
 } from './styles';
-import {useAuth} from '../../../../global/context';
-import {Input} from '../../../../components/Input';
-import {ContinueButton} from '../../../../components/ContinueButton';
-import {HeaderComponent} from '../../../../components/HeaderComponent';
-import {useRedefinePassword} from '../../../../global/context/RedefinePassword';
-import api from '../../../../global/services/api';
+import {useAuth} from '@global/context';
+import {Input} from '@components/Input';
+import {ContinueButton} from '@components/ContinueButton';
+import {HeaderComponent} from '@components/HeaderComponent';
+import {useRedefinePassword} from '@global/context/RedefinePassword';
+import api from '@global/services/api';
 
 interface FormData {
   email: string;

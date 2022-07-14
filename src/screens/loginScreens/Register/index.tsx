@@ -2,13 +2,13 @@ import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
-import {BackButton} from '../../../components/BackButton';
-import {Input} from '../../../components/Input';
+import {BackButton} from '@components/BackButton';
+import {Input} from '@components/Input';
 import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {Controller, useForm} from 'react-hook-form';
-import {ContinueButton} from '../../../components/ContinueButton';
-import {useCreateUser} from '../../../global/context/createUserAuth';
+import {ContinueButton} from '@components/ContinueButton';
+import {useCreateUser} from '@global/context/createUserAuth';
 
 import {
   Image,

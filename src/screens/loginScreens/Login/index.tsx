@@ -5,9 +5,9 @@ import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {Controller, useForm} from 'react-hook-form';
 import {RFPercentage, RFValue} from 'react-native-responsive-fontsize';
-import {useAuth} from '../../../global/context';
+import {useAuth} from '@global/context';
 import {useNavigation} from '@react-navigation/native';
-import {Input} from '../../../components/Input';
+import {Input} from '@components/Input';
 
 import {Keyboard, StatusBar, TouchableWithoutFeedback} from 'react-native';
 
@@ -25,7 +25,7 @@ import {
   RegisterButtonTitle,
   ButtonTitle,
 } from './styles';
-import {ContinueButton} from '../../../components/ContinueButton';
+import {ContinueButton} from '@components/ContinueButton';
 
 interface FormData {
   email: string;

@@ -1,17 +1,17 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import {Home} from '../../screens/Home';
-import {Favorites} from '../../screens/Favorites';
-import {Settings} from '../../screens/Settings';
-import {TabBarButton} from '../../components/TabBarButton';
+import {Home} from '@screens/Home';
+import {Favorites} from '@screens/Favorites';
+import {Settings} from '@screens/Settings';
+import {TabBarButton} from '@components/TabBarButton';
 import {useTheme} from 'styled-components';
 import {useNavigation} from '@react-navigation/native';
 import {Platform} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useCreateCart} from '../context/Cart';
-import {CartComponent} from '../../components/CartComponent';
-import {Orders} from '../../screens/Orders';
+import {CartComponent} from '@components/CartComponent';
+import {Orders} from '@screens/Orders';
 
 const Tabs = createBottomTabNavigator();
 

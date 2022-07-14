@@ -3,8 +3,8 @@ import React, {useEffect} from 'react';
 import {ImageSourcePropType} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useTheme} from 'styled-components';
-import {useAuth} from '../../global/context';
-import {useFetch} from '../../global/services/get';
+import {useAuth} from '@global/context';
+import {useFetch} from '@global/services/get';
 import {
   CheckOrders,
   Container,

@@ -4,9 +4,9 @@ import {StyleSheet, View} from 'react-native';
 import {Swipeable} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
-import {useAuth} from '../../global/context';
-import {useCreateCart} from '../../global/context/Cart';
-import {useFetch} from '../../global/services/get';
+import {useAuth} from '@global/context';
+import {useCreateCart} from '@global/context/Cart';
+import {useFetch} from '@global/services/get';
 
 import {
   Container,

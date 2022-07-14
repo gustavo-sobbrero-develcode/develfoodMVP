@@ -3,8 +3,8 @@ import React, {useEffect, useRef, useState} from 'react';
 import {FlatList, ViewToken} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {RFValue} from 'react-native-responsive-fontsize';
-import {useAuth} from '../../global/context';
-import {useFetch} from '../../global/services/get';
+import {useAuth} from '@global/context';
+import {useFetch} from '@global/services/get';
 import {Banner} from '../Banner';
 import {Container, PhotoIndexes, PhotoIndex, Banners} from './styles';
 interface ChangePhotoProps {

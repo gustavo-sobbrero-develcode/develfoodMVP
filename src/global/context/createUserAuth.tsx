@@ -1,7 +1,7 @@
 import React, {createContext, useState} from 'react';
 import {useContext} from 'react';
 import {Alert} from 'react-native';
-import {usePost} from '../services/post';
+import {usePost} from '@global/services/post';
 
 interface AuthProviderProps {
   children: React.ReactNode;

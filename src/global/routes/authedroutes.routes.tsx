@@ -1,11 +1,11 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {RestaurantProfile} from '../../screens/RestaurantProfile';
+import {RestaurantProfile} from '@screens/RestaurantProfile';
 import {Routes} from './routes.routes';
-import {CartComponent} from '../../components/CartComponent';
-import {Checkout} from '../../screens/Checkout';
-import {CheckoutSuccess} from '../../screens/CheckoutSuccess';
-import {OrderInfo} from '../../screens/OrderInfo';
+import {CartComponent} from '@components/CartComponent';
+import {Checkout} from '@screens/Checkout';
+import {CheckoutSuccess} from '@screens/CheckoutSuccess';
+import {OrderInfo} from '@screens/OrderInfo';
 import {CartProvider} from '../context/Cart';
 
 const {Navigator, Screen} = createNativeStackNavigator();

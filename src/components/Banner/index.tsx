@@ -2,8 +2,8 @@
 import React, {useEffect} from 'react';
 import {TouchableOpacity} from 'react-native';
 import {useTheme} from 'styled-components';
-import {useAuth} from '../../global/context';
-import {useFetch} from '../../global/services/get';
+import {useAuth} from '@global/context';
+import {useFetch} from '@global/services/get';
 import {BannerImage} from './styles';
 
 interface BannerProps {
