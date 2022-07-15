@@ -7,7 +7,6 @@ import {useTheme} from 'styled-components';
 import {useAuth} from '../../global/Context';
 import {useCreateCart} from '../../global/Context/Cart';
 import {useFavorites} from '../../global/Context/Favorites';
-import api from '../../global/services/api';
 import {useFetch} from '../../global/services/get';
 
 import {
@@ -98,7 +97,7 @@ export function Plates({
     cleanUpSamePlates,
   } = useCreateCart();
 
-  const {favoritePlate, deletePlate} = useFavorites();
+  const {favoritePlate} = useFavorites();
 
   const itemCount = cart.find((item: ItemProps) => item?.id === id)?.quantity;
 
@@ -126,10 +125,6 @@ export function Plates({
       </CleanUpButton>
     );
   };
-
-  async function handleFavorite() {
-    api.get(`/plate/search?restaurantid=${id}`).then(response => {});
-  }
 
   useEffect(() => {
     fetchData();
@@ -208,7 +203,10 @@ export function Plates({
     </Swipeable>
   ) : (
     <Container>
-      <FavoriteButton onPress={() => handleFavorite()}>
+      <FavoriteButton
+        onPress={favorite => {
+          favoritePlate({id, favorite});
+        }}>
         <FavoriteImage
           source={favoriteWhite}
           // style={favorite && {tintColor: 'red'}}
