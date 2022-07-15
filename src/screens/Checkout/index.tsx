@@ -65,7 +65,8 @@ export function Checkout({
 
   const navigation = useNavigation();
 
-  const {cart, nameRestaurant, foodTypes, restaurantPhoto} = useCreateCart();
+  const {cart, nameRestaurant, foodTypes, restaurantPhoto, loading} =
+    useCreateCart();
 
   function handlerBackHome() {
     navigation.navigate('Home' as never);
@@ -183,7 +184,7 @@ export function Checkout({
           title="Seu carrinho está vazio"
         />
       )}
-      <CheckoutComponent />
+      <CheckoutComponent loading={loading} />
     </Container>
   );
 }
