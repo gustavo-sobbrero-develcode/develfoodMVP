@@ -9,6 +9,7 @@ import {Input} from '../../components/Input';
 import {ListEmptyComponent} from '../../components/ListEmptyComponent';
 import {Plates} from '../../components/Plates';
 import {useAuth} from '../../global/Context';
+import {useFavorites} from '../../global/Context/Favorites';
 import {useFetch} from '../../global/services/get';
 import theme from '../../global/styles/theme';
 import {CategorySelect} from '../Home/styles';
@@ -31,12 +32,16 @@ export function Favorites() {
     page: 0,
   });
 
+  const {idPlate} = useFavorites();
+
+  // plate/favoritePlates/search?page=0&quantity=10&plateName=Hamburger&foodType=fastfood
+
   const {
     data: dataFavorites,
     fetchData,
     loading: loadingFavorite,
   } = useFetch<FavoritesResponse>(
-    `/plate/favoritePlates/search?page=${isFiltred.page}&quantity=10&plateName=${isFiltred.text}`,
+    `/plate/favoritePlates/search?page=${isFiltred.page}&quantity=10 `,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -57,7 +62,7 @@ export function Favorites() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [idPlate]);
 
   useEffect(() => {
     loadRestaurants();
@@ -84,6 +89,7 @@ export function Favorites() {
   const debounced = useDebouncedCallback(value => {
     handleSearch(value);
   }, 1500);
+
   const renderItem = ({item}: {item: Plate}) => {
     return (
       <PlatesWrapper>
@@ -109,7 +115,7 @@ export function Favorites() {
     <Container>
       <StatusBar
         barStyle={'dark-content'}
-        translucent
+        translucent={false}
         backgroundColor={theme.colors.background}
       />
       <View style={{marginTop: 20}}>

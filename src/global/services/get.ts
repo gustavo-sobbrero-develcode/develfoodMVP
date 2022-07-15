@@ -2,7 +2,7 @@ import axios, {AxiosRequestConfig} from 'axios';
 import {useState} from 'react';
 
 const api = axios.create({
-  baseURL: 'https://28f8-179-235-88-84.ngrok.io',
+  baseURL: 'https://0859-179-235-88-84.ngrok.io',
 });
 
 export function useFetch<T = unknown>(
@@ -10,7 +10,9 @@ export function useFetch<T = unknown>(
   options?: AxiosRequestConfig,
 ) {
   const [data, setData] = useState<T>({} as T);
+
   const [loading, setLoading] = useState(false);
+
   const [error, setError] = useState<Error | null>(null);
 
   async function fetchData(onSuccess?: (response: T) => void) {
@@ -25,5 +27,6 @@ export function useFetch<T = unknown>(
       setLoading(false);
     }
   }
+
   return {data, loading, setLoading, error, fetchData, setData};
 }
