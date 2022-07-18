@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect} from 'react';
 import {ImageSourcePropType} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useTheme} from 'styled-components';
 import {useAuth} from '@global/context';
 import {useFetch} from '@global/services/get';
@@ -57,28 +56,26 @@ export function OrderCard({
     fetchData();
   }, [photo_url]);
   return (
-    <TouchableOpacity onPress={onPress} activeOpacity={0}>
-      <Container>
-        <RestaurantPhoto
-          source={
-            data.code
-              ? {
-                  uri: `${data.code}`,
-                }
-              : theme.images.noImage
-          }
-        />
-        <WrapperRestaurantInfo>
-          <RestaurantName>{restaurantName}</RestaurantName>
-          <CheckOrders source={source} />
-          <WrapperInfoPoduct>
-            <StatusOrder>{statusOrder}</StatusOrder>
-            <OrderN>N° </OrderN>
-            <OrderNumber>{orderNumber}</OrderNumber>
-          </WrapperInfoPoduct>
-          <FoodOrderName numberOfLines={3}>{foodName}</FoodOrderName>
-        </WrapperRestaurantInfo>
-      </Container>
-    </TouchableOpacity>
+    <Container onPress={onPress}>
+      <RestaurantPhoto
+        source={
+          data.code
+            ? {
+                uri: `${data.code}`,
+              }
+            : theme.images.noImage
+        }
+      />
+      <WrapperRestaurantInfo>
+        <RestaurantName>{restaurantName}</RestaurantName>
+        <CheckOrders source={source} />
+        <WrapperInfoPoduct>
+          <StatusOrder>{statusOrder}</StatusOrder>
+          <OrderN>N° </OrderN>
+          <OrderNumber>{orderNumber}</OrderNumber>
+        </WrapperInfoPoduct>
+        <FoodOrderName numberOfLines={3}>{foodName}</FoodOrderName>
+      </WrapperRestaurantInfo>
+    </Container>
   );
 }

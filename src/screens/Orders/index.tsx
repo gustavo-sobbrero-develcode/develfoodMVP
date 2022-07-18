@@ -242,13 +242,13 @@ export function Orders() {
               </WrapperInfo>
             ) : null
           }
-          ListFooterComponent={() =>
-            isLoading ? (
-              <Footer>
+          ListFooterComponent={() => (
+            <Footer>
+              {isLoading && (
                 <ActivityIndicator color={theme.colors.background_red} />
-              </Footer>
-            ) : null
-          }
+              )}
+            </Footer>
+          )}
           onEndReached={() => {
             handleLoadOnEnd();
           }}
