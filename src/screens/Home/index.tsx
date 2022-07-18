@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   ActivityIndicator,
   Dimensions,
@@ -14,11 +14,7 @@ import {useAuth} from '@global/context';
 import {useFetch} from '@global/services/get';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useDebouncedCallback} from 'use-debounce';
-import {
-  useFocusEffect,
-  useNavigation,
-  useScrollToTop,
-} from '@react-navigation/native';
+import {useNavigation, useScrollToTop} from '@react-navigation/native';
 import {ListEmptyComponent} from '@components/ListEmptyComponent';
 import {FlatList} from 'react-native-gesture-handler';
 import {Restaurants} from '@components/Restaurants';

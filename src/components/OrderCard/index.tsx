@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect} from 'react';
 import {ImageSourcePropType} from 'react-native';
-import {RectButton, TouchableOpacity} from 'react-native-gesture-handler';
 import {useTheme} from 'styled-components';
 import {useAuth} from '@global/context';
 import {useFetch} from '@global/services/get';
