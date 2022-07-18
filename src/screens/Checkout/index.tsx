@@ -145,10 +145,7 @@ export function Checkout({
             <WrapperInfoRestaurant>
               <RestauratName>{nameRestaurant}</RestauratName>
 
-              <FoodType>
-                {foodTypes?.charAt(0).toUpperCase() +
-                  foodTypes?.slice(1).toLowerCase()}
-              </FoodType>
+              <FoodType>{foodTypes}</FoodType>
 
               <WrapperPhoto>
                 <RestaurantPhoto
