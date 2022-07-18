@@ -8,6 +8,8 @@ import {useAuth} from '../../global/Context';
 import {useCreateCart} from '../../global/Context/Cart';
 import {useFavorites} from '../../global/Context/Favorites';
 import {useFetch} from '../../global/services/get';
+import {usePut} from '../../global/services/put';
+import {Plate} from '../../screens/RestaurantProfile';
 
 import {
   Container,
@@ -49,7 +51,7 @@ interface ListPlatesProps {
   inside: boolean;
   photoRestaurant?: string;
   Swipe: boolean;
-  favorite: boolean | null;
+  favorite: any;
 }
 
 interface Photos {
@@ -71,6 +73,10 @@ interface ItemProps {
   unityPrice?: number;
 }
 
+interface FavoritesResponse {
+  content: Plate[];
+  totalPages: number;
+}
 export function Plates({
   name,
   description,
@@ -130,11 +136,53 @@ export function Plates({
     fetchData();
   }, [source]);
 
-  const favoritex = true;
+  // const [favoritePlates, setFavoritePlates] = useState<Plate[]>([]);
 
   const favoriteWhite = require('../../global/assets/Icons/favoriteRestaurant.png');
 
   const [isPressed, setIsPressed] = useState(false);
+
+  // const [idPlate, setIdPlate] = useState<number>();
+
+  // function favoritePlatesFunction() {
+  //   setIdPlate(id);
+
+  //   fetchFavorites();
+
+  //   const itemFavorite = favoritePlates.find((item: Plate) => item?.id === id);
+
+  //   itemFavorite && console.log('itemFavorite', itemFavorite);
+
+  //   console.log('clicou no coração', dataFavorites);
+  // }
+
+  // const {
+  //   data: dataFavorites,
+  //   fetchData: fetchFavorites,
+  //   loading: loadingFavorite,
+  // } = useFetch<FavoritesResponse>(
+  //   `/plate/favoritePlates/search?page=0&quantity=100`,
+  //   {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   },
+  // );
+
+  // useEffect(() => {
+  //   dataFavorites &&
+  //     setFavoritePlates([...favoritePlates, ...dataFavorites.content]);
+  // }, [dataFavorites]);
+
+  // const {
+  //   data: dataPut,
+  //   handlerPut,
+  //   error,
+  // } = usePut<any>(`/plate/favorite/${idPlate}`, undefined, {
+  //   headers: {
+  //     Authorization: `Bearer ${token}`,
+  //   },
+  // });
 
   return Swipe ? (
     <Swipeable renderLeftActions={leftSwipe}>
@@ -203,13 +251,10 @@ export function Plates({
     </Swipeable>
   ) : (
     <Container>
-      <FavoriteButton
-        onPress={favorite => {
-          favoritePlate({id, favorite});
-        }}>
+      <FavoriteButton onPress={() => favoritePlate(id)}>
         <FavoriteImage
           source={favoriteWhite}
-          // style={favorite && {tintColor: 'red'}}
+          // style={favorite && {tintColor: 'red'}} <<<<<<<<<<<
           style={favorite && {tintColor: 'red'}}
         />
       </FavoriteButton>

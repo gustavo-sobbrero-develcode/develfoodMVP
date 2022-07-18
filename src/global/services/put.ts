@@ -2,7 +2,7 @@ import axios, {AxiosRequestConfig} from 'axios';
 import {useState} from 'react';
 
 const api = axios.create({
-  baseURL: 'https://0859-179-235-88-84.ngrok.io',
+  baseURL: 'https://develfood-3.herokuapp.com',
 });
 
 export const usePut = <T = unknown, TResponse = unknown>(

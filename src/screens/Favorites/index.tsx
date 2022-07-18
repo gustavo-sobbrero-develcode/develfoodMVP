@@ -17,7 +17,7 @@ import {Plate} from '../RestaurantProfile';
 import {PlatesWrapper} from '../RestaurantProfile/styles';
 import {Container, Content, Footer} from './styles';
 
-interface FavoritesResponse {
+export interface FavoritesResponse {
   content: Plate[];
   totalPages: number;
 }
@@ -32,7 +32,11 @@ export function Favorites() {
     page: 0,
   });
 
-  const {idPlate} = useFavorites();
+  const {
+    idPlate,
+    favoritesState,
+    favoritePlates: favoritePlatesContext,
+  } = useFavorites();
 
   // plate/favoritePlates/search?page=0&quantity=10&plateName=Hamburger&foodType=fastfood
 
@@ -61,10 +65,6 @@ export function Favorites() {
   }
 
   useEffect(() => {
-    fetchData();
-  }, [idPlate]);
-
-  useEffect(() => {
     loadRestaurants();
   }, [isFiltred]);
 
@@ -89,6 +89,10 @@ export function Favorites() {
   const debounced = useDebouncedCallback(value => {
     handleSearch(value);
   }, 1500);
+
+  function rerender(state: number) {
+    state && fetchData();
+  }
 
   const renderItem = ({item}: {item: Plate}) => {
     return (
@@ -151,6 +155,7 @@ export function Favorites() {
             </CategorySelect>
           </View>
         }
+        extraData={() => rerender(favoritesState)}
         data={favoritePlates}
         keyExtractor={item => item.id.toString()}
         renderItem={renderItem}
