@@ -9,7 +9,6 @@ import {Input} from '../../components/Input';
 import {ListEmptyComponent} from '../../components/ListEmptyComponent';
 import {Plates} from '../../components/Plates';
 import {useAuth} from '../../global/Context';
-import {useFavorites} from '../../global/Context/Favorites';
 import {useFetch} from '../../global/services/get';
 import theme from '../../global/styles/theme';
 import {CategorySelect} from '../Home/styles';
@@ -31,13 +30,6 @@ export function Favorites() {
     text: '',
     page: 0,
   });
-
-  const {
-    idPlate,
-    favoritesState,
-    favoritePlates: favoritePlatesContext,
-    deleteFavorite,
-  } = useFavorites();
 
   // plate/favoritePlates/search?page=0&quantity=10&plateName=Hamburger&foodType=fastfood
 
@@ -105,12 +97,8 @@ export function Favorites() {
           description={item.description}
           price={item.price}
           source={item.photo_url}
-          // restaurantID={id}
           id={item.id}
           favorite={item.favorite}
-          // restaurantFoodTypes={food_types}
-          // restaurantName={name}
-          // photoRestaurant={photo_url}
         />
       </PlatesWrapper>
     );
@@ -156,7 +144,6 @@ export function Favorites() {
             </CategorySelect>
           </View>
         }
-        extraData={() => rerender(favoritesState)}
         data={favoritePlates}
         keyExtractor={item => item.id.toString()}
         renderItem={renderItem}
