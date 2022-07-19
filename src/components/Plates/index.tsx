@@ -6,11 +6,9 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
 import {useAuth} from '../../global/Context';
 import {useCreateCart} from '../../global/Context/Cart';
-import {useFavorites} from '../../global/Context/Favorites';
 import {useDelete} from '../../global/services/delete';
 import {useFetch} from '../../global/services/get';
 import {usePut} from '../../global/services/put';
-import {Plate} from '../../screens/RestaurantProfile';
 
 import {
   Container,
@@ -53,7 +51,6 @@ interface ListPlatesProps {
   photoRestaurant?: string;
   Swipe: boolean;
   favorite: any;
-  onPress?: Function;
 }
 
 interface Photos {
@@ -75,9 +72,15 @@ interface ItemProps {
   unityPrice?: number;
 }
 
-interface FavoritesResponse {
-  content: Plate[];
-  totalPages: number;
+interface PutResponse {
+  id: number;
+  name: string;
+  description: string;
+  price: null;
+  foodType: null;
+  restaurantName: null;
+  photo_url: string;
+  favorite: null;
 }
 export function Plates({
   name,
@@ -92,7 +95,6 @@ export function Plates({
   inside,
   Swipe,
   favorite,
-  onPress,
 }: ListPlatesProps) {
   const theme = useTheme();
 
@@ -139,7 +141,7 @@ export function Plates({
 
   const favoriteWhite = require('../../global/assets/Icons/favoriteRestaurant.png');
 
-  const [isPressed, setIsPressed] = useState(false);
+  const [isFavorite, setIsFavorite] = useState<boolean>(favorite);
 
   function handlerLikeButton() {
     if (isFavorite) {
@@ -163,7 +165,7 @@ export function Plates({
     data: dataPut,
     handlerPut,
     error: errorPut,
-  } = usePut<any>(`/plate/favorite/${id}`, undefined, {
+  } = usePut<any, PutResponse>(`/plate/favorite/${id}`, undefined, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -173,8 +175,6 @@ export function Plates({
     setIsFavorite(!isFavorite);
     handlerLikeButton();
   }
-
-  const [isFavorite, setIsFavorite] = useState<boolean>(favorite);
 
   return Swipe ? (
     <Swipeable renderLeftActions={leftSwipe}>

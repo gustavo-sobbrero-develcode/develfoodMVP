@@ -134,8 +134,6 @@ export function RestaurantProfile({route}: RouteParams) {
     navigation.navigate('Checkout' as never);
   }
 
-  const [likeState, setLikeState] = useState(false);
-
   const renderItem = ({item}: {item: Plate}) => {
     return (
       <PlatesWrapper>
@@ -152,7 +150,6 @@ export function RestaurantProfile({route}: RouteParams) {
           restaurantName={name}
           photoRestaurant={photo_url}
           favorite={item.favorite}
-          onPress={() => setLikeState(!likeState)}
         />
       </PlatesWrapper>
     );
@@ -212,7 +209,6 @@ export function RestaurantProfile({route}: RouteParams) {
 
       <FlatList
         data={plate}
-        extraData={likeState}
         keyExtractor={item => item.id.toString()}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={
