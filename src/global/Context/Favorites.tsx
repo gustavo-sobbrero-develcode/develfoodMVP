@@ -14,7 +14,7 @@ interface AuthProviderProps {
 }
 
 interface Props {
-  favoritePlate: Function;
+  deleteFavorite: Function;
   idPlate: number | undefined;
   favoritesState: number;
   favoritePlates: Plate[];
@@ -27,10 +27,10 @@ function FavoritesProvider({children}: AuthProviderProps) {
 
   const [idPlate, setIdPlate] = useState<number>();
 
-  function favoritePlate(id: number) {
+  function deleteFavorite(id: number) {
     setIdPlate(id);
-    setFavoritesState(favoritesState + 1);
-    console.log('favoritesState no contexto', favoritesState);
+
+    // fetchFavorites(onSuccess);
   }
 
   const [favoritePlates, setFavoritePlates] = useState<Plate[]>([]);
@@ -54,16 +54,16 @@ function FavoritesProvider({children}: AuthProviderProps) {
 
   const [favoritesState, setFavoritesState] = useState<number>(0);
 
-  useEffect(() => {
-    const itemFavorite = favoritePlates?.find(
-      (item: Plate) => item?.id === idPlate,
-    );
+  // useEffect(() => {
+  //   const itemFavorite = favoritePlates?.find(
+  //     (item: Plate) => item?.id === idPlate,
+  //   );
 
-    itemFavorite && handlerDelete();
-  }, [favoritePlates]);
+  //   itemFavorite && handlerDelete();
+  // }, [favoritePlates]);
 
   useEffect(() => {
-    idPlate && fetchFavorites(onSuccess);
+    handlerDelete();
   }, [idPlate]);
 
   const {
@@ -81,7 +81,7 @@ function FavoritesProvider({children}: AuthProviderProps) {
   //   handlerPut,
   //   error,
   // } = usePut<any>(`/plate/favorite/${idPlate}`, undefined, {
-  //   headers: {favoritePlate
+  //   headers: {
   //     Authorization: `Bearer ${token}`,
   //   },
   // });
@@ -89,7 +89,7 @@ function FavoritesProvider({children}: AuthProviderProps) {
   return (
     <FavoritesContext.Provider
       value={{
-        favoritePlate,
+        deleteFavorite,
         idPlate,
         favoritesState,
         favoritePlates,

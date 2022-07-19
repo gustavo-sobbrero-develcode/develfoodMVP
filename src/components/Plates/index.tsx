@@ -7,6 +7,7 @@ import {useTheme} from 'styled-components';
 import {useAuth} from '../../global/Context';
 import {useCreateCart} from '../../global/Context/Cart';
 import {useFavorites} from '../../global/Context/Favorites';
+import {useDelete} from '../../global/services/delete';
 import {useFetch} from '../../global/services/get';
 import {usePut} from '../../global/services/put';
 import {Plate} from '../../screens/RestaurantProfile';
@@ -52,6 +53,7 @@ interface ListPlatesProps {
   photoRestaurant?: string;
   Swipe: boolean;
   favorite: any;
+  onPress?: Function;
 }
 
 interface Photos {
@@ -90,6 +92,7 @@ export function Plates({
   inside,
   Swipe,
   favorite,
+  onPress,
 }: ListPlatesProps) {
   const theme = useTheme();
 
@@ -102,8 +105,6 @@ export function Plates({
     addNewProductoCart,
     cleanUpSamePlates,
   } = useCreateCart();
-
-  const {favoritePlate} = useFavorites();
 
   const itemCount = cart.find((item: ItemProps) => item?.id === id)?.quantity;
 
@@ -136,53 +137,44 @@ export function Plates({
     fetchData();
   }, [source]);
 
-  // const [favoritePlates, setFavoritePlates] = useState<Plate[]>([]);
-
   const favoriteWhite = require('../../global/assets/Icons/favoriteRestaurant.png');
 
   const [isPressed, setIsPressed] = useState(false);
 
-  // const [idPlate, setIdPlate] = useState<number>();
+  function handlerLikeButton() {
+    if (isFavorite) {
+      handlerDelete();
+    } else {
+      handlerPut();
+    }
+  }
 
-  // function favoritePlatesFunction() {
-  //   setIdPlate(id);
+  const {
+    data: dataDelete,
+    handlerDelete,
+    error: errorDelete,
+  } = useDelete<any>(`/plate/favorite/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
-  //   fetchFavorites();
+  const {
+    data: dataPut,
+    handlerPut,
+    error: errorPut,
+  } = usePut<any>(`/plate/favorite/${id}`, undefined, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
-  //   const itemFavorite = favoritePlates.find((item: Plate) => item?.id === id);
+  function onpressss() {
+    setIsFavorite(!isFavorite);
+    handlerLikeButton();
+  }
 
-  //   itemFavorite && console.log('itemFavorite', itemFavorite);
-
-  //   console.log('clicou no coração', dataFavorites);
-  // }
-
-  // const {
-  //   data: dataFavorites,
-  //   fetchData: fetchFavorites,
-  //   loading: loadingFavorite,
-  // } = useFetch<FavoritesResponse>(
-  //   `/plate/favoritePlates/search?page=0&quantity=100`,
-  //   {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   },
-  // );
-
-  // useEffect(() => {
-  //   dataFavorites &&
-  //     setFavoritePlates([...favoritePlates, ...dataFavorites.content]);
-  // }, [dataFavorites]);
-
-  // const {
-  //   data: dataPut,
-  //   handlerPut,
-  //   error,
-  // } = usePut<any>(`/plate/favorite/${idPlate}`, undefined, {
-  //   headers: {
-  //     Authorization: `Bearer ${token}`,
-  //   },
-  // });
+  const [isFavorite, setIsFavorite] = useState<boolean>(favorite);
 
   return Swipe ? (
     <Swipeable renderLeftActions={leftSwipe}>
@@ -251,11 +243,10 @@ export function Plates({
     </Swipeable>
   ) : (
     <Container>
-      <FavoriteButton onPress={() => favoritePlate(id)}>
+      <FavoriteButton onPress={onpressss}>
         <FavoriteImage
           source={favoriteWhite}
-          // style={favorite && {tintColor: 'red'}} <<<<<<<<<<<
-          style={favorite && {tintColor: 'red'}}
+          style={isFavorite && {tintColor: 'red'}}
         />
       </FavoriteButton>
 

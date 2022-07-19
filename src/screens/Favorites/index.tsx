@@ -36,6 +36,7 @@ export function Favorites() {
     idPlate,
     favoritesState,
     favoritePlates: favoritePlatesContext,
+    deleteFavorite,
   } = useFavorites();
 
   // plate/favoritePlates/search?page=0&quantity=10&plateName=Hamburger&foodType=fastfood
