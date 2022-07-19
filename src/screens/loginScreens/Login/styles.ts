@@ -43,9 +43,10 @@ export const FogotPassButton = styled.TouchableOpacity`
 
 export const ForgotPass = styled.Text`
   font-family: ${({theme}) => theme.fonts.secondaryBold};
-  font-size: ${RFValue(14)}px;
+  font-size: ${RFValue(12)}px;
   font-weight: bold;
   margin-top: ${RFValue(0)}px;
+  color: ${({theme}) => theme.colors.text_login};
 `;
 
 export const WrapperRegister = styled.View`

@@ -6,6 +6,7 @@ export default {
     header: '#C20C18',
     button: '#C20C18',
     card: '#F0F0F5',
+    cardRemove: '#FF0000',
     favorite_border: '#DEDCDC',
 
     text_white: '#FFFFFF',
@@ -17,6 +18,7 @@ export default {
     icon_white: '#FFFFFF',
     icon_red: '#C20C18',
     icon_dark: '#2B2B2E',
+    icon_slider: '#C4C4C4',
   },
 
   fonts: {
@@ -63,6 +65,10 @@ export default {
     cleanUp: require('../assets/Icons/cleanUp.png'),
     checkOrders: require('../assets/Icons/checkOrders.png'),
     map: require('../assets/Icons/map.png'),
+    checkorder: require('../assets/Icons/checkorder.png'),
+    deliveryorder: require('../assets/Icons/deliveryorder.png'),
+    doingorder: require('../assets/Icons/doingorder.png'),
+    waitingorder: require('../assets/Icons/waitingorder.png'),
   },
 
   images: {
@@ -84,5 +90,10 @@ export default {
     inRoute: require('../assets/Images/inRoute.png'),
     delivered: require('../assets/Images/delivered.png'),
     noFavorites: require('../assets/Images/noFavorites.png'),
+    authEmail: require('../assets/RedefinePasswordImages/auth-email.png'),
+    forgotPassword: require('../assets/RedefinePasswordImages/forgot_password.png'),
+    lock: require('../assets/RedefinePasswordImages/lock.png'),
+    redefineSuccess: require('../assets/RedefinePasswordImages/redefine-success.png'),
+    pin: require('../assets/Images/pin.png'),
   },
 };

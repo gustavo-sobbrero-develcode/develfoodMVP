@@ -2,12 +2,10 @@ import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StatusBar} from 'react-native';
 import {useTheme} from 'styled-components';
-import {BackButton} from '../../components/BackButton';
-import {ContinueButton} from '../../components/ContinueButton';
+import {ContinueButton} from '@components/ContinueButton';
+import {HeaderComponent} from '@components/HeaderComponent';
 import {
   Container,
-  Header,
-  Title,
   Wrapper,
   SuccessTitle,
   ImageSuccess,
@@ -33,13 +31,18 @@ export function CheckoutSuccess() {
     <Container>
       <StatusBar
         barStyle={'light-content'}
-        translucent
+        translucent={false}
         backgroundColor={theme.colors.background_red}
       />
-      <Header>
-        <BackButton name="exitWhite" onPressed={handlerBackHome} />
-        <Title>Checkout</Title>
-      </Header>
+
+      <HeaderComponent
+        name="Checkout"
+        Textcolor={theme.colors.background}
+        source={theme.icons.exitWhite}
+        iconColor={theme.colors.icon_white}
+        onPress={handlerBackHome}
+        backgroudColor={theme.colors.background_red}
+      />
 
       <Wrapper>
         <SuccessTitle>Pedido Realizado</SuccessTitle>

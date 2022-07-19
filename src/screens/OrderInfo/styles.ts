@@ -12,6 +12,12 @@ export const WrapperInfo = styled.View`
   flex-direction: row;
 `;
 
+export const PinImage = styled.Image`
+  position: absolute;
+  z-index: 1;
+  margin: ${RFValue(35)}px ${RFValue(35)}px;
+`;
+
 export const MapImage = styled.Image`
   width: ${RFValue(54)}px;
   height: ${RFValue(54)}px;
@@ -45,7 +51,9 @@ export const DateCard = styled.View`
   border: ${RFValue(2)}px;
   border-radius: ${RFValue(5)}px;
   border-color: ${({theme}) => theme.colors.background_red};
-  left: ${RFValue(95)}px;
+  top: ${RFValue(15)}px;
+  right: ${RFValue(15)}px;
+  position: absolute;
   align-items: center;
   justify-content: center;
 `;
@@ -91,7 +99,8 @@ export const RestaurantName = styled.Text`
 `;
 
 export const WrapperOrderInfo = styled.View`
-  left: ${RFValue(108)}px;
+  position: absolute;
+  right: ${RFValue(22)}px;
   align-items: center;
 `;
 
@@ -125,8 +134,6 @@ export const WrapperPlates = styled.View`
 export const WrapperCartPlates = styled.View`
   width: 90%;
   margin-left: 5%;
-  margin-right: 5%;
-  background-color: blue;
 `;
 
 export const LineBetween = styled.View`
@@ -135,4 +142,39 @@ export const LineBetween = styled.View`
   top: ${RFValue(12)}px;
   background-color: #f0f0f5;
   margin-left: ${RFValue(20)}px;
+`;
+
+export const TotalValueWrapper = styled.View`
+  width: 32.8%;
+  height: 6.1%;
+  position: absolute;
+  margin: ${RFValue(19)}px 0;
+  left: ${RFValue(16)}px;
+  padding: ${RFValue(5)}px ${RFValue(7)}px;
+  align-items: center;
+  background-color: ${({theme}) => theme.colors.text_gray};
+  border-radius: ${RFValue(6)}px;
+`;
+
+export const TotalText = styled.Text`
+  font-size: ${RFValue(10)}px;
+  font-weight: 400;
+  color: ${({theme}) => theme.colors.text_white};
+`;
+
+export const WrapperPrice = styled.View`
+  flex-direction: row;
+`;
+
+export const R$Text = styled.Text`
+  font-size: ${RFValue(14)}px;
+  font-weight: 400;
+  color: ${({theme}) => theme.colors.text_white};
+  margin-right: ${RFValue(5)}px;
+`;
+
+export const TotalValue = styled.Text`
+  font-size: ${RFValue(12)}px;
+  font-weight: 700;
+  color: ${({theme}) => theme.colors.text_white};
 `;

@@ -1,18 +1,17 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import {Home} from '../../screens/Home';
-import {Favorites} from '../../screens/Favorites';
-import {Settings} from '../../screens/Settings';
-import {TabBarButton} from '../../components/TabBarButton';
+import {Home} from '@screens/Home';
+import {Favorites} from '@screens/Favorites';
+import {Settings} from '@screens/Settings';
+import {TabBarButton} from '@components/TabBarButton';
 import {useTheme} from 'styled-components';
 import {useNavigation} from '@react-navigation/native';
 import {Platform} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
-import {useCreateCart} from '../Context/Cart';
-import {CartComponent} from '../../components/CartComponent';
-import {Orders} from '../../screens/Orders';
-// import {TabBar} from '../../components/TabBar';
+import {useCreateCart} from '../context/Cart';
+import {CartComponent} from '@components/CartComponent';
+import {Orders} from '@screens/Orders';
 
 const Tabs = createBottomTabNavigator();
 
@@ -66,7 +65,7 @@ export function Routes() {
             tabBarIcon: ({focused}) => (
               <TabBarButton
                 isPressed={focused}
-                name={'Favotitos'}
+                name={'Favoritos'}
                 source={theme.icons.favorite}
                 onPressed={() => navigation.navigate('Favoritos' as never)}
               />
@@ -77,6 +76,7 @@ export function Routes() {
           name="Orders"
           component={Orders}
           options={{
+            unmountOnBlur: true,
             tabBarIcon: ({focused}) => (
               <TabBarButton
                 isPressed={focused}

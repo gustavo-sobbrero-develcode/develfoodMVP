@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+// import {useAuth} from '@global/context';
+import {useAuth} from '@global/context';
+import {useCreateCart} from '@global/context/Cart';
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Swipeable} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
-import {useAuth} from '../../global/Context';
-import {useCreateCart} from '../../global/Context/Cart';
 import {useDelete} from '../../global/services/delete';
 import {useFetch} from '../../global/services/get';
 import {usePut} from '../../global/services/put';
@@ -36,6 +37,7 @@ import {
   CleanUpTitle,
   FavoriteButton,
   FavoriteImage,
+  ContentContainer,
 } from './styles';
 
 interface ListPlatesProps {
@@ -177,70 +179,76 @@ export function Plates({
   }
 
   return Swipe ? (
-    <Swipeable renderLeftActions={leftSwipe}>
-      <Container>
-        <WrapperImage>
-          <PlateImage
-            source={data.code ? {uri: `${data.code}`} : theme.images.noImage}
-          />
-        </WrapperImage>
+    <ContentContainer>
+      <Swipeable renderLeftActions={leftSwipe}>
+        <Container>
+          <WrapperImage>
+            <PlateImage
+              source={data.code ? {uri: `${data.code}`} : theme.images.noImage}
+            />
+          </WrapperImage>
 
-        <WrapperPlateInfo>
-          <PlateTitle>{name}</PlateTitle>
-          <PlateInfo>{description}</PlateInfo>
+          <WrapperPlateInfo>
+            <PlateTitle>{name}</PlateTitle>
+            <PlateInfo numberOfLines={3}>{description}</PlateInfo>
 
-          <WrapperAdvancedInfo>
-            <PriceWrapper>
-              <Price>R$ {priceFormatted}</Price>
-            </PriceWrapper>
+            <WrapperAdvancedInfo>
+              <PriceWrapper>
+                <Price>R$ {priceFormatted}</Price>
+              </PriceWrapper>
 
-            {itemCount && itemCount > 0 ? (
-              <WrapperCartButton insideCart={inside ? RFValue(5) : RFValue(20)}>
-                <AddQuantityButton
-                  onPress={() => addProductToCart(id, price, restaurantID)}>
-                  <AddQuantityButtonImage source={theme.icons.add} />
-                </AddQuantityButton>
+              {itemCount && itemCount > 0 ? (
+                <WrapperCartButton
+                  insideCart={inside ? RFValue(5) : RFValue(20)}>
+                  <AddQuantityButton
+                    onPress={() => addProductToCart(id, price, restaurantID)}>
+                    <AddQuantityButtonImage source={theme.icons.add} />
+                  </AddQuantityButton>
 
-                <NumberOfQuantityWrapper>
-                  <Number>
-                    {cart.find((item: ItemProps) => item?.id === id)?.quantity}
-                  </Number>
-                </NumberOfQuantityWrapper>
+                  <NumberOfQuantityWrapper>
+                    <Number>
+                      {
+                        cart.find((item: ItemProps) => item?.id === id)
+                          ?.quantity
+                      }
+                    </Number>
+                  </NumberOfQuantityWrapper>
 
-                {itemCount > 1 ? (
-                  <RemoveCartButton
-                    onPress={() => removeProductFromCart(id, price)}>
-                    <RemoveQuantityButtonImage source={theme.icons.remove} />
-                  </RemoveCartButton>
-                ) : (
-                  <RemoveCartButton
-                    onPress={() => removeProductFromCart(id, price)}>
-                    <RemoveQuantityButtonImage source={theme.icons.remove} />
-                  </RemoveCartButton>
-                )}
-              </WrapperCartButton>
-            ) : (
-              <AddButton
-                onPress={() =>
-                  addNewProductoCart(
-                    id,
-                    price,
-                    restaurantID,
-                    name,
-                    description,
-                    source,
-                    restaurantFoodTypes,
-                    restaurantName,
-                    photoRestaurant,
-                  )
-                }>
-                <TextButton>Adicionar</TextButton>
-              </AddButton>
-            )}
-          </WrapperAdvancedInfo>
-        </WrapperPlateInfo>
-      </Container>
-    </Swipeable>
+                  {itemCount > 1 ? (
+                    <RemoveCartButton
+                      onPress={() => removeProductFromCart(id, price)}>
+                      <RemoveQuantityButtonImage source={theme.icons.remove} />
+                    </RemoveCartButton>
+                  ) : (
+                    <RemoveCartButton
+                      onPress={() => removeProductFromCart(id, price)}>
+                      <RemoveQuantityButtonImage source={theme.icons.remove} />
+                    </RemoveCartButton>
+                  )}
+                </WrapperCartButton>
+              ) : (
+                <AddButton
+                  onPress={() =>
+                    addNewProductoCart(
+                      id,
+                      price,
+                      restaurantID,
+                      name,
+                      description,
+                      source,
+                      restaurantFoodTypes,
+                      restaurantName,
+                      photoRestaurant,
+                    )
+                  }>
+                  <TextButton>Adicionar</TextButton>
+                </AddButton>
+              )}
+            </WrapperAdvancedInfo>
+          </WrapperPlateInfo>
+        </Container>
+      </Swipeable>
+    </ContentContainer>
   ) : (
     <Container>
       <FavoriteButton onPress={onpressss}>
@@ -258,7 +266,7 @@ export function Plates({
 
       <WrapperPlateInfo>
         <PlateTitle>{name}</PlateTitle>
-        <PlateInfo>{description}</PlateInfo>
+        <PlateInfo numberOfLines={3}>{description}</PlateInfo>
 
         <WrapperAdvancedInfo>
           <PriceWrapper>
@@ -316,7 +324,7 @@ export function Plates({
 
 const styles = StyleSheet.create({
   deleteBox: {
-    backgroundColor: '#C20C18',
+    backgroundColor: '#FF0000',
     height: RFValue(103),
     borderRadius: RFValue(8),
     width: RFValue(100),

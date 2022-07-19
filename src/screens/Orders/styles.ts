@@ -25,10 +25,6 @@ export const OrderDate = styled.Text`
   left: ${RFValue(20)}px;
 `;
 
-export const Content = styled.View`
-  padding: 0 ${RFValue(20)}px;
-`;
-
 export const Footer = styled.View`
   width: 100%;
   height: ${RFValue(100)}px;

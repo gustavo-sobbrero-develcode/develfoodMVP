@@ -1,3 +1,4 @@
+import {useAuth} from '@global/context';
 import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, StatusBar, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
@@ -8,7 +9,6 @@ import {HeaderComponent} from '../../components/HeaderComponent';
 import {Input} from '../../components/Input';
 import {ListEmptyComponent} from '../../components/ListEmptyComponent';
 import {Plates} from '../../components/Plates';
-import {useAuth} from '../../global/Context';
 import {useFetch} from '../../global/services/get';
 import theme from '../../global/styles/theme';
 import {CategorySelect} from '../Home/styles';

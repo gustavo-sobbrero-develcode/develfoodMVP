@@ -2,15 +2,15 @@ import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
-import {BackButton} from '../../../components/BackButton';
-import {Input} from '../../../components/Input';
+import {BackButton} from '@components/BackButton';
+import {Input} from '@components/Input';
 import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {Controller, useForm} from 'react-hook-form';
-import {ContinueButton} from '../../../components/ContinueButton';
+import {ContinueButton} from '@components/ContinueButton';
 import {cpf} from 'cpf-cnpj-validator';
-import {InputMask} from '../../../components/InputMask';
-import {useCreateUser} from '../../../global/Context/createUserAuth';
+import {InputMask} from '@components/InputMask';
+import {useCreateUser} from '@global/context/createUserAuth';
 
 import {
   Image,
@@ -42,8 +42,8 @@ interface FormData {
 const schema = Yup.object().shape({
   name: Yup.string().required('Nome é obrigatório.'),
   lastName: Yup.string().required('Sobrenome é obrigatório.'),
-  cpf: Yup.string().test('is-cpf', 'CPF inválido.', (value: any) =>
-    cpf.isValid(value),
+  cpf: Yup.string().test('is-cpf', 'CPF inválido.', value =>
+    cpf.isValid(value!),
   ),
   phone: Yup.string()
     .required('Telefone é obrigatório.')
