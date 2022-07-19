@@ -1,6 +1,6 @@
 import {useAuth} from '@global/context';
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, StatusBar, View} from 'react-native';
+import {ActivityIndicator, StatusBar, StyleSheet, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useDebouncedCallback} from 'use-debounce';
@@ -19,6 +19,11 @@ import {Container, Content, Footer} from './styles';
 export interface FavoritesResponse {
   content: Plate[];
   totalPages: number;
+}
+
+interface ListFoodType {
+  id: number;
+  name: string;
 }
 
 export function Favorites() {
@@ -87,6 +92,47 @@ export function Favorites() {
     state && fetchData();
   }
 
+  const [activeButton, setActiveButton] = useState<'' | ListFoodType['name']>(
+    '',
+  );
+  // const [foodType, setFoodType] = useState<string>('');<<<<<<<
+  const onPress = (item: ListFoodType) => {
+    activeButton === item.name
+      ? setActiveButton('')
+      : setActiveButton(item.name);
+    setFavoritePlates([]);
+    foodType === item.name ? setFoodType('') : setFoodType(item.name);
+    setIsFiltred({...isFiltred, page: 0});
+  };
+
+  const [categories, setCategories] = useState<ListFoodType[]>([]);
+
+  const {data: datafoodtype, fetchData: fetchfoodtype} = useFetch<
+    ListFoodType[]
+  >('/foodType', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  useEffect(() => {
+    datafoodtype && setCategories(datafoodtype);
+  }, [datafoodtype]);
+
+  const renderCategories =
+    categories.length > 1 &&
+    categories?.map(item => {
+      return (
+        <Category
+          key={item.id}
+          title={item.name}
+          style={activeButton === item.name && styles.activeButton}
+          textStyle={activeButton === item.name && styles.activeText}
+          onPress={() => onPress(item)}
+        />
+      );
+    });
+
   const renderItem = ({item}: {item: Plate}) => {
     return (
       <PlatesWrapper>
@@ -130,17 +176,12 @@ export function Favorites() {
                 onChangeText={value => debounced(value)}
               />
             </Content>
+
             <CategorySelect
               horizontal={true}
-              showsHorizontalScrollIndicator={false}>
-              <Category title="Pizza" />
-              <Category title="Churrasco" />
-              <Category title="Almoço" />
-              <Category title="Massas" />
-              <Category title="Coreana" />
-              <Category title="Japonesa" />
-              <Category title="Tailandesa" />
-              <Category title="Chinesa" />
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{paddingLeft: RFValue(10)}}>
+              {renderCategories}
             </CategorySelect>
           </View>
         }
@@ -169,3 +210,14 @@ export function Favorites() {
     </Container>
   );
 }
+
+const styles = StyleSheet.create({
+  activeButton: {
+    backgroundColor: theme.colors.background,
+    borderWidth: 2,
+    borderColor: theme.colors.background_red,
+  },
+  activeText: {
+    color: theme.colors.background_red,
+  },
+});
