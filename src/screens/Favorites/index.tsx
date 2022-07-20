@@ -36,20 +36,19 @@ export function Favorites() {
     page: 0,
   });
 
-  // plate/favoritePlates/search?page=0&quantity=10&plateName=Hamburger&foodType=fastfood
+  const [foodType, setFoodType] = useState<string>('');
 
-  const {
-    data: dataFavorites,
-    fetchData,
-    loading: loadingFavorite,
-  } = useFetch<FavoritesResponse>(
-    `/plate/favoritePlates/search?page=${isFiltred.page}&quantity=10 `,
+  const {data: dataFavorites, fetchData} = useFetch<FavoritesResponse>(
+    `plate/favoritePlates/search?page=${isFiltred.page}&quantity=10&plateName=${
+      isFiltred.text
+    }&${foodType !== '' ? `foodType=${foodType}&` : ''}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     },
   );
+
   const [favoritePlates, setFavoritePlates] = useState<Plate[]>([]);
 
   function onSuccess(dataFavorites: FavoritesResponse) {
@@ -88,14 +87,10 @@ export function Favorites() {
     handleSearch(value);
   }, 1500);
 
-  function rerender(state: number) {
-    state && fetchData();
-  }
-
   const [activeButton, setActiveButton] = useState<'' | ListFoodType['name']>(
     '',
   );
-  // const [foodType, setFoodType] = useState<string>('');<<<<<<<
+
   const onPress = (item: ListFoodType) => {
     activeButton === item.name
       ? setActiveButton('')
@@ -114,6 +109,12 @@ export function Favorites() {
       Authorization: `Bearer ${token}`,
     },
   });
+
+  useEffect(() => {
+    (async () => {
+      await fetchfoodtype();
+    })();
+  }, []);
 
   useEffect(() => {
     datafoodtype && setCategories(datafoodtype);
