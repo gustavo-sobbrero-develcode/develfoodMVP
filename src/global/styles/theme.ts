@@ -69,6 +69,7 @@ export default {
     deliveryorder: require('../assets/Icons/deliveryorder.png'),
     doingorder: require('../assets/Icons/doingorder.png'),
     waitingorder: require('../assets/Icons/waitingorder.png'),
+    editInfo: require('../assets/Icons/editInfo.png'),
   },
 
   images: {
@@ -94,5 +95,6 @@ export default {
     lock: require('../assets/RedefinePasswordImages/lock.png'),
     redefineSuccess: require('../assets/RedefinePasswordImages/redefine-success.png'),
     pin: require('../assets/Images/pin.png'),
+    eu: require('../assets/Images/Eu.jpeg'),
   },
 };
