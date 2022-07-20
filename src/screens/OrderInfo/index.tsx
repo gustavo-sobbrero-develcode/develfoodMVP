@@ -4,6 +4,7 @@
 import {RouteProp, useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {StatusBar} from 'react-native';
+import {Modal} from '@components/Modal';
 import {FlatList} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
@@ -252,6 +253,13 @@ export function OrderInfo({route}: RouteParams) {
           marginTop: RFValue(120),
         }}
       />
+      {status === 'PEDIDO_FINALIZADO' && (
+        <Modal
+          title="Deu bom?"
+          description={`Obrigado por escolher nosso app, você faz toda a diferença. :D Agora, queremos saber o que você acha do nosso parceiro`}
+          name={name}
+        />
+      )}
     </Container>
   );
 }
