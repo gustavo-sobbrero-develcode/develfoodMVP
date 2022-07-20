@@ -213,6 +213,14 @@ export function Orders() {
     data.content && sectionDataFormatter([...order, ...data.content]);
   }, [data]);
 
+  useEffect(() => {
+    return () => {
+      setOrderSections([]);
+      setOrder([]);
+      setFilter(0);
+    };
+  }, []);
+
   return (
     <Container>
       <StatusBar
