@@ -3,8 +3,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {RouteProp, useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {StatusBar} from 'react-native';
-import {Modal} from '@components/Modal';
+import {Keyboard, StatusBar, TouchableWithoutFeedback} from 'react-native';
+import {EvaluationModal} from '@components/EvaluationModal';
 import {FlatList} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
@@ -173,93 +173,96 @@ export function OrderInfo({route}: RouteParams) {
   }, []);
 
   return (
-    <Container>
-      <StatusBar
-        barStyle={'light-content'}
-        translucent={false}
-        backgroundColor={theme.colors.background_red}
-      />
-
-      <HeaderComponent
-        backgroudColor={theme.colors.background_red}
-        name={`Pedido N.° ${id}`}
-        source={theme.icons.exitWhite}
-        iconColor={theme.colors.icon_white}
-        Textcolor={theme.colors.text_white}
-        onPress={handlerBackHome}
-      />
-
-      <WrapperInfo>
-        <PinImage source={theme.images.pin} />
-        <MapImage source={theme.images.mapImage} />
-
-        <WrapperAddresInfo>
-          <SubTitle>Entregar em:</SubTitle>
-          <Street>도산대로49길</Street>
-          <Neighborhood>서울특별시 강남구 도산대로49길 22</Neighborhood>
-        </WrapperAddresInfo>
-        <DateCard>
-          <Day>{moment(date).format('DD')}</Day>
-          <Month>
-            {moment(date).format('MMM').charAt(0).toUpperCase() +
-              moment(date).format('MMM').slice(1).toLowerCase()}
-          </Month>
-        </DateCard>
-      </WrapperInfo>
-
-      <WrapperRestaurantInfo>
-        <RestaurantPhoto
-          source={
-            data.code
-              ? {
-                  uri: `${data.code}`,
-                }
-              : theme.images.noImage
-          }
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <Container>
+        <StatusBar
+          barStyle={'light-content'}
+          translucent={false}
+          backgroundColor={theme.colors.background_red}
         />
-        <WrapperName>
-          <Restaurant>Restaurante</Restaurant>
-          <RestaurantName>{name}</RestaurantName>
-        </WrapperName>
-        <WrapperOrderInfo>
-          <StatusImage source={statusImage} />
 
-          <WrapperText>
-            <StatusText>{statusText}</StatusText>
-          </WrapperText>
-        </WrapperOrderInfo>
-      </WrapperRestaurantInfo>
-
-      <LineBetween />
-
-      <WrapperPlates>
-        <TotalValueWrapper>
-          <TotalText>Total pago:</TotalText>
-          <WrapperPrice>
-            <R$Text>R$</R$Text>
-            <TotalValue>{priceFormatted}</TotalValue>
-          </WrapperPrice>
-        </TotalValueWrapper>
-      </WrapperPlates>
-
-      <FlatList
-        data={order}
-        keyExtractor={item => String(item.id)}
-        renderItem={renderItem}
-        showsVerticalScrollIndicator={false}
-        style={{
-          width: '90%',
-          marginRight: '10%',
-          marginTop: RFValue(120),
-        }}
-      />
-      {status === 'PEDIDO_FINALIZADO' && (
-        <Modal
-          title="Deu bom?"
-          description={`Obrigado por escolher nosso app, você faz toda a diferença. :D Agora, queremos saber o que você acha do nosso parceiro`}
-          name={name}
+        <HeaderComponent
+          backgroudColor={theme.colors.background_red}
+          name={`Pedido N.° ${id}`}
+          source={theme.icons.exitWhite}
+          iconColor={theme.colors.icon_white}
+          Textcolor={theme.colors.text_white}
+          onPress={handlerBackHome}
         />
-      )}
-    </Container>
+
+        <WrapperInfo>
+          <PinImage source={theme.images.pin} />
+          <MapImage source={theme.images.mapImage} />
+
+          <WrapperAddresInfo>
+            <SubTitle>Entregar em:</SubTitle>
+            <Street>도산대로49길</Street>
+            <Neighborhood>서울특별시 강남구 도산대로49길 22</Neighborhood>
+          </WrapperAddresInfo>
+          <DateCard>
+            <Day>{moment(date).format('DD')}</Day>
+            <Month>
+              {moment(date).format('MMM').charAt(0).toUpperCase() +
+                moment(date).format('MMM').slice(1).toLowerCase()}
+            </Month>
+          </DateCard>
+        </WrapperInfo>
+
+        <WrapperRestaurantInfo>
+          <RestaurantPhoto
+            source={
+              data.code
+                ? {
+                    uri: `${data.code}`,
+                  }
+                : theme.images.noImage
+            }
+          />
+          <WrapperName>
+            <Restaurant>Restaurante</Restaurant>
+            <RestaurantName>{name}</RestaurantName>
+          </WrapperName>
+          <WrapperOrderInfo>
+            <StatusImage source={statusImage} />
+
+            <WrapperText>
+              <StatusText>{statusText}</StatusText>
+            </WrapperText>
+          </WrapperOrderInfo>
+        </WrapperRestaurantInfo>
+
+        <LineBetween />
+
+        <WrapperPlates>
+          <TotalValueWrapper>
+            <TotalText>Total pago:</TotalText>
+            <WrapperPrice>
+              <R$Text>R$</R$Text>
+              <TotalValue>{priceFormatted}</TotalValue>
+            </WrapperPrice>
+          </TotalValueWrapper>
+        </WrapperPlates>
+
+        <FlatList
+          data={order}
+          keyExtractor={item => String(item.id)}
+          renderItem={renderItem}
+          showsVerticalScrollIndicator={false}
+          style={{
+            width: '90%',
+            marginRight: '10%',
+            marginTop: RFValue(120),
+          }}
+        />
+        {status === 'PEDIDO_FINALIZADO' && (
+          <EvaluationModal
+            title="Deu bom?"
+            description={`Obrigado por escolher nosso app, você faz toda a diferença. :D Agora, queremos saber o que você acha do nosso parceiro`}
+            name={name}
+            type="evaluation"
+          />
+        )}
+      </Container>
+    </TouchableWithoutFeedback>
   );
 }
