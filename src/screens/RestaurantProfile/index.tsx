@@ -150,7 +150,6 @@ export function RestaurantProfile({route}: RouteParams) {
           restaurantName={name}
           photoRestaurant={photo_url}
           favorite={item.favorite}
-          isTouchable={false}
         />
       </PlatesWrapper>
     );

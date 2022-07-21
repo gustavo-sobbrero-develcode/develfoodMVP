@@ -5,8 +5,6 @@ export interface CartStyleProps {
   insideCart: number;
 }
 
-export const PlateButton = styled.TouchableOpacity``;
-
 export const ContentContainer = styled.View`
   width: 100%;
   height: ${RFValue(103)}px;
