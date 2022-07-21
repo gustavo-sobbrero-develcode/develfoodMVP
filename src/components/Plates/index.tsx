@@ -52,7 +52,7 @@ interface ListPlatesProps {
   inside: boolean;
   photoRestaurant?: string;
   Swipe: boolean;
-  favorite: any;
+  favorite: boolean;
 }
 
 interface Photos {
