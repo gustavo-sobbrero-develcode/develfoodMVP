@@ -24,6 +24,7 @@ export const usePost = <T = unknown, TResponse = unknown>(
       response.data && onSuccess && onSuccess(response.data);
     } catch (error: AxiosError<any, any> | any) {
       error && onError(error);
+      console.log(error);
     } finally {
       setLoading(false);
     }

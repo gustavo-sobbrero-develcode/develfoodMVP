@@ -149,7 +149,7 @@ export function Home() {
               item.food_types.length > 0 ? item.food_types[0].name : '',
             )
           }
-          name={item.name}
+          name={item.id}
           id={item.id}
           category={
             item.food_types.length > 0

@@ -8,7 +8,7 @@ export function EvaluationBar({childToParent}: any) {
 
   return (
     <View style={styles.ratingBarStyle}>
-      {maxRating.map((item, key) => {
+      {maxRating.map(item => {
         return (
           <TouchableOpacity
             activeOpacity={0.7}

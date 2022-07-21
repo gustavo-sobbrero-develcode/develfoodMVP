@@ -56,6 +56,7 @@ interface RouteParams {
         totalValue: number;
         date: Date;
         status: string;
+        restaurantId: number;
       };
     },
     'params'
@@ -91,7 +92,8 @@ export function OrderInfo({route}: RouteParams) {
 
   const {token} = useAuth();
 
-  const {name, photo_url, id, totalValue, date, status} = route.params;
+  const {name, photo_url, id, totalValue, date, status, restaurantId} =
+    route.params;
 
   const [order, setOrder] = useState<RequestiItemsProps[]>([]);
 
@@ -177,8 +179,8 @@ export function OrderInfo({route}: RouteParams) {
       <Container>
         <StatusBar
           barStyle={'light-content'}
-          translucent={false}
-          backgroundColor={theme.colors.background_red}
+          translucent
+          backgroundColor={'transparent'}
         />
 
         <HeaderComponent
@@ -257,9 +259,11 @@ export function OrderInfo({route}: RouteParams) {
         {status === 'PEDIDO_FINALIZADO' && (
           <EvaluationModal
             title="Deu bom?"
-            description={`Obrigado por escolher nosso app, você faz toda a diferença. :D Agora, queremos saber o que você acha do nosso parceiro`}
+            description={
+              'Obrigado por escolher nosso app, você faz toda a diferença. :D Agora, queremos saber o que você acha do nosso parceiro'
+            }
             name={name}
-            type="evaluation"
+            restaurantId={restaurantId}
           />
         )}
       </Container>

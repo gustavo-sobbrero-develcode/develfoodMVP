@@ -73,6 +73,7 @@ interface HandleOrderInfoProps {
   totalValue: number;
   date: Date;
   status: string;
+  restaurantId: number;
 }
 
 export function Orders() {
@@ -117,10 +118,11 @@ export function Orders() {
     totalValue,
     date,
     status,
+    restaurantId,
   }: HandleOrderInfoProps) {
     navigation.navigate(
       'OrderInfo' as never,
-      {name, photo_url, id, totalValue, date, status} as never,
+      {name, photo_url, id, totalValue, date, status, restaurantId} as never,
     );
   }
 
@@ -148,6 +150,7 @@ export function Orders() {
             totalValue: item.totalValue,
             date: item.date,
             status: item.status,
+            restaurantId: item.restaurant.id,
           })
         }
         photo_url={item.restaurant.photo_url}
