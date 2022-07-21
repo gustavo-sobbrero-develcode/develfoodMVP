@@ -254,7 +254,7 @@ export function Orders() {
           }}
           refreshing={isLoading}
           ListEmptyComponent={
-            !isLoading ? (
+            !isLoading && data.totalPages === 0 ? (
               <ListEmptyComponent
                 source={theme.images.noOrder}
                 title="Você ainda não fez nenhum pedido"

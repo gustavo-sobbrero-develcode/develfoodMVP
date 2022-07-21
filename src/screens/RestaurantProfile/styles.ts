@@ -6,37 +6,21 @@ export const Container = styled.View`
   background-color: ${({theme}) => theme.colors.background};
 `;
 
-export const Header = styled.View`
-  width: 100%;
-  flex-direction: row;
-  align-items: center;
-  height: ${RFValue(56)}px;
-  top: ${RFValue(22)}px;
+export const HeaderView = styled.View`
+  margin-left: ${RFValue(-5)}px;
 `;
 
-export const FavoriteIconWrapper = styled.View`
-  width: ${RFValue(42)}px;
-  height: ${RFValue(42)}px;
+export const HeartButton = styled.TouchableOpacity`
   position: absolute;
-  right: ${RFValue(16)}px;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const IconButton = styled.TouchableOpacity``;
-
-export const FavoriteIcon = styled.Image`
-  width: ${RFValue(26)}px;
-  height: ${RFValue(22)}px;
-  border-color: ${({theme}) => theme.colors.icon_red};
+  right: 19px;
+  top: 21px;
 `;
 
 export const WrapperRestaurantInfo = styled.View`
   width: 100%;
   height: ${RFValue(99)}px;
-  top: ${RFValue(22)}px;
   padding-left: ${RFValue(21)}px;
-  padding-top: ${RFValue(13)}px;
+  padding-top: ${RFValue(20)}px;
   flex-direction: row;
   border-bottom: ${RFValue(10)}px;
 `;
@@ -58,6 +42,7 @@ export const TypeFood = styled.Text`
 export const WrapperPhoto = styled.View`
   position: absolute;
   right: ${RFValue(14)}px;
+  top: ${RFValue(9)}px;
 `;
 
 export const RestaurantPhoto = styled.Image`
