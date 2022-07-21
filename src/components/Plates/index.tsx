@@ -56,7 +56,7 @@ export interface ListPlatesProps {
   inside: boolean;
   photoRestaurant?: string;
   Swipe: boolean;
-  favorite: any;
+  favorite: boolean;
   isTouchable?: boolean;
 }
 
