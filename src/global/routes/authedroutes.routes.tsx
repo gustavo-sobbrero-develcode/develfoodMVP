@@ -7,6 +7,7 @@ import {Checkout} from '@screens/Checkout';
 import {CheckoutSuccess} from '@screens/CheckoutSuccess';
 import {OrderInfo} from '@screens/OrderInfo';
 import {CartProvider} from '../context/Cart';
+import {About} from '@screens/About';
 
 const {Navigator, Screen} = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ export function AuthedRoutes() {
           <Screen name="Checkout" component={Checkout} />
           <Screen name="CheckoutSuccess" component={CheckoutSuccess} />
           <Screen name="OrderInfo" component={OrderInfo} />
+          <Screen name="About" component={About} />
         </Navigator>
       </CartProvider>
     </>

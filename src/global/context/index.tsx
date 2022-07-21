@@ -12,6 +12,7 @@ interface Props {
   userLogin: Function;
   token: string;
   loading: boolean;
+  logOut: Function;
 }
 
 interface LoginRequest {
@@ -28,6 +29,7 @@ const AuthContext = createContext({
   loading: false,
   userLogin: () => {},
   token: '',
+  logOut: () => {},
 } as Props);
 
 function AuthProvider({children}: AuthProviderProps) {
@@ -37,6 +39,10 @@ function AuthProvider({children}: AuthProviderProps) {
   const loginError = () => {
     Alert.alert('Erro', 'Email ou senha incorretos');
   };
+
+  function logOut() {
+    setToken('');
+  }
 
   async function userLogin(request: LoginRequest) {
     await handlerPost(request, loginError);
@@ -48,7 +54,7 @@ function AuthProvider({children}: AuthProviderProps) {
   }, [data.token, loading]);
 
   return (
-    <AuthContext.Provider value={{userLogin, token, loading}}>
+    <AuthContext.Provider value={{userLogin, token, loading, logOut}}>
       {children}
     </AuthContext.Provider>
   );

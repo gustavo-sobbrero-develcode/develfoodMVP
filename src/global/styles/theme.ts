@@ -19,6 +19,9 @@ export default {
     icon_red: '#C20C18',
     icon_dark: '#2B2B2E',
     icon_slider: '#C4C4C4',
+
+    modalBackGround: 'rgba(0, 0, 0, 0.5)',
+    modalButtonClose: '#009EFF',
   },
 
   fonts: {
@@ -70,6 +73,11 @@ export default {
     doingorder: require('../assets/Icons/doingorder.png'),
     waitingorder: require('../assets/Icons/waitingorder.png'),
     editInfo: require('../assets/Icons/editInfo.png'),
+    help: require('../assets/Icons/help.png'),
+    settingsArrow: require('../assets/Icons/settingsArrow.png'),
+    about: require('../assets/Icons/about.png'),
+    logoutIcon: require('../assets/Icons/logoutIcon.png'),
+    deleteUserIcon: require('../assets/Icons/deleteUserIcon.png'),
   },
 
   images: {
@@ -96,5 +104,8 @@ export default {
     redefineSuccess: require('../assets/RedefinePasswordImages/redefine-success.png'),
     pin: require('../assets/Images/pin.png'),
     eu: require('../assets/Images/Eu.jpeg'),
+    logoutImage: require('../assets/Images/logoutImage.png'),
+    develFoodLogo: require('../assets/Images/Logo.png'),
+    timeDevelFood: require('../assets/Images/TimeDevelfood.jpeg'),
   },
 };

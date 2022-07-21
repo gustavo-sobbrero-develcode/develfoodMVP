@@ -6,15 +6,19 @@ export const Container = styled.View`
   background-color: ${({theme}) => theme.colors.background};
 `;
 
+export const Content = styled.View`
+  padding: ${RFValue(5)}px;
+`;
+
 export const UserInfo = styled.View.attrs({
   elevation: 5,
 })`
-  top: ${RFValue(20)}px;
   width: 100%;
-  height: ${RFValue(81)}px;
+  height: ${RFValue(100)}px;
   padding-top: ${RFValue(16)}px;
   padding-left: ${RFValue(16)}px;
   flex-direction: row;
+  background-color: ${({theme}) => theme.colors.background};
 `;
 
 export const UserPhoto = styled.Image`
@@ -50,8 +54,165 @@ export const UserEditInfoButton = styled.TouchableOpacity`
 
 export const EditInfoIcon = styled.Image``;
 
+export const HelpContent = styled.View.attrs({
+  elevation: 5,
+})`
+  width: 100%;
+  height: ${RFValue(50)}px;
+  align-items: center;
+  flex-direction: row;
+  background-color: ${({theme}) => theme.colors.background};
+`;
+
+export const HelpButton = styled.TouchableOpacity`
+  width: 100%;
+  align-items: center;
+  flex-direction: row;
+`;
+
+export const HelpIcon = styled.Image`
+  left: ${RFValue(25)}px;
+`;
+
+export const HelpButtonText = styled.Text`
+  left: ${RFValue(75)}px;
+  font-size: ${RFValue(14)}px;
+  font-weight: 500;
+  color: ${({theme}) => theme.colors.text_gray};
+`;
+
+export const ArrowImage = styled.Image`
+  position: absolute;
+  left: ${RFValue(320)}px;
+`;
+
+export const AboutContent = styled.View.attrs({
+  elevation: 5,
+})`
+  width: 100%;
+  height: ${RFValue(50)}px;
+  align-items: center;
+  flex-direction: row;
+  background-color: ${({theme}) => theme.colors.background};
+`;
+
+export const AboutButton = styled.TouchableOpacity`
+  width: 100%;
+  align-items: center;
+  flex-direction: row;
+`;
+
+export const AboutIcon = styled.Image`
+  left: ${RFValue(25)}px;
+`;
+
+export const AboutButtonText = styled.Text`
+  left: ${RFValue(75)}px;
+  font-size: ${RFValue(14)}px;
+  font-weight: 500;
+  color: ${({theme}) => theme.colors.text_gray};
+`;
+
+export const LogOutContent = styled.View.attrs({
+  elevation: 5,
+})`
+  width: 100%;
+  height: ${RFValue(50)}px;
+  align-items: center;
+  flex-direction: row;
+  background-color: ${({theme}) => theme.colors.background};
+`;
+
+export const LogOutPageButton = styled.TouchableOpacity`
+  width: 100%;
+  align-items: center;
+  flex-direction: row;
+`;
+
+export const LogOutIcon = styled.Image`
+  left: ${RFValue(25)}px;
+`;
+
+export const LogOutPageButtonText = styled.Text`
+  left: ${RFValue(75)}px;
+  font-size: ${RFValue(14)}px;
+  font-weight: 500;
+  color: ${({theme}) => theme.colors.text_gray};
+`;
+
 export const ModalContent = styled.View`
   align-items: center;
 `;
 
-export const ButtonModal = styled.TouchableOpacity``;
+export const ButtonModal = styled.TouchableOpacity`
+  top: ${RFValue(200)}px;
+`;
+
+export const DeleteUserContent = styled.View.attrs({
+  elevation: 5,
+})`
+  width: 100%;
+  height: ${RFValue(50)}px;
+  align-items: center;
+  flex-direction: row;
+  background-color: ${({theme}) => theme.colors.background};
+`;
+
+export const DeleteUserButton = styled.TouchableOpacity`
+  width: 100%;
+  align-items: center;
+  flex-direction: row;
+`;
+
+export const DeleteUserIcon = styled.Image`
+  left: ${RFValue(25)}px;
+`;
+
+export const DeleteUserButtonText = styled.Text`
+  left: ${RFValue(75)}px;
+  font-size: ${RFValue(14)}px;
+  font-weight: 500;
+  color: ${({theme}) => theme.colors.text_gray};
+`;
+
+export const LogOutImage = styled.Image``;
+
+export const MessageLogOut = styled.Text`
+  text-align: center;
+  font-size: ${RFValue(14)}px;
+  color: ${({theme}) => theme.colors.text_dark};
+  top: ${RFValue(15)}px;
+`;
+
+export const CloseModal = styled.TouchableOpacity`
+  width: ${RFValue(200)}px;
+  height: ${RFValue(50)}px;
+  border-radius: ${RFValue(30)}px;
+  align-items: center;
+  justify-content: center;
+  background-color: ${({theme}) => theme.colors.modalButtonClose};
+  top: ${RFValue(25)}px;
+`;
+
+export const CloseModalText = styled.Text`
+  font-size: ${RFValue(14)}px;
+  color: ${({theme}) => theme.colors.text_white};
+`;
+
+export const LogOutButton = styled.TouchableOpacity`
+  width: ${RFValue(200)}px;
+  height: ${RFValue(50)}px;
+  border-radius: ${RFValue(30)}px;
+  border: ${RFValue(1)}px;
+  border-color: ${({theme}) => theme.colors.modalButtonClose};
+  align-items: center;
+  justify-content: center;
+  background-color: ${({theme}) => theme.colors.background};
+  top: ${RFValue(35)}px;
+  margin-bottom: ${RFValue(40)}px;
+`;
+
+export const LogOutButtonText = styled.Text`
+  font-size: ${RFValue(14)}px;
+  color: ${({theme}) => theme.colors.modalButtonClose};
+`;
