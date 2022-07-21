@@ -5,6 +5,9 @@ import {Alert} from 'react-native';
 import {useAuth} from '.';
 import {useFetch} from '@global/services/get';
 import {usePost} from '@global/services/post';
+import {ListPlatesProps} from '@components/Plates';
+import {State} from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/native';
 
 interface AuthProviderProps {
   children: React.ReactNode;
@@ -112,6 +115,22 @@ interface Props {
   foodTypes: string;
   restaurantPhoto: string;
   userRequestCheckout: Function;
+  paramsToOrderDetails: Function;
+  plateData: PlateDataProps;
+}
+
+interface PlateDataProps {
+  name: string;
+  price: number;
+  description: string;
+  source: string;
+  restaurantID: number;
+  id: number;
+  restaurantFoodTypes: string;
+  restaurantName: string;
+  photoRestaurant: string;
+  inside: any;
+  favorite: boolean;
 }
 
 interface ItemProps {
@@ -340,6 +359,28 @@ function CartProvider({children}: AuthProviderProps) {
     await handlerPost(createCheckoutRequest, cartError, CheckoutUserSuccess);
   }
 
+  const [plateData, setPlateData] = useState<PlateDataProps>({price: 0});
+
+  function paramsToOrderDetails({
+    name,
+    description,
+    price,
+    source,
+    restaurantID,
+    id,
+    restaurantFoodTypes,
+    restaurantName,
+    photoRestaurant,
+    inside,
+    Swipe,
+    favorite,
+    isTouchable,
+  }: ListPlatesProps) {
+    setPlateData({price: price});
+    console.log('id e preço', price, id);
+    console.log(' plateData: ', plateData);
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -355,6 +396,8 @@ function CartProvider({children}: AuthProviderProps) {
         foodTypes,
         restaurantPhoto,
         userRequestCheckout,
+        paramsToOrderDetails,
+        plateData,
       }}>
       {children}
     </CartContext.Provider>

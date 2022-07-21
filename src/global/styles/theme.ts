@@ -69,6 +69,7 @@ export default {
     deliveryorder: require('../assets/Icons/deliveryorder.png'),
     doingorder: require('../assets/Icons/doingorder.png'),
     waitingorder: require('../assets/Icons/waitingorder.png'),
+    restaurant: require('../assets/Icons/restaurant.png'),
   },
 
   images: {

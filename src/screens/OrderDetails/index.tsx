@@ -1,5 +1,6 @@
 import {BackButton} from '@components/BackButton';
 import {ListPlatesProps} from '@components/Plates';
+import {useCreateCart} from '@global/context/Cart';
 import theme from '@global/styles/theme';
 import {useNavigation} from '@react-navigation/native';
 import {Text} from '@screens/loginScreens/RegisterSuccess/styles';
@@ -29,7 +30,12 @@ export function OrderDetails({id}: ListPlatesProps) {
   function handlerBackButton() {
     navigation.goBack();
   }
+
+  const {plateData} = useCreateCart();
+  console.log('dataprice no OrderDetails:', plateData.price);
+
   const reference = require('../../global/assets/Images/camarao.png');
+
   return (
     <Container>
       <StatusBar
@@ -50,11 +56,19 @@ export function OrderDetails({id}: ListPlatesProps) {
       <PlateInfoWrapper>
         <PlatePhoto source={reference} resizeMode={'contain'} />
         <PlateName numberOfLines={1}>Prato de camarão e fritas</PlateName>
-        <FoodType>Almoço</FoodType>
-        <Description numberOfLines={3}></Description>
+        <FoodType numberOfLines={1}>Almoço</FoodType>
+        <Description numberOfLines={3}>
+          Um prato de camarão com fritas que é uma ótima opção para pedir quando
+          se está com a família
+        </Description>
         <RestaurantWrapper>
-          <RestaurantIcon source={reference} resizeMode={'contain'} />
-          <RestaurantName></RestaurantName>
+          <RestaurantIcon
+            source={theme.icons.restaurant}
+            resizeMode={'contain'}
+          />
+          <RestaurantName numberOfLines={1}>
+            Vendido e entregue por nome_restaurante
+          </RestaurantName>
         </RestaurantWrapper>
       </PlateInfoWrapper>
     </Container>

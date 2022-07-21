@@ -1,3 +1,4 @@
+import theme from '@global/styles/theme';
 import {RFValue} from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
@@ -54,9 +55,38 @@ export const FoodType = styled.Text`
   font-weight: 400;
   font-size: ${RFValue(12)}px;
   color: ${({theme}) => theme.colors.text_gray};
-  width: ${RFValue(298)}px;
+  margin-top: ${RFValue(-4)}px;
+  width: ${RFValue(149)}px;
 `;
-export const Description = styled.Text``;
-export const RestaurantWrapper = styled.View``;
-export const RestaurantIcon = styled.Image``;
-export const RestaurantName = styled.Text``;
+export const Description = styled.Text`
+  font-weight: 400;
+  font-size: ${RFValue(14)}px;
+  color: ${({theme}) => theme.colors.text_dark};
+  margin-top: ${RFValue(32)}px;
+  width: ${RFValue(298)}px;
+  line-height: ${RFValue(16.41)}px;
+`;
+export const RestaurantWrapper = styled.View`
+  width: 100%;
+  height: ${RFValue(49)}px;
+  align-self: center;
+  align-items: center;
+  flex-direction: row;
+  margin-top: ${RFValue(24)}px;
+  border: ${RFValue(0.5)}px;
+  border-radius: ${RFValue(6)}px;
+  border-color: ${({theme}) => theme.colors.text_gray};
+`;
+export const RestaurantIcon = styled.Image`
+  width: ${RFValue(18)}px;
+  height: ${RFValue(18)}px;
+  left: ${RFValue(14)}px;
+`;
+export const RestaurantName = styled.Text`
+  font-weight: 400;
+  font-size: ${RFValue(12)}px;
+  color: ${({theme}) => theme.colors.text_gray};
+  width: ${RFValue(250)}px;
+  line-height: ${RFValue(14.06)}px;
+  left: ${RFValue(30)}px;
+`;
