@@ -9,6 +9,7 @@ import {
   AboutTitle,
   Container,
   Content,
+  DevsScrollView,
   LogoDevelFood,
   TimeDevelfood,
   TimeText,
@@ -36,9 +37,9 @@ export function About() {
 
         <AboutContent>
           <AboutText>
-            Nosso trabalho é encher sua barriga {'\n'}com comida deliciosa,
-            {'\n'}
-            com sabor e entrega grátis.
+            Nosso trabalho é encher sua barriga {'\n'}com comida deliciosa, com
+            sabor e{'\n'}
+            entrega grátis.
           </AboutText>
 
           <WrapperImage>
@@ -47,7 +48,19 @@ export function About() {
         </AboutContent>
 
         <TimeText>Conheça nossos Devs</TimeText>
-        <DevsComponent name="Diógenes" source={theme.images.eu} />
+
+        <DevsScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <DevsComponent
+            name="Carla"
+            source={theme.images.carlaMelhorAgilista}
+          />
+          <DevsComponent name="Diógenes" source={theme.images.eu} />
+          <DevsComponent name="Gustavo" source={theme.images.gustaGol} />
+          <DevsComponent name="Isaias" source={theme.images.isaias} />
+          <DevsComponent name="Kevin" source={theme.images.kevinCareca} />
+          <DevsComponent name="Manoela" source={theme.images.manoela} />
+          <DevsComponent name="Michael" source={theme.images.michael} />
+        </DevsScrollView>
         <TimeDevelfood source={theme.images.timeDevelFood} />
       </Content>
     </Container>

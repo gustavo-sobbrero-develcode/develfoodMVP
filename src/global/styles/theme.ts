@@ -22,6 +22,8 @@ export default {
 
     modalBackGround: 'rgba(0, 0, 0, 0.5)',
     modalButtonClose: '#009EFF',
+
+    devsBanner: '#102844',
   },
 
   fonts: {
@@ -107,5 +109,11 @@ export default {
     logoutImage: require('../assets/Images/logoutImage.png'),
     develFoodLogo: require('../assets/Images/Logo.png'),
     timeDevelFood: require('../assets/Images/TimeDevelfood.jpeg'),
+    gustaGol: require('../assets/Images/gustaGol.jpeg'),
+    isaias: require('../assets/Images/isaias.jpg'),
+    kevinCareca: require('../assets/Images/kevinCareca.jpg'),
+    manoela: require('../assets/Images/manoela.jpg'),
+    carlaMelhorAgilista: require('../assets/Images/carlaMelhorAgilista.jpg'),
+    michael: require('../assets/Images/michael.jpg'),
   },
 };

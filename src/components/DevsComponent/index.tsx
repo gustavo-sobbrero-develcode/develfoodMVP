@@ -1,6 +1,6 @@
 import React from 'react';
 import {ImageSourcePropType} from 'react-native';
-import {Container, DevsImage, Title, WrapperDevs, WrapperImage} from './styles';
+import {Container, DevsImage, Title, WrapperImage, WrapperName} from './styles';
 
 interface Props {
   name: string;
@@ -9,14 +9,13 @@ interface Props {
 
 export function DevsComponent({name, source}: Props) {
   return (
-    <WrapperDevs horizontal={true} showsHorizontalScrollIndicator={false}>
-      <Container>
+    <Container>
+      <WrapperName>
         <Title>{name}</Title>
-
-        <WrapperImage>
-          <DevsImage source={source} />
-        </WrapperImage>
-      </Container>
-    </WrapperDevs>
+      </WrapperName>
+      <WrapperImage>
+        <DevsImage source={source} />
+      </WrapperImage>
+    </Container>
   );
 }

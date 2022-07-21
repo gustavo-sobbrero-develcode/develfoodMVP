@@ -21,7 +21,9 @@ export const UserInfo = styled.View.attrs({
   background-color: ${({theme}) => theme.colors.background};
 `;
 
-export const UserPhoto = styled.Image`
+export const UserPhoto = styled.Image.attrs({
+  resizeMode: 'contain',
+})`
   width: ${RFValue(64)}px;
   height: ${RFValue(64)}px;
   border-radius: ${RFValue(10)}px;

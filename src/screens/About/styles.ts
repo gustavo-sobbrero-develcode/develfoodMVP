@@ -25,12 +25,12 @@ export const AboutContent = styled.View`
 `;
 
 export const AboutText = styled.Text`
-  top: ${RFValue(30)}px;
+  top: ${RFValue(20)}px;
 `;
 
 export const WrapperImage = styled.View`
-  width: ${RFValue(100)}px;
-  height: ${RFValue(100)}px;
+  width: ${RFValue(90)}px;
+  height: ${RFValue(90)}px;
   border-radius: ${RFValue(50)}px;
   align-items: center;
   justify-content: center;
@@ -43,17 +43,17 @@ export const TimeText = styled.Text`
   font-size: ${RFValue(16)}px;
   font-weight: 700;
   color: ${({theme}) => theme.colors.text_dark};
-  top: ${RFValue(60)}px;
+  margin-top: ${RFValue(30)}px;
 `;
 
-export const WrapperDevs = styled.ScrollView`
-  flex-direction: row;
+export const DevsScrollView = styled.ScrollView`
   position: absolute;
-  width: 100%;
+  margin-top: ${RFValue(200)}px;
+  padding-left: ${RFValue(10)}px;
 `;
 
 export const TimeDevelfood = styled.Image`
   width: ${RFValue(400)}px;
   height: ${RFValue(400)}px;
-  top: ${RFValue(90)}px;
+  top: ${RFValue(80)}px;
 `;
