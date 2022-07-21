@@ -23,8 +23,8 @@ export function TabBarButton({source, name, isPressed, onPressed}: Props) {
             tintColor: isPressed
               ? theme.colors.icon_red
               : theme.colors.icon_gray,
-            height: isPressed ? RFValue(25) : RFValue(25),
-            width: isPressed ? RFValue(30) : RFValue(22),
+            height: isPressed ? RFValue(20) : RFValue(15),
+            width: isPressed ? RFValue(20) : RFValue(15),
             resizeMode: 'contain',
           }}
         />

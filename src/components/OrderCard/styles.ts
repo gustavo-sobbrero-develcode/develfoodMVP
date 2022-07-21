@@ -1,15 +1,17 @@
+import {RectButton} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
-export const Container = styled.View.attrs({
+export const Container = styled(RectButton).attrs({
   elevation: 10,
 })`
-  width: 100%;
+  width: 90%;
   height: ${RFValue(103)}px;
   background-color: ${({theme}) => theme.colors.card};
   border-radius: ${RFValue(8)}px;
   margin-top: ${RFValue(10)}px;
   margin-bottom: ${RFValue(10)}px;
+  align-self: center;
 `;
 
 export const RestaurantPhoto = styled.Image`
@@ -48,12 +50,12 @@ export const StatusOrder = styled.Text`
   font-size: ${RFValue(10)}px;
   font-weight: 700;
   color: ${({theme}) => theme.colors.text_gray};
-  left: ${RFValue(20)}px;
+  left: ${RFValue(18)}px;
   bottom: ${RFValue(6)}px;
 `;
 
 export const OrderN = styled.Text`
-  left: ${RFValue(30)}px;
+  left: ${RFValue(25)}px;
   bottom: ${RFValue(6)}px;
   font-size: ${RFValue(10)}px;
   font-weight: 700;
@@ -64,7 +66,7 @@ export const OrderNumber = styled.Text`
   font-size: ${RFValue(10)}px;
   font-weight: 400;
   color: ${({theme}) => theme.colors.text_gray};
-  left: ${RFValue(30)}px;
+  left: ${RFValue(25)}px;
   bottom: ${RFValue(6)}px;
 `;
 

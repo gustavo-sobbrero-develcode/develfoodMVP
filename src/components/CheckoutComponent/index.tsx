@@ -1,16 +1,21 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {useTheme} from 'styled-components';
-import {useCreateCart} from '../../global/Context/Cart';
+import {useCreateCart} from '@global/context/Cart';
 import {
   Container,
   CheckoutButton,
   DollarIcon,
   EndOrder,
   TotalPrice,
+  Load,
 } from './styles';
 
-export function CheckoutComponent() {
+interface Props {
+  loading?: boolean;
+}
+
+export function CheckoutComponent({loading}: Props) {
   const theme = useTheme();
 
   const navigation = useNavigation();
@@ -27,17 +32,28 @@ export function CheckoutComponent() {
   function handleCheckout() {
     function CheckoutUserSuccess(data: string) {
       data && navigation.navigate('CheckoutSuccess' as never);
-      clearCart();
+      setTimeout(() => {
+        clearCart();
+      }, 2000);
     }
     userRequestCheckout(CheckoutUserSuccess);
   }
 
   return (
-    <CheckoutButton onPress={() => handleCheckout()}>
+    <CheckoutButton
+      onPress={() => handleCheckout()}
+      disable={loading}
+      activeOpacity={0.95}>
       <Container>
-        <DollarIcon source={theme.icons.dollar} />
-        <EndOrder>Finalizar Pedido</EndOrder>
-        <TotalPrice>R$ {priceFormatted}</TotalPrice>
+        {loading ? (
+          <Load />
+        ) : (
+          <>
+            <DollarIcon source={theme.icons.dollar} />
+            <EndOrder>Finalizar Pedido</EndOrder>
+            <TotalPrice>R$ {priceFormatted}</TotalPrice>
+          </>
+        )}
       </Container>
     </CheckoutButton>
   );

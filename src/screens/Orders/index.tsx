@@ -6,19 +6,12 @@ import {ActivityIndicator, SectionList, StatusBar} from 'react-native';
 import {useTheme} from 'styled-components';
 import {ListEmptyComponent} from '../../components/ListEmptyComponent';
 import {OrderCard} from '../../components/OrderCard';
-import {useAuth} from '../../global/Context';
+import {useAuth} from '@global/context';
 import {useFetch} from '../../global/services/get';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
-import {
-  Container,
-  Content,
-  OrderDate,
-  SubTitle,
-  WrapperInfo,
-  Footer,
-} from './styles';
+import {Container, OrderDate, SubTitle, WrapperInfo, Footer} from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {HeaderComponent} from '../../components/HeaderComponent';
 
@@ -73,6 +66,15 @@ interface SectionListData {
   data: OrderProps[];
 }
 
+interface HandleOrderInfoProps {
+  name: string;
+  photo_url: string;
+  id: number;
+  totalValue: number;
+  date: Date;
+  status: string;
+}
+
 export function Orders() {
   const {token} = useAuth();
 
@@ -108,73 +110,56 @@ export function Orders() {
     setIsLoading(false);
   }
 
-  function handlerOrderInfo(name: string, photo_url: string, id: number) {
-    navigation.navigate('OrderInfo' as never, {name, photo_url, id} as never);
+  function handlerOrderInfo({
+    name,
+    photo_url,
+    id,
+    totalValue,
+    date,
+    status,
+  }: HandleOrderInfoProps) {
+    navigation.navigate(
+      'OrderInfo' as never,
+      {name, photo_url, id, totalValue, date, status} as never,
+    );
+  }
+
+  function getStatusImage(status: string) {
+    const statusImage = {
+      PEDIDO_REALIZADO: theme.icons.waitingorder,
+      PEDIDO_EM_REALIZAÇÃO: theme.icons.doingorder,
+      PEDIDO_À_CAMINHO: theme.icons.deliveryorder,
+      PEDIDO_FINALIZADO: theme.icons.checkorder,
+    }[status];
+    return statusImage;
   }
 
   const renderItem = ({item}: {item: OrderProps}) => {
+    const statusImage = getStatusImage(item.status);
+
     return item ? (
-      <Content>
-        <OrderCard
-          restaurantID={item.restaurant.id}
-          onPress={() =>
-            handlerOrderInfo(
-              item.restaurant.name,
-              item.restaurant.photo_url,
-              item.id,
-            )
-          }
-          photo_url={item.restaurant.photo_url}
-          restaurantName={item.restaurant.name}
-          statusOrder={
-            item.status.charAt(0).toUpperCase() +
-            item.status
-              .slice(1)
-              .toLowerCase()
-              .replace('_', ' ')
-              .replace('_', ' ')
-          }
-          orderNumber={item.id}
-          foodName={`${
-            item.requestItems[0].quantity > 1
-              ? item.requestItems[0].quantity
-              : ''
-          } ${item.requestItems[0].plateDTO.name} ${
-            item.requestItems[1]
-              ? ` + ${
-                  item.requestItems[1].quantity > 1
-                    ? item.requestItems[1].quantity
-                    : ''
-                } ${item.requestItems[1].plateDTO.name}`
-              : ''
-          } ${
-            item.requestItems[2]
-              ? ` + ${
-                  item.requestItems[2].quantity > 1
-                    ? item.requestItems[2].quantity
-                    : ''
-                } ${item.requestItems[2].plateDTO.name}`
-              : ''
-          } ${
-            item.requestItems[3]
-              ? ` + ${
-                  item.requestItems[3].quantity > 1
-                    ? item.requestItems[3].quantity
-                    : ''
-                } ${item.requestItems[3].plateDTO.name}`
-              : ''
-          } ${
-            item.requestItems[4]
-              ? ` + ${
-                  item.requestItems[4].quantity > 1
-                    ? item.requestItems[4].quantity
-                    : ''
-                } ${item.requestItems[4].plateDTO.name}`
-              : ''
-          } 
-          ${item.requestItems[5] ? '...' : ''}`}
-        />
-      </Content>
+      <OrderCard
+        restaurantID={item.restaurant.id}
+        onPress={() =>
+          handlerOrderInfo({
+            name: item.restaurant.name,
+            photo_url: item.restaurant.photo_url,
+            id: item.id,
+            totalValue: item.totalValue,
+            date: item.date,
+            status: item.status,
+          })
+        }
+        photo_url={item.restaurant.photo_url}
+        restaurantName={item.restaurant.name}
+        statusOrder={
+          item.status.charAt(0).toUpperCase() +
+          item.status.slice(1).toLowerCase().replace('_', ' ').replace('_', ' ')
+        }
+        orderNumber={item.id}
+        foodName={listItems(item)}
+        source={statusImage}
+      />
     ) : null;
   };
 
@@ -197,22 +182,26 @@ export function Orders() {
     setOrderSections(orderFormatted);
   }
 
+  const listItems = (item: OrderProps) => {
+    let quantityVisible = item.requestItems.map(
+      (requestItem: RequestItemsResponse, index) => {
+        if (requestItem.quantity > 1) {
+          return index !== 0
+            ? ' + ' + requestItem.quantity + ' ' + requestItem.plateDTO.name
+            : requestItem.quantity + ' ' + requestItem.plateDTO.name;
+        } else {
+          return index !== 0
+            ? ' + ' + requestItem?.plateDTO.name
+            : requestItem?.plateDTO.name;
+        }
+      },
+    );
+    return quantityVisible;
+  };
+
   async function handleLoadOnEnd() {
     if (data.totalPages !== filter) {
       setFilter(filter + 1);
-    }
-  }
-
-  function handlerRefreshPage() {
-    if (filter !== 0) {
-      setOrder([]);
-      setOrderSections([]);
-      setFilter(0);
-      setIsLoading(true);
-    } else {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 500);
     }
   }
 
@@ -239,10 +228,6 @@ export function Orders() {
       />
 
       <>
-        <WrapperInfo>
-          <SubTitle>Historico</SubTitle>
-        </WrapperInfo>
-
         <SectionList
           sections={orderSections}
           keyExtractor={item => item.id.toString()}
@@ -250,18 +235,26 @@ export function Orders() {
           renderSectionHeader={({section: {title}}) => (
             <OrderDate>{moment(title).format('llll').slice(0, -9)}</OrderDate>
           )}
+          ListHeaderComponent={
+            data.totalPages > 0 ? (
+              <WrapperInfo>
+                <SubTitle>Historico</SubTitle>
+              </WrapperInfo>
+            ) : null
+          }
           ListFooterComponent={() => (
             <Footer>
-              <ActivityIndicator color={theme.colors.background_red} />
+              {isLoading && (
+                <ActivityIndicator color={theme.colors.background_red} />
+              )}
             </Footer>
           )}
           onEndReached={() => {
             handleLoadOnEnd();
           }}
           refreshing={isLoading}
-          onRefresh={() => handlerRefreshPage()}
           ListEmptyComponent={
-            !isLoading ? (
+            !isLoading && data.totalPages === 0 ? (
               <ListEmptyComponent
                 source={theme.images.noOrder}
                 title="Você ainda não fez nenhum pedido"

@@ -5,6 +5,14 @@ export interface CartStyleProps {
   insideCart: number;
 }
 
+export const ContentContainer = styled.View`
+  width: 100%;
+  height: ${RFValue(103)}px;
+  background-color: ${({theme}) => theme.colors.cardRemove};
+  border-radius: ${RFValue(8)}px;
+  margin-bottom: ${RFValue(18)}px;
+`;
+
 export const Container = styled.View.attrs({
   elevation: 10,
 })`
@@ -92,26 +100,23 @@ export const WrapperCartButton = styled.View`
 export const AddQuantityButton = styled.TouchableOpacity`
   position: absolute;
   margin-left: ${RFValue(75)}px;
-  width: ${RFValue(8)}px;
-  height: ${RFValue(16)}px;
   justify-content: center;
 `;
 
-export const AddQuantityButtonImage = styled.Image`
-  width: ${RFValue(12)}px;
-  height: ${RFValue(10)}px;
+export const AddQuantityButtonLabel = styled.Text`
+  font-size: ${RFValue(18)}px;
+  color: ${({theme}) => theme.colors.background_red};
+  font-weight: 700;
 `;
 export const RemoveCartButton = styled.TouchableOpacity`
-  justify-content: center;
   position: absolute;
-  margin-left: ${RFValue(20)}px;
-  width: ${RFValue(15)}px;
-  height: ${RFValue(10)}px;
+  margin-left: ${RFValue(25)}px;
 `;
 
-export const RemoveQuantityButtonImage = styled.Image`
-  width: ${RFValue(12)}px;
-  height: ${RFValue(5)}px;
+export const RemoveQuantityButtonLabel = styled.Text`
+  color: ${({theme}) => theme.colors.background_red};
+  font-size: ${RFValue(21)}px;
+  font-weight: 700;
 `;
 
 export const NumberOfQuantityWrapper = styled.View`

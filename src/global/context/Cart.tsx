@@ -3,8 +3,8 @@ import React, {createContext, useContext, useState} from 'react';
 import {useEffect} from 'react';
 import {Alert} from 'react-native';
 import {useAuth} from '.';
-import {useFetch} from '../services/get';
-import {usePost} from '../services/post';
+import {useFetch} from '@global/services/get';
+import {usePost} from '@global/services/post';
 
 interface AuthProviderProps {
   children: React.ReactNode;
@@ -112,6 +112,7 @@ interface Props {
   foodTypes: string;
   restaurantPhoto: string;
   userRequestCheckout: Function;
+  loading: boolean;
 }
 
 interface ItemProps {
@@ -296,11 +297,14 @@ function CartProvider({children}: AuthProviderProps) {
     fetchData();
   }, []);
 
-  const {handlerPost} = usePost<CartRequest, CartResponse>('/request', {
-    headers: {
-      Authorization: `Bearer ${token}`,
+  const {handlerPost, loading} = usePost<CartRequest, CartResponse>(
+    '/request',
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
 
   const cartError = () => {
     Alert.alert(
@@ -355,6 +359,7 @@ function CartProvider({children}: AuthProviderProps) {
         foodTypes,
         restaurantPhoto,
         userRequestCheckout,
+        loading,
       }}>
       {children}
     </CartContext.Provider>

@@ -1,32 +1,37 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useCallback, useState} from 'react';
-import {ActivityIndicator, Dimensions, StatusBar} from 'react-native';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useEffect, useRef, useState} from 'react';
+import {
+  ActivityIndicator,
+  Dimensions,
+  StatusBar,
+  StyleSheet,
+} from 'react-native';
 import {useTheme} from 'styled-components';
-import {Input} from '../../components/Input';
-import {useAuth} from '../../global/Context';
-import {useFetch} from '../../global/services/get';
+import {Input} from '@components/Input';
+import {useAuth} from '@global/context';
+import {useFetch} from '@global/services/get';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useDebouncedCallback} from 'use-debounce';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import {ListEmptyComponent} from '../../components/ListEmptyComponent';
+import {useNavigation, useScrollToTop} from '@react-navigation/native';
+import {ListEmptyComponent} from '@components/ListEmptyComponent';
 import {FlatList} from 'react-native-gesture-handler';
-
-import {Restaurants} from '../../components/Restaurants';
-import {Category} from '../../components/CategoryButton';
+import {Restaurants} from '@components/Restaurants';
+import {Category} from '@components/CategoryButton';
 
 import {
   Container,
   Content,
-  BannerWrapper,
-  Banner,
   TitleWrapper,
   Title,
   CategorySelect,
   RestaurantListWrapper,
   Footer,
 } from './styles';
-import {HeaderComponent} from '../../components/HeaderComponent';
+import {HeaderComponent} from '@components/HeaderComponent';
+import {PhotoSlider} from '@components/PhotoSlider';
+import theme from '@global/styles/theme';
 
 interface ListRestaurantProps {
   food_types: ListFoodType[];
@@ -37,6 +42,7 @@ interface ListRestaurantProps {
 interface ListRestaurantResponse {
   content: ListRestaurantProps[];
   totalPages: number;
+  totalElements: number;
 }
 interface ListFoodType {
   id: number;
@@ -58,6 +64,12 @@ export function Home() {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const [categories, setCategories] = useState<ListFoodType[]>([]);
+
+  const [foodType, setFoodType] = useState<string>('');
+
+  const [activeButton, setActiveButton] = useState<string>('');
+
   const [restaurants, setRestaurants] = useState<ListRestaurantProps[]>([]);
 
   const navigation = useNavigation();
@@ -75,13 +87,23 @@ export function Home() {
   }
 
   const {data, fetchData} = useFetch<ListRestaurantResponse>(
-    `/restaurant/filter?name=${isFiltred.text}&page=${isFiltred.page}&quantity=10`,
+    `/restaurant/filter?${foodType !== '' ? `foodType=${foodType}&` : ''}name=${
+      isFiltred.text
+    }&page=${isFiltred.page}&quantity=10`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     },
   );
+
+  const {data: datafoodtype, fetchData: fetchfoodtype} = useFetch<
+    ListFoodType[]
+  >('/foodType', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   function onSuccess(response: ListRestaurantResponse) {
     setRestaurants([...restaurants, ...response.content]);
@@ -94,7 +116,7 @@ export function Home() {
   }
 
   async function handleLoadOnEnd() {
-    if (data.totalPages !== isFiltred.page) {
+    if (isFiltred.page + 1 < data.totalPages) {
       setIsFiltred({...isFiltred, page: isFiltred.page + 1});
     }
   }
@@ -129,12 +151,7 @@ export function Home() {
           }
           name={item.name}
           id={item.id}
-          category={
-            item.food_types.length > 0
-              ? item.food_types[0]?.name.charAt(0).toUpperCase() +
-                item.food_types[0]?.name.slice(1).toLowerCase()
-              : ''
-          }
+          category={item?.food_types ? item.food_types[0]?.name : ''}
           avaliation={item.id}
           source={item.photo_url ? item.photo_url : theme.images.noImage}
         />
@@ -142,11 +159,46 @@ export function Home() {
     );
   };
 
-  useFocusEffect(
-    useCallback(() => {
-      loadRestaurants();
-    }, [isFiltred]),
-  );
+  const onPress = (item: ListFoodType) => {
+    activeButton === item.name
+      ? setActiveButton('')
+      : setActiveButton(item.name);
+    setRestaurants([]);
+    foodType === item.name ? setFoodType('') : setFoodType(item.name);
+    setIsFiltred({...isFiltred, page: 0});
+  };
+
+  const renderCategories =
+    categories.length > 1 &&
+    categories?.map(item => {
+      return (
+        <Category
+          key={item.id}
+          title={item.name}
+          style={activeButton === item.name && styles.activeButton}
+          textStyle={activeButton === item.name && styles.activeText}
+          onPress={() => onPress(item)}
+        />
+      );
+    });
+
+  const ref = useRef<FlatList>(null);
+
+  useScrollToTop(ref);
+
+  useEffect(() => {
+    loadRestaurants();
+  }, [isFiltred, foodType]);
+
+  useEffect(() => {
+    (async () => {
+      await fetchfoodtype();
+    })();
+  }, []);
+
+  useEffect(() => {
+    datafoodtype && setCategories(datafoodtype);
+  }, [datafoodtype]);
 
   return (
     <>
@@ -155,6 +207,7 @@ export function Home() {
           barStyle={'light-content'}
           translucent={false}
           backgroundColor={theme.colors.background_red}
+          animated
         />
 
         <HeaderComponent
@@ -166,6 +219,7 @@ export function Home() {
         />
 
         <FlatList
+          ref={ref}
           data={restaurants}
           keyExtractor={item => item.id.toString()}
           numColumns={2}
@@ -179,10 +233,7 @@ export function Home() {
           }}
           ListHeaderComponent={
             <>
-              <BannerWrapper>
-                <Banner source={theme.images.banner} />
-                <Banner source={theme.images.banner} />
-              </BannerWrapper>
+              <PhotoSlider />
 
               <TitleWrapper>
                 <Title>Categoria</Title>
@@ -190,15 +241,9 @@ export function Home() {
 
               <CategorySelect
                 horizontal={true}
-                showsHorizontalScrollIndicator={false}>
-                <Category title="Pizza" />
-                <Category title="Churrasco" />
-                <Category title="Almoço" />
-                <Category title="Massas" />
-                <Category title="Coreana" />
-                <Category title="Japonesa" />
-                <Category title="Tailandesa" />
-                <Category title="Chinesa" />
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{paddingLeft: RFValue(10)}}>
+                {renderCategories}
               </CategorySelect>
 
               <Content>
@@ -213,7 +258,9 @@ export function Home() {
           }
           ListFooterComponent={() => (
             <Footer>
-              <ActivityIndicator color={theme.colors.background_red} />
+              {isLoading && (
+                <ActivityIndicator color={theme.colors.background_red} />
+              )}
             </Footer>
           )}
           renderItem={renderItem}
@@ -226,7 +273,7 @@ export function Home() {
             handleLoadOnEnd();
           }}
           ListEmptyComponent={
-            !isLoading ? (
+            !isLoading && data.totalElements === 0 ? (
               <ListEmptyComponent
                 source={theme.images.notFound}
                 title="Nenhum restaurante encontrado"
@@ -238,3 +285,14 @@ export function Home() {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  activeButton: {
+    backgroundColor: theme.colors.background,
+    borderWidth: 2,
+    borderColor: theme.colors.background_red,
+  },
+  activeText: {
+    color: theme.colors.background_red,
+  },
+});

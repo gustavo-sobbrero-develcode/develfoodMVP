@@ -6,13 +6,13 @@ import {StatusBar} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
-import {CheckoutComponent} from '../../components/CheckoutComponent';
-import {HeaderComponent} from '../../components/HeaderComponent';
-import {ListEmptyComponent} from '../../components/ListEmptyComponent';
-import {Plates} from '../../components/Plates';
-import {useAuth} from '../../global/Context';
-import {useCreateCart} from '../../global/Context/Cart';
-import {useFetch} from '../../global/services/get';
+import {CheckoutComponent} from '@components/CheckoutComponent';
+import {HeaderComponent} from '@components/HeaderComponent';
+import {ListEmptyComponent} from '@components/ListEmptyComponent';
+import {Plates} from '@components/Plates';
+import {useAuth} from '@global/context';
+import {useCreateCart} from '@global/context/Cart';
+import {useFetch} from '@global/services/get';
 
 import {
   Container,
@@ -33,6 +33,7 @@ import {
   TitleCart,
   WrapperCartPlates,
   FooterComponent,
+  PinImage,
 } from './styles';
 
 interface PlateProps {
@@ -64,7 +65,8 @@ export function Checkout({
 
   const navigation = useNavigation();
 
-  const {cart, nameRestaurant, foodTypes, restaurantPhoto} = useCreateCart();
+  const {cart, nameRestaurant, foodTypes, restaurantPhoto, loading} =
+    useCreateCart();
 
   function handlerBackHome() {
     navigation.navigate('Home' as never);
@@ -127,6 +129,8 @@ export function Checkout({
       {cart.length > 0 ? (
         <>
           <WrapperInfo>
+            <PinImage source={theme.images.pin} />
+
             <MapImage source={theme.images.mapImage} />
 
             <WrapperAddresInfo>
@@ -141,10 +145,7 @@ export function Checkout({
             <WrapperInfoRestaurant>
               <RestauratName>{nameRestaurant}</RestauratName>
 
-              <FoodType>
-                {foodTypes?.charAt(0).toUpperCase() +
-                  foodTypes?.slice(1).toLowerCase()}
-              </FoodType>
+              <FoodType>{foodTypes}</FoodType>
 
               <WrapperPhoto>
                 <RestaurantPhoto
@@ -180,7 +181,7 @@ export function Checkout({
           title="Seu carrinho está vazio"
         />
       )}
-      <CheckoutComponent />
+      <CheckoutComponent loading={loading} />
     </Container>
   );
 }

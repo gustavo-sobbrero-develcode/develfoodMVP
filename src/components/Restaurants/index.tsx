@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
 import {useTheme} from 'styled-components';
-import {useAuth} from '../../global/Context';
-import {useFetch} from '../../global/services/get';
+import {useAuth} from '@global/context';
+import {useFetch} from '@global/services/get';
 import {
   Wrapper,
   Container,
@@ -76,7 +76,7 @@ export function Restaurants({
   }, [source, dataRatio]);
 
   return (
-    <Wrapper onPress={onPress} activeOpacity={0}>
+    <Wrapper onPress={onPress} activeOpacity={1}>
       <Container>
         <RestaurantImage
           source={data.code ? {uri: `${data.code}`} : theme.images.noImage}

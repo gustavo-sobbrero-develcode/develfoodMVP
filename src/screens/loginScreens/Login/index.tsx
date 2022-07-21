@@ -5,9 +5,9 @@ import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {Controller, useForm} from 'react-hook-form';
 import {RFPercentage, RFValue} from 'react-native-responsive-fontsize';
-import {useAuth} from '../../../global/Context';
+import {useAuth} from '@global/context';
 import {useNavigation} from '@react-navigation/native';
-import {Input} from '../../../components/Input';
+import {Input} from '@components/Input';
 
 import {Keyboard, StatusBar, TouchableWithoutFeedback} from 'react-native';
 
@@ -24,8 +24,8 @@ import {
   RegisterSimpleTitle,
   RegisterButtonTitle,
   ButtonTitle,
-} from './styled';
-import {ContinueButton} from '../../../components/ContinueButton';
+} from './styles';
+import {ContinueButton} from '@components/ContinueButton';
 
 interface FormData {
   email: string;
@@ -120,7 +120,10 @@ export function Login() {
               name="password"
             />
 
-            <FogotPassButton>
+            <FogotPassButton
+              onPress={() => {
+                navigation.navigate('ForgotPassword' as never);
+              }}>
               <ForgotPass>Esqueci minha senha</ForgotPass>
             </FogotPassButton>
 
