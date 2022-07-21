@@ -1,12 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect} from 'react';
+// import {useAuth} from '@global/context';
+import {useAuth} from '@global/context';
+import {useCreateCart} from '@global/context/Cart';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Swipeable} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
-import {useAuth} from '@global/context';
-import {useCreateCart} from '@global/context/Cart';
-import {useFetch} from '@global/services/get';
+import {useDelete} from '../../global/services/delete';
+import {useFetch} from '../../global/services/get';
+import {usePut} from '../../global/services/put';
 
 import {
   Container,
@@ -32,6 +35,8 @@ import {
   CleanUpButton,
   CleanUpImage,
   CleanUpTitle,
+  FavoriteButton,
+  FavoriteImage,
   ContentContainer,
 } from './styles';
 
@@ -41,12 +46,13 @@ interface ListPlatesProps {
   description: string;
   price: number;
   source: string;
-  restaurantID: number;
+  restaurantID?: number;
   restaurantFoodTypes?: string;
   restaurantName?: string;
   inside: boolean;
-  photoRestaurant: string;
+  photoRestaurant?: string;
   Swipe: boolean;
+  favorite: boolean;
 }
 
 interface Photos {
@@ -68,6 +74,16 @@ interface ItemProps {
   unityPrice?: number;
 }
 
+interface PutResponse {
+  id: number;
+  name: string;
+  description: string;
+  price: null;
+  foodType: null;
+  restaurantName: null;
+  photo_url: string;
+  favorite: null;
+}
 export function Plates({
   name,
   description,
@@ -80,6 +96,7 @@ export function Plates({
   photoRestaurant,
   inside,
   Swipe,
+  favorite,
 }: ListPlatesProps) {
   const theme = useTheme();
 
@@ -123,6 +140,43 @@ export function Plates({
   useEffect(() => {
     fetchData();
   }, [source]);
+
+  const favoriteWhite = require('../../global/assets/Icons/favoriteRestaurant.png');
+
+  const [isFavorite, setIsFavorite] = useState<boolean>(favorite);
+
+  function handlerLikeButton() {
+    if (isFavorite) {
+      handlerDelete();
+    } else {
+      handlerPut();
+    }
+  }
+
+  const {
+    data: dataDelete,
+    handlerDelete,
+    error: errorDelete,
+  } = useDelete<any>(`/plate/favorite/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const {
+    data: dataPut,
+    handlerPut,
+    error: errorPut,
+  } = usePut<any, PutResponse>(`/plate/favorite/${id}`, undefined, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  function onpressss() {
+    setIsFavorite(!isFavorite);
+    handlerLikeButton();
+  }
 
   return Swipe ? (
     <ContentContainer>
@@ -197,6 +251,13 @@ export function Plates({
     </ContentContainer>
   ) : (
     <Container>
+      <FavoriteButton onPress={onpressss}>
+        <FavoriteImage
+          source={favoriteWhite}
+          style={isFavorite && {tintColor: 'red'}}
+        />
+      </FavoriteButton>
+
       <WrapperImage>
         <PlateImage
           source={data.code ? {uri: `${data.code}`} : theme.images.noImage}

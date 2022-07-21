@@ -2,7 +2,7 @@ import axios, {AxiosRequestConfig} from 'axios';
 import {useState} from 'react';
 
 const api = axios.create({
-  baseURL: 'https://gorest.co.in',
+  baseURL: 'https://develfood-3.herokuapp.com',
 });
 
 export const useDelete = <TResponse = unknown>(
@@ -10,7 +10,9 @@ export const useDelete = <TResponse = unknown>(
   options?: AxiosRequestConfig,
 ) => {
   const [data, setData] = useState<TResponse>({} as TResponse);
+
   const [loading, setLoading] = useState(false);
+
   const [error, setError] = useState<Error | null | unknown>(null);
 
   async function handlerDelete() {

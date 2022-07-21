@@ -56,6 +56,16 @@ export const PlateInfo = styled.Text`
   color: ${({theme}) => theme.colors.text_gray};
 `;
 
+export const FavoriteButton = styled.TouchableOpacity`
+  position: absolute;
+  right: ${RFValue(9)}px;
+  top: ${RFValue(8)}px;
+`;
+export const FavoriteImage = styled.Image`
+  width: ${RFValue(18)}px;
+  height: ${RFValue(16)}px;
+`;
+
 export const WrapperAdvancedInfo = styled.View`
   position: absolute;
   width: 100%;
