@@ -41,7 +41,7 @@ export const IconButton = styled.TouchableOpacity`
 `;
 
 export const FavoriteIcon = styled.Image`
-  width: ${RFValue(25)}px;
+  width: ${RFValue(26)}px;
   height: ${RFValue(22)}px;
   border-color: ${({theme}) => theme.colors.icon_red};
 `;
@@ -84,6 +84,7 @@ export const SubTitle = styled.Text`
   font-family: ${({theme}) => theme.fonts.secondaryMed};
   font-size: ${RFValue(12)}px;
   color: ${({theme}) => theme.colors.text_gray};
+  text-transform: capitalize;
 `;
 
 export const Avaliation = styled.View`

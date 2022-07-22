@@ -100,6 +100,7 @@ export default {
     doing: require('../assets/Images/doing.png'),
     inRoute: require('../assets/Images/inRoute.png'),
     delivered: require('../assets/Images/delivered.png'),
+    noFavorites: require('../assets/Images/noFavorites.png'),
     authEmail: require('../assets/RedefinePasswordImages/auth-email.png'),
     forgotPassword: require('../assets/RedefinePasswordImages/forgot_password.png'),
     lock: require('../assets/RedefinePasswordImages/lock.png'),

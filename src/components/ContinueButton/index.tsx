@@ -12,7 +12,7 @@ interface Props {
 export function ContinueButton({title, onPressed, loading}: Props) {
   const theme = useTheme();
   return (
-    <Container onPress={() => onPressed()}>
+    <Container onPress={() => onPressed()} activeOpacity={0.95}>
       {loading ? (
         <ActivityIndicator color={theme.colors.background} size={25} />
       ) : (

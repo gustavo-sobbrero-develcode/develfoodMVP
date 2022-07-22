@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {ActivityIndicator, SectionList, StatusBar} from 'react-native';
 import {useTheme} from 'styled-components';
 import {ListEmptyComponent} from '../../components/ListEmptyComponent';
@@ -12,7 +12,7 @@ import moment from 'moment';
 import 'moment/locale/pt-br';
 
 import {Container, OrderDate, SubTitle, WrapperInfo, Footer} from './styles';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {HeaderComponent} from '../../components/HeaderComponent';
 
 interface PlateDTOResponse {
@@ -107,7 +107,6 @@ export function Orders() {
   async function loadOrder() {
     setIsLoading(true);
     await fetchData(onSuccess);
-    setIsLoading(false);
   }
 
   function handlerOrderInfo({
@@ -206,8 +205,19 @@ export function Orders() {
   }
 
   useEffect(() => {
-    loadOrder();
+    filter !== 0 && loadOrder();
   }, [filter]);
+
+  useFocusEffect(
+    useCallback(() => {
+      loadOrder();
+      return () => {
+        setOrder([]);
+        setFilter(0);
+        setOrderSections([]);
+      };
+    }, []),
+  );
 
   useEffect(() => {
     data.content && sectionDataFormatter([...order, ...data.content]);
@@ -254,7 +264,7 @@ export function Orders() {
           }}
           refreshing={isLoading}
           ListEmptyComponent={
-            !isLoading ? (
+            !isLoading && data.totalPages === 0 ? (
               <ListEmptyComponent
                 source={theme.images.noOrder}
                 title="Você ainda não fez nenhum pedido"

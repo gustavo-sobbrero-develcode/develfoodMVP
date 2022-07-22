@@ -94,6 +94,10 @@ export function OrderInfo({route}: RouteParams) {
 
   const [order, setOrder] = useState<RequestiItemsProps[]>([]);
 
+  const [newStatus, setNewStatus] = useState(status);
+
+  const [extraData, setExtraData] = useState(false);
+
   const navigation = useNavigation();
 
   function handlerBackHome() {
@@ -110,8 +114,19 @@ export function OrderInfo({route}: RouteParams) {
     setOrder([...order, ...response.requestItems]);
   }
 
+  function onStatusSuccess(response: OrderProps) {
+    setNewStatus(response.status);
+    status !== 'PEDIDO_FINALIZADO' &&
+      response.status !== 'PEDIDO_FINALIZADO' &&
+      setExtraData(!extraData);
+  }
+
   async function loadOrder() {
     await fetchData(onSuccess);
+  }
+
+  async function loadStatus() {
+    await fetchData(onStatusSuccess);
   }
 
   const {data, fetchData: fetchPhoto} = useFetch<Photo>(photo_url, {
@@ -130,7 +145,7 @@ export function OrderInfo({route}: RouteParams) {
     return statusText;
   }
 
-  const statusText = getStatus(status);
+  const statusText = getStatus(newStatus);
 
   function getStatusImage(status: string) {
     const statusImage = {
@@ -142,7 +157,7 @@ export function OrderInfo({route}: RouteParams) {
     return statusImage;
   }
 
-  const statusImage = getStatusImage(status);
+  const statusImage = getStatusImage(newStatus);
 
   const renderItem = ({item}: {item: RequestiItemsProps}) => {
     return item ? (
@@ -170,6 +185,15 @@ export function OrderInfo({route}: RouteParams) {
     fetchPhoto();
     loadOrder();
   }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      loadStatus();
+    }, 8000);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [extraData]);
 
   return (
     <Container>

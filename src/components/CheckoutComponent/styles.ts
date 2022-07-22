@@ -33,3 +33,10 @@ export const TotalPrice = styled.Text`
   font-size: ${RFValue(12)}px;
   right: ${RFValue(15)}px;
 `;
+
+export const Load = styled.ActivityIndicator.attrs({
+  color: '#FFFFFF',
+})`
+  width: 100%;
+  align-self: center;
+`;
