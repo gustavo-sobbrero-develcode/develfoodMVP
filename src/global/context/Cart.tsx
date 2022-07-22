@@ -5,9 +5,6 @@ import {Alert} from 'react-native';
 import {useAuth} from '.';
 import {useFetch} from '@global/services/get';
 import {usePost} from '@global/services/post';
-import {ListPlatesProps} from '@components/Plates';
-import {State} from 'react-native-gesture-handler';
-import {useNavigation} from '@react-navigation/native';
 
 interface AuthProviderProps {
   children: React.ReactNode;
@@ -128,7 +125,9 @@ interface Plate {
   restaurantFoodTypes: string;
   restaurantName: string;
   favorite: boolean;
-  data: string;
+  inside: boolean;
+  restaurantID: number;
+  photoRestaurant: string;
 }
 
 interface ItemProps {
@@ -368,7 +367,9 @@ function CartProvider({children}: AuthProviderProps) {
     restaurantFoodTypes: string,
     restaurantName: string,
     favorite: boolean,
-    data: string,
+    inside: boolean,
+    restaurantID: number,
+    photoRestaurant: string,
   ) {
     setPlateData({
       name: name,
@@ -379,20 +380,11 @@ function CartProvider({children}: AuthProviderProps) {
       restaurantFoodTypes: restaurantFoodTypes,
       restaurantName: restaurantName,
       favorite: favorite,
-      data: data,
-
+      inside: inside,
+      restaurantID: restaurantID,
+      photoRestaurant: photoRestaurant,
     });
-    console.log('id e preço', price, id, description);
-    console.log(' plateData: ');
   }
-  // price: price,
-  //     description: description,
-  //     source: source,
-  //     restaurantID: restaurantID,
-  //     id: id,
-  //     restaurantFoodTypes: restaurantFoodTypes,
-  //     restaurantName: restaurantName,
-  //     favorite: favorite,
 
   return (
     <CartContext.Provider

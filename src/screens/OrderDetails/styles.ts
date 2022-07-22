@@ -1,3 +1,4 @@
+import {CartStyleProps} from '@components/Plates/styles';
 import theme from '@global/styles/theme';
 import {RFValue} from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
@@ -58,6 +59,7 @@ export const FoodType = styled.Text`
   margin-top: ${RFValue(-4)}px;
   width: ${RFValue(149)}px;
 `;
+
 export const Description = styled.Text`
   font-weight: 400;
   font-size: ${RFValue(14)}px;
@@ -89,4 +91,99 @@ export const RestaurantName = styled.Text`
   width: ${RFValue(250)}px;
   line-height: ${RFValue(14.06)}px;
   left: ${RFValue(30)}px;
+`;
+
+export const ViewCart = styled.View`
+  background-color: ${theme.colors.background_red};
+  width: 100%;
+  height: ${RFValue(55)}px;
+  position: absolute;
+  bottom: 0px;
+  border-top-left-radius: ${RFValue(8)}px;
+  border-top-right-radius: ${RFValue(8)}px;
+  direction: row;
+  justify-content: center;
+`;
+export const PlateTotalPrice = styled.Text`
+  color: ${theme.colors.icon_white};
+  font-weight: 700;
+  font-size: ${RFValue(16)}px;
+  line-height: ${RFValue(18.75)}px;
+  position: absolute;
+  left: ${RFValue(35)}px;
+`;
+
+export const WrapperCartButton = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  width: ${RFValue(75)}px;
+  right: ${RFValue(25)}px;
+`;
+
+export const AddQuantityButton = styled.TouchableOpacity`
+  position: absolute;
+  margin-left: ${RFValue(75)}px;
+  width: ${RFValue(8)}px;
+  height: ${RFValue(16)}px;
+  justify-content: center;
+`;
+
+export const AddQuantityButtonImage = styled.Image`
+  width: ${RFValue(12)}px;
+  height: ${RFValue(10)}px;
+`;
+
+export const NumberOfQuantityWrapper = styled.View`
+  width: ${RFValue(20)}px;
+  height: ${RFValue(20)}px;
+  background-color: ${({theme}) => theme.colors.background_red};
+  border-radius: ${RFValue(4)}px;
+  align-items: center;
+  justify-content: center;
+  margin-left: ${RFValue(45)}px;
+`;
+
+export const Number = styled.Text`
+  font-size: ${RFValue(12)}px;
+  font-weight: 700;
+  color: ${({theme}) => theme.colors.text_white};
+`;
+
+export const RemoveCartButton = styled.TouchableOpacity`
+  justify-content: center;
+  position: absolute;
+  margin-left: ${RFValue(20)}px;
+  width: ${RFValue(15)}px;
+  height: ${RFValue(10)}px;
+`;
+
+export const RemoveQuantityButtonImage = styled.Image`
+  width: ${RFValue(12)}px;
+  height: ${RFValue(5)}px;
+`;
+
+export const LitterButton = styled.TouchableOpacity`
+  justify-content: center;
+  position: absolute;
+  margin-left: ${RFValue(22)}px;
+`;
+
+export const LitterImage = styled.Image`
+  width: ${RFValue(14)}px;
+  height: ${RFValue(14)}px;
+`;
+
+export const AddButton = styled.TouchableOpacity`
+  position: absolute;
+  right: ${RFValue(27)}px;
+`;
+
+export const TextButton = styled.Text`
+  font-size: ${RFValue(14)}px;
+  font-weight: 700;
+  font-size: ${RFValue(16)}px;
+  line-height: ${RFValue(18.75)}px;
+  color: ${({theme}) => theme.colors.text_white};
 `;

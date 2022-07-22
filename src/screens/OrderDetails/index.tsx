@@ -1,11 +1,17 @@
 import {BackButton} from '@components/BackButton';
-import {ListPlatesProps} from '@components/Plates';
+import {ItemProps} from '@components/Plates';
+import {useAuth} from '@global/context';
 import {useCreateCart} from '@global/context/Cart';
+import {useFetch} from '@global/services/get';
 import theme from '@global/styles/theme';
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StatusBar} from 'react-native';
+import {RFValue} from 'react-native-responsive-fontsize';
 import {
+  AddButton,
+  AddQuantityButton,
+  AddQuantityButtonImage,
   Container,
   Description,
   FavoriteIcon,
@@ -13,27 +19,70 @@ import {
   FoodType,
   Header,
   IconButton,
+  LitterButton,
+  LitterImage,
+  Number,
+  NumberOfQuantityWrapper,
   PlateInfoWrapper,
   PlateName,
   PlatePhoto,
+  PlateTotalPrice,
+  RemoveCartButton,
+  RemoveQuantityButtonImage,
   RestaurantIcon,
   RestaurantName,
   RestaurantWrapper,
+  TextButton,
+  ViewCart,
+  WrapperCartButton,
 } from './styles';
+
+interface Photos {
+  id: number;
+  code: string;
+}
 
 export function OrderDetails() {
   const navigation = useNavigation();
-
-  console.log('id nos detalhes');
 
   function handlerBackButton() {
     navigation.goBack();
   }
 
   const {plateData} = useCreateCart();
-  console.log('foto no OrderDetails:');
 
-  const reference = require('../../global/assets/Images/camarao.png');
+  const {token} = useAuth();
+
+  const {data: dataPhoto, fetchData} = useFetch<Photos>(plateData.source, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  useEffect(() => {
+    fetchData();
+  }, [plateData.source]);
+
+  function priceConverter() {
+    const priceWZeros = parseFloat(plateData.price.toString()).toFixed(2);
+    const priceFormatted = priceWZeros.toString().replace('.', ',');
+    return priceFormatted;
+  }
+
+  const priceFormatted = priceConverter();
+
+  const {
+    addProductToCart,
+    removeProductFromCart,
+    cart,
+    addNewProductoCart,
+    cleanUpSamePlates,
+    paramsToOrderDetails,
+  } = useCreateCart();
+
+  const itemCount = cart.find(
+    (item: ItemProps) => item?.id === plateData.id,
+  )?.quantity;
 
   return (
     <Container>
@@ -52,21 +101,97 @@ export function OrderDetails() {
           </IconButton>
         </FavoriteIconWrapper>
       </Header>
+
       <PlateInfoWrapper>
-        <PlatePhoto source={{uri: plateData.data}} resizeMode={'contain'} />
+        <PlatePhoto
+          source={dataPhoto.code ? {uri: dataPhoto.code} : theme.images.noImage}
+          resizeMode={'contain'}
+        />
         <PlateName numberOfLines={1}>{plateData.name}</PlateName>
         <FoodType numberOfLines={1}>{plateData.restaurantFoodTypes}</FoodType>
-        <Description numberOfLines={3}>{plateData.description}</Description>
+        <Description numberOfLines={10}>{plateData.description}</Description>
+
         <RestaurantWrapper>
           <RestaurantIcon
             source={theme.icons.restaurant}
             resizeMode={'contain'}
           />
+
           <RestaurantName numberOfLines={1}>
             Vendido e entregue por {plateData.restaurantName}
           </RestaurantName>
         </RestaurantWrapper>
       </PlateInfoWrapper>
+
+      <ViewCart>
+        <PlateTotalPrice>R$ {priceFormatted}</PlateTotalPrice>
+
+        {itemCount && itemCount > 0 ? (
+          <WrapperCartButton
+            insideCart={plateData.inside ? RFValue(5) : RFValue(20)}>
+            <AddQuantityButton
+              onPress={() =>
+                addProductToCart(
+                  plateData.id,
+                  plateData.price,
+                  plateData.restaurantID,
+                )
+              }>
+              <AddQuantityButtonImage
+                source={theme.icons.add}
+                style={{tintColor: `${theme.colors.text_white}`}}
+              />
+            </AddQuantityButton>
+
+            <NumberOfQuantityWrapper>
+              <Number>
+                {cart &&
+                  cart.find((item: ItemProps) => item?.id === plateData.id)
+                    ?.quantity}
+              </Number>
+            </NumberOfQuantityWrapper>
+
+            {itemCount && itemCount > 1 ? (
+              <RemoveCartButton
+                onPress={() =>
+                  removeProductFromCart(plateData.id, plateData.price)
+                }>
+                <RemoveQuantityButtonImage
+                  source={theme.icons.remove}
+                  style={{tintColor: `${theme.colors.text_white}`}}
+                />
+              </RemoveCartButton>
+            ) : (
+              <LitterButton
+                onPress={() =>
+                  removeProductFromCart(plateData.id, plateData.price)
+                }>
+                <LitterImage
+                  source={theme.icons.litter}
+                  style={{tintColor: `${theme.colors.text_white}`}}
+                />
+              </LitterButton>
+            )}
+          </WrapperCartButton>
+        ) : (
+          <AddButton
+            onPress={() =>
+              addNewProductoCart(
+                plateData.id,
+                plateData.price,
+                plateData.restaurantID,
+                plateData.name,
+                plateData.description,
+                plateData.source,
+                plateData.restaurantFoodTypes,
+                plateData.restaurantName,
+                plateData.photoRestaurant,
+              )
+            }>
+            <TextButton>Adicionar</TextButton>
+          </AddButton>
+        )}
+      </ViewCart>
     </Container>
   );
 }

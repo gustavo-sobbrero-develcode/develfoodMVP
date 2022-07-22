@@ -63,7 +63,7 @@ interface Photos {
   code: string;
 }
 
-interface ItemProps {
+export interface ItemProps {
   id: number;
   quantity: number;
   price: number;
@@ -268,7 +268,9 @@ export function Plates({
           restaurantFoodTypes,
           restaurantName,
           favorite,
-          data,
+          inside,
+          restaurantID,
+          photoRestaurant,
         );
         navigation.navigate('OrderDetails' as never);
       }}>

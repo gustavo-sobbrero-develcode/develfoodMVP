@@ -121,6 +121,7 @@ export const AddQuantityButtonImage = styled.Image`
   width: ${RFValue(12)}px;
   height: ${RFValue(10)}px;
 `;
+
 export const RemoveCartButton = styled.TouchableOpacity`
   justify-content: center;
   position: absolute;
