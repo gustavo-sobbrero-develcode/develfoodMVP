@@ -39,6 +39,29 @@ export const WrapperImage = styled.View`
 
 export const LogoDevelFood = styled.Image``;
 
+export const GetStartedWrapper = styled.View.attrs({
+  elevation: 25,
+})`
+  width: ${RFValue(100)}px;
+  height: ${RFValue(30)}px;
+  position: absolute;
+  top: ${RFValue(135)}px;
+  background-color: ${({theme}) => theme.colors.card};
+  border-radius: ${RFValue(20)}px;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const GetStartedButton = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.8,
+})``;
+
+export const GetStartedText = styled.Text`
+  font-size: ${RFValue(12)}px;
+  color: ${({theme}) => theme.colors.text_dark};
+  font-weight: 400;
+`;
+
 export const TimeText = styled.Text`
   font-size: ${RFValue(16)}px;
   font-weight: 700;

@@ -10,6 +10,9 @@ import {
   Container,
   Content,
   DevsScrollView,
+  GetStartedButton,
+  GetStartedText,
+  GetStartedWrapper,
   LogoDevelFood,
   TimeDevelfood,
   TimeText,
@@ -46,6 +49,13 @@ export function About() {
             <LogoDevelFood source={theme.images.develFoodLogo} />
           </WrapperImage>
         </AboutContent>
+
+        <GetStartedWrapper>
+          <GetStartedButton
+            onPress={() => navigation.navigate('Home' as never)}>
+            <GetStartedText>Get Started</GetStartedText>
+          </GetStartedButton>
+        </GetStartedWrapper>
 
         <TimeText>Conheça nossos Devs</TimeText>
 

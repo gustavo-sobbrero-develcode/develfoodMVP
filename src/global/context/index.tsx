@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-shadow */
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {createContext, useState} from 'react';
 import {useEffect} from 'react';
 import {useContext} from 'react';
@@ -40,18 +43,41 @@ function AuthProvider({children}: AuthProviderProps) {
     Alert.alert('Erro', 'Email ou senha incorretos');
   };
 
-  function logOut() {
-    setToken('');
+  async function logOut() {
+    try {
+      setToken('');
+      await AsyncStorage.clear();
+    } catch (error) {}
+  }
+
+  const getUserData = async (data: string) => {
+    try {
+      const userToken = await AsyncStorage.getItem('@userToken');
+      if (userToken) {
+        setToken(userToken);
+      }
+    } catch (error) {
+      Alert.alert('Erro', 'Erro ao carregar dados');
+    }
+  };
+
+  async function onSuccess(data: UserData) {
+    setToken(data.token);
+    await AsyncStorage.setItem('@userToken', data.token);
   }
 
   async function userLogin(request: LoginRequest) {
-    await handlerPost(request, loginError);
-    setToken(data.token);
+    try {
+      await handlerPost(request, loginError, onSuccess);
+      setToken(data.token);
+      data.token && (await AsyncStorage.setItem('@userToken', token));
+    } catch (error) {}
   }
 
   useEffect(() => {
     setToken(data.token);
-  }, [data.token, loading]);
+    getUserData(data.token);
+  }, [loading, data.token]);
 
   return (
     <AuthContext.Provider value={{userLogin, token, loading, logOut}}>

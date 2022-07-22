@@ -111,6 +111,7 @@ export function Settings() {
   return (
     <Container>
       <StatusBar
+        hidden
         barStyle={'light-content'}
         backgroundColor={theme.colors.background}
       />
