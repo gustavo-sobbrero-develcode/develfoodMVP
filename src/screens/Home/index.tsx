@@ -151,12 +151,7 @@ export function Home() {
           }
           name={item.name}
           id={item.id}
-          category={
-            item.food_types.length > 0
-              ? item.food_types[0]?.name.charAt(0).toUpperCase() +
-                item.food_types[0]?.name.slice(1).toLowerCase()
-              : ''
-          }
+          category={item?.food_types ? item.food_types[0]?.name : ''}
           avaliation={item.id}
           source={item.photo_url ? item.photo_url : theme.images.noImage}
         />
@@ -212,6 +207,7 @@ export function Home() {
           barStyle={'light-content'}
           translucent={false}
           backgroundColor={theme.colors.background_red}
+          animated
         />
 
         <HeaderComponent

@@ -25,9 +25,9 @@ import {
   TextButton,
   WrapperCartButton,
   AddQuantityButton,
-  AddQuantityButtonImage,
+  AddQuantityButtonLabel,
   RemoveCartButton,
-  RemoveQuantityButtonImage,
+  RemoveQuantityButtonLabel,
   NumberOfQuantityWrapper,
   Number,
   LitterButton,
@@ -42,20 +42,20 @@ import {
   PlateButton,
 } from './styles';
 
-export interface ListPlatesProps {
+interface ListPlatesProps {
   id: number;
   name: string;
   description: string;
   price: number;
   source: string;
-  restaurantID: number;
-  restaurantFoodTypes: string;
-  restaurantName: string;
+  restaurantID?: number;
+  restaurantFoodTypes?: string;
+  restaurantName?: string;
   inside: boolean;
-  photoRestaurant: string;
+  photoRestaurant?: string;
   Swipe: boolean;
   favorite: boolean;
-  isTouchable?: boolean;
+  isButton?: boolean;
 }
 
 interface Photos {
@@ -100,7 +100,7 @@ export function Plates({
   inside,
   Swipe,
   favorite,
-  isTouchable,
+  isButton,
 }: ListPlatesProps) {
   const theme = useTheme();
 
@@ -150,6 +150,8 @@ export function Plates({
 
   const [isFavorite, setIsFavorite] = useState<boolean>(favorite);
 
+  const navigation = useNavigation();
+
   function handlerLikeButton() {
     if (isFavorite) {
       handlerDelete();
@@ -178,12 +180,11 @@ export function Plates({
     },
   });
 
-  function onpressss() {
+  function likeButtonPressed() {
     setIsFavorite(!isFavorite);
     handlerLikeButton();
   }
 
-  const navigation = useNavigation();
   return Swipe ? (
     <ContentContainer>
       <Swipeable renderLeftActions={leftSwipe}>
@@ -208,7 +209,7 @@ export function Plates({
                   insideCart={inside ? RFValue(5) : RFValue(20)}>
                   <AddQuantityButton
                     onPress={() => addProductToCart(id, price, restaurantID)}>
-                    <AddQuantityButtonImage source={theme.icons.add} />
+                    <AddQuantityButtonLabel>+</AddQuantityButtonLabel>
                   </AddQuantityButton>
 
                   <NumberOfQuantityWrapper>
@@ -223,12 +224,12 @@ export function Plates({
                   {itemCount > 1 ? (
                     <RemoveCartButton
                       onPress={() => removeProductFromCart(id, price)}>
-                      <RemoveQuantityButtonImage source={theme.icons.remove} />
+                      <RemoveQuantityButtonLabel>-</RemoveQuantityButtonLabel>
                     </RemoveCartButton>
                   ) : (
                     <RemoveCartButton
                       onPress={() => removeProductFromCart(id, price)}>
-                      <RemoveQuantityButtonImage source={theme.icons.remove} />
+                      <RemoveQuantityButtonLabel>-</RemoveQuantityButtonLabel>
                     </RemoveCartButton>
                   )}
                 </WrapperCartButton>
@@ -267,15 +268,15 @@ export function Plates({
           id,
           restaurantFoodTypes,
           restaurantName,
-          favorite,
+          isFavorite,
           inside,
           restaurantID,
           photoRestaurant,
         );
-        navigation.navigate('OrderDetails' as never);
+        navigation.navigate('PlatesDetails' as never);
       }}>
       <Container>
-        <FavoriteButton onPress={onpressss}>
+        <FavoriteButton onPress={likeButtonPressed}>
           <FavoriteImage
             source={favoriteWhite}
             style={isFavorite && {tintColor: 'red'}}
@@ -298,10 +299,10 @@ export function Plates({
             </PriceWrapper>
 
             {itemCount && itemCount > 0 ? (
-              <WrapperCartButton insideCart={inside ? RFValue(5) : RFValue(20)}>
+              <WrapperCartButton insideCart={inside ? RFValue(5) : RFValue(35)}>
                 <AddQuantityButton
                   onPress={() => addProductToCart(id, price, restaurantID)}>
-                  <AddQuantityButtonImage source={theme.icons.add} />
+                  <AddQuantityButtonLabel>+</AddQuantityButtonLabel>
                 </AddQuantityButton>
 
                 <NumberOfQuantityWrapper>
@@ -314,7 +315,7 @@ export function Plates({
                 {itemCount && itemCount > 1 ? (
                   <RemoveCartButton
                     onPress={() => removeProductFromCart(id, price)}>
-                    <RemoveQuantityButtonImage source={theme.icons.remove} />
+                    <RemoveQuantityButtonLabel>-</RemoveQuantityButtonLabel>
                   </RemoveCartButton>
                 ) : (
                   <LitterButton

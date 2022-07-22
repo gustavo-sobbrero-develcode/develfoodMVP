@@ -11,7 +11,6 @@ import {ForgotPassword} from '@screens/loginScreens/RedefinePasswordScreens/Forg
 import {AuthCode} from '@screens/loginScreens/RedefinePasswordScreens/AuthCode/index';
 import {RedefinePassword} from '@screens/loginScreens/RedefinePasswordScreens/RedefinePassword';
 import {RedefineSuccess} from '@screens/loginScreens/RedefinePasswordScreens/RedefineSuccess';
-import {OrderDetails} from '@screens/OrderDetails';
 
 const {Navigator, Screen} = createStackNavigator();
 
@@ -32,7 +31,6 @@ export function AuthRoutes() {
         <Screen name="AuthCode" component={AuthCode} />
         <Screen name="RedefinePassword" component={RedefinePassword} />
         <Screen name="RedefineSuccess" component={RedefineSuccess} />
-        <Screen name="OrderDetails" component={OrderDetails} />
       </Navigator>
     </>
   );

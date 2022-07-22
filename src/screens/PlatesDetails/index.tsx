@@ -2,16 +2,19 @@ import {BackButton} from '@components/BackButton';
 import {ItemProps} from '@components/Plates';
 import {useAuth} from '@global/context';
 import {useCreateCart} from '@global/context/Cart';
+import {useDelete} from '@global/services/delete';
 import {useFetch} from '@global/services/get';
+import {usePut} from '@global/services/put';
 import theme from '@global/styles/theme';
 import {useNavigation} from '@react-navigation/native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StatusBar} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
+
 import {
   AddButton,
   AddQuantityButton,
-  AddQuantityButtonImage,
+  AddQuantityButtonLabel,
   Container,
   Description,
   FavoriteIcon,
@@ -29,6 +32,7 @@ import {
   PlateTotalPrice,
   RemoveCartButton,
   RemoveQuantityButtonImage,
+  RemoveQuantityButtonLabel,
   RestaurantIcon,
   RestaurantName,
   RestaurantWrapper,
@@ -42,7 +46,27 @@ interface Photos {
   code: string;
 }
 
-export function OrderDetails() {
+interface PutResponse {
+  id: number;
+  name: string;
+  description: string;
+  price: null;
+  foodType: null;
+  restaurantName: null;
+  photo_url: string;
+  favorite: null;
+}
+
+export function PlatesDetails() {
+  const {
+    addProductToCart,
+    removeProductFromCart,
+    cart,
+    addNewProductoCart,
+    cleanUpSamePlates,
+    paramsToOrderDetails,
+  } = useCreateCart();
+
   const navigation = useNavigation();
 
   function handlerBackButton() {
@@ -59,30 +83,58 @@ export function OrderDetails() {
     },
   });
 
+  const [isFavorite, setIsFavorite] = useState<boolean>(plateData.favorite);
+
   useEffect(() => {
     fetchData();
   }, [plateData.source]);
 
+  const itemCount = cart.find(
+    (item: ItemProps) => item?.id === plateData.id,
+  )?.quantity;
+
   function priceConverter() {
-    const priceWZeros = parseFloat(plateData.price.toString()).toFixed(2);
+    const multipliedValue = itemCount
+      ? plateData.price * itemCount
+      : plateData.price;
+    const priceWZeros = parseFloat(multipliedValue.toString()).toFixed(2);
     const priceFormatted = priceWZeros.toString().replace('.', ',');
     return priceFormatted;
   }
 
-  const priceFormatted = priceConverter();
+  const priceTotalFormatted = priceConverter();
+
+  function handlerLikeButton() {
+    if (isFavorite) {
+      handlerDelete();
+    } else {
+      handlerPut();
+    }
+  }
+  const {
+    data: dataDelete,
+    handlerDelete,
+    error: errorDelete,
+  } = useDelete<any>(`/plate/favorite/${plateData.id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   const {
-    addProductToCart,
-    removeProductFromCart,
-    cart,
-    addNewProductoCart,
-    cleanUpSamePlates,
-    paramsToOrderDetails,
-  } = useCreateCart();
+    data: dataPut,
+    handlerPut,
+    error: errorPut,
+  } = usePut<any, PutResponse>(`/plate/favorite/${plateData.id}`, undefined, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
-  const itemCount = cart.find(
-    (item: ItemProps) => item?.id === plateData.id,
-  )?.quantity;
+  function likeButtonPressed() {
+    setIsFavorite(!isFavorite);
+    handlerLikeButton();
+  }
 
   return (
     <Container>
@@ -96,8 +148,11 @@ export function OrderDetails() {
         <BackButton onPressed={handlerBackButton} name="arrow" />
 
         <FavoriteIconWrapper>
-          <IconButton onPress={() => {}}>
-            <FavoriteIcon source={theme.icons.favoriteRestaurant} />
+          <IconButton onPress={likeButtonPressed}>
+            <FavoriteIcon
+              source={theme.icons.favoriteRestaurant}
+              style={isFavorite && {tintColor: 'red'}}
+            />
           </IconButton>
         </FavoriteIconWrapper>
       </Header>
@@ -124,11 +179,10 @@ export function OrderDetails() {
       </PlateInfoWrapper>
 
       <ViewCart>
-        <PlateTotalPrice>R$ {priceFormatted}</PlateTotalPrice>
+        <PlateTotalPrice>R$ {priceTotalFormatted}</PlateTotalPrice>
 
         {itemCount && itemCount > 0 ? (
-          <WrapperCartButton
-            insideCart={plateData.inside ? RFValue(5) : RFValue(20)}>
+          <WrapperCartButton>
             <AddQuantityButton
               onPress={() =>
                 addProductToCart(
@@ -137,10 +191,7 @@ export function OrderDetails() {
                   plateData.restaurantID,
                 )
               }>
-              <AddQuantityButtonImage
-                source={theme.icons.add}
-                style={{tintColor: `${theme.colors.text_white}`}}
-              />
+              <AddQuantityButtonLabel>+</AddQuantityButtonLabel>
             </AddQuantityButton>
 
             <NumberOfQuantityWrapper>
@@ -156,10 +207,7 @@ export function OrderDetails() {
                 onPress={() =>
                   removeProductFromCart(plateData.id, plateData.price)
                 }>
-                <RemoveQuantityButtonImage
-                  source={theme.icons.remove}
-                  style={{tintColor: `${theme.colors.text_white}`}}
-                />
+                <RemoveQuantityButtonLabel>-</RemoveQuantityButtonLabel>
               </RemoveCartButton>
             ) : (
               <LitterButton
@@ -167,8 +215,9 @@ export function OrderDetails() {
                   removeProductFromCart(plateData.id, plateData.price)
                 }>
                 <LitterImage
-                  source={theme.icons.litter}
+                  source={theme.icons.trash}
                   style={{tintColor: `${theme.colors.text_white}`}}
+                  resizeMode={'contain'}
                 />
               </LitterButton>
             )}

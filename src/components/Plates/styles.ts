@@ -1,11 +1,9 @@
 import {RFValue} from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
-export interface CartStyleProps {
+interface CartStyleProps {
   insideCart: number;
 }
-
-export const PlateButton = styled.TouchableOpacity``;
 
 export const ContentContainer = styled.View`
   width: 100%;
@@ -112,27 +110,24 @@ export const WrapperCartButton = styled.View`
 export const AddQuantityButton = styled.TouchableOpacity`
   position: absolute;
   margin-left: ${RFValue(75)}px;
-  width: ${RFValue(8)}px;
-  height: ${RFValue(16)}px;
   justify-content: center;
 `;
 
-export const AddQuantityButtonImage = styled.Image`
-  width: ${RFValue(12)}px;
-  height: ${RFValue(10)}px;
+export const AddQuantityButtonLabel = styled.Text`
+  font-size: ${RFValue(18)}px;
+  color: ${({theme}) => theme.colors.background_red};
+  font-weight: 700;
 `;
 
 export const RemoveCartButton = styled.TouchableOpacity`
-  justify-content: center;
   position: absolute;
-  margin-left: ${RFValue(20)}px;
-  width: ${RFValue(15)}px;
-  height: ${RFValue(10)}px;
+  margin-left: ${RFValue(25)}px;
 `;
 
-export const RemoveQuantityButtonImage = styled.Image`
-  width: ${RFValue(12)}px;
-  height: ${RFValue(5)}px;
+export const RemoveQuantityButtonLabel = styled.Text`
+  color: ${({theme}) => theme.colors.background_red};
+  font-size: ${RFValue(21)}px;
+  font-weight: 700;
 `;
 
 export const NumberOfQuantityWrapper = styled.View`
@@ -184,3 +179,5 @@ export const CleanUpTitle = styled.Text`
   color: ${({theme}) => theme.colors.text_white};
   font-weight: 400;
 `;
+
+export const PlateButton = styled.TouchableOpacity``;

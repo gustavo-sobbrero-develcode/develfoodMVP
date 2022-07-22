@@ -312,11 +312,14 @@ function CartProvider({children}: AuthProviderProps) {
     fetchData();
   }, []);
 
-  const {handlerPost} = usePost<CartRequest, CartResponse>('/request', {
-    headers: {
-      Authorization: `Bearer ${token}`,
+  const {handlerPost, loading} = usePost<CartRequest, CartResponse>(
+    '/request',
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
 
   const cartError = () => {
     Alert.alert(
@@ -403,6 +406,7 @@ function CartProvider({children}: AuthProviderProps) {
         userRequestCheckout,
         paramsToOrderDetails,
         plateData,
+        loading,
       }}>
       {children}
     </CartContext.Provider>

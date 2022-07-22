@@ -2,11 +2,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import {RouteProp, useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, StatusBar, View} from 'react-native';
+import {ActivityIndicator, Image, StatusBar, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {useTheme} from 'styled-components';
 import {useDebouncedCallback} from 'use-debounce';
-import {BackButton} from '@components/BackButton';
 import {CartComponent} from '@components/CartComponent';
 import {Input} from '@components/Input';
 import {ListEmptyComponent} from '@components/ListEmptyComponent';
@@ -17,10 +16,8 @@ import {useFetch} from '@global/services/get';
 
 import {
   Container,
-  Header,
-  FavoriteIconWrapper,
-  IconButton,
-  FavoriteIcon,
+  HeaderView,
+  HeartButton,
   WrapperRestaurantInfo,
   WrapperRestaurantTypes,
   NameRestaurant,
@@ -32,6 +29,7 @@ import {
   Title,
   PlatesWrapper,
 } from './styles';
+import {HeaderComponent} from '@components/HeaderComponent';
 
 export interface Plate {
   id: number;
@@ -75,13 +73,13 @@ export function RestaurantProfile({route}: RouteParams) {
 
   const theme = useTheme();
 
-  const [isPressed, setIsPressed] = useState(false);
-
   const [plate, setPlate] = useState<Plate[]>([]);
 
   const [filter, setFilter] = useState('');
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const [selected, setSelected] = useState(false);
 
   const {totalItems} = useCreateCart();
 
@@ -122,6 +120,10 @@ export function RestaurantProfile({route}: RouteParams) {
     setIsLoading(false);
   }
 
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const debounced = useDebouncedCallback(value => {
     handleSearch(value);
   }, 1500);
@@ -150,7 +152,6 @@ export function RestaurantProfile({route}: RouteParams) {
           restaurantName={name}
           photoRestaurant={photo_url}
           favorite={item.favorite}
-          isTouchable={false}
         />
       </PlatesWrapper>
     );
@@ -165,25 +166,24 @@ export function RestaurantProfile({route}: RouteParams) {
     <Container>
       <StatusBar
         barStyle={'dark-content'}
-        translucent
         backgroundColor={theme.colors.background}
+        animated
       />
-
-      <Header>
-        <BackButton onPressed={handlerBackButton} name="arrow" />
-
-        <FavoriteIconWrapper>
-          <IconButton onPress={() => setIsPressed(!isPressed)}>
-            <FavoriteIcon
-              source={theme.icons.favoriteRestaurant}
-              style={
-                isPressed ? {tintColor: theme.colors.background_red} : null
-              }
-            />
-          </IconButton>
-        </FavoriteIconWrapper>
-      </Header>
-
+      <HeaderView>
+        <HeaderComponent
+          backgroudColor={theme.colors.background}
+          name=""
+          source={theme.icons.arrow}
+          iconColor={theme.colors.icon_dark}
+          onPress={handlerBackButton}
+        />
+        <HeartButton onPress={() => setSelected(!selected)}>
+          <Image
+            source={theme.icons.favoriteRestaurant}
+            style={selected ? {tintColor: theme.colors.background_red} : null}
+          />
+        </HeartButton>
+      </HeaderView>
       <WrapperRestaurantInfo>
         <WrapperRestaurantTypes>
           <NameRestaurant>{name}</NameRestaurant>

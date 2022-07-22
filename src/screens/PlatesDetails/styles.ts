@@ -1,4 +1,3 @@
-import {CartStyleProps} from '@components/Plates/styles';
 import theme from '@global/styles/theme';
 import {RFValue} from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
@@ -122,17 +121,28 @@ export const WrapperCartButton = styled.View`
   right: ${RFValue(25)}px;
 `;
 
+export const AddQuantityButtonLabel = styled.Text`
+  font-size: ${RFValue(18)}px;
+  color: ${({theme}) => theme.colors.text_white};
+  font-weight: 700;
+`;
 export const AddQuantityButton = styled.TouchableOpacity`
+  width: ${RFValue(25)}px;
   position: absolute;
   margin-left: ${RFValue(75)}px;
-  width: ${RFValue(8)}px;
-  height: ${RFValue(16)}px;
   justify-content: center;
 `;
 
-export const AddQuantityButtonImage = styled.Image`
-  width: ${RFValue(12)}px;
-  height: ${RFValue(10)}px;
+export const RemoveQuantityButtonLabel = styled.Text`
+  color: ${({theme}) => theme.colors.text_white};
+  font-size: ${RFValue(21)}px;
+  font-weight: 700;
+`;
+
+export const RemoveCartButton = styled.TouchableOpacity`
+  width: ${RFValue(25)}px;
+  position: absolute;
+  margin-left: ${RFValue(25)}px;
 `;
 
 export const NumberOfQuantityWrapper = styled.View`
@@ -143,20 +153,14 @@ export const NumberOfQuantityWrapper = styled.View`
   align-items: center;
   justify-content: center;
   margin-left: ${RFValue(45)}px;
+  border: ${RFValue(1)}px;
+  border-color: ${({theme}) => theme.colors.text_white};
 `;
 
 export const Number = styled.Text`
   font-size: ${RFValue(12)}px;
   font-weight: 700;
   color: ${({theme}) => theme.colors.text_white};
-`;
-
-export const RemoveCartButton = styled.TouchableOpacity`
-  justify-content: center;
-  position: absolute;
-  margin-left: ${RFValue(20)}px;
-  width: ${RFValue(15)}px;
-  height: ${RFValue(10)}px;
 `;
 
 export const RemoveQuantityButtonImage = styled.Image`
@@ -168,6 +172,8 @@ export const LitterButton = styled.TouchableOpacity`
   justify-content: center;
   position: absolute;
   margin-left: ${RFValue(22)}px;
+  width: ${RFValue(25)}px;
+  height: ${RFValue(25)}px;
 `;
 
 export const LitterImage = styled.Image`
