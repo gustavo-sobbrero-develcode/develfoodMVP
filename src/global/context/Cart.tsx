@@ -116,21 +116,19 @@ interface Props {
   restaurantPhoto: string;
   userRequestCheckout: Function;
   paramsToOrderDetails: Function;
-  plateData: PlateDataProps;
+  plateData: Plate;
 }
 
-interface PlateDataProps {
+interface Plate {
   name: string;
   price: number;
   description: string;
   source: string;
-  restaurantID: number;
   id: number;
   restaurantFoodTypes: string;
   restaurantName: string;
-  photoRestaurant: string;
-  inside: any;
   favorite: boolean;
+  data: string;
 }
 
 interface ItemProps {
@@ -359,27 +357,42 @@ function CartProvider({children}: AuthProviderProps) {
     await handlerPost(createCheckoutRequest, cartError, CheckoutUserSuccess);
   }
 
-  const [plateData, setPlateData] = useState<PlateDataProps>({price: 0});
+  const [plateData, setPlateData] = useState<Plate>();
 
-  function paramsToOrderDetails({
-    name,
-    description,
-    price,
-    source,
-    restaurantID,
-    id,
-    restaurantFoodTypes,
-    restaurantName,
-    photoRestaurant,
-    inside,
-    Swipe,
-    favorite,
-    isTouchable,
-  }: ListPlatesProps) {
-    setPlateData({price: price});
-    console.log('id e preço', price, id);
-    console.log(' plateData: ', plateData);
+  function paramsToOrderDetails(
+    name: string,
+    price: number,
+    description: string,
+    source: string,
+    id: number,
+    restaurantFoodTypes: string,
+    restaurantName: string,
+    favorite: boolean,
+    data: string,
+  ) {
+    setPlateData({
+      name: name,
+      price: price,
+      description: description,
+      source: source,
+      id: id,
+      restaurantFoodTypes: restaurantFoodTypes,
+      restaurantName: restaurantName,
+      favorite: favorite,
+      data: data,
+
+    });
+    console.log('id e preço', price, id, description);
+    console.log(' plateData: ');
   }
+  // price: price,
+  //     description: description,
+  //     source: source,
+  //     restaurantID: restaurantID,
+  //     id: id,
+  //     restaurantFoodTypes: restaurantFoodTypes,
+  //     restaurantName: restaurantName,
+  //     favorite: favorite,
 
   return (
     <CartContext.Provider

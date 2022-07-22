@@ -3,13 +3,11 @@
 import {useAuth} from '@global/context';
 import {useCreateCart} from '@global/context/Cart';
 import {useNavigation} from '@react-navigation/native';
-import {OrderDetails} from '@screens/OrderDetails';
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Swipeable} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
-import {number} from 'yup';
 import {useDelete} from '../../global/services/delete';
 import {useFetch} from '../../global/services/get';
 import {usePut} from '../../global/services/put';
@@ -50,11 +48,11 @@ export interface ListPlatesProps {
   description: string;
   price: number;
   source: string;
-  restaurantID?: number;
-  restaurantFoodTypes?: string;
-  restaurantName?: string;
+  restaurantID: number;
+  restaurantFoodTypes: string;
+  restaurantName: string;
   inside: boolean;
-  photoRestaurant?: string;
+  photoRestaurant: string;
   Swipe: boolean;
   favorite: boolean;
   isTouchable?: boolean;
@@ -261,20 +259,17 @@ export function Plates({
     <PlateButton
       activeOpacity={0.9}
       onPress={() => {
-        paramsToOrderDetails({
+        paramsToOrderDetails(
           name,
-          description,
           price,
+          description,
           source,
-          restaurantID,
           id,
           restaurantFoodTypes,
           restaurantName,
-          photoRestaurant,
-          inside,
-          Swipe,
           favorite,
-        });
+          data,
+        );
         navigation.navigate('OrderDetails' as never);
       }}>
       <Container>
