@@ -68,6 +68,7 @@ interface OrderProps {
   totalValue: number;
   status: string;
   requestItems: RequestiItemsProps[];
+  isEvaluated: boolean;
 }
 interface RequestiItemsProps {
   id: number;
@@ -264,6 +265,7 @@ export function OrderInfo({route}: RouteParams) {
             }
             name={name}
             restaurantId={restaurantId}
+            orderId={id}
           />
         )}
       </Container>

@@ -122,7 +122,15 @@ export function Orders() {
   }: HandleOrderInfoProps) {
     navigation.navigate(
       'OrderInfo' as never,
-      {name, photo_url, id, totalValue, date, status, restaurantId} as never,
+      {
+        name,
+        photo_url,
+        id,
+        totalValue,
+        date,
+        status,
+        restaurantId,
+      } as never,
     );
   }
 

@@ -1,6 +1,7 @@
 import {ContinueButton} from '@components/ContinueButton';
 import {EvaluationBar} from '@components/EvaluationBar';
 import {useAuth} from '@global/context';
+import {useFetch} from '@global/services/get';
 import {usePost} from '@global/services/post';
 import theme from '@global/styles/theme';
 import React, {SetStateAction, useEffect, useRef, useState} from 'react';
@@ -19,6 +20,20 @@ type Props = {
   description: string;
   name: string;
   restaurantId: number;
+  orderId: number;
+};
+
+type EvaluationBody = {
+  grade: number;
+  observation: string;
+  restaurant: {
+    id: number;
+  };
+};
+
+type EvaluationData = {
+  id: number;
+  isEvaluated: boolean;
 };
 
 export function EvaluationModal({
@@ -26,35 +41,30 @@ export function EvaluationModal({
   description,
   name,
   restaurantId,
+  orderId,
 }: Props) {
   const modalizeRef = useRef<Modalize>(null);
-
-  useEffect(() => {
-    modalizeRef.current?.open();
-  }, []);
 
   const ModalHeight = Dimensions.get('screen').height * 0.605;
 
   const [observation, setObservation] = useState('');
-  const [data, setData] = useState('');
+  const [data, setData] = useState(0);
 
-  const childToParent = (childdata: SetStateAction<string>) => {
+  const childToParent = (childdata: SetStateAction<number>) => {
     setData(childdata);
   };
   const {token} = useAuth();
-  console.log(token);
 
-  const {
-    // data: dataPost,
-    loading,
-    handlerPost,
-  } = usePost<any, any>('/restaurantEvaluation', {
-    headers: {
-      Authorization: `Bearer ${token}`,
+  const {loading, handlerPost} = usePost<EvaluationBody, undefined>(
+    '/restaurantEvaluation',
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
 
-  const requestBody = {
+  const requestBody: EvaluationBody = {
     grade: data,
     observation: observation,
     restaurant: {
@@ -78,7 +88,22 @@ export function EvaluationModal({
       () => onError(),
       () => onSuccess(),
     );
-    console.log(requestBody);
+  }
+  const {fetchData} = useFetch<EvaluationData>(`/request/${orderId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  useEffect(() => {
+    (async () => {
+      await fetchData(onSuccessFetch);
+    })();
+  }, []);
+
+  function onSuccessFetch(response: EvaluationData) {
+    if (response.isEvaluated === false) {
+      modalizeRef.current?.open();
+    }
   }
 
   return (
@@ -103,12 +128,12 @@ export function EvaluationModal({
           <>
             <EvaluationBar childToParent={childToParent} />
             <TextInput
+              maxLength={100}
               style={styles.input}
               multiline
-              numberOfLines={6}
+              numberOfLines={7}
               placeholder="Conte-nos um pouco deste restaurante..."
               placeholderTextColor="#020202"
-              blurOnSubmit
               textAlignVertical="top"
               onChangeText={text => {
                 setObservation(text);

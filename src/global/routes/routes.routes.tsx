@@ -47,6 +47,7 @@ export function Routes() {
           name="Inicio"
           component={Home}
           options={{
+            unmountOnBlur: true,
             tabBarIcon: ({focused}) => (
               <TabBarButton
                 isPressed={focused}
