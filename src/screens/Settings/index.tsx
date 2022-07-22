@@ -53,13 +53,18 @@ interface UserProps {
   costumer: {
     id: number;
     firstName: string;
+    photo_url: string;
   };
+}
+
+interface Photo {
+  code: string;
 }
 
 const ModalPoup = ({visible, children}: any) => {
   const [showModal, setShowModal] = useState(visible);
   const scaleValue = useRef(new Animated.Value(0)).current;
-  const toggleModal = () => {
+  const changeModalState = () => {
     if (visible) {
       setShowModal(true);
       Animated.spring(scaleValue, {
@@ -77,7 +82,7 @@ const ModalPoup = ({visible, children}: any) => {
     }
   };
   useEffect(() => {
-    toggleModal();
+    changeModalState();
   }, [visible]);
   return (
     <Modal transparent visible={showModal}>
@@ -91,7 +96,7 @@ const ModalPoup = ({visible, children}: any) => {
   );
 };
 
-export function Settings() {
+export function Settings({costumer}: UserProps) {
   const theme = useTheme();
 
   const {token, logOut} = useAuth();
@@ -105,8 +110,19 @@ export function Settings() {
       Authorization: `Bearer ${token}`,
     },
   });
+
+  const {data: dataPhoto, fetchData: fetchPhoto} = useFetch<Photo>(
+    costumer?.photo_url,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
   useEffect(() => {
     fetchData();
+    fetchPhoto();
   }, [data]);
   return (
     <Container>
@@ -123,7 +139,15 @@ export function Settings() {
 
       <Content>
         <UserInfo>
-          <UserPhoto source={theme.images.eu} />
+          <UserPhoto
+            source={
+              dataPhoto.code
+                ? {
+                    uri: `${dataPhoto.code}`,
+                  }
+                : theme.images.eu
+            }
+          />
 
           <UserInfoWrapper>
             <UserName>Seja bem vindo, {data?.costumer?.firstName}!</UserName>
@@ -138,7 +162,7 @@ export function Settings() {
         </UserInfo>
 
         <HelpContent>
-          <HelpButton>
+          <HelpButton onPress={() => navigation.navigate('About' as never)}>
             <HelpIcon source={theme.icons.help} />
             <HelpButtonText>Ajuda</HelpButtonText>
             <ArrowImage source={theme.icons.settingsArrow} />
