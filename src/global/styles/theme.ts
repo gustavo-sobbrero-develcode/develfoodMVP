@@ -97,5 +97,7 @@ export default {
     lock: require('../assets/RedefinePasswordImages/lock.png'),
     redefineSuccess: require('../assets/RedefinePasswordImages/redefine-success.png'),
     pin: require('../assets/Images/pin.png'),
+    star: require('../assets/Images/estrela.png'),
+    starEmpty: require('../assets/Images/estrela_vazia.png'),
   },
 };
