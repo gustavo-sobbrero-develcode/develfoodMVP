@@ -2,7 +2,7 @@ import axios, {AxiosRequestConfig} from 'axios';
 import {useState} from 'react';
 
 const api = axios.create({
-  baseURL: 'https://develfood-3.herokuapp.com',
+  baseURL: 'https://1fef-164-163-142-68.ngrok.io',
 });
 
 export function useFetch<T = unknown>(
@@ -23,6 +23,7 @@ export function useFetch<T = unknown>(
       response.data && onSuccess && onSuccess(response.data);
     } catch (erro) {
       setError(error);
+      console.log('erro get', error);
     } finally {
       setLoading(false);
     }

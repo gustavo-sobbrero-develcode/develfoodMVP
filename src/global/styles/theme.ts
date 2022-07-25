@@ -69,6 +69,8 @@ export default {
     deliveryorder: require('../assets/Icons/deliveryorder.png'),
     doingorder: require('../assets/Icons/doingorder.png'),
     waitingorder: require('../assets/Icons/waitingorder.png'),
+    
+
   },
 
   images: {
@@ -95,5 +97,7 @@ export default {
     lock: require('../assets/RedefinePasswordImages/lock.png'),
     redefineSuccess: require('../assets/RedefinePasswordImages/redefine-success.png'),
     pin: require('../assets/Images/pin.png'),
+    star: require('../assets/Images/estrela.png'),
+    starEmpty: require('../assets/Images/estrela_vazia.png'),
   },
 };
