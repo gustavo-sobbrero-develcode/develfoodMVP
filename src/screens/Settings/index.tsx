@@ -49,15 +49,17 @@ import {
 } from './styles';
 import {useNavigation} from '@react-navigation/native';
 
+interface CostumerProps {
+  id: number;
+  firstName: string;
+  photo_url: string;
+}
 interface UserProps {
-  costumer: {
-    id: number;
-    firstName: string;
-    photo_url: string;
-  };
+  costumer: CostumerProps;
 }
 
 interface Photo {
+  id: number;
   code: string;
 }
 
@@ -96,7 +98,7 @@ const ModalPoup = ({visible, children}: any) => {
   );
 };
 
-export function Settings({costumer}: UserProps) {
+export function Settings() {
   const theme = useTheme();
 
   const {token, logOut} = useAuth();
@@ -112,7 +114,7 @@ export function Settings({costumer}: UserProps) {
   });
 
   const {data: dataPhoto, fetchData: fetchPhoto} = useFetch<Photo>(
-    costumer?.photo_url,
+    `${data?.costumer?.photo_url}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -143,7 +145,7 @@ export function Settings({costumer}: UserProps) {
             source={
               dataPhoto.code
                 ? {
-                    uri: `${dataPhoto.code}`,
+                    uri: `data:image/jpg;base64,${dataPhoto.code}`,
                   }
                 : theme.images.eu
             }
