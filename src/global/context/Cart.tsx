@@ -114,6 +114,7 @@ interface Props {
   userRequestCheckout: Function;
   paramsToOrderDetails: Function;
   plateData: Plate;
+  loading: boolean;
 }
 
 interface Plate {
@@ -359,7 +360,7 @@ function CartProvider({children}: AuthProviderProps) {
     await handlerPost(createCheckoutRequest, cartError, CheckoutUserSuccess);
   }
 
-  const [plateData, setPlateData] = useState<Plate>();
+  const [plateData, setPlateData] = useState<Plate>({} as Plate);
 
   function paramsToOrderDetails(
     name: string,

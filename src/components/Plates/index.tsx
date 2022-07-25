@@ -186,76 +186,97 @@ export function Plates({
   }
 
   return Swipe ? (
-    <ContentContainer>
-      <Swipeable renderLeftActions={leftSwipe}>
-        <Container>
-          <WrapperImage>
-            <PlateImage
-              source={data.code ? {uri: `${data.code}`} : theme.images.noImage}
-            />
-          </WrapperImage>
+    <PlateButton
+      activeOpacity={0.9}
+      onPress={() => {
+        paramsToOrderDetails(
+          name,
+          price,
+          description,
+          source,
+          id,
+          restaurantFoodTypes,
+          restaurantName,
+          isFavorite,
+          inside,
+          restaurantID,
+          photoRestaurant,
+        );
+        navigation.navigate('PlatesDetails' as never);
+      }}>
+      <ContentContainer>
+        <Swipeable renderLeftActions={leftSwipe}>
+          <Container>
+            <WrapperImage>
+              <PlateImage
+                source={
+                  data.code ? {uri: `${data.code}`} : theme.images.noImage
+                }
+              />
+            </WrapperImage>
 
-          <WrapperPlateInfo>
-            <PlateTitle>{name}</PlateTitle>
-            <PlateInfo numberOfLines={3}>{description}</PlateInfo>
+            <WrapperPlateInfo>
+              <PlateTitle>{name}</PlateTitle>
+              <PlateInfo numberOfLines={3}>{description}</PlateInfo>
 
-            <WrapperAdvancedInfo>
-              <PriceWrapper>
-                <Price>R$ {priceFormatted}</Price>
-              </PriceWrapper>
+              <WrapperAdvancedInfo>
+                <PriceWrapper>
+                  <Price>R$ {priceFormatted}</Price>
+                </PriceWrapper>
 
-              {itemCount && itemCount > 0 ? (
-                <WrapperCartButton
-                  insideCart={inside ? RFValue(5) : RFValue(20)}>
-                  <AddQuantityButton
-                    onPress={() => addProductToCart(id, price, restaurantID)}>
-                    <AddQuantityButtonLabel>+</AddQuantityButtonLabel>
-                  </AddQuantityButton>
+                {itemCount && itemCount > 0 ? (
+                  <WrapperCartButton
+                    insideCart={inside ? RFValue(5) : RFValue(20)}>
+                    <AddQuantityButton
+                      onPress={() => addProductToCart(id, price, restaurantID)}>
+                      <AddQuantityButtonLabel>+</AddQuantityButtonLabel>
+                    </AddQuantityButton>
 
-                  <NumberOfQuantityWrapper>
-                    <Number>
-                      {
-                        cart.find((item: ItemProps) => item?.id === id)
-                          ?.quantity
-                      }
-                    </Number>
-                  </NumberOfQuantityWrapper>
+                    <NumberOfQuantityWrapper>
+                      <Number>
+                        {
+                          cart.find((item: ItemProps) => item?.id === id)
+                            ?.quantity
+                        }
+                      </Number>
+                    </NumberOfQuantityWrapper>
 
-                  {itemCount > 1 ? (
-                    <RemoveCartButton
-                      onPress={() => removeProductFromCart(id, price)}>
-                      <RemoveQuantityButtonLabel>-</RemoveQuantityButtonLabel>
-                    </RemoveCartButton>
-                  ) : (
-                    <RemoveCartButton
-                      onPress={() => removeProductFromCart(id, price)}>
-                      <RemoveQuantityButtonLabel>-</RemoveQuantityButtonLabel>
-                    </RemoveCartButton>
-                  )}
-                </WrapperCartButton>
-              ) : (
-                <AddButton
-                  onPress={() =>
-                    addNewProductoCart(
-                      id,
-                      price,
-                      restaurantID,
-                      name,
-                      description,
-                      source,
-                      restaurantFoodTypes,
-                      restaurantName,
-                      photoRestaurant,
-                    )
-                  }>
-                  <TextButton>Adicionar</TextButton>
-                </AddButton>
-              )}
-            </WrapperAdvancedInfo>
-          </WrapperPlateInfo>
-        </Container>
-      </Swipeable>
-    </ContentContainer>
+                    {itemCount > 1 ? (
+                      <RemoveCartButton
+                        onPress={() => removeProductFromCart(id, price)}>
+                        <RemoveQuantityButtonLabel>-</RemoveQuantityButtonLabel>
+                      </RemoveCartButton>
+                    ) : (
+                      <RemoveCartButton
+                        onPress={() => removeProductFromCart(id, price)}>
+                        <RemoveQuantityButtonLabel>-</RemoveQuantityButtonLabel>
+                      </RemoveCartButton>
+                    )}
+                  </WrapperCartButton>
+                ) : (
+                  <AddButton
+                    onPress={() =>
+                      addNewProductoCart(
+                        id,
+                        price,
+                        restaurantID,
+                        name,
+                        description,
+                        source,
+                        restaurantFoodTypes,
+                        restaurantName,
+                        photoRestaurant,
+                      )
+                    }>
+                    <TextButton>Adicionar</TextButton>
+                  </AddButton>
+                )}
+              </WrapperAdvancedInfo>
+            </WrapperPlateInfo>
+          </Container>
+        </Swipeable>
+      </ContentContainer>
+    </PlateButton>
   ) : (
     <PlateButton
       activeOpacity={0.9}

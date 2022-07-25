@@ -1,4 +1,5 @@
 import {BackButton} from '@components/BackButton';
+import {View} from '@components/CategoryButton/styles';
 import {ItemProps} from '@components/Plates';
 import {useAuth} from '@global/context';
 import {useCreateCart} from '@global/context/Cart';
@@ -9,7 +10,7 @@ import theme from '@global/styles/theme';
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {StatusBar} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
+import {ScrollView} from 'react-native-gesture-handler';
 
 import {
   AddButton,
@@ -31,13 +32,13 @@ import {
   PlatePhoto,
   PlateTotalPrice,
   RemoveCartButton,
-  RemoveQuantityButtonImage,
   RemoveQuantityButtonLabel,
   RestaurantIcon,
   RestaurantName,
   RestaurantWrapper,
   TextButton,
   ViewCart,
+  ViewScroll,
   WrapperCartButton,
 } from './styles';
 
@@ -63,8 +64,7 @@ export function PlatesDetails() {
     removeProductFromCart,
     cart,
     addNewProductoCart,
-    cleanUpSamePlates,
-    paramsToOrderDetails,
+    plateData,
   } = useCreateCart();
 
   const navigation = useNavigation();
@@ -72,8 +72,6 @@ export function PlatesDetails() {
   function handlerBackButton() {
     navigation.goBack();
   }
-
-  const {plateData} = useCreateCart();
 
   const {token} = useAuth();
 
@@ -157,27 +155,34 @@ export function PlatesDetails() {
         </FavoriteIconWrapper>
       </Header>
 
-      <PlateInfoWrapper>
-        <PlatePhoto
-          source={dataPhoto.code ? {uri: dataPhoto.code} : theme.images.noImage}
-          resizeMode={'contain'}
-        />
-        <PlateName numberOfLines={1}>{plateData.name}</PlateName>
-        <FoodType numberOfLines={1}>{plateData.restaurantFoodTypes}</FoodType>
-        <Description numberOfLines={10}>{plateData.description}</Description>
+      <ScrollView>
+        <ViewScroll>
+          <PlateInfoWrapper>
+            <PlatePhoto
+              source={
+                dataPhoto.code ? {uri: dataPhoto.code} : theme.images.noImage
+              }
+              resizeMode={'contain'}
+            />
+            <PlateName numberOfLines={1}>{plateData.name}</PlateName>
+            <FoodType numberOfLines={1}>
+              {plateData.restaurantFoodTypes}
+            </FoodType>
+            <Description>{plateData.description}</Description>
 
-        <RestaurantWrapper>
-          <RestaurantIcon
-            source={theme.icons.restaurant}
-            resizeMode={'contain'}
-          />
+            <RestaurantWrapper>
+              <RestaurantIcon
+                source={theme.icons.restaurant}
+                resizeMode={'contain'}
+              />
 
-          <RestaurantName numberOfLines={1}>
-            Vendido e entregue por {plateData.restaurantName}
-          </RestaurantName>
-        </RestaurantWrapper>
-      </PlateInfoWrapper>
-
+              <RestaurantName numberOfLines={1}>
+                Vendido e entregue por {plateData.restaurantName}
+              </RestaurantName>
+            </RestaurantWrapper>
+          </PlateInfoWrapper>
+        </ViewScroll>
+      </ScrollView>
       <ViewCart>
         <PlateTotalPrice>R$ {priceTotalFormatted}</PlateTotalPrice>
 

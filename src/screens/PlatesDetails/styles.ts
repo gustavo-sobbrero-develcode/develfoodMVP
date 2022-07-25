@@ -34,7 +34,6 @@ export const FavoriteIcon = styled.Image`
 
 export const PlateInfoWrapper = styled.View`
   width: ${RFValue(312)}px;
-  height: ${RFValue(356)}px;
   align-self: center;
   margin-top: ${RFValue(24)}px;
 `;
@@ -51,7 +50,12 @@ export const PlateName = styled.Text`
   margin-top: ${RFValue(20)}px;
   width: ${RFValue(298)}px;
 `;
+
+export const ViewScroll = styled.View`
+  flex: 1;
+`;
 export const FoodType = styled.Text`
+  text-transform: capitalize;
   font-weight: 400;
   font-size: ${RFValue(12)}px;
   color: ${({theme}) => theme.colors.text_gray};

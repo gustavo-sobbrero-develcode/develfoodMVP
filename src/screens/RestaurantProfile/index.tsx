@@ -1,7 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import {RouteProp, useNavigation} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
+import {
+  RouteProp,
+  useFocusEffect,
+  useNavigation,
+} from '@react-navigation/native';
+import React, {useCallback, useEffect, useState} from 'react';
 import {ActivityIndicator, Image, StatusBar, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {useTheme} from 'styled-components';
@@ -120,9 +124,14 @@ export function RestaurantProfile({route}: RouteParams) {
     setIsLoading(false);
   }
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      loadPlates();
+      return () => {
+        setPlate([]);
+      };
+    }, []),
+  );
 
   const debounced = useDebouncedCallback(value => {
     handleSearch(value);
