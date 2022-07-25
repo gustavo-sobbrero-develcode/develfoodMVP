@@ -24,9 +24,9 @@ import {
   TextButton,
   WrapperCartButton,
   AddQuantityButton,
-  AddQuantityButtonImage,
+  AddQuantityButtonLabel,
   RemoveCartButton,
-  RemoveQuantityButtonImage,
+  RemoveQuantityButtonLabel,
   NumberOfQuantityWrapper,
   Number,
   LitterButton,
@@ -204,7 +204,7 @@ export function Plates({
                   insideCart={inside ? RFValue(5) : RFValue(20)}>
                   <AddQuantityButton
                     onPress={() => addProductToCart(id, price, restaurantID)}>
-                    <AddQuantityButtonImage source={theme.icons.add} />
+                    <AddQuantityButtonLabel>+</AddQuantityButtonLabel>
                   </AddQuantityButton>
 
                   <NumberOfQuantityWrapper>
@@ -219,12 +219,12 @@ export function Plates({
                   {itemCount > 1 ? (
                     <RemoveCartButton
                       onPress={() => removeProductFromCart(id, price)}>
-                      <RemoveQuantityButtonImage source={theme.icons.remove} />
+                      <RemoveQuantityButtonLabel>-</RemoveQuantityButtonLabel>
                     </RemoveCartButton>
                   ) : (
                     <RemoveCartButton
                       onPress={() => removeProductFromCart(id, price)}>
-                      <RemoveQuantityButtonImage source={theme.icons.remove} />
+                      <RemoveQuantityButtonLabel>-</RemoveQuantityButtonLabel>
                     </RemoveCartButton>
                   )}
                 </WrapperCartButton>
@@ -276,10 +276,10 @@ export function Plates({
           </PriceWrapper>
 
           {itemCount && itemCount > 0 ? (
-            <WrapperCartButton insideCart={inside ? RFValue(5) : RFValue(20)}>
+            <WrapperCartButton insideCart={inside ? RFValue(5) : RFValue(35)}>
               <AddQuantityButton
                 onPress={() => addProductToCart(id, price, restaurantID)}>
-                <AddQuantityButtonImage source={theme.icons.add} />
+                <AddQuantityButtonLabel>+</AddQuantityButtonLabel>
               </AddQuantityButton>
 
               <NumberOfQuantityWrapper>
@@ -292,7 +292,7 @@ export function Plates({
               {itemCount && itemCount > 1 ? (
                 <RemoveCartButton
                   onPress={() => removeProductFromCart(id, price)}>
-                  <RemoveQuantityButtonImage source={theme.icons.remove} />
+                  <RemoveQuantityButtonLabel>-</RemoveQuantityButtonLabel>
                 </RemoveCartButton>
               ) : (
                 <LitterButton onPress={() => removeProductFromCart(id, price)}>

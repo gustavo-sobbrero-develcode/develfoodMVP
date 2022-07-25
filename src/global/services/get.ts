@@ -23,6 +23,7 @@ export function useFetch<T = unknown>(
       response.data && onSuccess && onSuccess(response.data);
     } catch (erro) {
       setError(error);
+      console.log('erro get', error);
     } finally {
       setLoading(false);
     }

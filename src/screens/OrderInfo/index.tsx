@@ -3,7 +3,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {RouteProp, useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {StatusBar} from 'react-native';
+import {Keyboard, StatusBar, TouchableWithoutFeedback} from 'react-native';
+import {EvaluationModal} from '@components/EvaluationModal';
 import {FlatList} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
@@ -55,6 +56,7 @@ interface RouteParams {
         totalValue: number;
         date: Date;
         status: string;
+        restaurantId: number;
       };
     },
     'params'
@@ -66,6 +68,7 @@ interface OrderProps {
   totalValue: number;
   status: string;
   requestItems: RequestiItemsProps[];
+  isEvaluated: boolean;
 }
 interface RequestiItemsProps {
   id: number;
@@ -90,9 +93,14 @@ export function OrderInfo({route}: RouteParams) {
 
   const {token} = useAuth();
 
-  const {name, photo_url, id, totalValue, date, status} = route.params;
+  const {name, photo_url, id, totalValue, date, status, restaurantId} =
+    route.params;
 
   const [order, setOrder] = useState<RequestiItemsProps[]>([]);
+
+  const [newStatus, setNewStatus] = useState(status);
+
+  const [extraData, setExtraData] = useState(false);
 
   const navigation = useNavigation();
 
@@ -110,8 +118,19 @@ export function OrderInfo({route}: RouteParams) {
     setOrder([...order, ...response.requestItems]);
   }
 
+  function onStatusSuccess(response: OrderProps) {
+    setNewStatus(response.status);
+    status !== 'PEDIDO_FINALIZADO' &&
+      response.status !== 'PEDIDO_FINALIZADO' &&
+      setExtraData(!extraData);
+  }
+
   async function loadOrder() {
     await fetchData(onSuccess);
+  }
+
+  async function loadStatus() {
+    await fetchData(onStatusSuccess);
   }
 
   const {data, fetchData: fetchPhoto} = useFetch<Photo>(photo_url, {
@@ -130,7 +149,7 @@ export function OrderInfo({route}: RouteParams) {
     return statusText;
   }
 
-  const statusText = getStatus(status);
+  const statusText = getStatus(newStatus);
 
   function getStatusImage(status: string) {
     const statusImage = {
@@ -142,7 +161,7 @@ export function OrderInfo({route}: RouteParams) {
     return statusImage;
   }
 
-  const statusImage = getStatusImage(status);
+  const statusImage = getStatusImage(newStatus);
 
   const renderItem = ({item}: {item: RequestiItemsProps}) => {
     return item ? (
@@ -171,87 +190,109 @@ export function OrderInfo({route}: RouteParams) {
     loadOrder();
   }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      loadStatus();
+    }, 8000);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [extraData]);
+
   return (
-    <Container>
-      <StatusBar
-        barStyle={'light-content'}
-        translucent={false}
-        backgroundColor={theme.colors.background_red}
-      />
-
-      <HeaderComponent
-        backgroudColor={theme.colors.background_red}
-        name={`Pedido N.° ${id}`}
-        source={theme.icons.exitWhite}
-        iconColor={theme.colors.icon_white}
-        Textcolor={theme.colors.text_white}
-        onPress={handlerBackHome}
-      />
-
-      <WrapperInfo>
-        <PinImage source={theme.images.pin} />
-        <MapImage source={theme.images.mapImage} />
-
-        <WrapperAddresInfo>
-          <SubTitle>Entregar em:</SubTitle>
-          <Street>도산대로49길</Street>
-          <Neighborhood>서울특별시 강남구 도산대로49길 22</Neighborhood>
-        </WrapperAddresInfo>
-        <DateCard>
-          <Day>{moment(date).format('DD')}</Day>
-          <Month>
-            {moment(date).format('MMM').charAt(0).toUpperCase() +
-              moment(date).format('MMM').slice(1).toLowerCase()}
-          </Month>
-        </DateCard>
-      </WrapperInfo>
-
-      <WrapperRestaurantInfo>
-        <RestaurantPhoto
-          source={
-            data.code
-              ? {
-                  uri: `${data.code}`,
-                }
-              : theme.images.noImage
-          }
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <Container>
+        <StatusBar
+          barStyle={'light-content'}
+          translucent
+          backgroundColor={'transparent'}
         />
-        <WrapperName>
-          <Restaurant>Restaurante</Restaurant>
-          <RestaurantName>{name}</RestaurantName>
-        </WrapperName>
-        <WrapperOrderInfo>
-          <StatusImage source={statusImage} />
 
-          <WrapperText>
-            <StatusText>{statusText}</StatusText>
-          </WrapperText>
-        </WrapperOrderInfo>
-      </WrapperRestaurantInfo>
+        <HeaderComponent
+          backgroudColor={theme.colors.background_red}
+          name={`Pedido N.° ${id}`}
+          source={theme.icons.exitWhite}
+          iconColor={theme.colors.icon_white}
+          Textcolor={theme.colors.text_white}
+          onPress={handlerBackHome}
+        />
 
-      <LineBetween />
+        <WrapperInfo>
+          <PinImage source={theme.images.pin} />
+          <MapImage source={theme.images.mapImage} />
 
-      <WrapperPlates>
-        <TotalValueWrapper>
-          <TotalText>Total pago:</TotalText>
-          <WrapperPrice>
-            <R$Text>R$</R$Text>
-            <TotalValue>{priceFormatted}</TotalValue>
-          </WrapperPrice>
-        </TotalValueWrapper>
-      </WrapperPlates>
+          <WrapperAddresInfo>
+            <SubTitle>Entregar em:</SubTitle>
+            <Street>도산대로49길</Street>
+            <Neighborhood>서울특별시 강남구 도산대로49길 22</Neighborhood>
+          </WrapperAddresInfo>
+          <DateCard>
+            <Day>{moment(date).format('DD')}</Day>
+            <Month>
+              {moment(date).format('MMM').charAt(0).toUpperCase() +
+                moment(date).format('MMM').slice(1).toLowerCase()}
+            </Month>
+          </DateCard>
+        </WrapperInfo>
 
-      <FlatList
-        data={order}
-        keyExtractor={item => String(item.id)}
-        renderItem={renderItem}
-        showsVerticalScrollIndicator={false}
-        style={{
-          width: '90%',
-          marginRight: '10%',
-          marginTop: RFValue(120),
-        }}
-      />
-    </Container>
+        <WrapperRestaurantInfo>
+          <RestaurantPhoto
+            source={
+              data.code
+                ? {
+                    uri: `${data.code}`,
+                  }
+                : theme.images.noImage
+            }
+          />
+          <WrapperName>
+            <Restaurant>Restaurante</Restaurant>
+            <RestaurantName>{name}</RestaurantName>
+          </WrapperName>
+          <WrapperOrderInfo>
+            <StatusImage source={statusImage} />
+
+            <WrapperText>
+              <StatusText>{statusText}</StatusText>
+            </WrapperText>
+          </WrapperOrderInfo>
+        </WrapperRestaurantInfo>
+
+        <LineBetween />
+
+        <WrapperPlates>
+          <TotalValueWrapper>
+            <TotalText>Total pago:</TotalText>
+            <WrapperPrice>
+              <R$Text>R$</R$Text>
+              <TotalValue>{priceFormatted}</TotalValue>
+            </WrapperPrice>
+          </TotalValueWrapper>
+        </WrapperPlates>
+
+        <FlatList
+          data={order}
+          keyExtractor={item => String(item.id)}
+          renderItem={renderItem}
+          showsVerticalScrollIndicator={false}
+          style={{
+            width: '90%',
+            marginRight: '10%',
+            marginTop: RFValue(120),
+          }}
+        />
+        {status === 'PEDIDO_FINALIZADO' && (
+          <EvaluationModal
+            title="Deu bom?"
+            description={
+              'Obrigado por escolher nosso app, você faz toda a diferença. :D Agora, queremos saber o que você acha do nosso parceiro'
+            }
+            name={name}
+            restaurantId={restaurantId}
+            orderId={id}
+          />
+        )}
+      </Container>
+    </TouchableWithoutFeedback>
   );
 }

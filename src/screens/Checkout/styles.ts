@@ -71,6 +71,7 @@ export const FoodType = styled.Text`
   font-weight: 400;
   top: ${RFValue(15)}px;
   color: ${({theme}) => theme.colors.text_gray};
+  text-transform: capitalize;
 `;
 
 export const WrapperPhoto = styled.View`
