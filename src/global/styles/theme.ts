@@ -69,6 +69,8 @@ export default {
     deliveryorder: require('../assets/Icons/deliveryorder.png'),
     doingorder: require('../assets/Icons/doingorder.png'),
     waitingorder: require('../assets/Icons/waitingorder.png'),
+    
+
   },
 
   images: {
@@ -89,10 +91,13 @@ export default {
     doing: require('../assets/Images/doing.png'),
     inRoute: require('../assets/Images/inRoute.png'),
     delivered: require('../assets/Images/delivered.png'),
+    noFavorites: require('../assets/Images/noFavorites.png'),
     authEmail: require('../assets/RedefinePasswordImages/auth-email.png'),
     forgotPassword: require('../assets/RedefinePasswordImages/forgot_password.png'),
     lock: require('../assets/RedefinePasswordImages/lock.png'),
     redefineSuccess: require('../assets/RedefinePasswordImages/redefine-success.png'),
     pin: require('../assets/Images/pin.png'),
+    star: require('../assets/Images/estrela.png'),
+    starEmpty: require('../assets/Images/estrela_vazia.png'),
   },
 };
