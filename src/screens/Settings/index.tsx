@@ -106,6 +106,17 @@ export function Settings() {
     },
   );
 
+  function userPhoto() {
+    const photo = dataPhoto.code
+      ? {
+          uri: `data:image/jpg;base64,${dataPhoto.code}`,
+        }
+      : theme.images.eu;
+    return photo;
+  }
+
+  const getUserPhoto = userPhoto();
+
   useEffect(() => {
     fetchData();
     fetchPhoto();
@@ -124,15 +135,7 @@ export function Settings() {
 
       <Content>
         <UserInfo>
-          <UserPhoto
-            source={
-              dataPhoto.code
-                ? {
-                    uri: `data:image/jpg;base64,${dataPhoto.code}`,
-                  }
-                : theme.images.eu
-            }
-          />
+          <UserPhoto source={getUserPhoto} />
 
           <UserInfoWrapper>
             <UserName>Seja bem vindo, {data?.costumer?.firstName}!</UserName>
