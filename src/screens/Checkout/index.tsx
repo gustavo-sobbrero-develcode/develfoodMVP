@@ -75,7 +75,7 @@ export function Checkout({
   } = useCreateCart();
 
   function handlerBackHome() {
-    navigation.navigate('Home' as never);
+    navigation.goBack();
   }
 
   const {fetchData} = useFetch<Photos>(source, {
