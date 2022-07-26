@@ -74,12 +74,17 @@ export default {
     deliveryorder: require('../assets/Icons/deliveryorder.png'),
     doingorder: require('../assets/Icons/doingorder.png'),
     waitingorder: require('../assets/Icons/waitingorder.png'),
+<<<<<<< HEAD
     editInfo: require('../assets/Icons/editInfo.png'),
     help: require('../assets/Icons/help.png'),
     settingsArrow: require('../assets/Icons/settingsArrow.png'),
     about: require('../assets/Icons/about.png'),
     logoutIcon: require('../assets/Icons/logoutIcon.png'),
     deleteUserIcon: require('../assets/Icons/deleteUserIcon.png'),
+=======
+    
+
+>>>>>>> 770dfcc96af72e4a90c3da9e1f832b5ba2481fef
   },
 
   images: {
@@ -106,6 +111,7 @@ export default {
     lock: require('../assets/RedefinePasswordImages/lock.png'),
     redefineSuccess: require('../assets/RedefinePasswordImages/redefine-success.png'),
     pin: require('../assets/Images/pin.png'),
+<<<<<<< HEAD
     eu: require('../assets/Images/Eu.jpeg'),
     logoutImage: require('../assets/Images/logoutImage.png'),
     develFoodLogo: require('../assets/Images/Logo.png'),
@@ -116,6 +122,8 @@ export default {
     manoela: require('../assets/Images/manoela.jpg'),
     carlaMelhorAgilista: require('../assets/Images/carlaMelhorAgilista.jpg'),
     michael: require('../assets/Images/michael.jpg'),
+=======
+>>>>>>> 770dfcc96af72e4a90c3da9e1f832b5ba2481fef
     star: require('../assets/Images/estrela.png'),
     starEmpty: require('../assets/Images/estrela_vazia.png'),
   },
