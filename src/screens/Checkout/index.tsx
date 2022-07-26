@@ -110,6 +110,18 @@ export function Checkout({
     );
   };
 
+  const navigateToRestaurant = () => {
+    navigation.navigate(
+      'RestaurantProfile' as never,
+      {
+        id,
+        name,
+        photo_url,
+        food_types,
+      } as never,
+    );
+  };
+
   useEffect(() => {
     fetchData();
     fetchPhoto();
@@ -149,23 +161,11 @@ export function Checkout({
             <LineBetween />
 
             <WrapperInfoRestaurant>
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate(
-                    'RestaurantProfile' as never,
-                    {
-                      id,
-                      name,
-                      photo_url,
-                      food_types,
-                    } as never,
-                  )
-                }>
+              <TouchableOpacity onPress={navigateToRestaurant}>
                 <RestauratName>{name}</RestauratName>
+
+                <FoodType>{food_types}</FoodType>
               </TouchableOpacity>
-
-              <FoodType>{food_types}</FoodType>
-
               <WrapperPhoto>
                 <RestaurantPhoto
                   source={
