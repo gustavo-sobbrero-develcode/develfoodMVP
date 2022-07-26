@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState} from 'react';
 import {StatusBar, StyleSheet, Modal, View, Animated} from 'react-native';
@@ -67,6 +66,7 @@ const CloseAppModal = ({visible, children}: any) => {
       }).start();
     }
   };
+
   useEffect(() => {
     changeModalState();
   }, [visible]);
@@ -83,7 +83,7 @@ const CloseAppModal = ({visible, children}: any) => {
 };
 
 export function Settings() {
-  const theme = useTheme();
+  const themeProps = useTheme();
 
   const {token, logOut} = useAuth();
 
@@ -120,17 +120,17 @@ export function Settings() {
   useEffect(() => {
     fetchData();
     fetchPhoto();
-  }, [data]);
+  }, [data, fetchData, fetchPhoto]);
   return (
     <Container>
       <StatusBar
         barStyle={'light-content'}
-        backgroundColor={theme.colors.background}
+        backgroundColor={themeProps.colors.background}
       />
       <HeaderComponent
         name="Configurações"
-        backgroudColor={theme.colors.background}
-        Textcolor={theme.colors.text_dark}
+        backgroudColor={themeProps.colors.background}
+        Textcolor={themeProps.colors.text_dark}
       />
 
       <Content>
@@ -143,7 +143,7 @@ export function Settings() {
             <UserEditInfoWrapper>
               <UserEditInfoText>Editar Perfil</UserEditInfoText>
               <UserEditInfoButton>
-                <EditInfoIcon source={theme.icons.editInfo} />
+                <EditInfoIcon source={themeProps.icons.editInfo} />
               </UserEditInfoButton>
             </UserEditInfoWrapper>
           </UserInfoWrapper>
@@ -152,43 +152,43 @@ export function Settings() {
         <ProfilePageComponent
           onPress={() => navigation.navigate('About' as never)}
           name="Ajuda"
-          sourceArrowIcon={theme.icons.settingsArrow}
-          sourceIcon={theme.icons.help}
+          sourceArrowIcon={themeProps.icons.settingsArrow}
+          sourceIcon={themeProps.icons.help}
         />
 
         <ProfilePageComponent
           onPress={() => navigation.navigate('About' as never)}
           name="Sobre o DevelFood"
-          sourceArrowIcon={theme.icons.settingsArrow}
-          sourceIcon={theme.icons.about}
+          sourceArrowIcon={themeProps.icons.settingsArrow}
+          sourceIcon={themeProps.icons.about}
         />
 
         <ProfilePageComponent
           onPress={() => setIsVisible(true)}
           name="Sair do App"
-          sourceArrowIcon={theme.icons.settingsArrow}
-          sourceIcon={theme.icons.logoutIcon}
+          sourceArrowIcon={themeProps.icons.settingsArrow}
+          sourceIcon={themeProps.icons.logoutIcon}
         />
 
         <ProfilePageComponent
           onPress={() => setIsVisible(true)}
           name="Excluir Conta"
-          sourceArrowIcon={theme.icons.settingsArrow}
-          sourceIcon={theme.icons.deleteUserIcon}
+          sourceArrowIcon={themeProps.icons.settingsArrow}
+          sourceIcon={themeProps.icons.deleteUserIcon}
         />
       </Content>
 
       <CloseAppModal visible={isVisible}>
         <ModalContent>
-          <LogOutImage source={theme.images.logoutImage} />
+          <LogOutImage source={themeProps.images.logoutImage} />
           <MessageLogOut>
-            Oh no! You're Leaving... {'\n'} Are you sure?
+            Ah não! Você está saindo... {'\n'} Tem certeza?
           </MessageLogOut>
           <CloseModal onPress={() => setIsVisible(false)}>
-            <CloseModalText>Naah, Just Kidding</CloseModalText>
+            <CloseModalText>Naah, To só brincando</CloseModalText>
           </CloseModal>
           <LogOutButton onPress={() => logOut()}>
-            <LogOutButtonText>Yes, I'm sure</LogOutButtonText>
+            <LogOutButtonText>Sim, to vazando</LogOutButtonText>
           </LogOutButton>
         </ModalContent>
       </CloseAppModal>

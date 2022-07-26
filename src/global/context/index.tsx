@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-shadow */
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {createContext, useState} from 'react';
 import {useEffect} from 'react';
@@ -50,7 +48,7 @@ function AuthProvider({children}: AuthProviderProps) {
     } catch (error) {}
   }
 
-  const getUserData = async (data: string) => {
+  const getUserData = async () => {
     try {
       const userToken = await AsyncStorage.getItem('@userToken');
       if (userToken) {
@@ -61,9 +59,9 @@ function AuthProvider({children}: AuthProviderProps) {
     }
   };
 
-  async function onSuccess(data: UserData) {
-    setToken(data.token);
-    await AsyncStorage.setItem('@userToken', data.token);
+  async function onSuccess(dataAsyncStorage: UserData) {
+    setToken(dataAsyncStorage.token);
+    await AsyncStorage.setItem('@userToken', dataAsyncStorage.token);
   }
 
   async function userLogin(request: LoginRequest) {
@@ -76,7 +74,7 @@ function AuthProvider({children}: AuthProviderProps) {
 
   useEffect(() => {
     setToken(data.token);
-    getUserData(data.token);
+    getUserData();
   }, [loading, data.token]);
 
   return (
