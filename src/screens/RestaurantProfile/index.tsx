@@ -184,8 +184,9 @@ export function RestaurantProfile({route}: RouteParams) {
         <WrapperRestaurantTypes>
           <NameRestaurant>{name}</NameRestaurant>
           <TypeFood>
-            {food_types.charAt(0).toUpperCase() +
-              food_types.slice(1).toLowerCase()}
+            {food_types &&
+              food_types.charAt(0).toUpperCase() +
+                food_types.slice(1).toLowerCase()}
           </TypeFood>
         </WrapperRestaurantTypes>
 
