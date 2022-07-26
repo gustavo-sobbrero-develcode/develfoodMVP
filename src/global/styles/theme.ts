@@ -116,5 +116,7 @@ export default {
     manoela: require('../assets/Images/manoela.jpg'),
     carlaMelhorAgilista: require('../assets/Images/carlaMelhorAgilista.jpg'),
     michael: require('../assets/Images/michael.jpg'),
+    star: require('../assets/Images/estrela.png'),
+    starEmpty: require('../assets/Images/estrela_vazia.png'),
   },
 };
