@@ -29,25 +29,9 @@ import {
   LogOutButton,
   LogOutButtonText,
   Content,
-  HelpButton,
-  HelpIcon,
-  HelpButtonText,
-  HelpContent,
-  ArrowImage,
-  AboutContent,
-  AboutButton,
-  AboutIcon,
-  AboutButtonText,
-  LogOutContent,
-  LogOutPageButton,
-  LogOutIcon,
-  LogOutPageButtonText,
-  DeleteUserContent,
-  DeleteUserButton,
-  DeleteUserIcon,
-  DeleteUserButtonText,
 } from './styles';
 import {useNavigation} from '@react-navigation/native';
+import {ProfilePageComponent} from '@components/ProfilePageComponent';
 
 interface CostumerProps {
   id: number;
@@ -63,7 +47,7 @@ interface Photo {
   code: string;
 }
 
-const ModalPoup = ({visible, children}: any) => {
+const CloseAppModal = ({visible, children}: any) => {
   const [showModal, setShowModal] = useState(visible);
   const scaleValue = useRef(new Animated.Value(0)).current;
   const changeModalState = () => {
@@ -129,7 +113,6 @@ export function Settings() {
   return (
     <Container>
       <StatusBar
-        hidden
         barStyle={'light-content'}
         backgroundColor={theme.colors.background}
       />
@@ -163,40 +146,36 @@ export function Settings() {
           </UserInfoWrapper>
         </UserInfo>
 
-        <HelpContent>
-          <HelpButton onPress={() => navigation.navigate('About' as never)}>
-            <HelpIcon source={theme.icons.help} />
-            <HelpButtonText>Ajuda</HelpButtonText>
-            <ArrowImage source={theme.icons.settingsArrow} />
-          </HelpButton>
-        </HelpContent>
+        <ProfilePageComponent
+          onPress={() => navigation.navigate('About' as never)}
+          name="Ajuda"
+          sourceArrowIcon={theme.icons.settingsArrow}
+          sourceIcon={theme.icons.help}
+        />
 
-        <AboutContent>
-          <AboutButton onPress={() => navigation.navigate('About' as never)}>
-            <AboutIcon source={theme.icons.about} />
-            <AboutButtonText>Sobre o DevelFood</AboutButtonText>
-            <ArrowImage source={theme.icons.settingsArrow} />
-          </AboutButton>
-        </AboutContent>
+        <ProfilePageComponent
+          onPress={() => navigation.navigate('About' as never)}
+          name="Sobre o DevelFood"
+          sourceArrowIcon={theme.icons.settingsArrow}
+          sourceIcon={theme.icons.about}
+        />
 
-        <LogOutContent>
-          <LogOutPageButton onPress={() => setIsVisible(true)}>
-            <LogOutIcon source={theme.icons.logoutIcon} />
-            <LogOutPageButtonText>Sair do App</LogOutPageButtonText>
-            <ArrowImage source={theme.icons.settingsArrow} />
-          </LogOutPageButton>
-        </LogOutContent>
+        <ProfilePageComponent
+          onPress={() => setIsVisible(true)}
+          name="Sair do App"
+          sourceArrowIcon={theme.icons.settingsArrow}
+          sourceIcon={theme.icons.logoutIcon}
+        />
 
-        <DeleteUserContent>
-          <DeleteUserButton>
-            <DeleteUserIcon source={theme.icons.deleteUserIcon} />
-            <DeleteUserButtonText>Excluir Conta</DeleteUserButtonText>
-            <ArrowImage source={theme.icons.settingsArrow} />
-          </DeleteUserButton>
-        </DeleteUserContent>
+        <ProfilePageComponent
+          onPress={() => setIsVisible(true)}
+          name="Excluir Conta"
+          sourceArrowIcon={theme.icons.settingsArrow}
+          sourceIcon={theme.icons.deleteUserIcon}
+        />
       </Content>
 
-      <ModalPoup visible={isVisible}>
+      <CloseAppModal visible={isVisible}>
         <ModalContent>
           <LogOutImage source={theme.images.logoutImage} />
           <MessageLogOut>
@@ -209,7 +188,7 @@ export function Settings() {
             <LogOutButtonText>Yes, I'm sure</LogOutButtonText>
           </LogOutButton>
         </ModalContent>
-      </ModalPoup>
+      </CloseAppModal>
     </Container>
   );
 }
