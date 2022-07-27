@@ -1,7 +1,7 @@
 import {RFValue} from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
-export interface CartStyleProps {
+interface CartStyleProps {
   insideCart: number;
 }
 
@@ -118,6 +118,7 @@ export const AddQuantityButtonLabel = styled.Text`
   color: ${({theme}) => theme.colors.background_red};
   font-weight: 700;
 `;
+
 export const RemoveCartButton = styled.TouchableOpacity`
   position: absolute;
   margin-left: ${RFValue(25)}px;
@@ -178,3 +179,5 @@ export const CleanUpTitle = styled.Text`
   color: ${({theme}) => theme.colors.text_white};
   font-weight: 400;
 `;
+
+export const PlateButton = styled.TouchableOpacity``;
