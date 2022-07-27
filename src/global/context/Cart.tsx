@@ -113,7 +113,23 @@ interface Props {
   foodTypes: string;
   restaurantPhoto: string;
   userRequestCheckout: Function;
+  paramsToOrderDetails: Function;
+  plateData: Plate;
   loading: boolean;
+}
+
+interface Plate {
+  name: string;
+  price: number;
+  description: string;
+  source: string;
+  id: number;
+  restaurantFoodTypes: string;
+  restaurantName: string;
+  favorite: boolean;
+  inside: boolean;
+  restaurantID: number;
+  photoRestaurant: string;
 }
 
 interface ItemProps {
@@ -348,6 +364,36 @@ function CartProvider({children}: AuthProviderProps) {
     await handlerPost(createCheckoutRequest, cartError, CheckoutUserSuccess);
   }
 
+  const [plateData, setPlateData] = useState<Plate>({} as Plate);
+
+  function paramsToOrderDetails(
+    name: string,
+    price: number,
+    description: string,
+    source: string,
+    id: number,
+    restaurantFoodTypes: string,
+    restaurantName: string,
+    favorite: boolean,
+    inside: boolean,
+    restaurantID: number,
+    photoRestaurant: string,
+  ) {
+    setPlateData({
+      name: name,
+      price: price,
+      description: description,
+      source: source,
+      id: id,
+      restaurantFoodTypes: restaurantFoodTypes,
+      restaurantName: restaurantName,
+      favorite: favorite,
+      inside: inside,
+      restaurantID: restaurantID,
+      photoRestaurant: photoRestaurant,
+    });
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -364,6 +410,8 @@ function CartProvider({children}: AuthProviderProps) {
         restaurantPhoto,
         restaurantId,
         userRequestCheckout,
+        paramsToOrderDetails,
+        plateData,
         loading,
       }}>
       {children}
