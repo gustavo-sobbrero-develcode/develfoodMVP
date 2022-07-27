@@ -301,7 +301,7 @@ export function Plates({
         <FavoriteButton onPress={likeButtonPressed}>
           <FavoriteImage
             source={favoriteWhite}
-            style={isFavorite && {tintColor: 'red'}}
+            style={[isFavorite && styles.tintColor, styles.resizeMode]}
           />
         </FavoriteButton>
 
@@ -380,4 +380,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  tintColor: {tintColor: 'red'},
+  resizeMode: {resizeMode: 'contain'},
 });
