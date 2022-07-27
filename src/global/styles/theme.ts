@@ -80,6 +80,8 @@ export default {
     about: require('../assets/Icons/about.png'),
     logoutIcon: require('../assets/Icons/logoutIcon.png'),
     deleteUserIcon: require('../assets/Icons/deleteUserIcon.png'),
+    restaurant: require('../assets/Icons/restaurant.png'),
+    trash: require('../assets/Icons/trash.png'),
   },
 
   images: {
