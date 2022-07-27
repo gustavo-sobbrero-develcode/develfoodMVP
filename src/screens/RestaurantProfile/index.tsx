@@ -7,7 +7,6 @@ import {
 } from '@react-navigation/native';
 import React, {useCallback, useEffect, useState} from 'react';
 import {ActivityIndicator, Image, StatusBar, View} from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
 import {useTheme} from 'styled-components';
 import {useDebouncedCallback} from 'use-debounce';
 import {CartComponent} from '@components/CartComponent';
@@ -32,8 +31,17 @@ import {
   Content,
   Title,
   PlatesWrapper,
+  Separator,
 } from './styles';
 import {HeaderComponent} from '@components/HeaderComponent';
+import Animated, {
+  Extrapolate,
+  interpolate,
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
 export interface Plate {
   id: number;
@@ -86,6 +94,30 @@ export function RestaurantProfile({route}: RouteParams) {
   const [selected, setSelected] = useState(false);
 
   const {totalItems} = useCreateCart();
+
+  const scrollY = useSharedValue(0);
+  const opacity = useSharedValue(0);
+
+  const scrollHandler = useAnimatedScrollHandler(event => {
+    scrollY.value = event.contentOffset.y;
+    if (scrollY.value >= 40) {
+      opacity.value = withTiming(1, {duration: 500});
+    } else if (scrollY.value <= 35) {
+      opacity.value = withTiming(0, {duration: 500});
+    }
+  });
+
+  const headerSeparatorStyle = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(scrollY.value, [5, 50], [0, 1], Extrapolate.CLAMP),
+    };
+  });
+
+  const headerTitle = useAnimatedStyle(() => {
+    return {
+      opacity: opacity.value,
+    };
+  });
 
   const {fetchData} = useFetch<Plate[]>(
     `/plate/search?name=${filter}&restaurantid=${id}`,
@@ -181,10 +213,12 @@ export function RestaurantProfile({route}: RouteParams) {
       <HeaderView>
         <HeaderComponent
           backgroudColor={theme.colors.background}
-          name=""
+          name={name}
           source={theme.icons.arrow}
           iconColor={theme.colors.icon_dark}
           onPress={handlerBackButton}
+          animatedStyle={headerTitle}
+          Textcolor={theme.colors.icon_dark}
         />
         <HeartButton onPress={() => setSelected(!selected)}>
           <Image
@@ -193,36 +227,38 @@ export function RestaurantProfile({route}: RouteParams) {
           />
         </HeartButton>
       </HeaderView>
-      <WrapperRestaurantInfo>
-        <WrapperRestaurantTypes>
-          <NameRestaurant>{name}</NameRestaurant>
-          <TypeFood>
-            {food_types.charAt(0).toUpperCase() +
-              food_types.slice(1).toLowerCase()}
-          </TypeFood>
-        </WrapperRestaurantTypes>
-
-        <WrapperPhoto>
-          <RestaurantPhoto
-            source={
-              data.code
-                ? {
-                    uri: `${data.code}`,
-                  }
-                : theme.images.noImage
-            }
-          />
-        </WrapperPhoto>
-      </WrapperRestaurantInfo>
-
-      <LineBetween />
-
-      <FlatList
+      <Separator style={headerSeparatorStyle} />
+      <Animated.FlatList
+        onScroll={scrollHandler}
+        scrollEventThrottle={16}
         data={plate}
         keyExtractor={item => item.id.toString()}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={
           <>
+            <WrapperRestaurantInfo>
+              <WrapperRestaurantTypes>
+                <NameRestaurant>{name}</NameRestaurant>
+                <TypeFood>
+                  {food_types.charAt(0).toUpperCase() +
+                    food_types.slice(1).toLowerCase()}
+                </TypeFood>
+              </WrapperRestaurantTypes>
+
+              <WrapperPhoto>
+                <RestaurantPhoto
+                  source={
+                    data.code
+                      ? {
+                          uri: `${data.code}`,
+                        }
+                      : theme.images.noImage
+                  }
+                />
+              </WrapperPhoto>
+            </WrapperRestaurantInfo>
+
+            <LineBetween />
             <Content>
               <Title>Pratos</Title>
 

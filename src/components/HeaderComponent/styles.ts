@@ -1,3 +1,4 @@
+import Animated from 'react-native-reanimated';
 import {RFValue} from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
@@ -9,7 +10,7 @@ export const Container = styled.View`
   flex-direction: row;
 `;
 
-export const Title = styled.Text`
+export const Title = styled(Animated.Text)`
   font-size: ${RFValue(14)}px;
   color: ${({theme}) => theme.colors.text_dark};
   font-weight: 500;
