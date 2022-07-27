@@ -122,7 +122,9 @@ const createUser = createContext({
 } as Props);
 
 function CreateUserProvider({children}: AuthProviderProps) {
-  const {handlerPost, loading} = usePost<CreateUserPost, any>('/user');
+  const {handlerPost, loading} = usePost<CreateUserPost, CreateUserResponse>(
+    '/user',
+  );
 
   const [postData, setPostData] = useState<CreateUserPost>(
     {} as CreateUserPost,
