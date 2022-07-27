@@ -54,8 +54,7 @@ interface ListPlatesProps {
   inside: boolean;
   photoRestaurant?: string;
   Swipe: boolean;
-  favorite: boolean;
-  isButton?: boolean;
+  favorite?: boolean;
 }
 
 interface Photos {
@@ -148,7 +147,9 @@ export function Plates({
 
   const favoriteWhite = require('../../global/assets/Icons/favoriteRestaurant.png');
 
-  const [isFavorite, setIsFavorite] = useState<boolean>(favorite);
+  const [isFavorite, setIsFavorite] = useState<boolean>(
+    favorite ? favorite : false,
+  );
 
   const navigation = useNavigation();
 
