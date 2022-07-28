@@ -51,3 +51,19 @@ export const ButtonWrapper = styled.View`
   width: 100%;
   padding: 0 ${RFValue(32)}px;
 `;
+
+export const ErrorImage = styled.Image`
+  height: ${RFValue(30)}px;
+  width: ${RFValue(30)}px;
+  align-self: center;
+  margin-top: ${RFValue(15)}px;
+`;
+
+export const ModalMessage = styled.Text`
+  font-family: ${({theme}) => theme.fonts.primaryMed};
+  font-size: ${RFValue(14)}px;
+  font-weight: bold;
+  color: ${({theme}) => theme.colors.text_dark};
+  text-align: center;
+  margin-top: ${RFValue(15)}px;
+`;
