@@ -3,25 +3,101 @@ import {RFValue} from 'react-native-responsive-fontsize';
 
 export const Container = styled.View`
   flex: 1;
-
   background-color: ${({theme}) => theme.colors.background};
 `;
 
-export const Header = styled.View`
-  width: 100%;
-  height: ${RFValue(148)}px;
-
-  background-color: ${({theme}) => theme.colors.header};
+export const Content = styled.View`
+  padding: ${RFValue(5)}px;
 `;
 
-export const BannerWrapper = styled.ScrollView.attrs({
-  horizontal: true,
-  showsHorizontalScrollIndicator: false,
-  contentContainerStyle: {paddingLeft: 12},
+export const UserInfo = styled.View.attrs({
+  elevation: 5,
 })`
-  top: ${RFValue(20)}px;
+  width: 100%;
+  height: ${RFValue(100)}px;
+  padding-top: ${RFValue(16)}px;
+  padding-left: ${RFValue(16)}px;
+  flex-direction: row;
+  background-color: ${({theme}) => theme.colors.background};
 `;
 
-export const Banner = styled.Image`
-  margin-right: ${RFValue(8)}px;
+export const UserPhoto = styled.Image.attrs({
+  resizeMode: 'contain',
+})`
+  width: ${RFValue(64)}px;
+  height: ${RFValue(64)}px;
+  border-radius: ${RFValue(10)}px;
+`;
+
+export const UserInfoWrapper = styled.View`
+  left: ${RFValue(24)}px;
+  top: ${RFValue(7)}px;
+`;
+
+export const UserName = styled.Text`
+  font-size: ${RFValue(14)}px;
+  font-weight: 400;
+  color: ${({theme}) => theme.colors.text_dark};
+`;
+
+export const UserEditInfoWrapper = styled.View`
+  top: ${RFValue(7)}px;
+  flex-direction: row;
+`;
+
+export const UserEditInfoText = styled.Text`
+  font-size: ${RFValue(12)}px;
+  color: ${({theme}) => theme.colors.text_gray};
+`;
+
+export const UserEditInfoButton = styled.TouchableOpacity`
+  left: ${RFValue(6)}px;
+`;
+
+export const EditInfoIcon = styled.Image``;
+
+export const ModalContent = styled.View`
+  align-items: center;
+`;
+
+export const LogOutImage = styled.Image``;
+
+export const MessageLogOut = styled.Text`
+  text-align: center;
+  font-size: ${RFValue(14)}px;
+  color: ${({theme}) => theme.colors.text_dark};
+  top: ${RFValue(15)}px;
+`;
+
+export const CloseModal = styled.TouchableOpacity`
+  width: ${RFValue(200)}px;
+  height: ${RFValue(50)}px;
+  border-radius: ${RFValue(30)}px;
+  align-items: center;
+  justify-content: center;
+  background-color: ${({theme}) => theme.colors.modalButtonClose};
+  top: ${RFValue(25)}px;
+`;
+
+export const CloseModalText = styled.Text`
+  font-size: ${RFValue(14)}px;
+  color: ${({theme}) => theme.colors.text_white};
+`;
+
+export const LogOutButton = styled.TouchableOpacity`
+  width: ${RFValue(200)}px;
+  height: ${RFValue(50)}px;
+  border-radius: ${RFValue(30)}px;
+  border: ${RFValue(1)}px;
+  border-color: ${({theme}) => theme.colors.modalButtonClose};
+  align-items: center;
+  justify-content: center;
+  background-color: ${({theme}) => theme.colors.background};
+  top: ${RFValue(35)}px;
+  margin-bottom: ${RFValue(40)}px;
+`;
+
+export const LogOutButtonText = styled.Text`
+  font-size: ${RFValue(14)}px;
+  color: ${({theme}) => theme.colors.modalButtonClose};
 `;

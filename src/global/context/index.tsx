@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {createContext, useState} from 'react';
 import {useEffect} from 'react';
 import {useContext} from 'react';
@@ -12,6 +13,7 @@ interface Props {
   userLogin: Function;
   token: string;
   loading: boolean;
+  logOut: Function;
 }
 
 interface LoginRequest {
@@ -28,6 +30,7 @@ const AuthContext = createContext({
   loading: false,
   userLogin: () => {},
   token: '',
+  logOut: () => {},
 } as Props);
 
 function AuthProvider({children}: AuthProviderProps) {
@@ -38,17 +41,44 @@ function AuthProvider({children}: AuthProviderProps) {
     Alert.alert('Erro', 'Email ou senha incorretos');
   };
 
+  async function logOut() {
+    try {
+      setToken('');
+      await AsyncStorage.clear();
+    } catch (error) {}
+  }
+
+  const getUserData = async () => {
+    try {
+      const userToken = await AsyncStorage.getItem('@userToken');
+      if (userToken) {
+        setToken(userToken);
+      }
+    } catch (error) {
+      Alert.alert('Erro', 'Erro ao carregar dados');
+    }
+  };
+
+  async function onSuccess(dataAsyncStorage: UserData) {
+    setToken(dataAsyncStorage.token);
+    await AsyncStorage.setItem('@userToken', dataAsyncStorage.token);
+  }
+
   async function userLogin(request: LoginRequest) {
-    await handlerPost(request, loginError);
-    setToken(data.token);
+    try {
+      await handlerPost(request, loginError, onSuccess);
+      setToken(data.token);
+      data.token && (await AsyncStorage.setItem('@userToken', token));
+    } catch (error) {}
   }
 
   useEffect(() => {
     setToken(data.token);
-  }, [data.token, loading]);
+    getUserData();
+  }, [loading, data.token]);
 
   return (
-    <AuthContext.Provider value={{userLogin, token, loading}}>
+    <AuthContext.Provider value={{userLogin, token, loading, logOut}}>
       {children}
     </AuthContext.Provider>
   );

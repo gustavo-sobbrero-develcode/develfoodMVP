@@ -10,9 +10,7 @@ export const useDelete = <TResponse = unknown>(
   options?: AxiosRequestConfig,
 ) => {
   const [data, setData] = useState<TResponse>({} as TResponse);
-
   const [loading, setLoading] = useState(false);
-
   const [error, setError] = useState<Error | null | unknown>(null);
 
   async function handlerDelete() {
