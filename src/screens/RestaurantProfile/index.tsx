@@ -170,7 +170,7 @@ export function RestaurantProfile({route}: RouteParams) {
   }, 1500);
 
   function handlerBackButton() {
-    navigation.navigate('Home' as never);
+    navigation.goBack();
   }
 
   function handlerCheckoutScreen() {

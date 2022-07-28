@@ -109,6 +109,7 @@ interface Props {
   totalItems: number;
   total: number;
   nameRestaurant: string;
+  restaurantId: number;
   foodTypes: string;
   restaurantPhoto: string;
   userRequestCheckout: Function;
@@ -160,6 +161,8 @@ function CartProvider({children}: AuthProviderProps) {
 
   const [restaurantPhoto, setRestaurantPhoto] = useState('');
 
+  const [restaurantId, setRestaurantId] = useState(0);
+
   function addNewProductoCart(
     id: number,
     price: number,
@@ -204,6 +207,7 @@ function CartProvider({children}: AuthProviderProps) {
       setNameRestaurant(restaurantName);
       setFoodTypes(restaurantFoodTypes);
       setRestaurantPhoto(photoRestaurant);
+      setRestaurantId(restaurantID);
     } else {
       Alert.alert(
         'Você não pode adicionar produtos de restaurantes diferentes',
@@ -404,6 +408,7 @@ function CartProvider({children}: AuthProviderProps) {
         nameRestaurant,
         foodTypes,
         restaurantPhoto,
+        restaurantId,
         userRequestCheckout,
         paramsToOrderDetails,
         plateData,
