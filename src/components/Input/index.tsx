@@ -18,12 +18,13 @@ interface Props extends TextInputProps {
   error?: string;
   editable?: boolean;
   source: ImageSourcePropType;
-  placeholder: string;
+  placeholder?: string;
   keyboardType?: KeyboardType;
   sourcePassword?: boolean;
   onChangeText: (value: string) => void;
   value?: string;
   maxLength?: number;
+  defaultValue?: string;
 }
 
 export function Input({
@@ -34,6 +35,7 @@ export function Input({
   keyboardType,
   sourcePassword,
   onChangeText,
+  defaultValue,
   value,
   maxLength,
 }: Props) {
@@ -49,6 +51,8 @@ export function Input({
         <LoginIcon source={source} />
 
         <InputLogin
+          selectTextOnFocus
+          defaultValue={defaultValue}
           placeholder={placeholder}
           autoCapitalize="none"
           keyboardType={keyboardType}
