@@ -3,6 +3,77 @@ import {useContext} from 'react';
 import {Alert} from 'react-native';
 import {usePost} from '@global/services/post';
 
+interface CreateUserResponse {
+  accountNonExpired: boolean;
+  accountNonLocked: boolean;
+  authorities: [
+    {
+      authority: string;
+    },
+  ];
+  costumer: {
+    address: [
+      {
+        city: string;
+        id: 0;
+        neighborhood: string;
+        nickname: string;
+        number: string;
+        state: string;
+        street: string;
+        zipCode: string;
+      },
+    ];
+    cpf: string;
+    firstName: string;
+    id: 0;
+    lastName: string;
+    phone: string;
+    photo: {
+      code: string;
+      id: 0;
+    };
+  };
+  creationDate: string;
+  credentialsNonExpired: boolean;
+  email: string;
+  enabled: boolean;
+  id: 0;
+  password: string;
+  restaurant: {
+    address: {
+      city: string;
+      id: 0;
+      neighborhood: string;
+      nickname: string;
+      number: string;
+      state: string;
+      street: string;
+      zipCode: string;
+    };
+    cnpj: string;
+    foodTypes: [
+      {
+        id: 0;
+        name: string;
+      },
+    ];
+    id: 0;
+    name: string;
+    phone: string;
+    photo: {
+      code: string;
+      id: 0;
+    };
+  };
+  role: {
+    authority: string;
+    id: 0;
+    name: string;
+  };
+  username: string;
+}
+
 interface AuthProviderProps {
   children: React.ReactNode;
 }
@@ -51,7 +122,9 @@ const createUser = createContext({
 } as Props);
 
 function CreateUserProvider({children}: AuthProviderProps) {
-  const {handlerPost, loading} = usePost<CreateUserPost, any>('/user');
+  const {handlerPost, loading} = usePost<CreateUserPost, CreateUserResponse>(
+    '/user',
+  );
 
   const [postData, setPostData] = useState<CreateUserPost>(
     {} as CreateUserPost,
