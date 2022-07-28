@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
 import {BackButton} from '@components/BackButton';
@@ -11,6 +11,7 @@ import {ContinueButton} from '@components/ContinueButton';
 import {useCreateUser} from '@global/context/createUserAuth';
 
 import {
+  Dimensions,
   Image,
   Keyboard,
   StatusBar,
@@ -28,7 +29,11 @@ import {
   CenterCircle,
   InputWrapper,
   ButtonWrapper,
+  ModalMessage,
+  ErrorImage,
 } from './styles';
+import api from '@global/services/api';
+import {Modalize} from 'react-native-modalize';
 
 interface FormData {
   email: string;
@@ -56,6 +61,12 @@ export function Register() {
 
   const {handleSetPostData, loading} = useCreateUser();
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  const modalizeRef = useRef<Modalize>(null);
+
+  const ModalHeight = Dimensions.get('screen').height * 0.2;
+
   function handlerBackButton() {
     navigation.navigate('Login' as never);
   }
@@ -68,13 +79,22 @@ export function Register() {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (value: FormData) => {
-    handleSetPostData({
-      email: value.email,
-      password: value.password,
-      creationDate: new Date(),
-    });
-    navigation.navigate('RegisterPersonalData' as never);
+  const onSubmit = async (value: FormData) => {
+    setIsLoading(true);
+    await api
+      .get(`/user/verify?email=${value.email}`)
+      .then(() => {
+        modalizeRef.current?.open();
+      })
+      .catch(() => {
+        handleSetPostData({
+          email: value.email,
+          password: value.password,
+          creationDate: new Date(),
+        });
+        navigation.navigate('RegisterPersonalData' as never);
+      });
+    setIsLoading(false);
   };
 
   return (
@@ -172,9 +192,13 @@ export function Register() {
           <ContinueButton
             title="Continuar"
             onPressed={handleSubmit(onSubmit)}
-            loading={loading}
+            loading={isLoading}
           />
         </ButtonWrapper>
+        <Modalize modalHeight={ModalHeight} ref={modalizeRef}>
+          <ErrorImage source={theme.images.error} />
+          <ModalMessage>E-mail já cadastrado no Develfood...</ModalMessage>
+        </Modalize>
       </Container>
     </TouchableWithoutFeedback>
   );
