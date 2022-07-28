@@ -8,9 +8,10 @@ interface Props extends TextInputProps {
   error?: string;
   editable: boolean;
   source: ImageSourcePropType;
-  placeholder: string;
-  onChangeText: (value: string) => void;
-  value: string;
+  placeholder?: string;
+  defaultValue?: string;
+  onChangeText?: (value: string) => void;
+  value?: string;
 }
 
 export function InputMask({
@@ -19,6 +20,7 @@ export function InputMask({
   source,
   placeholder,
   onChangeText,
+  defaultValue,
   value,
 }: Props) {
   return (
@@ -28,6 +30,7 @@ export function InputMask({
 
         <TextMask
           type="cel-phone"
+          defaultValue={defaultValue}
           options={{maskType: 'BRL', withDDD: true, dddMask: '(99) '}}
           placeholder={placeholder}
           autoCapitalize="none"

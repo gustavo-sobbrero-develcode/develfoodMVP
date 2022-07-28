@@ -71,6 +71,7 @@ export default {
     waitingorder: require('../assets/Icons/waitingorder.png'),
     restaurant: require('../assets/Icons/restaurant.png'),
     trash: require('../assets/Icons/trash.png'),
+    camera: require('../assets/Icons/camera.png'),
   },
 
   images: {
