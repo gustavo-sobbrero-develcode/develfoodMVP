@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
 import {BackButton} from '@components/BackButton';
@@ -36,6 +37,8 @@ import {
   ButtonWrapper,
 } from './styles';
 import {InputMaskZipCode} from '@components/InputMask/zipcode';
+import {useState} from 'react';
+import {useCep} from '@global/services/viaCEP';
 
 interface FormData {
   street: string;
@@ -77,6 +80,10 @@ interface CreateUserAccount {
   };
 }
 
+interface CEPProps {
+  endpoint: string;
+}
+
 const schema = Yup.object().shape({
   street: Yup.string().required('Rua é obrigatório.'),
   city: Yup.string().required('Cidade é obrigatória.'),
@@ -94,6 +101,10 @@ export function RegisterLocale() {
 
   const theme = useTheme();
 
+  const [cep, setCEP] = useState('');
+
+  const {data: cepData, handleCEP} = useCep<CEPProps>(`/${cep}/json/`);
+
   const {handleSetPostData, loading, createUserAccount, postData} =
     useCreateUser();
 
@@ -104,6 +115,7 @@ export function RegisterLocale() {
   const {
     control,
     handleSubmit,
+    setValue,
     formState: {errors},
   } = useForm<FormData>({
     resolver: yupResolver(schema),
@@ -132,6 +144,22 @@ export function RegisterLocale() {
     }
     await createUserAccount(createUserSuccess, postData);
   };
+
+  function handleCEPChange() {
+    handleCEP();
+  }
+
+  useEffect(() => {
+    setValue('street', cepData.logradouro);
+    setValue('city', cepData.localidade);
+    setValue('neighborhood', cepData.bairro);
+    setValue('state', cepData.uf);
+    setValue('cep', cep);
+  }, [cepData]);
+
+  useEffect(() => {
+    handleCEP();
+  }, [cepData]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -193,9 +221,15 @@ export function RegisterLocale() {
                 render={({field: {onChange, value}}) => (
                   <InputMaskZipCode
                     source={theme.icons.locale}
+                    name="cep"
                     error={errors.cep && errors.cep.message}
                     editable={!loading}
-                    onChangeText={onChange}
+                    onChangeText={text => {
+                      onChange;
+                      setCEP(text);
+                      console.log('text ==>', text);
+                    }}
+                    onBlur={() => handleCEPChange()}
                     value={value}
                     placeholder="CEP"
                   />
@@ -212,7 +246,11 @@ export function RegisterLocale() {
               render={({field: {onChange, value}}) => (
                 <Input
                   editable={!loading}
-                  error={errors.street && errors.street.message}
+                  error={
+                    cepData.logradouro
+                      ? null
+                      : errors.street && errors.street.message
+                  }
                   keyboardType="email-address"
                   placeholder="Rua"
                   source={theme.icons.locale}
@@ -230,7 +268,11 @@ export function RegisterLocale() {
               render={({field: {onChange, value}}) => (
                 <Input
                   editable={!loading}
-                  error={errors.city && errors.city.message}
+                  error={
+                    cepData.localidade
+                      ? null
+                      : errors.city && errors.city.message
+                  }
                   keyboardType="email-address"
                   placeholder="Cidade"
                   source={theme.icons.locale}
@@ -248,7 +290,11 @@ export function RegisterLocale() {
               render={({field: {onChange, value}}) => (
                 <Input
                   editable={!loading}
-                  error={errors.neighborhood && errors.neighborhood.message}
+                  error={
+                    cepData.logradouro
+                      ? null
+                      : errors.neighborhood && errors.neighborhood.message
+                  }
                   keyboardType="email-address"
                   placeholder="Bairro"
                   source={theme.icons.locale}
@@ -269,7 +315,9 @@ export function RegisterLocale() {
                 render={({field: {onChange, value}}) => (
                   <Input
                     editable={!loading}
-                    error={errors.state && errors.state.message}
+                    error={
+                      cepData.uf ? null : errors.state && errors.state.message
+                    }
                     keyboardType="email-address"
                     placeholder="Estado"
                     source={theme.icons.locale}

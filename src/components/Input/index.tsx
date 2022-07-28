@@ -14,7 +14,7 @@ import {ImageSourcePropType, KeyboardType, TextInputProps} from 'react-native';
 
 interface Props extends TextInputProps {
   name?: string;
-  error?: string;
+  error?: string | null;
   editable?: boolean;
   source: ImageSourcePropType;
   placeholder: string;
