@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, {createContext, useContext, useState} from 'react';
 import {useEffect} from 'react';
 import {Alert} from 'react-native';
