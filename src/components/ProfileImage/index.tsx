@@ -11,7 +11,7 @@ import {
 } from './styles';
 
 interface Props {
-  url: string;
+  url: URL | string;
   onPress: () => void;
   loading: boolean;
 }

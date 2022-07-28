@@ -9,7 +9,6 @@ import {Controller, useForm} from 'react-hook-form';
 import {InputMask} from '@components/InputMask';
 
 import {
-  Alert,
   Dimensions,
   Keyboard,
   StatusBar,
