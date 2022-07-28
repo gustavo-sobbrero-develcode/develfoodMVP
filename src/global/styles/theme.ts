@@ -8,6 +8,7 @@ export default {
     card: '#F0F0F5',
     cardRemove: '#FF0000',
     favorite_border: '#DEDCDC',
+    separator: '#DDDDDD',
 
     text_white: '#FFFFFF',
     text_gray: '#BFBABA',
