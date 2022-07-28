@@ -120,7 +120,7 @@ export function Settings() {
   useEffect(() => {
     fetchData();
     fetchPhoto();
-  }, [data, fetchData, fetchPhoto]);
+  }, [data]);
   return (
     <Container>
       <StatusBar
@@ -142,7 +142,8 @@ export function Settings() {
 
             <UserEditInfoWrapper>
               <UserEditInfoText>Editar Perfil</UserEditInfoText>
-              <UserEditInfoButton>
+              <UserEditInfoButton
+                onPress={() => navigation.navigate('EditProfile' as never)}>
                 <EditInfoIcon source={themeProps.icons.editInfo} />
               </UserEditInfoButton>
             </UserEditInfoWrapper>
