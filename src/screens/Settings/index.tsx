@@ -27,6 +27,7 @@ import {
   LogOutButton,
   LogOutButtonText,
   Content,
+  UserPhotoNoPhoto,
 } from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {ProfilePageComponent} from '@components/ProfilePageComponent';
@@ -135,6 +136,7 @@ export function Settings() {
 
       <Content>
         <UserInfo>
+          <UserPhotoNoPhoto source={theme.images.eu} />
           <UserPhoto source={getUserPhoto} />
 
           <UserInfoWrapper>
