@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState} from 'react';
 import {StatusBar, StyleSheet, Modal, View, Animated} from 'react-native';
 import {HeaderComponent} from '@components/HeaderComponent';
@@ -120,7 +119,8 @@ export function Settings() {
   useEffect(() => {
     fetchData();
     fetchPhoto();
-  }, [data, fetchData, fetchPhoto]);
+  }, [data]);
+
   return (
     <Container>
       <StatusBar

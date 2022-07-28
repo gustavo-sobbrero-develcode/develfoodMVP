@@ -68,7 +68,7 @@ export function RedefinePassword() {
   const onSubmit = async (value: FormData) => {
     setLoading(true);
     await api
-      .put(`reset-password/change-password`, {
+      .put('reset-password/change-password', {
         token: value.token,
         password: value.password,
       })
