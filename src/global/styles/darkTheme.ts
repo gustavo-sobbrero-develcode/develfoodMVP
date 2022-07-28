@@ -42,7 +42,7 @@ export default {
 
   icons: {
     home: require('../assets/Icons/home.png'),
-    favorite: require('../assets/Icons/favorite.png'),
+    favorite: require('../assets/Icons/favorite-dark.png'),
     deliverylist: require('../assets/Icons/deliverylist.png'),
     profile: require('../assets/Icons/profile.png'),
     email: require('../assets/loginIcons/E-mail.png'),
@@ -63,7 +63,7 @@ export default {
     womansuccess: require('../assets/loginIcons/womansuccess.png'),
     search: require('../assets/Icons/search.png'),
     iconLocale: require('../assets/Icons/locale.png'),
-    favoriteRestaurant: require('../assets/Icons/favoriteRestaurant.png'),
+    favoriteRestaurant: require('../assets/Icons/favorite-dark.png'),
     starRatio: require('../assets/Icons/star.png'),
     add: require('../assets/Icons/add.png'),
     remove: require('../assets/Icons/remove.png'),
@@ -96,7 +96,7 @@ export default {
     footer: require('../assets/loginImages/dark/null.png'),
     develfood: require('../assets/loginImages/develfood.png'),
     banner: require('../assets/Images/banner.png'),
-    noImage: require('../assets/Images/NoImage.png'),
+    noImage: require('../assets/Images/NoImage-dark.png'),
     pizzaImage: require('../assets/Images/pizza.png'),
     camaraoImage: require('../assets/Images/camarao.png'),
     notFound: require('../assets/Images/not_found.png'),

@@ -4,6 +4,7 @@ import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
 import {ActivityIndicator, StatusBar, StyleSheet, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
+import {useTheme} from 'styled-components';
 import {useDebouncedCallback} from 'use-debounce';
 import {Category} from '../../components/CategoryButton';
 import {HeaderComponent} from '../../components/HeaderComponent';
@@ -11,11 +12,10 @@ import {Input} from '../../components/Input';
 import {ListEmptyComponent} from '../../components/ListEmptyComponent';
 import {Plates} from '../../components/Plates';
 import {useFetch} from '../../global/services/get';
-import theme from '../../global/styles/theme';
 import {CategorySelect} from '../Home/styles';
 import {PlatesWrapper} from '../RestaurantProfile/styles';
 import {Container, Content, Footer} from './styles';
-
+import theme from '@global/styles/theme';
 export interface FavoritesResponse {
   content: Plate[];
   totalPages: number;
@@ -179,20 +179,21 @@ export function Favorites({navigation}: any) {
   function handlerBackButton() {
     navigation.navigate('Inicio');
   }
+  const theme = useTheme();
 
   return (
     <Container>
       <StatusBar
-        barStyle={'dark-content'}
+        barStyle={'default'}
         translucent={false}
         backgroundColor={theme.colors.background}
       />
 
       <HeaderComponent
-        backgroudColor="#ffffff"
+        backgroudColor={theme.colors.background}
         name="Favoritos"
-        Textcolor="#2b2b2e"
-        source={theme.icons.arrow}
+        Textcolor={theme.colors.text_dark}
+        iconColor={theme.colors.icon_gray}
         onPress={handlerBackButton}
       />
 

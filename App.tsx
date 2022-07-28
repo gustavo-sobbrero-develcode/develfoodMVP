@@ -28,10 +28,10 @@ export default function App() {
             <CreateUserProvider>
               <ThemeProvider theme={darkThemeState ? darkTheme : theme}>
                 <NavigationContainer>
-                  <Button
+                  {/* <Button
                     title="Change Theme"
                     onPress={() => setDarkThemeState(!darkThemeState)}
-                  />
+                  /> */}
                   <AppRoutes />
                 </NavigationContainer>
               </ThemeProvider>
