@@ -10,11 +10,15 @@ import {CreateUserProvider} from './src/global/context/createUserAuth';
 import {CartProvider} from './src/global/context/Cart';
 import {RedefinePasswordProvider} from './src/global/context/RedefinePassword';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import darkTheme from '@global/styles/darkTheme';
+import {Button} from 'react-native';
 
 export default function App() {
   useEffect(() => {
     SplashScreen.hide();
   }, []);
+
+  const [darkThemeState, setDarkThemeState] = React.useState(true);
 
   return (
     <GestureHandlerRootView style={{flex: 1}}>
@@ -22,8 +26,12 @@ export default function App() {
         <CartProvider>
           <RedefinePasswordProvider>
             <CreateUserProvider>
-              <ThemeProvider theme={theme}>
+              <ThemeProvider theme={darkThemeState ? darkTheme : theme}>
                 <NavigationContainer>
+                  <Button
+                    title="Change Theme"
+                    onPress={() => setDarkThemeState(!darkThemeState)}
+                  />
                   <AppRoutes />
                 </NavigationContainer>
               </ThemeProvider>

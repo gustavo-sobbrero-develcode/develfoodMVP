@@ -87,7 +87,9 @@ export function Restaurants({
             <FavoriteIcon
               source={theme.icons.favoriteRestaurant}
               style={
-                isPressed ? {tintColor: theme.colors.background_red} : null
+                isPressed
+                  ? {tintColor: theme.colors.icon_red}
+                  : {tintColor: theme.colors.favorite_color}
               }
             />
           </IconButton>

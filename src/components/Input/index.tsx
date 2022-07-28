@@ -11,6 +11,7 @@ import {
 } from './styles';
 
 import {ImageSourcePropType, KeyboardType, TextInputProps} from 'react-native';
+import {useTheme} from 'styled-components';
 
 interface Props extends TextInputProps {
   name?: string;
@@ -44,6 +45,8 @@ export function Input({
     setIsClicked(!isClicked);
   }
 
+  const theme = useTheme();
+
   return (
     <>
       <Container>
@@ -51,6 +54,7 @@ export function Input({
 
         <InputLogin
           selectTextOnFocus
+          placeholderTextColor={theme.colors.text_gray}
           defaultValue={defaultValue}
           placeholder={placeholder}
           autoCapitalize="none"

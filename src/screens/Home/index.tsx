@@ -214,8 +214,8 @@ export function Home() {
           backgroudColor={theme.colors.background_red}
           name="서울특별시 강남구 도산대로49길 22"
           source={theme.icons.map}
-          iconColor={theme.colors.icon_white}
-          Textcolor={theme.colors.text_white}
+          iconColor={theme.colors.icon_light}
+          Textcolor={theme.colors.text_light}
         />
 
         <FlatList

@@ -8,7 +8,7 @@ export const Container = styled.View.attrs({
 })`
   width: ${RFValue(156)}px;
   height: ${RFValue(173)}px;
-  background-color: ${({theme}) => theme.colors.background};
+  background-color: ${({theme}) => theme.colors.card};
   border-radius: ${RFValue(8)}px;
   margin-bottom: ${RFValue(8)}px;
 `;
@@ -43,14 +43,13 @@ export const IconButton = styled.TouchableOpacity`
 export const FavoriteIcon = styled.Image`
   width: ${RFValue(26)}px;
   height: ${RFValue(22)}px;
-  border-color: ${({theme}) => theme.colors.icon_red};
 `;
 
 export const Content = styled.View`
   width: 100%;
   padding: 0 ${RFValue(12)}px;
   height: ${RFValue(69)}px;
-  background-color: ${({theme}) => theme.colors.background};
+  background-color: ${({theme}) => theme.colors.card};
   position: absolute;
   bottom: 0;
   border-radius: ${RFValue(8)}px;

@@ -37,6 +37,7 @@ export const TitleWrapper = styled.View`
 export const Title = styled.Text`
   font-family: ${({theme}) => theme.fonts.secondaryBold};
   font-size: ${RFValue(14)}px;
+  color: ${({theme}) => theme.colors.text_dark};
   font-weight: bold;
 `;
 
