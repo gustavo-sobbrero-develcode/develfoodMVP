@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://1292-164-163-142-68.ngrok.io',
+  baseURL: 'https://develfood-3.herokuapp.com',
 });
 
 export default api;
