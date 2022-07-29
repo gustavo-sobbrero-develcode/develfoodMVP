@@ -43,7 +43,13 @@ export const WrapperPlateInfo = styled.View`
   right: ${RFValue(20)}px;
 `;
 
-export const PlateTitle = styled.Text`
+export const PlateTitleWrapper = styled.View`
+  width: 80%;
+`;
+
+export const PlateTitle = styled.Text.attrs({
+  numberOfLines: 1,
+})`
   text-align: justify;
   font-weight: 500;
   font-size: ${RFValue(14)}px;
@@ -67,9 +73,8 @@ export const FavoriteImage = styled.Image`
 `;
 
 export const WrapperAdvancedInfo = styled.View`
-  position: absolute;
   width: 100%;
-  top: ${RFValue(62)}px;
+  margin-top: ${RFValue(5)}px;
   flex-direction: row;
   justify-content: space-between;
 `;
@@ -102,9 +107,7 @@ export const WrapperCartButton = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  left: ${(props: CartStyleProps) =>
-    props.insideCart ? props.insideCart : 10}px;
+  margin-right: ${RFValue(20)}px;
 `;
 
 export const AddQuantityButton = styled.TouchableOpacity`
