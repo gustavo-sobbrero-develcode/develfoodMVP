@@ -40,7 +40,9 @@ export const IconButton = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-export const FavoriteIcon = styled.Image`
+export const FavoriteIcon = styled.Image.attrs({
+  resizeMode: 'contain',
+})`
   width: ${RFValue(26)}px;
   height: ${RFValue(23)}px;
   border-color: ${({theme}) => theme.colors.icon_red};
