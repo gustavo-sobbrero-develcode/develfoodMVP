@@ -1,7 +1,7 @@
 import {useAuth} from '@global/context';
 import {useFocusEffect} from '@react-navigation/native';
 import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
-import {ActivityIndicator, StatusBar, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, StatusBar, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
@@ -15,7 +15,6 @@ import {useFetch} from '../../global/services/get';
 import {CategorySelect} from '../Home/styles';
 import {PlatesWrapper} from '../RestaurantProfile/styles';
 import {Container, Content, Footer} from './styles';
-import theme from '@global/styles/theme';
 export interface FavoritesResponse {
   content: Plate[];
   totalPages: number;
@@ -149,8 +148,16 @@ export function Favorites({navigation}: any) {
         <Category
           key={item.id}
           title={item.name}
-          style={activeButton === item.name && styles.activeButton}
-          textStyle={activeButton === item.name && styles.activeText}
+          style={
+            activeButton === item.name && {
+              backgroundColor: theme.colors.background,
+              borderWidth: 2,
+              borderColor: theme.colors.background_red,
+            }
+          }
+          textStyle={
+            activeButton === item.name && {color: theme.colors.background_red}
+          }
           onPress={() => onPress(item)}
         />
       );
@@ -241,14 +248,3 @@ export function Favorites({navigation}: any) {
     </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  activeButton: {
-    backgroundColor: theme.colors.background,
-    borderWidth: 2,
-    borderColor: theme.colors.background_red,
-  },
-  activeText: {
-    color: theme.colors.background_red,
-  },
-});

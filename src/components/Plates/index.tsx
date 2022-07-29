@@ -146,8 +146,6 @@ export function Plates({
     fetchData();
   }, [source]);
 
-  const favoriteWhite = require('../../global/assets/Icons/favoriteRestaurant.png');
-
   const [isFavorite, setIsFavorite] = useState<boolean>(
     favorite ? favorite : false,
   );
@@ -301,8 +299,11 @@ export function Plates({
       <Container>
         <FavoriteButton onPress={likeButtonPressed}>
           <FavoriteImage
-            source={favoriteWhite}
-            style={[isFavorite && styles.tintColor, styles.resizeMode]}
+            source={theme.icons.favorite}
+            style={[
+              isFavorite && {tintColor: theme.colors.background_red},
+              {resizeMode: 'contain'},
+            ]}
           />
         </FavoriteButton>
 
@@ -371,8 +372,3 @@ export function Plates({
     </PlateButton>
   );
 }
-
-const styles = StyleSheet.create({
-  tintColor: {tintColor: 'red'},
-  resizeMode: {resizeMode: 'contain'},
-});

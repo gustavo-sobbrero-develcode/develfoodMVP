@@ -83,7 +83,7 @@ export function Register() {
         <StatusBar
           hidden={false}
           barStyle={'dark-content'}
-          backgroundColor={'white'}
+          backgroundColor={theme.colors.background}
         />
         <Header>
           <BackButton onPressed={handlerBackButton} name="arrow" />

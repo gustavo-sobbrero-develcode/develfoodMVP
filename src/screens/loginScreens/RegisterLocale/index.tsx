@@ -136,7 +136,10 @@ export function RegisterLocale() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Container>
-        <StatusBar barStyle={'dark-content'} backgroundColor={'white'} />
+        <StatusBar
+          barStyle={'dark-content'}
+          backgroundColor={theme.colors.background}
+        />
         <Header>
           <BackButton onPressed={handlerBackButton} name="arrow" />
           <TittleWrapper>

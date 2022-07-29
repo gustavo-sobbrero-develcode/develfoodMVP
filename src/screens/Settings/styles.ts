@@ -34,6 +34,13 @@ export const UserInfoWrapper = styled.View`
   top: ${RFValue(7)}px;
 `;
 
+export const modalBackground = styled.View`
+  flex: 1;
+  background-color: ${({theme}) => theme.colors.background};
+  align-items: center;
+  justify-content: center;
+`;
+
 export const UserName = styled.Text`
   font-size: ${RFValue(14)}px;
   font-weight: 400;
@@ -81,7 +88,7 @@ export const CloseModal = styled.TouchableOpacity`
 
 export const CloseModalText = styled.Text`
   font-size: ${RFValue(14)}px;
-  color: ${({theme}) => theme.colors.text_white};
+  color: ${({theme}) => theme.colors.text_light};
 `;
 
 export const LogOutButton = styled.TouchableOpacity`
@@ -92,12 +99,12 @@ export const LogOutButton = styled.TouchableOpacity`
   border-color: ${({theme}) => theme.colors.modalButtonClose};
   align-items: center;
   justify-content: center;
-  background-color: ${({theme}) => theme.colors.background};
+  background-color: ${({theme}) => theme.colors.card};
   top: ${RFValue(35)}px;
   margin-bottom: ${RFValue(40)}px;
 `;
 
 export const LogOutButtonText = styled.Text`
   font-size: ${RFValue(14)}px;
-  color: ${({theme}) => theme.colors.modalButtonClose};
+  color: ${({theme}) => theme.colors.text_light};
 `;

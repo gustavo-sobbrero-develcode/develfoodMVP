@@ -91,6 +91,7 @@ export function RedefinePassword() {
             name=""
             Textcolor={theme.colors.text_dark}
             source={theme.icons.arrow}
+            iconColor={theme.colors.icon_black}
             onPress={() => navigation.navigate('Login' as never)}
           />
           <Content>

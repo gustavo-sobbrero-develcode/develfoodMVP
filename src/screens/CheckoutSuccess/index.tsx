@@ -31,15 +31,14 @@ export function CheckoutSuccess() {
     <Container>
       <StatusBar
         barStyle={'light-content'}
-        translucent={false}
         backgroundColor={theme.colors.background_red}
       />
 
       <HeaderComponent
         name="Checkout"
-        Textcolor={theme.colors.background}
+        Textcolor={theme.colors.text_light}
         source={theme.icons.exitWhite}
-        iconColor={theme.colors.icon_white}
+        iconColor={theme.colors.icon_light}
         onPress={handlerBackHome}
         backgroudColor={theme.colors.background_red}
       />

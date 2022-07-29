@@ -1,19 +1,12 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState} from 'react';
-import {
-  StatusBar,
-  StyleSheet,
-  Modal,
-  View,
-  Animated,
-  Button,
-} from 'react-native';
+import {StatusBar, Modal, View, Animated} from 'react-native';
 import {HeaderComponent} from '@components/HeaderComponent';
-import {ThemeProvider, useTheme} from 'styled-components';
+import {useTheme} from 'styled-components';
 import {useFetch} from '@global/services/get';
 import {useAuth} from '@global/context';
 import {useEffect} from 'react';
-import theme from '@global/styles/theme';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useRef} from 'react';
 
@@ -39,7 +32,6 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {ProfilePageComponent} from '@components/ProfilePageComponent';
 import {useThemeContext} from '@global/context/Theme';
-import darkTheme from '@global/styles/darkTheme';
 
 interface CostumerProps {
   id: number;
@@ -57,6 +49,7 @@ interface Photo {
 
 const CloseAppModal = ({visible, children}: any) => {
   const [showModal, setShowModal] = useState(visible);
+  const theme = useTheme();
   const scaleValue = useRef(new Animated.Value(0)).current;
   const changeModalState = () => {
     if (visible) {
@@ -81,9 +74,23 @@ const CloseAppModal = ({visible, children}: any) => {
   }, [visible]);
   return (
     <Modal transparent visible={showModal}>
-      <View style={styles.modalBackground}>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: theme.colors.modalBackGround,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
         <Animated.View
-          style={[styles.modalContainer, {transform: [{scale: scaleValue}]}]}>
+          style={{
+            width: '80%',
+            backgroundColor: theme.colors.background,
+            paddingHorizontal: RFValue(20),
+            paddingVertical: RFValue(20),
+            borderRadius: RFValue(10),
+            elevation: RFValue(20),
+            transform: [{scale: scaleValue}],
+          }}>
           {children}
         </Animated.View>
       </View>
@@ -93,6 +100,7 @@ const CloseAppModal = ({visible, children}: any) => {
 
 export function Settings() {
   const themeProps = useTheme();
+  const theme = useTheme();
 
   const {toggleTheme, themeSetted} = useThemeContext();
 
@@ -199,7 +207,7 @@ export function Settings() {
             Ah não! Você está saindo... {'\n'} Tem certeza?
           </MessageLogOut>
           <CloseModal onPress={() => setIsVisible(false)}>
-            <CloseModalText>Naah, To só brincando</CloseModalText>
+            <CloseModalText>Naah, to só brincando</CloseModalText>
           </CloseModal>
           <LogOutButton onPress={() => logOut()}>
             <LogOutButtonText>Sim, to vazando</LogOutButtonText>
@@ -209,20 +217,3 @@ export function Settings() {
     </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  modalBackground: {
-    flex: 1,
-    backgroundColor: theme.colors.modalBackGround,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modalContainer: {
-    width: '80%',
-    backgroundColor: theme.colors.background,
-    paddingHorizontal: RFValue(20),
-    paddingVertical: RFValue(20),
-    borderRadius: RFValue(10),
-    elevation: RFValue(20),
-  },
-});

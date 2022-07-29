@@ -26,6 +26,7 @@ export const AboutContent = styled.View`
 
 export const AboutText = styled.Text`
   top: ${RFValue(20)}px;
+  color: ${({theme}) => theme.colors.text_dark};
 `;
 
 export const WrapperImage = styled.View`

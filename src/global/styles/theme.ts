@@ -3,7 +3,7 @@ export default {
     background: '#FFFFFF',
     background_red: '#C20C18',
 
-    header: '#C20C18',
+    header: '#FFFFFF',
     button: '#C20C18',
     card: '#F0F0F5',
     cardRemove: '#FF0000',

@@ -226,7 +226,7 @@ export function PlatesDetails() {
                 }>
                 <LitterImage
                   source={theme.icons.trash}
-                  style={{tintColor: `${theme.colors.text_white}`}}
+                  style={{tintColor: `${theme.colors.icon_light}`}}
                   resizeMode={'contain'}
                 />
               </LitterButton>

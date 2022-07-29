@@ -128,7 +128,7 @@ export const WrapperCartButton = styled.View`
 
 export const AddQuantityButtonLabel = styled.Text`
   font-size: ${RFValue(18)}px;
-  color: ${({theme}) => theme.colors.text_white};
+  color: ${({theme}) => theme.colors.icon_light};
   font-weight: 700;
 `;
 export const AddQuantityButton = styled.TouchableOpacity`
@@ -139,7 +139,7 @@ export const AddQuantityButton = styled.TouchableOpacity`
 `;
 
 export const RemoveQuantityButtonLabel = styled.Text`
-  color: ${({theme}) => theme.colors.text_white};
+  color: ${({theme}) => theme.colors.icon_light};
   font-size: ${RFValue(21)}px;
   font-weight: 700;
 `;
@@ -159,13 +159,13 @@ export const NumberOfQuantityWrapper = styled.View`
   justify-content: center;
   margin-left: ${RFValue(45)}px;
   border: ${RFValue(1)}px;
-  border-color: ${({theme}) => theme.colors.text_white};
+  border-color: ${({theme}) => theme.colors.icon_light};
 `;
 
 export const Number = styled.Text`
   font-size: ${RFValue(12)}px;
   font-weight: 700;
-  color: ${({theme}) => theme.colors.text_white};
+  color: ${({theme}) => theme.colors.text_light};
 `;
 
 export const RemoveQuantityButtonImage = styled.Image`

@@ -28,9 +28,10 @@ export function About() {
     <Container>
       <HeaderComponent
         name="Sobre"
-        backgroudColor={theme.colors.background}
+        backgroudColor={theme.colors.header}
         Textcolor={theme.colors.text_dark}
         source={theme.icons.arrow}
+        iconColor={theme.colors.icon_black}
         onPress={() => navigation.goBack()}
       />
       <Content>
