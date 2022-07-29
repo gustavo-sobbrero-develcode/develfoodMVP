@@ -113,7 +113,14 @@ export const WrapperCartButton = styled.View`
   justify-content: space-evenly;
 `;
 
-export const AddQuantityButton = styled.TouchableOpacity`
+export const AddQuantityButton = styled.TouchableOpacity.attrs({
+  hitSlop: {
+    top: RFValue(30),
+    bottom: RFValue(30),
+    left: RFValue(10),
+    right: RFValue(30),
+  },
+})`
   width: 30%;
   align-items: center;
   justify-content: center;
@@ -125,7 +132,14 @@ export const AddQuantityButtonLabel = styled.Text`
   font-weight: 700;
 `;
 
-export const RemoveCartButton = styled.TouchableOpacity`
+export const RemoveCartButton = styled.TouchableOpacity.attrs({
+  hitSlop: {
+    top: RFValue(30),
+    bottom: RFValue(30),
+    left: RFValue(30),
+    right: RFValue(30),
+  },
+})`
   width: 30%;
   align-items: center;
 `;
@@ -151,7 +165,14 @@ export const Number = styled.Text`
   color: ${({theme}) => theme.colors.text_white};
 `;
 
-export const LitterButton = styled.TouchableOpacity`
+export const LitterButton = styled.TouchableOpacity.attrs({
+  hitSlop: {
+    top: RFValue(30),
+    bottom: RFValue(30),
+    left: RFValue(30),
+    right: RFValue(30),
+  },
+})`
   width: 30%;
   align-items: center;
 `;
