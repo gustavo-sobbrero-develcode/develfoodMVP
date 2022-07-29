@@ -1,5 +1,6 @@
 import {useAuth} from '@global/context';
-import React, {useEffect, useState} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
+import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
 import {ActivityIndicator, StatusBar, StyleSheet, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -12,7 +13,6 @@ import {Plates} from '../../components/Plates';
 import {useFetch} from '../../global/services/get';
 import theme from '../../global/styles/theme';
 import {CategorySelect} from '../Home/styles';
-import {Plate} from '../RestaurantProfile';
 import {PlatesWrapper} from '../RestaurantProfile/styles';
 import {Container, Content, Footer} from './styles';
 
@@ -25,8 +25,24 @@ interface ListFoodType {
   id: number;
   name: string;
 }
+interface Plate {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  foodType: ListFoodType;
+  restaurant: Restaurant;
+  photo_url: string;
+  favorite: boolean;
+}
 
-export function Favorites() {
+interface Restaurant {
+  id: number;
+  photo_url: string;
+  food_types: ListFoodType[];
+}
+
+export function Favorites({navigation}: any) {
   const [isLoading, setIsLoading] = useState(false);
 
   const {token} = useAuth();
@@ -56,16 +72,12 @@ export function Favorites() {
   }
 
   async function handleLoadOnEnd() {
-    if (dataFavorites.totalPages !== isFiltred.page) {
+    if (dataFavorites.totalPages < isFiltred.page - 1) {
       setIsFiltred({...isFiltred, page: isFiltred.page + 1});
     }
   }
 
-  useEffect(() => {
-    loadRestaurants();
-  }, [isFiltred]);
-
-  async function loadRestaurants() {
+  async function loadFavorites() {
     setIsLoading(true);
     await fetchData(onSuccess);
     setIsLoading(false);
@@ -110,7 +122,7 @@ export function Favorites() {
     },
   });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     (async () => {
       await fetchfoodtype();
     })();
@@ -119,6 +131,16 @@ export function Favorites() {
   useEffect(() => {
     datafoodtype && setCategories(datafoodtype);
   }, [datafoodtype]);
+
+  useFocusEffect(
+    useCallback(() => {
+      loadFavorites();
+      return () => {
+        setFavoritePlates([]);
+        setCategories([]);
+      };
+    }, []),
+  );
 
   const renderCategories =
     categories.length > 1 &&
@@ -146,10 +168,17 @@ export function Favorites() {
           source={item.photo_url}
           id={item.id}
           favorite={item.favorite}
+          restaurantID={item.restaurant.id}
+          photoRestaurant={item.restaurant.photo_url}
+          restaurantFoodTypes={item.restaurant.food_types[0].name}
         />
       </PlatesWrapper>
     );
   };
+
+  function handlerBackButton() {
+    navigation.navigate('Inicio');
+  }
 
   return (
     <Container>
@@ -158,22 +187,22 @@ export function Favorites() {
         translucent={false}
         backgroundColor={theme.colors.background}
       />
-      <View style={{marginTop: 20}}>
-        <HeaderComponent
-          backgroudColor="#ffffff"
-          name="Favoritos"
-          Textcolor="#2b2b2e"
-          source={theme.icons.arrow}
-        />
-      </View>
+
+      <HeaderComponent
+        backgroudColor="#ffffff"
+        name="Favoritos"
+        Textcolor="#2b2b2e"
+        source={theme.icons.arrow}
+        onPress={handlerBackButton}
+      />
+
       <FlatList
         ListHeaderComponent={
           <View style={{marginBottom: RFValue(30)}}>
             <Content>
               <Input
                 source={theme.icons.search}
-                placeholder="Buscar restaurante"
-                keyboardType="email-address"
+                placeholder="Buscar favoritos"
                 onChangeText={value => debounced(value)}
               />
             </Content>
@@ -192,13 +221,13 @@ export function Favorites() {
         onEndReached={() => {
           handleLoadOnEnd();
         }}
-        ListFooterComponent={() =>
-          isLoading ? (
-            <Footer>
+        ListFooterComponent={() => (
+          <Footer>
+            {isLoading && (
               <ActivityIndicator color={theme.colors.background_red} />
-            </Footer>
-          ) : null
-        }
+            )}
+          </Footer>
+        )}
         ListEmptyComponent={
           !isLoading ? (
             <ListEmptyComponent

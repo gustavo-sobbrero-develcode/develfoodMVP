@@ -8,6 +8,7 @@ export default {
     card: '#F0F0F5',
     cardRemove: '#FF0000',
     favorite_border: '#DEDCDC',
+    separator: '#DDDDDD',
 
     text_white: '#FFFFFF',
     text_gray: '#BFBABA',
@@ -43,6 +44,7 @@ export default {
     email: require('../assets/loginIcons/E-mail.png'),
     password: require('../assets/loginIcons/Senha.png'),
     eye: require('../assets/loginIcons/eye.png'),
+    cleanEye: require('../assets/Icons/eye.png'),
     arrow: require('../assets/loginIcons/Arrow.png'),
     circle: require('../assets/loginIcons/Circle.png'),
     blankcircle: require('../assets/loginIcons/BlanckCircle.png'),
@@ -82,6 +84,7 @@ export default {
     deleteUserIcon: require('../assets/Icons/deleteUserIcon.png'),
     restaurant: require('../assets/Icons/restaurant.png'),
     trash: require('../assets/Icons/trash.png'),
+    camera: require('../assets/Icons/camera.png'),
   },
 
   images: {
@@ -120,5 +123,6 @@ export default {
     michael: require('../assets/Images/michael.jpg'),
     star: require('../assets/Images/estrela.png'),
     starEmpty: require('../assets/Images/estrela_vazia.png'),
+    error: require('../assets/Images/error.png'),
   },
 };

@@ -11,18 +11,20 @@ import {
 } from './styles';
 
 import {ImageSourcePropType, KeyboardType, TextInputProps} from 'react-native';
+import theme from '@global/styles/theme';
 
 interface Props extends TextInputProps {
   name?: string;
   error?: string | null;
   editable?: boolean;
   source: ImageSourcePropType;
-  placeholder: string;
+  placeholder?: string;
   keyboardType?: KeyboardType;
-  sourcePassword?: ImageSourcePropType;
+  sourcePassword?: boolean;
   onChangeText: (value: string) => void;
   value?: string;
   maxLength?: number;
+  defaultValue?: string;
 }
 
 export function Input({
@@ -33,6 +35,7 @@ export function Input({
   keyboardType,
   sourcePassword,
   onChangeText,
+  defaultValue,
   value,
   maxLength,
 }: Props) {
@@ -48,6 +51,8 @@ export function Input({
         <LoginIcon source={source} />
 
         <InputLogin
+          selectTextOnFocus
+          defaultValue={defaultValue}
           placeholder={placeholder}
           autoCapitalize="none"
           keyboardType={keyboardType}
@@ -60,7 +65,9 @@ export function Input({
 
         {sourcePassword && (
           <IconPassword onPress={() => updateSecureTextEntry()}>
-            <LogoHide source={sourcePassword} />
+            <LogoHide
+              source={isClicked ? theme.icons.cleanEye : theme.icons.eye}
+            />
           </IconPassword>
         )}
       </Container>

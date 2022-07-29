@@ -114,7 +114,7 @@ export function Login() {
                   name="password"
                   onChangeText={onChange}
                   value={value}
-                  sourcePassword={theme.icons.eye}
+                  sourcePassword
                 />
               )}
               name="password"

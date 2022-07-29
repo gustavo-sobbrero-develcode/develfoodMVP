@@ -54,8 +54,7 @@ interface ListPlatesProps {
   inside: boolean;
   photoRestaurant?: string;
   Swipe: boolean;
-  favorite: boolean;
-  isButton?: boolean;
+  favorite?: boolean;
 }
 
 interface Photos {
@@ -148,7 +147,9 @@ export function Plates({
 
   const favoriteWhite = require('../../global/assets/Icons/favoriteRestaurant.png');
 
-  const [isFavorite, setIsFavorite] = useState<boolean>(favorite);
+  const [isFavorite, setIsFavorite] = useState<boolean>(
+    favorite ? favorite : false,
+  );
 
   const navigation = useNavigation();
 
@@ -164,7 +165,7 @@ export function Plates({
     data: dataDelete,
     handlerDelete,
     error: errorDelete,
-  } = useDelete<any>(`/plate/favorite/${id}`, {
+  } = useDelete(`/plate/favorite/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -174,7 +175,7 @@ export function Plates({
     data: dataPut,
     handlerPut,
     error: errorPut,
-  } = usePut<any, PutResponse>(`/plate/favorite/${id}`, undefined, {
+  } = usePut<null, PutResponse>(`/plate/favorite/${id}`, {}, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -300,7 +301,7 @@ export function Plates({
         <FavoriteButton onPress={likeButtonPressed}>
           <FavoriteImage
             source={favoriteWhite}
-            style={isFavorite && {tintColor: 'red'}}
+            style={[isFavorite && styles.tintColor, styles.resizeMode]}
           />
         </FavoriteButton>
 
@@ -379,4 +380,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  tintColor: {tintColor: 'red'},
+  resizeMode: {resizeMode: 'contain'},
 });
