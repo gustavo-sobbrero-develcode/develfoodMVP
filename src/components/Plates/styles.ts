@@ -45,6 +45,7 @@ export const WrapperPlateInfo = styled.View`
 
 export const PlateTitleWrapper = styled.View`
   width: 80%;
+  height: ${RFValue(60)}px;
 `;
 
 export const PlateTitle = styled.Text.attrs({
@@ -73,10 +74,11 @@ export const FavoriteImage = styled.Image`
 `;
 
 export const WrapperAdvancedInfo = styled.View`
-  width: 100%;
-  margin-top: ${RFValue(5)}px;
+  width: 110%;
+  height: ${RFValue(30)}px;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const PriceWrapper = styled.View`
@@ -90,7 +92,9 @@ export const Price = styled.Text`
 `;
 
 export const AddButton = styled.TouchableOpacity`
-  right: 0;
+  width: ${RFValue(100)}px;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const TextButton = styled.Text`
@@ -99,20 +103,19 @@ export const TextButton = styled.Text`
   color: ${({theme}) => theme.colors.icon_red};
 `;
 
-export const RemoveButton = styled.TouchableOpacity`
-  right: 20;
-`;
+export const RemoveButton = styled.TouchableOpacity``;
 
 export const WrapperCartButton = styled.View`
+  width: 40%;
+  height: ${RFValue(30)}px;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  margin-right: ${RFValue(20)}px;
+  justify-content: space-evenly;
 `;
 
 export const AddQuantityButton = styled.TouchableOpacity`
-  position: absolute;
-  margin-left: ${RFValue(75)}px;
+  width: 30%;
+  align-items: center;
   justify-content: center;
 `;
 
@@ -123,8 +126,8 @@ export const AddQuantityButtonLabel = styled.Text`
 `;
 
 export const RemoveCartButton = styled.TouchableOpacity`
-  position: absolute;
-  margin-left: ${RFValue(25)}px;
+  width: 30%;
+  align-items: center;
 `;
 
 export const RemoveQuantityButtonLabel = styled.Text`
@@ -134,13 +137,12 @@ export const RemoveQuantityButtonLabel = styled.Text`
 `;
 
 export const NumberOfQuantityWrapper = styled.View`
-  width: ${RFValue(20)}px;
-  height: ${RFValue(20)}px;
+  width: 25%;
+  height: 80%;
   background-color: ${({theme}) => theme.colors.background_red};
   border-radius: ${RFValue(4)}px;
   align-items: center;
   justify-content: center;
-  margin-left: ${RFValue(45)}px;
 `;
 
 export const Number = styled.Text`
@@ -150,14 +152,13 @@ export const Number = styled.Text`
 `;
 
 export const LitterButton = styled.TouchableOpacity`
-  justify-content: center;
-  position: absolute;
-  margin-left: ${RFValue(22)}px;
+  width: 30%;
+  align-items: center;
 `;
 
 export const LitterImage = styled.Image`
-  width: ${RFValue(14)}px;
-  height: ${RFValue(14)}px;
+  width: ${RFValue(15)}px;
+  height: ${RFValue(15)}px;
 `;
 
 export const CleanUpWrapper = styled.View`
