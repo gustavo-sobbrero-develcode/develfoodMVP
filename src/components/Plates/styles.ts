@@ -1,10 +1,6 @@
 import {RFValue} from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
-interface CartStyleProps {
-  insideCart: number;
-}
-
 export const ContentContainer = styled.View`
   width: 100%;
   height: ${RFValue(103)}px;
