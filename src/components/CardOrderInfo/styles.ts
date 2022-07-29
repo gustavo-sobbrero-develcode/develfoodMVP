@@ -75,5 +75,5 @@ export const NumberOfQuantityWrapper = styled.View`
 export const Number = styled.Text`
   font-size: ${RFValue(12)}px;
   font-weight: 700;
-  color: ${({theme}) => theme.colors.text_white};
+  color: ${({theme}) => theme.colors.text_light};
 `;

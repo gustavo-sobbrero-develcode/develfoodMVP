@@ -1,39 +1,40 @@
-// import React, {createContext, useState} from 'react';
-// import {useContext} from 'react';
+import React, {createContext, useState} from 'react';
+import {useContext} from 'react';
 
-// interface  {
-//   children: React.ReactNode;
-// }
-// interface Props {
-//   token: string;
-//   setToken: (token: string) => void;
-//   email: string;
-//   setEmail: (email: string) => void;
-// }
+interface ThemeProps {
+  children: React.ReactNode;
+}
+interface Props {
+  themeSetted: boolean;
+  setThemeSetted: (theme: boolean) => void;
+  toggleTheme: () => void;
+}
 
-// const createUser = createContext({
-//   loading: false,
-//   email: '',
-//   token: '',
-//   setToken: () => {},
-//   setEmail: () => {},
-// } as Props);
+const ThemeContext = createContext({
+  themeSetted: false,
+  setThemeSetted: () => {},
+  toggleTheme: () => {},
+} as Props);
 
-// function RedefinePasswordProvider({children}: RedefinePasswordProviderProps) {
-//   const [email, setEmail] = useState('');
-//   const [token, setToken] = useState('');
+function ThemeContextProvider({children}: ThemeProps) {
+  const [themeSetted, setThemeSetted] = useState(false);
 
-//   return (
-//     <createUser.Provider value={{email, setEmail, setToken, token}}>
-//       {children}
-//     </createUser.Provider>
-//   );
-// }
+  function toggleTheme() {
+    setThemeSetted(!themeSetted);
+    console.log('toggleTheme', themeSetted);
+  }
 
-// function useRedefinePassword() {
-//   const Context = useContext(createUser);
+  return (
+    <ThemeContext.Provider value={{themeSetted, toggleTheme, setThemeSetted}}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
 
-//   return Context;
-// }
+function useThemeContext() {
+  const Context = useContext(ThemeContext);
 
-// export {useRedefinePassword, RedefinePasswordProvider};
+  return Context;
+}
+
+export {useThemeContext, ThemeContextProvider};

@@ -21,9 +21,12 @@ export default {
     icon_white: '#FFFFFF',
     icon_red: '#C20C18',
     icon_dark: '#2B2B2E',
+    icon_black: '#000',
     icon_slider: '#C4C4C4',
     icon_light: '#f2f2f2',
     favorite_color: '#C4C4C4',
+    line: '#f0f0f5',
+    priceView: '#BFBABA',
 
     modalBackGround: 'rgba(0, 0, 0, 0.5)',
     modalButtonClose: '#C20C18',

@@ -204,16 +204,15 @@ export function OrderInfo({route}: RouteParams) {
       <Container>
         <StatusBar
           barStyle={'light-content'}
-          translucent
-          backgroundColor={'transparent'}
+          backgroundColor={theme.colors.background_red}
         />
 
         <HeaderComponent
           backgroudColor={theme.colors.background_red}
           name={`Pedido N.° ${id}`}
           source={theme.icons.exitWhite}
-          iconColor={theme.colors.icon_white}
-          Textcolor={theme.colors.text_white}
+          iconColor={theme.colors.icon_light}
+          Textcolor={theme.colors.text_light}
           onPress={handlerBackHome}
         />
 

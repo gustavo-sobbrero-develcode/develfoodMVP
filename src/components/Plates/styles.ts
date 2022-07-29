@@ -22,7 +22,16 @@ export const Container = styled.View.attrs({
   align-items: center;
   margin-bottom: ${RFValue(18)}px;
   border-radius: ${RFValue(8)}px;
-  background-color: ${({theme}) => theme.colors.background};
+  background-color: ${({theme}) => theme.colors.card};
+`;
+
+export const DeleteView = styled.View`
+  background-color: ${({theme}) => theme.colors.background_red};
+  height: ${RFValue(103)}px;
+  border-radius: ${RFValue(8)}px;
+  width: ${RFValue(100)}px;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const WrapperImage = styled.View`
@@ -176,7 +185,7 @@ export const CleanUpImage = styled.Image`
 
 export const CleanUpTitle = styled.Text`
   font-size: ${RFValue(12)}px;
-  color: ${({theme}) => theme.colors.text_white};
+  color: ${({theme}) => theme.colors.text_light};
   font-weight: 400;
 `;
 

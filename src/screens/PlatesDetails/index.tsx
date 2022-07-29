@@ -1,5 +1,6 @@
 import {BackButton} from '@components/BackButton';
 import {View} from '@components/CategoryButton/styles';
+import {HeaderComponent} from '@components/HeaderComponent';
 import {ItemProps} from '@components/Plates';
 import {useAuth} from '@global/context';
 import {useCreateCart} from '@global/context/Cart';
@@ -11,6 +12,7 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {StatusBar} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
+import {useTheme} from 'styled-components';
 
 import {
   AddButton,
@@ -134,26 +136,29 @@ export function PlatesDetails() {
     handlerLikeButton();
   }
 
+  const theme = useTheme();
+
   return (
     <Container>
       <StatusBar
-        barStyle={'dark-content'}
-        translucent
+        barStyle={'default'}
         backgroundColor={theme.colors.background}
       />
-
-      <Header>
-        <BackButton onPressed={handlerBackButton} name="arrow" />
-
-        <FavoriteIconWrapper>
-          <IconButton onPress={likeButtonPressed}>
-            <FavoriteIcon
-              source={theme.icons.favoriteRestaurant}
-              style={isFavorite && {tintColor: 'red'}}
-            />
-          </IconButton>
-        </FavoriteIconWrapper>
-      </Header>
+      <HeaderComponent
+        backgroudColor={theme.colors.background}
+        name=""
+        onPress={handlerBackButton}
+        source={theme.icons.arrow}
+        iconColor={theme.colors.icon_black}
+      />
+      <FavoriteIconWrapper>
+        <IconButton onPress={likeButtonPressed}>
+          <FavoriteIcon
+            source={theme.icons.favoriteRestaurant}
+            style={isFavorite && {tintColor: theme.colors.icon_red}}
+          />
+        </IconButton>
+      </FavoriteIconWrapper>
 
       <ScrollView>
         <ViewScroll>

@@ -11,14 +11,18 @@ import {CartProvider} from './src/global/context/Cart';
 import {RedefinePasswordProvider} from './src/global/context/RedefinePassword';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import darkTheme from '@global/styles/darkTheme';
-import {Button} from 'react-native';
+import {ThemeContextProvider, useThemeContext} from '@global/context/Theme';
 
 export default function App() {
   useEffect(() => {
     SplashScreen.hide();
   }, []);
 
-  const [darkThemeState, setDarkThemeState] = React.useState(true);
+  const {themeSetted} = useThemeContext();
+
+  useEffect(() => {
+    console.log('themeSetted', themeSetted);
+  }, [themeSetted]);
 
   return (
     <GestureHandlerRootView style={{flex: 1}}>
@@ -26,15 +30,13 @@ export default function App() {
         <CartProvider>
           <RedefinePasswordProvider>
             <CreateUserProvider>
-              <ThemeProvider theme={darkThemeState ? darkTheme : theme}>
-                <NavigationContainer>
-                  {/* <Button
-                    title="Change Theme"
-                    onPress={() => setDarkThemeState(!darkThemeState)}
-                  /> */}
-                  <AppRoutes />
-                </NavigationContainer>
-              </ThemeProvider>
+              <ThemeContextProvider>
+                <ThemeProvider theme={darkTheme}>
+                  <NavigationContainer>
+                    <AppRoutes />
+                  </NavigationContainer>
+                </ThemeProvider>
+              </ThemeContextProvider>
             </CreateUserProvider>
           </RedefinePasswordProvider>
         </CartProvider>

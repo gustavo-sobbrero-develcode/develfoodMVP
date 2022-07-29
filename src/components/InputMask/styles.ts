@@ -21,6 +21,7 @@ export const LoginIcon = styled.Image`
 export const TextMask = styled(TextInputMask)`
   margin-left: ${RFValue(7)}px;
   width: ${RFValue(250)}px;
+  color: ${({theme}) => theme.colors.text_dark};
 `;
 
 export const Error = styled.Text`

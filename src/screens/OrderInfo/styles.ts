@@ -140,7 +140,7 @@ export const LineBetween = styled.View`
   width: ${RFValue(321)}px;
   height: ${RFValue(2)}px;
   top: ${RFValue(12)}px;
-  background-color: #f0f0f5;
+  background-color: ${({theme}) => theme.colors.line};
   margin-left: ${RFValue(20)}px;
 `;
 
@@ -152,14 +152,14 @@ export const TotalValueWrapper = styled.View`
   left: ${RFValue(16)}px;
   padding: ${RFValue(5)}px ${RFValue(7)}px;
   align-items: center;
-  background-color: ${({theme}) => theme.colors.text_gray};
+  background-color: ${({theme}) => theme.colors.priceView};
   border-radius: ${RFValue(6)}px;
 `;
 
 export const TotalText = styled.Text`
   font-size: ${RFValue(10)}px;
   font-weight: 400;
-  color: ${({theme}) => theme.colors.text_white};
+  color: ${({theme}) => theme.colors.text_light};
 `;
 
 export const WrapperPrice = styled.View`
@@ -169,12 +169,12 @@ export const WrapperPrice = styled.View`
 export const R$Text = styled.Text`
   font-size: ${RFValue(14)}px;
   font-weight: 400;
-  color: ${({theme}) => theme.colors.text_white};
+  color: ${({theme}) => theme.colors.text_light};
   margin-right: ${RFValue(5)}px;
 `;
 
 export const TotalValue = styled.Text`
   font-size: ${RFValue(12)}px;
   font-weight: 700;
-  color: ${({theme}) => theme.colors.text_white};
+  color: ${({theme}) => theme.colors.text_light};
 `;

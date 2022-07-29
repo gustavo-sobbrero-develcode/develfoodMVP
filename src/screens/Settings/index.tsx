@@ -1,8 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState} from 'react';
-import {StatusBar, StyleSheet, Modal, View, Animated} from 'react-native';
+import {
+  StatusBar,
+  StyleSheet,
+  Modal,
+  View,
+  Animated,
+  Button,
+} from 'react-native';
 import {HeaderComponent} from '@components/HeaderComponent';
-import {useTheme} from 'styled-components';
+import {ThemeProvider, useTheme} from 'styled-components';
 import {useFetch} from '@global/services/get';
 import {useAuth} from '@global/context';
 import {useEffect} from 'react';
@@ -31,6 +38,8 @@ import {
 } from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {ProfilePageComponent} from '@components/ProfilePageComponent';
+import {useThemeContext} from '@global/context/Theme';
+import darkTheme from '@global/styles/darkTheme';
 
 interface CostumerProps {
   id: number;
@@ -85,6 +94,8 @@ const CloseAppModal = ({visible, children}: any) => {
 export function Settings() {
   const themeProps = useTheme();
 
+  const {toggleTheme, themeSetted} = useThemeContext();
+
   const {token, logOut} = useAuth();
 
   const navigation = useNavigation();
@@ -116,6 +127,8 @@ export function Settings() {
   }
 
   const getUserPhoto = userPhoto();
+
+  useEffect(() => {}, [themeSetted]);
 
   useEffect(() => {
     fetchData();

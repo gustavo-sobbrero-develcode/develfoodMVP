@@ -1,4 +1,4 @@
-import theme from '@global/styles/theme';
+// import theme from '@global/styles/theme';
 import {RFValue} from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
@@ -29,6 +29,7 @@ export const IconButton = styled.TouchableOpacity``;
 export const FavoriteIcon = styled.Image`
   width: ${RFValue(26)}px;
   height: ${RFValue(22)}px;
+  margin-top: ${RFValue(16)}px;
   border-color: ${({theme}) => theme.colors.icon_red};
 `;
 
@@ -97,7 +98,7 @@ export const RestaurantName = styled.Text`
 `;
 
 export const ViewCart = styled.View`
-  background-color: ${theme.colors.background_red};
+  background-color: ${({theme}) => theme.colors.background_red};
   width: 100%;
   height: ${RFValue(55)}px;
   position: absolute;
@@ -108,7 +109,7 @@ export const ViewCart = styled.View`
   justify-content: center;
 `;
 export const PlateTotalPrice = styled.Text`
-  color: ${theme.colors.icon_white};
+  color: ${({theme}) => theme.colors.text_light};
   font-weight: 700;
   font-size: ${RFValue(16)}px;
   line-height: ${RFValue(18.75)}px;
@@ -195,5 +196,5 @@ export const TextButton = styled.Text`
   font-weight: 700;
   font-size: ${RFValue(16)}px;
   line-height: ${RFValue(18.75)}px;
-  color: ${({theme}) => theme.colors.text_white};
+  color: ${({theme}) => theme.colors.text_light};
 `;

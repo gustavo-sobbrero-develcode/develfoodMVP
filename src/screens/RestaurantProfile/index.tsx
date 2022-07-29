@@ -174,7 +174,7 @@ export function RestaurantProfile({route}: RouteParams) {
   return (
     <Container>
       <StatusBar
-        barStyle={'dark-content'}
+        barStyle={'default'}
         backgroundColor={theme.colors.background}
         animated
       />
@@ -183,7 +183,7 @@ export function RestaurantProfile({route}: RouteParams) {
           backgroudColor={theme.colors.background}
           name=""
           source={theme.icons.arrow}
-          iconColor={theme.colors.icon_dark}
+          iconColor={theme.colors.icon_black}
           onPress={handlerBackButton}
         />
         <HeartButton onPress={() => setSelected(!selected)}>

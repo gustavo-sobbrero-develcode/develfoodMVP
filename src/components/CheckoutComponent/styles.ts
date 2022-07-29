@@ -22,13 +22,13 @@ export const DollarIcon = styled.Image`
 `;
 
 export const EndOrder = styled.Text`
-  color: ${({theme}) => theme.colors.text_white};
+  color: ${({theme}) => theme.colors.text_light};
   font-weight: 400;
   font-size: ${RFValue(12)}px;
 `;
 
 export const TotalPrice = styled.Text`
-  color: ${({theme}) => theme.colors.text_white};
+  color: ${({theme}) => theme.colors.text_light};
   font-weight: 400;
   font-size: ${RFValue(12)}px;
   right: ${RFValue(15)}px;

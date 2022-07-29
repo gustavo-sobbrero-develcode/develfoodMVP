@@ -40,6 +40,7 @@ import {
   FavoriteImage,
   ContentContainer,
   PlateButton,
+  DeleteView,
 } from './styles';
 
 interface ListPlatesProps {
@@ -133,10 +134,10 @@ export function Plates({
   const leftSwipe = () => {
     return (
       <CleanUpButton onPress={() => cleanUpSamePlates(id, price)}>
-        <View style={styles.deleteBox}>
+        <DeleteView>
           <CleanUpImage source={theme.icons.cleanUp} />
           <CleanUpTitle>Remover</CleanUpTitle>
-        </View>
+        </DeleteView>
       </CleanUpButton>
     );
   };
@@ -372,14 +373,6 @@ export function Plates({
 }
 
 const styles = StyleSheet.create({
-  deleteBox: {
-    backgroundColor: '#FF0000',
-    height: RFValue(103),
-    borderRadius: RFValue(8),
-    width: RFValue(100),
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   tintColor: {tintColor: 'red'},
   resizeMode: {resizeMode: 'contain'},
 });
