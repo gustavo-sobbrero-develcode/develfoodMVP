@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {ActivityIndicator, SectionList, StatusBar} from 'react-native';
 import {useTheme} from 'styled-components';
 import {ListEmptyComponent} from '../../components/ListEmptyComponent';
@@ -12,7 +12,11 @@ import moment from 'moment';
 import 'moment/locale/pt-br';
 
 import {Container, OrderDate, SubTitle, WrapperInfo, Footer} from './styles';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {
+  useFocusEffect,
+  useNavigation,
+  useScrollToTop,
+} from '@react-navigation/native';
 import {HeaderComponent} from '../../components/HeaderComponent';
 
 interface PlateDTOResponse {
@@ -242,6 +246,10 @@ export function Orders() {
     };
   }, []);
 
+  const ref = useRef<SectionList>(null);
+
+  useScrollToTop(ref);
+
   return (
     <Container>
       <StatusBar
@@ -258,6 +266,7 @@ export function Orders() {
 
       <>
         <SectionList
+          ref={ref}
           sections={orderSections}
           keyExtractor={item => item.id.toString()}
           renderItem={({item}) => renderItem({item})}

@@ -42,7 +42,7 @@ export const IconButton = styled.TouchableOpacity`
 
 export const FavoriteIcon = styled.Image`
   width: ${RFValue(26)}px;
-  height: ${RFValue(22)}px;
+  height: ${RFValue(23)}px;
   border-color: ${({theme}) => theme.colors.icon_red};
 `;
 
@@ -92,7 +92,12 @@ export const Avaliation = styled.View`
   align-items: center;
 `;
 
-export const StarRatio = styled.Image``;
+export const StarRatio = styled.Image.attrs({
+  resizeMode: 'contain',
+})`
+  width: ${RFValue(10.8)}px;
+  height: ${RFValue(9)}px;
+`;
 
 export const NumberRatio = styled.Text`
   font-family: ${({theme}) => theme.fonts.secondaryMed};

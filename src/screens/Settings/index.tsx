@@ -111,7 +111,7 @@ export function Settings() {
       ? {
           uri: `data:image/jpg;base64,${dataPhoto.code}`,
         }
-      : theme.images.eu;
+      : theme.images.noImage;
     return photo;
   }
 

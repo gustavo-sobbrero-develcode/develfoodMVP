@@ -17,7 +17,9 @@ export const Separator = styled(Animated.View)`
   background-color: ${({theme}) => theme.colors.separator};
 `;
 
-export const HeartButton = styled.TouchableOpacity`
+export const HeartButton = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.8,
+})`
   position: absolute;
   right: 19px;
   top: 21px;
