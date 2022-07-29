@@ -9,6 +9,6 @@ export const ButtonIcon = styled.TouchableOpacity`
 `;
 
 export const Icon = styled.Image`
-  width: ${RFValue(30)}px;
-  height: ${RFValue(30)}px;
+  width: ${RFValue(26)}px;
+  height: ${RFValue(26)}px;
 `;

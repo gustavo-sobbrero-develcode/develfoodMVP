@@ -11,7 +11,7 @@ export const Header = styled.View`
   flex-direction: row;
   align-items: center;
   height: ${RFValue(56)}px;
-  top: ${RFValue(22)}px;
+  background-color: ${({theme}) => theme.colors.background};
 `;
 
 export const FavoriteIconWrapper = styled.View`
@@ -25,8 +25,10 @@ export const FavoriteIconWrapper = styled.View`
 
 export const IconButton = styled.TouchableOpacity``;
 
-export const FavoriteIcon = styled.Image`
-  width: ${RFValue(26)}px;
+export const FavoriteIcon = styled.Image.attrs({
+  resizeMode: 'contain',
+})`
+  width: ${RFValue(22)}px;
   height: ${RFValue(22)}px;
   border-color: ${({theme}) => theme.colors.icon_red};
 `;
