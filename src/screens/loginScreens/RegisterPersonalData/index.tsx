@@ -31,6 +31,7 @@ import {
   InputWrapper,
   Wrapper,
 } from './styles';
+import { HeaderComponent } from '@components/HeaderComponent';
 
 interface FormData {
   name: string;
@@ -91,12 +92,16 @@ export function RegisterPersonalData() {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Container>
         <StatusBar barStyle={'dark-content'} backgroundColor={'white'} />
-        <Header>
-          <BackButton onPressed={handlerBackButton} name="arrow" />
-          <TittleWrapper>
-            <Title>Cadastro</Title>
-          </TittleWrapper>
-        </Header>
+
+        <HeaderComponent
+          backgroudColor={theme.colors.background}
+          name={'Cadastro'}
+          source={theme.icons.arrow}
+          iconColor={theme.colors.icon_dark}
+          onPress={handlerBackButton}
+          Textcolor={theme.colors.icon_dark}
+        />
+
         <CircleWrapper>
           <CircleAdjust>
             <Circle source={theme.icons.circle} />
@@ -191,7 +196,7 @@ export function RegisterPersonalData() {
             <ContinueButton
               title="Continuar"
               onPressed={handleSubmit(onSubmit)}
-              loading={loading}
+              loading={loading} 
             />
           </InputWrapper>
         </Wrapper>

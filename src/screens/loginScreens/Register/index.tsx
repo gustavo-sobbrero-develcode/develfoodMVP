@@ -34,6 +34,7 @@ import {
 } from './styles';
 import api from '@global/services/api';
 import {Modalize} from 'react-native-modalize';
+import { HeaderComponent } from '@components/HeaderComponent';
 
 interface FormData {
   email: string;
@@ -105,12 +106,14 @@ export function Register() {
           barStyle={'dark-content'}
           backgroundColor={'white'}
         />
-        <Header>
-          <BackButton onPressed={handlerBackButton} name="arrow" />
-          <TittleWrapper>
-            <Title>Cadastro</Title>
-          </TittleWrapper>
-        </Header>
+        <HeaderComponent
+          backgroudColor={theme.colors.background}
+          name={'Cadastro'}
+          source={theme.icons.arrow}
+          iconColor={theme.colors.icon_dark}
+          onPress={handlerBackButton}
+          Textcolor={theme.colors.icon_dark}
+        />
         <CircleWrapper>
           <CircleAdjust>
             <Circle source={theme.icons.circle} />
