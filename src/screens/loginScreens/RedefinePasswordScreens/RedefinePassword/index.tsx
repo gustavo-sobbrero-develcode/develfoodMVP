@@ -119,7 +119,7 @@ export function RedefinePassword() {
                   name="token"
                   onChangeText={onChange}
                   value={value}
-                  sourcePassword={theme.icons.eye}
+                  sourcePassword
                 />
               )}
               name="token"
@@ -138,7 +138,7 @@ export function RedefinePassword() {
                   name="password"
                   onChangeText={onChange}
                   value={value}
-                  sourcePassword={theme.icons.eye}
+                  sourcePassword
                 />
               )}
               name="password"
@@ -159,7 +159,7 @@ export function RedefinePassword() {
                   name="password"
                   onChangeText={onChange}
                   value={value}
-                  sourcePassword={theme.icons.eye}
+                  sourcePassword
                 />
               )}
               name="confirmPassword"
