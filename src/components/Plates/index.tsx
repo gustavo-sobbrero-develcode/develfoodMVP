@@ -40,6 +40,7 @@ import {
   FavoriteImage,
   ContentContainer,
   PlateButton,
+  PlateTitleWrapper,
 } from './styles';
 
 interface ListPlatesProps {
@@ -175,11 +176,15 @@ export function Plates({
     data: dataPut,
     handlerPut,
     error: errorPut,
-  } = usePut<null, PutResponse>(`/plate/favorite/${id}`, {}, {
-    headers: {
-      Authorization: `Bearer ${token}`,
+  } = usePut<null, PutResponse>(
+    `/plate/favorite/${id}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
 
   function likeButtonPressed() {
     setIsFavorite(!isFavorite);
@@ -217,7 +222,9 @@ export function Plates({
             </WrapperImage>
 
             <WrapperPlateInfo>
-              <PlateTitle>{name}</PlateTitle>
+              <PlateTitleWrapper>
+                <PlateTitle>{name}</PlateTitle>
+              </PlateTitleWrapper>
               <PlateInfo numberOfLines={3}>{description}</PlateInfo>
 
               <WrapperAdvancedInfo>
@@ -312,7 +319,9 @@ export function Plates({
         </WrapperImage>
 
         <WrapperPlateInfo>
-          <PlateTitle>{name}</PlateTitle>
+          <PlateTitleWrapper>
+            <PlateTitle>{name}</PlateTitle>
+          </PlateTitleWrapper>
           <PlateInfo numberOfLines={3}>{description}</PlateInfo>
 
           <WrapperAdvancedInfo>
@@ -321,7 +330,7 @@ export function Plates({
             </PriceWrapper>
 
             {itemCount && itemCount > 0 ? (
-              <WrapperCartButton insideCart={inside ? RFValue(5) : RFValue(35)}>
+              <WrapperCartButton>
                 <AddQuantityButton
                   onPress={() => addProductToCart(id, price, restaurantID)}>
                   <AddQuantityButtonLabel>+</AddQuantityButtonLabel>

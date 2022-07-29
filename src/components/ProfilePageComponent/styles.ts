@@ -18,17 +18,21 @@ export const Button = styled.TouchableOpacity`
 `;
 
 export const Icon = styled.Image`
-  left: ${RFValue(25)}px;
+  margin-left: ${RFValue(25)}px;
+`;
+
+export const Wrapper = styled.View`
+  width: 70%;
+  margin-left: ${RFValue(30)}px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export const ButtonText = styled.Text`
-  left: ${RFValue(75)}px;
   font-size: ${RFValue(14)}px;
   font-weight: 500;
   color: ${({theme}) => theme.colors.text_gray};
 `;
 
-export const ArrowImage = styled.Image`
-  position: absolute;
-  left: ${RFValue(320)}px;
-`;
+export const ArrowImage = styled.Image``;
