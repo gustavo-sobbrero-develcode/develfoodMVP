@@ -44,6 +44,7 @@ export default {
     email: require('../assets/loginIcons/E-mail.png'),
     password: require('../assets/loginIcons/Senha.png'),
     eye: require('../assets/loginIcons/eye.png'),
+    cleanEye: require('../assets/Icons/eye.png'),
     arrow: require('../assets/loginIcons/Arrow.png'),
     circle: require('../assets/loginIcons/Circle.png'),
     blankcircle: require('../assets/loginIcons/BlanckCircle.png'),
@@ -83,6 +84,7 @@ export default {
     deleteUserIcon: require('../assets/Icons/deleteUserIcon.png'),
     restaurant: require('../assets/Icons/restaurant.png'),
     trash: require('../assets/Icons/trash.png'),
+    camera: require('../assets/Icons/camera.png'),
   },
 
   images: {

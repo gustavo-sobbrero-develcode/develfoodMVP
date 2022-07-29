@@ -121,7 +121,10 @@ export function Settings() {
     fetchData();
     fetchPhoto();
   }, [data]);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1546fb2405fe430bf277aae4a07b44923cd36bff
   return (
     <Container>
       <StatusBar
@@ -144,7 +147,8 @@ export function Settings() {
 
             <UserEditInfoWrapper>
               <UserEditInfoText>Editar Perfil</UserEditInfoText>
-              <UserEditInfoButton>
+              <UserEditInfoButton
+                onPress={() => navigation.navigate('EditProfile' as never)}>
                 <EditInfoIcon source={themeProps.icons.editInfo} />
               </UserEditInfoButton>
             </UserEditInfoWrapper>

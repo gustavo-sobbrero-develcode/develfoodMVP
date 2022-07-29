@@ -162,7 +162,7 @@ export function Register() {
                 name="password"
                 onChangeText={onChange}
                 value={value}
-                sourcePassword={theme.icons.eye}
+                sourcePassword
               />
             )}
             name="password"
@@ -181,7 +181,7 @@ export function Register() {
                 name="password"
                 onChangeText={onChange}
                 value={value}
-                sourcePassword={theme.icons.eye}
+                sourcePassword
               />
             )}
             name="confirmPassword"

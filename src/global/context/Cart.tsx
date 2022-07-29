@@ -209,7 +209,34 @@ function CartProvider({children}: AuthProviderProps) {
       setRestaurantId(restaurantID);
     } else {
       Alert.alert(
-        'Você não pode adicionar produtos de restaurantes diferentes',
+        'Você já tem itens adicionados na sua sacola',
+        'Deseja limpar o carrinho e adicionar este item?',
+        [
+          {
+            text: 'Cancelar',
+            onPress: () => {
+              Alert.prompt;
+            },
+          },
+          {
+            text: 'Adicionar',
+            onPress: () => {
+              replaceCart(
+                id,
+                1,
+                price,
+                price,
+                restaurantID,
+                name,
+                description,
+                source,
+                restaurantFoodTypes,
+                restaurantName,
+                photoRestaurant,
+              );
+            },
+          },
+        ],
       );
     }
   }
@@ -252,10 +279,6 @@ function CartProvider({children}: AuthProviderProps) {
       setCart(addingProducts);
       setTotal(total + price);
       setTotalItems(totalItems + 1);
-    } else {
-      Alert.alert(
-        'Você não pode adicionar produtos de restaurantes diferentes',
-      );
     }
   }
 
@@ -302,6 +325,40 @@ function CartProvider({children}: AuthProviderProps) {
     cart.splice(0, cart.length);
     setTotal(0);
     setTotalItems(0);
+  }
+
+  function replaceCart(
+    id: number,
+    quantity: number,
+    price: number,
+    unityPrice: number,
+    restaurantID: number,
+    name: string,
+    description: string,
+    source: string,
+    restaurantFoodTypes: string,
+    restaurantName: string,
+    photoRestaurant: string,
+  ) {
+    const product = {
+      id,
+      quantity,
+      price,
+      unityPrice,
+      restaurantID,
+      name,
+      description,
+      source,
+      restaurantFoodTypes,
+      restaurantName,
+      photoRestaurant,
+    };
+    cart.splice(0, cart.length, product);
+    setTotal(unityPrice);
+    setTotalItems(quantity);
+    setNameRestaurant(restaurantName);
+    setFoodTypes(restaurantFoodTypes);
+    setRestaurantPhoto(photoRestaurant);
   }
 
   const {token} = useAuth();
