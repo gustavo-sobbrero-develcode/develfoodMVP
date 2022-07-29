@@ -36,7 +36,7 @@ export const WrapperCartComponent = styled.TouchableOpacity`
 
 export const BasketImage = styled.Image`
   width: ${RFValue(20)}px;
-  height: ${RFValue(16)}px;
+  height: ${RFValue(17)}px;
 `;
 
 export const View = styled.View`
