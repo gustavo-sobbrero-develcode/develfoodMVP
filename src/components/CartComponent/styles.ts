@@ -11,8 +11,22 @@ export const Container = styled.View`
   position: absolute;
   background-color: ${({theme}) => theme.colors.background_red};
   border-radius: ${RFValue(6)}px;
-  flex-direction: row;
+`;
+
+export const Padding = styled.View`
+  align-self: center;
   align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  height: ${RFValue(40)}px;
+  flex-direction: row;
+`;
+
+export const BasketWrapper = styled.View`
+  width: ${RFValue(30)}px;
+  height: ${RFValue(30)}px;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const WrapperCartComponent = styled.TouchableOpacity`
@@ -21,28 +35,40 @@ export const WrapperCartComponent = styled.TouchableOpacity`
 `;
 
 export const BasketImage = styled.Image`
-  position: absolute;
-  left: ${RFValue(17)}px;
-  width: ${RFValue(18)}px;
-  height: ${RFValue(14)}px;
-  bottom: ${RFValue(12)}px;
+  width: ${RFValue(20)}px;
+  height: ${RFValue(16)}px;
+`;
+
+export const View = styled.View`
+  flex: 1;
+  align-items: flex-start;
+`;
+
+export const View2 = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const View3 = styled.View`
+  flex: 1;
+  align-items: flex-end;
 `;
 
 export const WrapperImage = styled.View`
-  position: absolute;
-  left: ${RFValue(10)}px;
-  top: ${RFValue(10)}px;
   flex-direction: row;
 `;
 
 export const ItemsCircle = styled.View`
-  left: ${RFValue(17)}px;
+  position: absolute;
   width: ${RFValue(12)}px;
   height: ${RFValue(12)}px;
   border-radius: ${RFValue(12)}px;
   background-color: ${({theme}) => theme.colors.background};
   align-items: center;
   justify-content: center;
+  bottom: ${RFValue(9)}px;
+  left: ${RFValue(6)}px;
 `;
 
 export const CartItems = styled.Text`
@@ -57,15 +83,14 @@ export const GoToCart = styled.View`
 `;
 
 export const ShowCart = styled.Text`
-  left: ${RFValue(143)}px;
   color: ${({theme}) => theme.colors.text_white};
   font-weight: 400;
   font-size: ${RFValue(12)}px;
-  top: ${RFValue(10)}px;
 `;
 
-export const TotalPrice = styled.Text`
-  left: ${RFValue(170)}px;
+export const TotalPrice = styled.Text.attrs({
+  numberOfLines: 1,
+})`
   color: ${({theme}) => theme.colors.text_white};
   font-weight: 400;
   font-size: ${RFValue(12)}px;
