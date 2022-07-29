@@ -32,6 +32,6 @@ export const TextView = styled.View`
 `;
 
 export const Icon = styled.Image`
-  width: ${RFValue(20)}px;
-  height: ${RFValue(20)}px;
+  width: ${RFValue(22)}px;
+  height: ${RFValue(22)}px;
 `;

@@ -12,7 +12,7 @@ export function BackButton({onPressed, name}: Props) {
   const theme = useTheme();
   return (
     <ButtonIcon onPress={() => onPressed()}>
-      <Icon
+      <Icon 
         source={
           name === 'arrow'
             ? theme.icons.arrow
