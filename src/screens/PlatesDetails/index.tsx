@@ -1,5 +1,7 @@
 import {BackButton} from '@components/BackButton';
+import { HeaderComponent } from '@components/HeaderComponent';
 import {ItemProps} from '@components/Plates';
+import { Image } from '@components/ProfileImage/styles';
 import {useAuth} from '@global/context';
 import {useCreateCart} from '@global/context/Cart';
 import {useDelete} from '@global/services/delete';
@@ -18,10 +20,9 @@ import {
   Container,
   Description,
   FavoriteIcon,
-  FavoriteIconWrapper,
   FoodType,
-  Header,
-  IconButton,
+  HeaderView,
+  HeartButton,
   LitterButton,
   LitterImage,
   Number,
@@ -136,18 +137,22 @@ export function PlatesDetails() {
         backgroundColor={theme.colors.background}
       />
 
-      <Header>
-        <BackButton onPressed={handlerBackButton} name="arrow" />
-
-        <FavoriteIconWrapper>
-          <IconButton onPress={likeButtonPressed}>
-            <FavoriteIcon
-              source={theme.icons.favoriteRestaurant}
-              style={isFavorite && {tintColor: 'red'}}
-            />
-          </IconButton>
-        </FavoriteIconWrapper>
-      </Header>
+<HeaderView>
+        <HeaderComponent
+          backgroudColor={theme.colors.background}
+          name={''}
+          source={theme.icons.arrow}
+          iconColor={theme.colors.icon_dark}
+          onPress={handlerBackButton}
+          Textcolor={theme.colors.icon_dark}
+        />
+        <HeartButton onPress={likeButtonPressed}>
+          <FavoriteIcon
+            source={theme.icons.favoriteRestaurant}
+            style={isFavorite && {tintColor: 'red'}}
+          />
+        </HeartButton>
+      </HeaderView>
 
       <ScrollView>
         <ViewScroll>
@@ -156,7 +161,7 @@ export function PlatesDetails() {
               source={
                 dataPhoto.code ? {uri: dataPhoto.code} : theme.images.noImage
               }
-              resizeMode={'contain'}
+              resizeMode={'cover'}
             />
             <PlateName numberOfLines={1}>{plateData.name}</PlateName>
             <FoodType numberOfLines={1}>
