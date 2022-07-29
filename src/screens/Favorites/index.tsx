@@ -19,6 +19,7 @@ import {Container, Content, Footer} from './styles';
 export interface FavoritesResponse {
   content: Plate[];
   totalPages: number;
+  totalElements: number;
 }
 
 interface ListFoodType {
@@ -137,9 +138,9 @@ export function Favorites({navigation}: any) {
       loadFavorites();
       return () => {
         setFavoritePlates([]);
-        setCategories([]);
+        setIsFiltred({text: '', page: 0});
       };
-    }, []),
+    }, [foodType]),
   );
 
   const renderCategories =
@@ -204,6 +205,7 @@ export function Favorites({navigation}: any) {
                 source={theme.icons.search}
                 placeholder="Buscar favoritos"
                 onChangeText={value => debounced(value)}
+                sourcePassword={false}
               />
             </Content>
 
@@ -229,7 +231,7 @@ export function Favorites({navigation}: any) {
           </Footer>
         )}
         ListEmptyComponent={
-          !isLoading ? (
+          !isLoading && dataFavorites.totalElements === 0 ? (
             <ListEmptyComponent
               source={theme.images.noFavorites}
               title="Você não possui favoritos"
