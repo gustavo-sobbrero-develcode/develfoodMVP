@@ -16,6 +16,7 @@ import {
   View,
   View2,
   View3,
+  Background,
 } from './styles';
 
 interface CartProps {
@@ -36,41 +37,41 @@ export function CartComponent({BottomBar, onPress}: CartProps) {
   const priceFormatted = priceConverter();
 
   return (
-    <WrapperCartComponent
-      onPress={onPress}
-      bottom={BottomBar ? RFValue(95) : RFValue(50)}>
-      <Container>
-        <Padding>
-          <View>
-            <BasketWrapper>
-              <BasketImage source={theme.icons.hamper} />
-              <WrapperImage>
-                {totalItems > 0 && totalItems <= 9 ? (
-                  <>
-                    <ItemsCircle>
-                      <CartItems>{totalItems}</CartItems>
-                    </ItemsCircle>
-                  </>
-                ) : totalItems > 9 ? (
-                  <>
-                    <ItemsCircle>
-                      <CartItems>9+</CartItems>
-                    </ItemsCircle>
-                  </>
-                ) : (
-                  <ItemsCircle />
-                )}
-              </WrapperImage>
-            </BasketWrapper>
-          </View>
-          <View2>
-            <ShowCart>Ver Carrinho</ShowCart>
-          </View2>
-          <View3>
-            <TotalPrice>R$ {priceFormatted}</TotalPrice>
-          </View3>
-        </Padding>
-      </Container>
-    </WrapperCartComponent>
+    <Background bottom={BottomBar ? RFValue(50) : RFValue(0)}>
+      <WrapperCartComponent onPress={onPress}>
+        <Container>
+          <Padding>
+            <View>
+              <BasketWrapper>
+                <BasketImage source={theme.icons.hamper} />
+                <WrapperImage>
+                  {totalItems > 0 && totalItems <= 9 ? (
+                    <>
+                      <ItemsCircle>
+                        <CartItems>{totalItems}</CartItems>
+                      </ItemsCircle>
+                    </>
+                  ) : totalItems > 9 ? (
+                    <>
+                      <ItemsCircle>
+                        <CartItems>9+</CartItems>
+                      </ItemsCircle>
+                    </>
+                  ) : (
+                    <ItemsCircle />
+                  )}
+                </WrapperImage>
+              </BasketWrapper>
+            </View>
+            <View2>
+              <ShowCart>Ver Carrinho</ShowCart>
+            </View2>
+            <View3>
+              <TotalPrice>R$ {priceFormatted}</TotalPrice>
+            </View3>
+          </Padding>
+        </Container>
+      </WrapperCartComponent>
+    </Background>
   );
 }

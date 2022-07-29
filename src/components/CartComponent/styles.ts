@@ -5,10 +5,21 @@ export interface CartStyleProps {
   bottom: number;
 }
 
+export const Background = styled.View.attrs({
+  elevation: 3,
+})`
+  width: 100%;
+  position: absolute;
+  height: ${RFValue(55)}px;
+  align-items: center;
+  justify-content: center;
+  background-color: ${({theme}) => theme.colors.background};
+  bottom: ${(props: CartStyleProps) => props.bottom && props.bottom}px;
+`;
+
 export const Container = styled.View`
   width: 100%;
   height: ${RFValue(40)}px;
-  position: absolute;
   background-color: ${({theme}) => theme.colors.background_red};
   border-radius: ${RFValue(6)}px;
 `;
@@ -17,26 +28,22 @@ export const Padding = styled.View`
   align-self: center;
   align-items: center;
   justify-content: space-between;
-  width: 90%;
+  width: 95%;
   height: ${RFValue(40)}px;
   flex-direction: row;
 `;
 
 export const BasketWrapper = styled.View`
-  width: ${RFValue(30)}px;
-  height: ${RFValue(30)}px;
   align-items: center;
   justify-content: center;
+  margin-left: ${RFValue(10)}px;
 `;
 
-export const WrapperCartComponent = styled.TouchableOpacity`
-  margin: 0 ${RFValue(9)}px;
-  bottom: ${(props: CartStyleProps) => (props.bottom ? props.bottom : 10)}px;
-`;
+export const WrapperCartComponent = styled.TouchableOpacity``;
 
 export const BasketImage = styled.Image`
   width: ${RFValue(20)}px;
-  height: ${RFValue(16)}px;
+  height: ${RFValue(17)}px;
 `;
 
 export const View = styled.View`
@@ -53,6 +60,7 @@ export const View2 = styled.View`
 export const View3 = styled.View`
   flex: 1;
   align-items: flex-end;
+  margin-right: ${RFValue(10)}px;
 `;
 
 export const WrapperImage = styled.View`
