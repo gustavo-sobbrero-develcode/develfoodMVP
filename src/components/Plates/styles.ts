@@ -115,10 +115,10 @@ export const WrapperCartButton = styled.View`
 
 export const AddQuantityButton = styled.TouchableOpacity.attrs({
   hitSlop: {
-    top: RFValue(30),
-    bottom: RFValue(30),
+    top: RFValue(10),
+    bottom: RFValue(10),
     left: RFValue(10),
-    right: RFValue(30),
+    right: RFValue(10),
   },
 })`
   width: 30%;
@@ -134,10 +134,10 @@ export const AddQuantityButtonLabel = styled.Text`
 
 export const RemoveCartButton = styled.TouchableOpacity.attrs({
   hitSlop: {
-    top: RFValue(30),
-    bottom: RFValue(30),
-    left: RFValue(30),
-    right: RFValue(30),
+    top: RFValue(10),
+    bottom: RFValue(10),
+    left: RFValue(10),
+    right: RFValue(10),
   },
 })`
   width: 30%;
@@ -167,10 +167,10 @@ export const Number = styled.Text`
 
 export const LitterButton = styled.TouchableOpacity.attrs({
   hitSlop: {
-    top: RFValue(30),
-    bottom: RFValue(30),
-    left: RFValue(30),
-    right: RFValue(30),
+    top: RFValue(10),
+    bottom: RFValue(10),
+    left: RFValue(10),
+    right: RFValue(10),
   },
 })`
   width: 30%;
