@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -227,7 +226,6 @@ export function RegisterLocale() {
                     onChangeText={text => {
                       onChange;
                       setCEP(text);
-                      console.log('text ==>', text);
                     }}
                     onBlur={() => handleCEPChange()}
                     value={value}
