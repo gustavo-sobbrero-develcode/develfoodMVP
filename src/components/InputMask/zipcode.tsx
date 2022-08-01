@@ -6,12 +6,14 @@ import {ImageSourcePropType, TextInputProps} from 'react-native';
 import {useTheme} from 'styled-components';
 
 interface Props extends TextInputProps {
+  name: string;
   error?: string;
   editable: boolean;
   source: ImageSourcePropType;
   placeholder: string;
   onChangeText: (value: string) => void;
   value: string;
+  onBlur: () => void;
 }
 
 export function InputMaskZipCode({
@@ -21,6 +23,7 @@ export function InputMaskZipCode({
   placeholder,
   onChangeText,
   value,
+  onBlur,
 }: Props) {
   const theme = useTheme();
   return (
@@ -36,6 +39,7 @@ export function InputMaskZipCode({
           onChangeText={onChangeText}
           value={value}
           editable={editable}
+          onBlur={onBlur}
         />
       </Container>
       {error && <Error>{error}</Error>}
