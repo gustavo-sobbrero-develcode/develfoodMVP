@@ -5,13 +5,13 @@ import {ActivityIndicator, StatusBar, StyleSheet, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useDebouncedCallback} from 'use-debounce';
-import {Category} from '../../components/CategoryButton';
-import {HeaderComponent} from '../../components/HeaderComponent';
-import {Input} from '../../components/Input';
-import {ListEmptyComponent} from '../../components/ListEmptyComponent';
-import {Plates} from '../../components/Plates';
-import {useFetch} from '../../global/services/get';
-import theme from '../../global/styles/theme';
+import {Category} from '@components/CategoryButton';
+import {HeaderComponent} from '@components/HeaderComponent';
+import {Input} from '@components/Input';
+import {ListEmptyComponent} from '@components/ListEmptyComponent';
+import {Plates} from '@components/Plates';
+import {useFetch} from '@global/services/get';
+import theme from '@global/styles/theme';
 import {CategorySelect} from '../Home/styles';
 import {PlatesWrapper} from '../RestaurantProfile/styles';
 import {Container, Content, Footer} from './styles';
@@ -134,13 +134,16 @@ export function Favorites({navigation}: any) {
   }, [datafoodtype]);
 
   useFocusEffect(
-    useCallback((useloadFavorites = loadFavorites) => {
-      useloadFavorites();
-      return () => {
-        setFavoritePlates([]);
-        setIsFiltred({text: '', page: 0});
-      };
-    }, [foodType]),
+    useCallback(
+      (useloadFavorites = loadFavorites) => {
+        useloadFavorites();
+        return () => {
+          setFavoritePlates([]);
+          setIsFiltred({text: '', page: 0});
+        };
+      },
+      [foodType],
+    ),
   );
 
   const renderCategories =
@@ -231,7 +234,7 @@ export function Favorites({navigation}: any) {
           </Footer>
         )}
         ListEmptyComponent={
-          !isLoading && dataFavorites.totalElements === 0 ? (
+          !isLoading && !!dataFavorites.totalElements ? (
             <ListEmptyComponent
               source={theme.images.noFavorites}
               title="Você não possui favoritos"

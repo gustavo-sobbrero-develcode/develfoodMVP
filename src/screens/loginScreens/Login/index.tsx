@@ -1,6 +1,5 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useTheme} from 'styled-components';
-import RNBootSplash from 'react-native-bootsplash';
 import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {Controller, useForm} from 'react-hook-form';
@@ -42,10 +41,6 @@ const schema = Yup.object().shape({
 });
 
 export function Login() {
-  useEffect(() => {
-    RNBootSplash.hide({fade: true});
-  }, []);
-
   const theme = useTheme();
 
   const navigation = useNavigation();

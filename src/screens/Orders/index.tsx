@@ -1,10 +1,10 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {ActivityIndicator, SectionList, StatusBar} from 'react-native';
 import {useTheme} from 'styled-components';
-import {ListEmptyComponent} from '../../components/ListEmptyComponent';
-import {OrderCard} from '../../components/OrderCard';
+import {ListEmptyComponent} from '@components/ListEmptyComponent';
+import {OrderCard} from '@components/OrderCard';
 import {useAuth} from '@global/context';
-import {useFetch} from '../../global/services/get';
+import {useFetch} from '@global/services/get';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
@@ -14,7 +14,7 @@ import {
   useNavigation,
   useScrollToTop,
 } from '@react-navigation/native';
-import {HeaderComponent} from '../../components/HeaderComponent';
+import {HeaderComponent} from '@components/HeaderComponent';
 
 interface PlateDTOResponse {
   id: number;

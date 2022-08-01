@@ -7,9 +7,9 @@ import {StyleSheet, View} from 'react-native';
 import {Swipeable} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
-import {useDelete} from '../../global/services/delete';
-import {useFetch} from '../../global/services/get';
-import {usePut} from '../../global/services/put';
+import {useDelete} from '@global/services/delete';
+import {useFetch} from '@global/services/get';
+import {usePut} from '@global/services/put';
 
 import {
   Container,
@@ -145,7 +145,7 @@ export function Plates({
     fetchData();
   }, [source]);
 
-  const favoriteWhite = require('../../global/assets/Icons/favoriteRestaurant.png');
+  const favoriteWhite = require('@global/assets/Icons/favoriteRestaurant.png');
 
   const [isFavorite, setIsFavorite] = useState<boolean>(
     favorite ? favorite : false,

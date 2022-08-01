@@ -1,6 +1,5 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useTheme} from 'styled-components';
-import RNBootSplash from 'react-native-bootsplash';
 import {useNavigation} from '@react-navigation/native';
 
 import {
@@ -15,10 +14,6 @@ import {ContinueButton} from '@components/ContinueButton';
 import {HeaderComponent} from '@components/HeaderComponent';
 
 export function RedefineSuccess() {
-  useEffect(() => {
-    RNBootSplash.hide({fade: true});
-  }, []);
-
   const theme = useTheme();
 
   const navigation = useNavigation();
