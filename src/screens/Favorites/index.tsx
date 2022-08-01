@@ -5,13 +5,13 @@ import {ActivityIndicator, StatusBar, StyleSheet, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useDebouncedCallback} from 'use-debounce';
-import {Category} from '../../components/CategoryButton';
-import {HeaderComponent} from '../../components/HeaderComponent';
-import {Input} from '../../components/Input';
-import {ListEmptyComponent} from '../../components/ListEmptyComponent';
-import {Plates} from '../../components/Plates';
-import {useFetch} from '../../global/services/get';
-import theme from '../../global/styles/theme';
+import {Category} from '@components/CategoryButton';
+import {HeaderComponent} from '@components/HeaderComponent';
+import {Input} from '@components/Input';
+import {ListEmptyComponent} from '@components/ListEmptyComponent';
+import {Plates} from '@components/Plates';
+import {useFetch} from '@global/services/get';
+import theme from '@global/styles/theme';
 import {CategorySelect} from '../Home/styles';
 import {PlatesWrapper} from '../RestaurantProfile/styles';
 import {Container, Content, Footer} from './styles';
@@ -19,6 +19,7 @@ import {Container, Content, Footer} from './styles';
 export interface FavoritesResponse {
   content: Plate[];
   totalPages: number;
+  totalElements: number;
 }
 
 interface ListFoodType {
@@ -137,9 +138,9 @@ export function Favorites({navigation}: any) {
       useloadFavorites();
       return () => {
         setFavoritePlates([]);
-        setCategories([]);
+        setIsFiltred({text: '', page: 0});
       };
-    }, []),
+    }, [foodType]),
   );
 
   const renderCategories =
@@ -204,6 +205,7 @@ export function Favorites({navigation}: any) {
                 source={theme.icons.search}
                 placeholder="Buscar favoritos"
                 onChangeText={value => debounced(value)}
+                sourcePassword={false}
               />
             </Content>
 
@@ -229,7 +231,7 @@ export function Favorites({navigation}: any) {
           </Footer>
         )}
         ListEmptyComponent={
-          !isLoading ? (
+          !isLoading && !!dataFavorites.totalElements ? (
             <ListEmptyComponent
               source={theme.images.noFavorites}
               title="Você não possui favoritos"
