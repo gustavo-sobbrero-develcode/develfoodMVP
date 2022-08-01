@@ -65,8 +65,8 @@ export function ForgotPassword() {
     await api
       .post(`reset-password?email=${value.email}`)
       .then(response => {
-        setToken(response.data.slice(39)),
-          navigation.navigate('AuthCode' as never);
+        setToken(response.data.slice(39));
+        navigation.navigate('AuthCode' as never);
       })
       .catch(() => {
         Alert.alert('Email não encontrado.');

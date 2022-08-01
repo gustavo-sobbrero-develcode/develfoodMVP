@@ -67,8 +67,8 @@ export function Favorites({navigation}: any) {
 
   const [favoritePlates, setFavoritePlates] = useState<Plate[]>([]);
 
-  function onSuccess(dataFavorites: FavoritesResponse) {
-    setFavoritePlates([...favoritePlates, ...dataFavorites.content]);
+  function onSuccess(responseFavorites: FavoritesResponse) {
+    setFavoritePlates([...favoritePlates, ...responseFavorites.content]);
   }
 
   async function handleLoadOnEnd() {
@@ -122,9 +122,9 @@ export function Favorites({navigation}: any) {
     },
   });
 
-  useLayoutEffect(() => {
+  useLayoutEffect((usefetchfoodtype = fetchfoodtype) => {
     (async () => {
-      await fetchfoodtype();
+      await usefetchfoodtype();
     })();
   }, []);
 
@@ -133,8 +133,8 @@ export function Favorites({navigation}: any) {
   }, [datafoodtype]);
 
   useFocusEffect(
-    useCallback(() => {
-      loadFavorites();
+    useCallback((useloadFavorites = loadFavorites) => {
+      useloadFavorites();
       return () => {
         setFavoritePlates([]);
         setCategories([]);

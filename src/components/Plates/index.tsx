@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 // import {useAuth} from '@global/context';
 import {useAuth} from '@global/context';
 import {useCreateCart} from '@global/context/Cart';
@@ -86,6 +85,7 @@ interface PutResponse {
   photo_url: string;
   favorite: null;
 }
+
 export function Plates({
   name,
   description,
@@ -99,7 +99,6 @@ export function Plates({
   inside,
   Swipe,
   favorite,
-  isButton,
 }: ListPlatesProps) {
   const theme = useTheme();
 
@@ -161,25 +160,21 @@ export function Plates({
     }
   }
 
-  const {
-    data: dataDelete,
-    handlerDelete,
-    error: errorDelete,
-  } = useDelete(`/plate/favorite/${id}`, {
+  const {handlerDelete} = useDelete(`/plate/favorite/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
 
-  const {
-    data: dataPut,
-    handlerPut,
-    error: errorPut,
-  } = usePut<null, PutResponse>(`/plate/favorite/${id}`, {}, {
-    headers: {
-      Authorization: `Bearer ${token}`,
+  const {handlerPut} = usePut<null, PutResponse>(
+    `/plate/favorite/${id}`,
+    null,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
 
   function likeButtonPressed() {
     setIsFavorite(!isFavorite);

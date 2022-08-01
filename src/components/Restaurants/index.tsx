@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
 import {useTheme} from 'styled-components';
 import {useAuth} from '@global/context';

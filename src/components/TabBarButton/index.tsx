@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {ImageSourcePropType} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';

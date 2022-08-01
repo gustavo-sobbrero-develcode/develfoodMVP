@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect} from 'react';
 import {TouchableOpacity} from 'react-native';
 import {useTheme} from 'styled-components';
