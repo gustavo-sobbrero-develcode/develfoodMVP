@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useRef, useState} from 'react';
 import {FlatList, ViewToken} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
