@@ -2,7 +2,6 @@ import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
-import {BackButton} from '@components/BackButton';
 import {Input} from '@components/Input';
 import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
@@ -19,13 +18,6 @@ import {
 
 import {
   Container,
-  Header,
-  TittleWrapper,
-  Title,
-  CircleWrapper,
-  CircleAdjust,
-  Circle,
-  CenterCircle,
   Wrapper,
   RowView,
   NicknameWrapper,
@@ -35,8 +27,14 @@ import {
   NumberWrapper,
   ButtonWrapper,
 } from './styles';
+import {
+  CircleWrapper,
+  CircleAdjust,
+  Circle,
+  CenterCircle,
+} from '../Register/styles';
 import {InputMaskZipCode} from '@components/InputMask/zipcode';
-import { HeaderComponent } from '@components/HeaderComponent';
+import {HeaderComponent} from '@components/HeaderComponent';
 
 interface FormData {
   street: string;
@@ -165,7 +163,11 @@ export function RegisterLocale() {
 
         <Image
           source={theme.icons.woman}
-          style={{marginTop: RFValue(6), marginBottom: RFValue(20)}}
+          style={{
+            marginTop: RFValue(6),
+            marginBottom: RFValue(20),
+            alignSelf: 'center',
+          }}
         />
 
         <Wrapper>
