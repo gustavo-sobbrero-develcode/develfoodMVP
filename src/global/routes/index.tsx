@@ -9,7 +9,6 @@ export function AppRoutes() {
 
   useEffect(() => {
     token !== undefined && SplashScreen.hide();
-    console.log('token', token);
   }, []);
 
   return token !== undefined ? <AuthedRoutes /> : <AuthRoutes />;
