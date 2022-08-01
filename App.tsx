@@ -9,7 +9,6 @@ import {CreateUserProvider} from './src/global/context/createUserAuth';
 import {CartProvider} from './src/global/context/Cart';
 import {RedefinePasswordProvider} from './src/global/context/RedefinePassword';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {ThemeContextProvider} from '@global/context/Theme';
 import {useColorScheme} from 'react-native';
 import themes from '@global/styles/themes';
 
@@ -28,13 +27,11 @@ export default function App() {
         <CartProvider>
           <RedefinePasswordProvider>
             <CreateUserProvider>
-              <ThemeContextProvider>
-                <ThemeProvider theme={theme}>
-                  <NavigationContainer>
-                    <AppRoutes />
-                  </NavigationContainer>
-                </ThemeProvider>
-              </ThemeContextProvider>
+              <ThemeProvider theme={theme}>
+                <NavigationContainer>
+                  <AppRoutes />
+                </NavigationContainer>
+              </ThemeProvider>
             </CreateUserProvider>
           </RedefinePasswordProvider>
         </CartProvider>

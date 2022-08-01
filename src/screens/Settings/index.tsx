@@ -30,8 +30,6 @@ import {
 } from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {ProfilePageComponent} from '@components/ProfilePageComponent';
-import {useThemeContext} from '@global/context/Theme';
-
 interface CostumerProps {
   id: number;
   firstName: string;
