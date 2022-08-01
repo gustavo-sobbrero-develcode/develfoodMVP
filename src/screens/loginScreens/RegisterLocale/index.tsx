@@ -8,7 +8,6 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {Controller, useForm} from 'react-hook-form';
 import {ContinueButton} from '@components/ContinueButton';
 import {useCreateUser} from '@global/context/createUserAuth';
-
 import {
   Image,
   Keyboard,
@@ -18,10 +17,6 @@ import {
 
 import {
   Container,
-  CircleWrapper,
-  CircleAdjust,
-  Circle,
-  CenterCircle,
   Wrapper,
   RowView,
   NicknameWrapper,
@@ -31,6 +26,12 @@ import {
   NumberWrapper,
   ButtonWrapper,
 } from './styles';
+import {
+  CircleWrapper,
+  CircleAdjust,
+  Circle,
+  CenterCircle,
+} from '../Register/styles';
 import {InputMaskZipCode} from '@components/InputMask/zipcode';
 import {useState} from 'react';
 import {useCep} from '@global/services/viaCEP';
@@ -188,7 +189,11 @@ export function RegisterLocale() {
 
         <Image
           source={theme.icons.woman}
-          style={{marginTop: RFValue(6), marginBottom: RFValue(20)}}
+          style={{
+            marginTop: RFValue(6),
+            marginBottom: RFValue(20),
+            alignSelf: 'center',
+          }}
         />
 
         <Wrapper>

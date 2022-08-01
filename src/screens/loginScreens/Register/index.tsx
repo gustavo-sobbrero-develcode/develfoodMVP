@@ -2,7 +2,6 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useRef, useState} from 'react';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
-import {BackButton} from '@components/BackButton';
 import {Input} from '@components/Input';
 import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
@@ -20,9 +19,6 @@ import {
 
 import {
   Container,
-  Header,
-  TittleWrapper,
-  Title,
   CircleWrapper,
   CircleAdjust,
   Circle,
@@ -34,7 +30,7 @@ import {
 } from './styles';
 import api from '@global/services/api';
 import {Modalize} from 'react-native-modalize';
-import { HeaderComponent } from '@components/HeaderComponent';
+import {HeaderComponent} from '@components/HeaderComponent';
 
 interface FormData {
   email: string;

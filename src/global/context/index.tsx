@@ -45,7 +45,9 @@ function AuthProvider({children}: AuthProviderProps) {
     try {
       setToken('');
       await AsyncStorage.clear();
-    } catch (error) {}
+    } catch (error) {
+      Alert.alert('Erro', 'Erro ao sair');
+    }
   }
 
   const getUserData = async () => {
@@ -69,7 +71,9 @@ function AuthProvider({children}: AuthProviderProps) {
       await handlerPost(request, loginError, onSuccess);
       setToken(data.token);
       data.token && (await AsyncStorage.setItem('@userToken', token));
-    } catch (error) {}
+    } catch (error) {
+      Alert.alert('Erro', 'Erro ao fazer login');
+    }
   }
 
   useEffect(() => {

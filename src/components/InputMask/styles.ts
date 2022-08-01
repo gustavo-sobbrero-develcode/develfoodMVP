@@ -24,9 +24,8 @@ export const TextMask = styled(TextInputMask)`
 `;
 
 export const Error = styled.Text`
-  align-self: center;
-  margin-top: ${RFValue(8)}px;
+  align-self: flex-start;
   font-family: ${({theme}) => theme.fonts.secondaryBold};
-  font-size: ${RFValue(15)}px;
+  font-size: ${RFValue(12)}px;
   color: ${({theme}) => theme.colors.background_red};
 `;

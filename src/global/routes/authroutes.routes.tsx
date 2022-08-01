@@ -1,6 +1,5 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import RNBootSplash from 'react-native-bootsplash';
 import {Login} from '@screens/loginScreens/Login';
 import {Register} from '@screens/loginScreens/Register';
 import {RegisterLocale} from '@screens/loginScreens/RegisterLocale';
@@ -14,10 +13,6 @@ import {RedefineSuccess} from '@screens/loginScreens/RedefinePasswordScreens/Red
 const {Navigator, Screen} = createStackNavigator();
 
 export function AuthRoutes() {
-  useEffect(() => {
-    RNBootSplash.hide({fade: true});
-  }, []);
-
   return (
     <>
       <Navigator screenOptions={{headerShown: false}}>
