@@ -54,6 +54,7 @@ export const UserName = styled.Text`
 export const UserEditInfoWrapper = styled.View`
   top: ${RFValue(7)}px;
   flex-direction: row;
+  align-items: center;
 `;
 
 export const UserEditInfoText = styled.Text`
@@ -65,7 +66,10 @@ export const UserEditInfoButton = styled.TouchableOpacity`
   left: ${RFValue(6)}px;
 `;
 
-export const EditInfoIcon = styled.Image``;
+export const EditInfoIcon = styled.Image`
+  width: ${RFValue(13.5)}px;
+  height: ${RFValue(13.5)}px;
+`;
 
 export const ModalContent = styled.View`
   align-items: center;

@@ -39,6 +39,7 @@ import {
   FavoriteImage,
   ContentContainer,
   PlateButton,
+  PlateTitleWrapper,
 } from './styles';
 
 interface ListPlatesProps {
@@ -212,8 +213,10 @@ export function Plates({
             </WrapperImage>
 
             <WrapperPlateInfo>
-              <PlateTitle>{name}</PlateTitle>
-              <PlateInfo numberOfLines={3}>{description}</PlateInfo>
+              <PlateTitleWrapper>
+                <PlateTitle>{name}</PlateTitle>
+                <PlateInfo numberOfLines={3}>{description}</PlateInfo>
+              </PlateTitleWrapper>
 
               <WrapperAdvancedInfo>
                 <PriceWrapper>
@@ -221,23 +224,8 @@ export function Plates({
                 </PriceWrapper>
 
                 {itemCount && itemCount > 0 ? (
-                  <WrapperCartButton
-                    insideCart={inside ? RFValue(5) : RFValue(20)}>
-                    <AddQuantityButton
-                      onPress={() => addProductToCart(id, price, restaurantID)}>
-                      <AddQuantityButtonLabel>+</AddQuantityButtonLabel>
-                    </AddQuantityButton>
-
-                    <NumberOfQuantityWrapper>
-                      <Number>
-                        {
-                          cart.find((item: ItemProps) => item?.id === id)
-                            ?.quantity
-                        }
-                      </Number>
-                    </NumberOfQuantityWrapper>
-
-                    {itemCount > 1 ? (
+                  <WrapperCartButton>
+                    {itemCount && itemCount > 1 ? (
                       <RemoveCartButton
                         onPress={() => removeProductFromCart(id, price)}>
                         <RemoveQuantityButtonLabel>-</RemoveQuantityButtonLabel>
@@ -248,6 +236,18 @@ export function Plates({
                         <RemoveQuantityButtonLabel>-</RemoveQuantityButtonLabel>
                       </RemoveCartButton>
                     )}
+                    <NumberOfQuantityWrapper>
+                      <Number>
+                        {cart &&
+                          cart.find((item: ItemProps) => item?.id === id)
+                            ?.quantity}
+                      </Number>
+                    </NumberOfQuantityWrapper>
+
+                    <AddQuantityButton
+                      onPress={() => addProductToCart(id, price, restaurantID)}>
+                      <AddQuantityButtonLabel>+</AddQuantityButtonLabel>
+                    </AddQuantityButton>
                   </WrapperCartButton>
                 ) : (
                   <AddButton
@@ -307,8 +307,10 @@ export function Plates({
         </WrapperImage>
 
         <WrapperPlateInfo>
-          <PlateTitle>{name}</PlateTitle>
-          <PlateInfo numberOfLines={3}>{description}</PlateInfo>
+          <PlateTitleWrapper>
+            <PlateTitle>{name}</PlateTitle>
+            <PlateInfo numberOfLines={3}>{description}</PlateInfo>
+          </PlateTitleWrapper>
 
           <WrapperAdvancedInfo>
             <PriceWrapper>
@@ -316,19 +318,7 @@ export function Plates({
             </PriceWrapper>
 
             {itemCount && itemCount > 0 ? (
-              <WrapperCartButton insideCart={inside ? RFValue(5) : RFValue(35)}>
-                <AddQuantityButton
-                  onPress={() => addProductToCart(id, price, restaurantID)}>
-                  <AddQuantityButtonLabel>+</AddQuantityButtonLabel>
-                </AddQuantityButton>
-
-                <NumberOfQuantityWrapper>
-                  <Number>
-                    {cart &&
-                      cart.find((item: ItemProps) => item?.id === id)?.quantity}
-                  </Number>
-                </NumberOfQuantityWrapper>
-
+              <WrapperCartButton>
                 {itemCount && itemCount > 1 ? (
                   <RemoveCartButton
                     onPress={() => removeProductFromCart(id, price)}>
@@ -340,6 +330,17 @@ export function Plates({
                     <LitterImage source={theme.icons.litter} />
                   </LitterButton>
                 )}
+                <NumberOfQuantityWrapper>
+                  <Number>
+                    {cart &&
+                      cart.find((item: ItemProps) => item?.id === id)?.quantity}
+                  </Number>
+                </NumberOfQuantityWrapper>
+
+                <AddQuantityButton
+                  onPress={() => addProductToCart(id, price, restaurantID)}>
+                  <AddQuantityButtonLabel>+</AddQuantityButtonLabel>
+                </AddQuantityButton>
               </WrapperCartButton>
             ) : (
               <AddButton
