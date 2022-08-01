@@ -34,6 +34,7 @@ import {
 } from './styles';
 import api from '@global/services/api';
 import {Modalize} from 'react-native-modalize';
+import {HeaderComponent} from '@components/HeaderComponent';
 
 interface FormData {
   email: string;
@@ -102,15 +103,16 @@ export function Register() {
       <Container>
         <StatusBar
           hidden={false}
-          barStyle={'dark-content'}
+          barStyle={theme.barStyles.dark}
           backgroundColor={theme.colors.background}
         />
-        <Header>
-          <BackButton onPressed={handlerBackButton} name="arrow" />
-          <TittleWrapper>
-            <Title>Cadastro</Title>
-          </TittleWrapper>
-        </Header>
+        <HeaderComponent
+          backgroudColor={theme.colors.background}
+          name="Cadastro"
+          onPress={handlerBackButton}
+          source={theme.icons.arrow}
+          iconColor={theme.colors.icon_black}
+        />
         <CircleWrapper>
           <CircleAdjust>
             <Circle source={theme.icons.circle} />
@@ -195,7 +197,10 @@ export function Register() {
             loading={isLoading}
           />
         </ButtonWrapper>
-        <Modalize modalHeight={ModalHeight} ref={modalizeRef}>
+        <Modalize
+          modalHeight={ModalHeight}
+          ref={modalizeRef}
+          modalStyle={{backgroundColor: theme.colors.background}}>
           <ErrorImage source={theme.images.error} />
           <ModalMessage>E-mail já cadastrado no Develfood...</ModalMessage>
         </Modalize>

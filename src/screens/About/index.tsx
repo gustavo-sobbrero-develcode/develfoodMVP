@@ -28,7 +28,7 @@ export function About() {
     <Container>
       <HeaderComponent
         name="Sobre"
-        backgroudColor={theme.colors.header}
+        backgroudColor={theme.colors.background}
         Textcolor={theme.colors.text_dark}
         source={theme.icons.arrow}
         iconColor={theme.colors.icon_black}

@@ -204,7 +204,7 @@ export function RestaurantProfile({route}: RouteParams) {
   return (
     <Container>
       <StatusBar
-        barStyle={'default'}
+        barStyle={theme.barStyles.dark}
         backgroundColor={theme.colors.background}
         animated
       />

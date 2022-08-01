@@ -27,7 +27,10 @@ export function RedefineSuccess() {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Container>
         <>
-          <StatusBar hidden />
+          <StatusBar
+            backgroundColor={theme.colors.background}
+            barStyle={theme.barStyles.dark}
+          />
           <HeaderComponent
             backgroudColor={theme.colors.background}
             name=""

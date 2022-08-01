@@ -133,7 +133,7 @@ export function PlatesDetails() {
   return (
     <Container>
       <StatusBar
-        barStyle={'default'}
+        barStyle={theme.barStyles.dark}
         backgroundColor={theme.colors.background}
       />
       <HeaderComponent

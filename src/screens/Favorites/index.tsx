@@ -191,7 +191,7 @@ export function Favorites({navigation}: any) {
   return (
     <Container>
       <StatusBar
-        barStyle={'default'}
+        barStyle={theme.barStyles.dark}
         translucent={false}
         backgroundColor={theme.colors.background}
       />

@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+// import {createStackNavigator} from '@react-navigation/native-stack';
 
 import RNBootSplash from 'react-native-bootsplash';
 import {Login} from '@screens/loginScreens/Login';
@@ -11,8 +11,9 @@ import {ForgotPassword} from '@screens/loginScreens/RedefinePasswordScreens/Forg
 import {AuthCode} from '@screens/loginScreens/RedefinePasswordScreens/AuthCode/index';
 import {RedefinePassword} from '@screens/loginScreens/RedefinePasswordScreens/RedefinePassword';
 import {RedefineSuccess} from '@screens/loginScreens/RedefinePasswordScreens/RedefineSuccess';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-const {Navigator, Screen} = createStackNavigator();
+const {Navigator, Screen} = createNativeStackNavigator();
 
 export function AuthRoutes() {
   useEffect(() => {
@@ -21,7 +22,11 @@ export function AuthRoutes() {
 
   return (
     <>
-      <Navigator screenOptions={{headerShown: false}}>
+      <Navigator
+        screenOptions={{
+          headerShown: false,
+          animation: 'slide_from_bottom',
+        }}>
         <Screen name="Login" component={Login} />
         <Screen name="Register" component={Register} />
         <Screen name="RegisterPersonalData" component={RegisterPersonalData} />

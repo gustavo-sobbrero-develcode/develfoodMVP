@@ -39,11 +39,15 @@ export function AuthCode() {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Container>
         <>
-          <StatusBar hidden />
+          <StatusBar
+            backgroundColor={theme.colors.background}
+            barStyle={theme.barStyles.dark}
+          />
           <HeaderComponent
             backgroudColor={theme.colors.background}
             name=""
             Textcolor={theme.colors.text_dark}
+            iconColor={theme.colors.icon_black}
             source={theme.icons.arrow}
             onPress={() => navigation.navigate('Login' as never)}
           />

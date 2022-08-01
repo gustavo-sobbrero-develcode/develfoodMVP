@@ -31,6 +31,7 @@ import {
   InputWrapper,
   Wrapper,
 } from './styles';
+import {HeaderComponent} from '@components/HeaderComponent';
 
 interface FormData {
   name: string;
@@ -91,15 +92,16 @@ export function RegisterPersonalData() {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Container>
         <StatusBar
-          barStyle={'dark-content'}
+          barStyle={theme.barStyles.dark}
           backgroundColor={theme.colors.background}
         />
-        <Header>
-          <BackButton onPressed={handlerBackButton} name="arrow" />
-          <TittleWrapper>
-            <Title>Cadastro</Title>
-          </TittleWrapper>
-        </Header>
+        <HeaderComponent
+          backgroudColor={theme.colors.background}
+          name="Cadastro"
+          onPress={handlerBackButton}
+          source={theme.icons.arrow}
+          iconColor={theme.colors.icon_black}
+        />
         <CircleWrapper>
           <CircleAdjust>
             <Circle source={theme.icons.circle} />

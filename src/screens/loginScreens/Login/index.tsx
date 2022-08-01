@@ -71,7 +71,10 @@ export function Login() {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Container>
         <>
-          <StatusBar hidden />
+          <StatusBar
+            backgroundColor={theme.colors.background}
+            barStyle={theme.barStyles.dark}
+          />
           <Hamburger
             source={theme.images.hamburger}
             style={{height: RFValue(210), width: RFValue(75)}}

@@ -145,7 +145,7 @@ export function Settings() {
   return (
     <Container>
       <StatusBar
-        barStyle={'light-content'}
+        barStyle={theme.barStyles.dark}
         backgroundColor={themeProps.colors.background}
       />
       <HeaderComponent
