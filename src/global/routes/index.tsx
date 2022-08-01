@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import SplashScreen from 'react-native-splash-screen';
+import RNBootSplash from 'react-native-bootsplash';
 import {useAuth} from '../context';
 import {AuthedRoutes} from './authedroutes.routes';
 import {AuthRoutes} from './authroutes.routes';
@@ -8,7 +8,10 @@ export function AppRoutes() {
   const {token} = useAuth();
 
   useEffect(() => {
-    token !== undefined && SplashScreen.hide();
+    setTimeout(() => {
+      token !== undefined && RNBootSplash.hide({fade: true});
+    }, 500);
+    console.log('token', token);
   }, []);
 
   return token !== undefined ? <AuthedRoutes /> : <AuthRoutes />;
