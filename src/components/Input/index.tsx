@@ -15,7 +15,7 @@ import theme from '@global/styles/theme';
 
 interface Props extends TextInputProps {
   name?: string;
-  error?: string;
+  error?: string | null;
   editable?: boolean;
   source: ImageSourcePropType;
   placeholder?: string;
