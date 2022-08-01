@@ -16,7 +16,7 @@ export default {
     text_red: '#C70d20',
     text_login: '#9B9B9B',
     text_light: '#f2f2f2',
-    separator: '#DDDDDD',
+    separator: '#333333',
 
     icon_gray: '#7B7B7B',
     icon_white: '#222222',
@@ -94,6 +94,10 @@ export default {
     restaurant: require('../assets/Icons/restaurant.png'),
     trash: require('../assets/Icons/trash.png'),
     camera: require('../assets/Icons/camera.png'),
+    cleanEye: require('../assets/Icons/eye.png'),
+    blankcircle: require('../assets/loginIcons/BlanckCircle-dark.png'),
+    circle: require('../assets/loginIcons/Circle-dark.png'),
+    check: require('../assets/loginIcons/Check-dark.png'),
   },
 
   images: {
@@ -109,7 +113,7 @@ export default {
     mapImage: require('../assets/Images/mapImage.png'),
     checkoutEmpty: require('../assets/Images/checkoutEmpty-dark.png'),
     checkoutSuccess: require('../assets/Images/checkoutsuccess-dark.png'),
-    noOrder: require('../assets/Images/noOrder.png'),
+    noOrder: require('../assets/Images/noOrder-dark.png'),
     waiting: require('../assets/Images/waiting.png'),
     doing: require('../assets/Images/doing.png'),
     inRoute: require('../assets/Images/inRoute.png'),

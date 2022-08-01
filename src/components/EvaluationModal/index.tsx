@@ -3,7 +3,7 @@ import {EvaluationBar} from '@components/EvaluationBar';
 import {useAuth} from '@global/context';
 import {useFetch} from '@global/services/get';
 import {usePost} from '@global/services/post';
-import theme from '@global/styles/theme';
+import light from '@global/styles/light';
 import React, {SetStateAction, useEffect, useRef, useState} from 'react';
 import {
   Alert,
@@ -157,7 +157,7 @@ export function EvaluationModal({
 const styles = StyleSheet.create({
   input: {
     marginTop: 23,
-    borderColor: theme.colors.text_gray,
+    borderColor: light.colors.text_gray,
     borderWidth: 1,
     borderRadius: 10,
   },

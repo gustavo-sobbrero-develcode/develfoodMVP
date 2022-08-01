@@ -1,4 +1,4 @@
-import theme from '@global/styles/theme';
+import light from '@global/styles/light';
 import React from 'react';
 import {Dimensions, StyleSheet} from 'react-native';
 import {Modalize} from 'react-native-modalize';
@@ -38,7 +38,7 @@ export function ModalError({modalErrorRef}: ModalErrorProps) {
 const styles = StyleSheet.create({
   input: {
     marginTop: 23,
-    borderColor: theme.colors.text_gray,
+    borderColor: light.colors.text_gray,
     borderWidth: 1,
     borderRadius: 10,
   },

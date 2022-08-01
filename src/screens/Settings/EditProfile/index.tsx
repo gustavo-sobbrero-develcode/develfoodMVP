@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useRef} from 'react';
 import {useTheme} from 'styled-components';
@@ -41,7 +40,7 @@ import {useAuth} from '@global/context';
 import ImagePicker from 'react-native-image-crop-picker';
 import {ProfileImage} from '@components/ProfileImage';
 import {Modalize} from 'react-native-modalize';
-import theme from '@global/styles/theme';
+import light from '@global/styles/light';
 import {ModalError} from '@components/ModalError';
 
 interface FormData {
@@ -547,7 +546,7 @@ export function EditProfile() {
 const styles = StyleSheet.create({
   input: {
     marginTop: 23,
-    borderColor: theme.colors.text_gray,
+    borderColor: light.colors.text_gray,
     borderWidth: 1,
     borderRadius: 10,
   },

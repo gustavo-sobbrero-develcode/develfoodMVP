@@ -36,6 +36,7 @@ import {
   ButtonWrapper,
 } from './styles';
 import {InputMaskZipCode} from '@components/InputMask/zipcode';
+import {HeaderComponent} from '@components/HeaderComponent';
 
 interface FormData {
   street: string;
@@ -140,12 +141,13 @@ export function RegisterLocale() {
           barStyle={theme.barStyles.dark}
           backgroundColor={theme.colors.background}
         />
-        <Header>
-          <BackButton onPressed={handlerBackButton} name="arrow" />
-          <TittleWrapper>
-            <Title>Cadastro</Title>
-          </TittleWrapper>
-        </Header>
+        <HeaderComponent
+          backgroudColor={theme.colors.background}
+          name="Cadastro"
+          onPress={handlerBackButton}
+          source={theme.icons.arrow}
+          iconColor={theme.colors.icon_black}
+        />
         <CircleWrapper>
           <CircleAdjust>
             <Circle source={theme.icons.circle} />

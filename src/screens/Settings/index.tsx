@@ -101,8 +101,6 @@ export function Settings() {
   const themeProps = useTheme();
   const theme = useTheme();
 
-  const {toggleTheme, themeSetted} = useThemeContext();
-
   const {token, logOut} = useAuth();
 
   const navigation = useNavigation();
@@ -134,8 +132,6 @@ export function Settings() {
   }
 
   const getUserPhoto = userPhoto();
-
-  useEffect(() => {}, [themeSetted]);
 
   useEffect(() => {
     fetchData();
