@@ -1,5 +1,3 @@
-import {BackButton} from '@components/BackButton';
-import {View} from '@components/CategoryButton/styles';
 import {HeaderComponent} from '@components/HeaderComponent';
 import {ItemProps} from '@components/Plates';
 import {useAuth} from '@global/context';
@@ -7,7 +5,6 @@ import {useCreateCart} from '@global/context/Cart';
 import {useDelete} from '@global/services/delete';
 import {useFetch} from '@global/services/get';
 import {usePut} from '@global/services/put';
-import theme from '@global/styles/theme';
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {StatusBar} from 'react-native';
@@ -23,7 +20,6 @@ import {
   FavoriteIcon,
   FavoriteIconWrapper,
   FoodType,
-  Header,
   IconButton,
   LitterButton,
   LitterImage,
@@ -111,25 +107,21 @@ export function PlatesDetails() {
       handlerPut();
     }
   }
-  const {
-    data: dataDelete,
-    handlerDelete,
-    error: errorDelete,
-  } = useDelete<any>(`/plate/favorite/${plateData.id}`, {
+  const {handlerDelete} = useDelete(`/plate/favorite/${plateData.id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
 
-  const {
-    data: dataPut,
-    handlerPut,
-    error: errorPut,
-  } = usePut<any, PutResponse>(`/plate/favorite/${plateData.id}`, undefined, {
-    headers: {
-      Authorization: `Bearer ${token}`,
+  const {handlerPut} = usePut<null, PutResponse>(
+    `/plate/favorite/${plateData.id}`,
+    null,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
 
   function likeButtonPressed() {
     setIsFavorite(!isFavorite);

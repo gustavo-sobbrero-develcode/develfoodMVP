@@ -1,8 +1,12 @@
 import theme from '@global/styles/theme';
-import React, {useState} from 'react';
+import React, {SetStateAction, useState} from 'react';
 import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 
-export function EvaluationBar({childToParent}: any) {
+interface Props {
+  childToParent: (childState: SetStateAction<number>) => void;
+}
+
+export function EvaluationBar({childToParent}: Props) {
   const [defaultRating, setDefaultRating] = useState<number>(0);
   const [maxRating] = useState([1, 2, 3, 4, 5]);
 

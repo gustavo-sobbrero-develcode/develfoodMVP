@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
-import {StatusBar} from 'react-native';
+import {StatusBar, TouchableOpacity} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
@@ -65,11 +65,17 @@ export function Checkout({
 
   const navigation = useNavigation();
 
-  const {cart, nameRestaurant, foodTypes, restaurantPhoto, loading} =
-    useCreateCart();
+  const {
+    cart,
+    restaurantId: id,
+    nameRestaurant: name,
+    foodTypes: food_types,
+    restaurantPhoto: photo_url,
+    loading,
+  } = useCreateCart();
 
   function handlerBackHome() {
-    navigation.navigate('Home' as never);
+    navigation.goBack();
   }
 
   const {fetchData} = useFetch<Photos>(source, {
@@ -78,7 +84,7 @@ export function Checkout({
     },
   });
 
-  const {data, fetchData: fetchPhoto} = useFetch<Photos>(restaurantPhoto, {
+  const {data, fetchData: fetchPhoto} = useFetch<Photos>(photo_url, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -98,9 +104,21 @@ export function Checkout({
           restaurantID={item.restaurantID}
           restaurantFoodTypes={restaurantFoodTypes}
           restaurantName={restaurantName}
-          photoRestaurant={restaurantPhoto}
+          photoRestaurant={photo_url}
         />
       </WrapperCartPlates>
+    );
+  };
+
+  const navigateToRestaurant = () => {
+    navigation.navigate(
+      'RestaurantProfile' as never,
+      {
+        id,
+        name,
+        photo_url,
+        food_types,
+      } as never,
     );
   };
 
@@ -143,10 +161,11 @@ export function Checkout({
             <LineBetween />
 
             <WrapperInfoRestaurant>
-              <RestauratName>{nameRestaurant}</RestauratName>
+              <TouchableOpacity onPress={navigateToRestaurant}>
+                <RestauratName>{name}</RestauratName>
 
-              <FoodType>{foodTypes}</FoodType>
-
+                <FoodType>{food_types}</FoodType>
+              </TouchableOpacity>
               <WrapperPhoto>
                 <RestaurantPhoto
                   source={

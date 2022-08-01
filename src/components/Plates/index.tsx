@@ -164,7 +164,7 @@ export function Plates({
     data: dataDelete,
     handlerDelete,
     error: errorDelete,
-  } = useDelete<any>(`/plate/favorite/${id}`, {
+  } = useDelete(`/plate/favorite/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -174,7 +174,7 @@ export function Plates({
     data: dataPut,
     handlerPut,
     error: errorPut,
-  } = usePut<any, PutResponse>(`/plate/favorite/${id}`, undefined, {
+  } = usePut<null, PutResponse>(`/plate/favorite/${id}`, {}, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

@@ -76,7 +76,7 @@ export const FoodType = styled.Text`
 
 export const WrapperPhoto = styled.View`
   position: absolute;
-  right: ${RFValue(14)}px;
+  right: 0;
 `;
 
 export const RestaurantPhoto = styled.Image`

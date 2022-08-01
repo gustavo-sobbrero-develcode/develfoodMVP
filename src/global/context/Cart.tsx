@@ -109,6 +109,7 @@ interface Props {
   totalItems: number;
   total: number;
   nameRestaurant: string;
+  restaurantId: number;
   foodTypes: string;
   restaurantPhoto: string;
   userRequestCheckout: Function;
@@ -160,6 +161,8 @@ function CartProvider({children}: AuthProviderProps) {
 
   const [restaurantPhoto, setRestaurantPhoto] = useState('');
 
+  const [restaurantId, setRestaurantId] = useState(0);
+
   function addNewProductoCart(
     id: number,
     price: number,
@@ -204,9 +207,37 @@ function CartProvider({children}: AuthProviderProps) {
       setNameRestaurant(restaurantName);
       setFoodTypes(restaurantFoodTypes);
       setRestaurantPhoto(photoRestaurant);
+      setRestaurantId(restaurantID);
     } else {
       Alert.alert(
-        'Você não pode adicionar produtos de restaurantes diferentes',
+        'Você já tem itens adicionados na sua sacola',
+        'Deseja limpar o carrinho e adicionar este item?',
+        [
+          {
+            text: 'Cancelar',
+            onPress: () => {
+              Alert.prompt;
+            },
+          },
+          {
+            text: 'Adicionar',
+            onPress: () => {
+              replaceCart(
+                id,
+                1,
+                price,
+                price,
+                restaurantID,
+                name,
+                description,
+                source,
+                restaurantFoodTypes,
+                restaurantName,
+                photoRestaurant,
+              );
+            },
+          },
+        ],
       );
     }
   }
@@ -249,10 +280,6 @@ function CartProvider({children}: AuthProviderProps) {
       setCart(addingProducts);
       setTotal(total + price);
       setTotalItems(totalItems + 1);
-    } else {
-      Alert.alert(
-        'Você não pode adicionar produtos de restaurantes diferentes',
-      );
     }
   }
 
@@ -299,6 +326,40 @@ function CartProvider({children}: AuthProviderProps) {
     cart.splice(0, cart.length);
     setTotal(0);
     setTotalItems(0);
+  }
+
+  function replaceCart(
+    id: number,
+    quantity: number,
+    price: number,
+    unityPrice: number,
+    restaurantID: number,
+    name: string,
+    description: string,
+    source: string,
+    restaurantFoodTypes: string,
+    restaurantName: string,
+    photoRestaurant: string,
+  ) {
+    const product = {
+      id,
+      quantity,
+      price,
+      unityPrice,
+      restaurantID,
+      name,
+      description,
+      source,
+      restaurantFoodTypes,
+      restaurantName,
+      photoRestaurant,
+    };
+    cart.splice(0, cart.length, product);
+    setTotal(unityPrice);
+    setTotalItems(quantity);
+    setNameRestaurant(restaurantName);
+    setFoodTypes(restaurantFoodTypes);
+    setRestaurantPhoto(photoRestaurant);
   }
 
   const {token} = useAuth();
@@ -404,6 +465,7 @@ function CartProvider({children}: AuthProviderProps) {
         nameRestaurant,
         foodTypes,
         restaurantPhoto,
+        restaurantId,
         userRequestCheckout,
         paramsToOrderDetails,
         plateData,

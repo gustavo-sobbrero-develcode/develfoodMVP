@@ -1,4 +1,3 @@
-// import theme from '@global/styles/theme';
 import {RFValue} from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 

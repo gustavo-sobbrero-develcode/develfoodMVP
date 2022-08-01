@@ -1,5 +1,6 @@
 import React from 'react';
 import {ImageSourcePropType} from 'react-native';
+import {StyleProps} from 'react-native-reanimated';
 import {BackButton, Container, TextView, Title, Icon} from './styles';
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
   source?: ImageSourcePropType;
   Textcolor?: string;
   iconColor?: string;
+  animatedStyle?: StyleProps;
 }
 
 export function HeaderComponent({
@@ -18,6 +20,7 @@ export function HeaderComponent({
   source,
   Textcolor,
   iconColor,
+  animatedStyle,
 }: Props) {
   return (
     <Container style={{backgroundColor: backgroudColor}}>
@@ -25,7 +28,7 @@ export function HeaderComponent({
         <Icon style={{tintColor: iconColor}} source={source!} />
       </BackButton>
       <TextView>
-        <Title style={{color: Textcolor}}>{name}</Title>
+        <Title style={[animatedStyle, {color: Textcolor}]}>{name}</Title>
       </TextView>
     </Container>
   );

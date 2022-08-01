@@ -1,3 +1,4 @@
+import Animated from 'react-native-reanimated';
 import {RFValue} from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
@@ -8,6 +9,12 @@ export const Container = styled.View`
 
 export const HeaderView = styled.View`
   margin-left: ${RFValue(-5)}px;
+`;
+
+export const Separator = styled(Animated.View)`
+  width: 100%;
+  height: 1px;
+  background-color: ${({theme}) => theme.colors.separator};
 `;
 
 export const HeartButton = styled.TouchableOpacity`
