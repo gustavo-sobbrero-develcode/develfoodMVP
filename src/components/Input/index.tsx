@@ -56,7 +56,7 @@ export function Input({
           placeholder={placeholder}
           autoCapitalize="none"
           keyboardType={keyboardType}
-          secureTextEntry={!isClicked}
+          secureTextEntry={sourcePassword && !isClicked}
           onChangeText={onChangeText}
           value={value}
           editable={editable}
