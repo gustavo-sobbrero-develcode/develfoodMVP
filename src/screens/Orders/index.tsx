@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-shadow */
-
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useCallback, useEffect, useState} from 'react';
 import {ActivityIndicator, SectionList, StatusBar} from 'react-native';
 import {useTheme} from 'styled-components';

@@ -1,5 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState} from 'react';
 import {StatusBar, Modal, View, Animated} from 'react-native';
 import {HeaderComponent} from '@components/HeaderComponent';
@@ -28,6 +26,7 @@ import {
   LogOutButton,
   LogOutButtonText,
   Content,
+  UserPhotoNoPhoto,
 } from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {ProfilePageComponent} from '@components/ProfilePageComponent';
@@ -142,6 +141,7 @@ export function Settings() {
     fetchData();
     fetchPhoto();
   }, [data]);
+
   return (
     <Container>
       <StatusBar
@@ -156,6 +156,7 @@ export function Settings() {
 
       <Content>
         <UserInfo>
+          <UserPhotoNoPhoto source={theme.images.eu} />
           <UserPhoto source={getUserPhoto} />
 
           <UserInfoWrapper>
