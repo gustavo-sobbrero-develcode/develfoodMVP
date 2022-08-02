@@ -11,7 +11,6 @@ export function AppRoutes() {
     setTimeout(() => {
       token !== undefined && RNBootSplash.hide({fade: true});
     }, 500);
-    console.log('token', token);
   }, []);
 
   return token !== undefined ? <AuthedRoutes /> : <AuthRoutes />;
