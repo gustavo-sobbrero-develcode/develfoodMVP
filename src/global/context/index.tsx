@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useNavigation} from '@react-navigation/native';
 import React, {createContext, useState} from 'react';
 import {useEffect} from 'react';
 import {useContext} from 'react';
@@ -36,6 +37,7 @@ const AuthContext = createContext({
 function AuthProvider({children}: AuthProviderProps) {
   const {data, handlerPost, loading} = usePost<LoginRequest, UserData>('/auth');
   const [token, setToken] = useState('');
+  const navigation = useNavigation();
 
   const loginError = () => {
     Alert.alert('Erro', 'Email ou senha incorretos');
@@ -44,6 +46,11 @@ function AuthProvider({children}: AuthProviderProps) {
   async function logOut() {
     try {
       setToken('');
+      setToken(null);
+      setToken(undefined);
+      token === undefined ||
+        token === null ||
+        (token === '' && navigation.navigate('Login' as never));
       await AsyncStorage.clear();
     } catch (error) {}
   }

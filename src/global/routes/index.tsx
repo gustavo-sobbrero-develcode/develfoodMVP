@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import RNBootSplash from 'react-native-bootsplash';
 import {useAuth} from '../context';
 import {AuthedRoutes} from './authedroutes.routes';
 import {AuthRoutes} from './authroutes.routes';
@@ -6,5 +7,11 @@ import {AuthRoutes} from './authroutes.routes';
 export function AppRoutes() {
   const {token} = useAuth();
 
-  return token ? <AuthedRoutes /> : <AuthRoutes />;
+  useEffect(() => {
+    setTimeout(() => {
+      token !== undefined && RNBootSplash.hide({fade: true});
+    }, 500);
+  }, []);
+
+  return token !== undefined ? <AuthedRoutes /> : <AuthRoutes />;
 }
