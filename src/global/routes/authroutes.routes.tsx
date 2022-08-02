@@ -1,6 +1,4 @@
 import React, {useEffect} from 'react';
-// import {createStackNavigator} from '@react-navigation/native-stack';
-
 import RNBootSplash from 'react-native-bootsplash';
 import {Login} from '@screens/loginScreens/Login';
 import {Register} from '@screens/loginScreens/Register';

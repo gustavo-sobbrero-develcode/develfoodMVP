@@ -1,4 +1,3 @@
-// import {useAuth} from '@global/context';
 import {useAuth} from '@global/context';
 import {useCreateCart} from '@global/context/Cart';
 import {useNavigation} from '@react-navigation/native';
