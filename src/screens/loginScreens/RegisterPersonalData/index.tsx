@@ -2,7 +2,6 @@ import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
-import {BackButton} from '@components/BackButton';
 import {Input} from '@components/Input';
 import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
@@ -19,18 +18,15 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 
+import {Container, InputWrapper, Wrapper} from './styles';
+import {HeaderComponent} from '@components/HeaderComponent';
+
 import {
-  Container,
-  Header,
-  TittleWrapper,
-  Title,
   CircleWrapper,
   CircleAdjust,
   Circle,
   CenterCircle,
-  InputWrapper,
-  Wrapper,
-} from './styles';
+} from '../Register/styles';
 
 interface FormData {
   name: string;
@@ -91,12 +87,16 @@ export function RegisterPersonalData() {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Container>
         <StatusBar barStyle={'dark-content'} backgroundColor={'white'} />
-        <Header>
-          <BackButton onPressed={handlerBackButton} name="arrow" />
-          <TittleWrapper>
-            <Title>Cadastro</Title>
-          </TittleWrapper>
-        </Header>
+
+        <HeaderComponent
+          backgroudColor={theme.colors.background}
+          name={'Cadastro'}
+          source={theme.icons.arrow}
+          iconColor={theme.colors.icon_dark}
+          onPress={handlerBackButton}
+          Textcolor={theme.colors.icon_dark}
+        />
+
         <CircleWrapper>
           <CircleAdjust>
             <Circle source={theme.icons.circle} />

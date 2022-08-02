@@ -1,5 +1,12 @@
 import React from 'react';
-import {ArrowImage, Button, ButtonText, Container, Icon} from './styles';
+import {
+  ArrowImage,
+  Button,
+  ButtonText,
+  Container,
+  Icon,
+  Wrapper,
+} from './styles';
 
 interface Props {
   onPress: () => void;
@@ -18,8 +25,10 @@ export function ProfilePageComponent({
     <Container>
       <Button onPress={onPress}>
         <Icon source={sourceIcon} />
-        <ButtonText>{name}</ButtonText>
-        <ArrowImage source={sourceArrowIcon} />
+        <Wrapper>
+          <ButtonText>{name}</ButtonText>
+          <ArrowImage source={sourceArrowIcon} />
+        </Wrapper>
       </Button>
     </Container>
   );

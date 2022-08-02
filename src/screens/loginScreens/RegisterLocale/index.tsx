@@ -2,14 +2,12 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
-import {BackButton} from '@components/BackButton';
 import {Input} from '@components/Input';
 import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {Controller, useForm} from 'react-hook-form';
 import {ContinueButton} from '@components/ContinueButton';
 import {useCreateUser} from '@global/context/createUserAuth';
-
 import {
   Image,
   Keyboard,
@@ -19,13 +17,6 @@ import {
 
 import {
   Container,
-  Header,
-  TittleWrapper,
-  Title,
-  CircleWrapper,
-  CircleAdjust,
-  Circle,
-  CenterCircle,
   Wrapper,
   RowView,
   NicknameWrapper,
@@ -35,9 +26,16 @@ import {
   NumberWrapper,
   ButtonWrapper,
 } from './styles';
+import {
+  CircleWrapper,
+  CircleAdjust,
+  Circle,
+  CenterCircle,
+} from '../Register/styles';
 import {InputMaskZipCode} from '@components/InputMask/zipcode';
 import {useState} from 'react';
 import {useCep} from '@global/services/viaCEP';
+import {HeaderComponent} from '@components/HeaderComponent';
 
 interface FormData {
   street: string;
@@ -164,12 +162,16 @@ export function RegisterLocale() {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Container>
         <StatusBar barStyle={'dark-content'} backgroundColor={'white'} />
-        <Header>
-          <BackButton onPressed={handlerBackButton} name="arrow" />
-          <TittleWrapper>
-            <Title>Cadastro</Title>
-          </TittleWrapper>
-        </Header>
+
+        <HeaderComponent
+          backgroudColor={theme.colors.background}
+          name={'Cadastro'}
+          source={theme.icons.arrow}
+          iconColor={theme.colors.icon_dark}
+          onPress={handlerBackButton}
+          Textcolor={theme.colors.icon_dark}
+        />
+
         <CircleWrapper>
           <CircleAdjust>
             <Circle source={theme.icons.circle} />
@@ -187,7 +189,11 @@ export function RegisterLocale() {
 
         <Image
           source={theme.icons.woman}
-          style={{marginTop: RFValue(6), marginBottom: RFValue(20)}}
+          style={{
+            marginTop: RFValue(6),
+            marginBottom: RFValue(20),
+            alignSelf: 'center',
+          }}
         />
 
         <Wrapper>

@@ -73,7 +73,7 @@ export function OrderCard({
           <OrderN>N° </OrderN>
           <OrderNumber>{orderNumber}</OrderNumber>
         </WrapperInfoPoduct>
-        <FoodOrderName numberOfLines={3}>{foodName}</FoodOrderName>
+        <FoodOrderName numberOfLines={2}>{foodName}</FoodOrderName>
       </WrapperRestaurantInfo>
     </Container>
   );

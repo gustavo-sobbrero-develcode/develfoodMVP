@@ -8,24 +8,6 @@ export const Container = styled.View`
   background-color: ${({theme}) => theme.colors.background};
 `;
 
-export const Header = styled.View`
-  width: 100%;
-  height: ${RFValue(100)}px;
-  background-color: ${({theme}) => theme.colors.header};
-`;
-
-export const BannerWrapper = styled.ScrollView.attrs({
-  horizontal: true,
-  showsHorizontalScrollIndicator: false,
-  contentContainerStyle: {paddingLeft: 12},
-})`
-  top: ${RFValue(20)}px;
-`;
-
-export const Banner = styled.Image`
-  margin-right: ${RFValue(8)}px;
-`;
-
 export const List = styled.FlatList`
   font-family: ${({theme}) => theme.fonts.secondaryMed};
 `;

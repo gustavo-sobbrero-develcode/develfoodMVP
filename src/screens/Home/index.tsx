@@ -263,8 +263,6 @@ export function Home() {
           renderItem={renderItem}
           style={{
             width: '100%',
-            marginTop: 10,
-            margin: 20,
           }}
           onEndReached={() => {
             handleLoadOnEnd();

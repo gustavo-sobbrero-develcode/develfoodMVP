@@ -201,8 +201,7 @@ export function OrderInfo({route}: RouteParams) {
       <Container>
         <StatusBar
           barStyle={'light-content'}
-          translucent
-          backgroundColor={'transparent'}
+          backgroundColor={theme.colors.background_red}
         />
 
         <HeaderComponent

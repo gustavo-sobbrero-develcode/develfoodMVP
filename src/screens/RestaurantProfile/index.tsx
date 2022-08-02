@@ -40,6 +40,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 export interface Plate {
   id: number;
@@ -221,7 +222,15 @@ export function RestaurantProfile({route}: RouteParams) {
         <HeartButton onPress={() => setSelected(!selected)}>
           <Image
             source={theme.icons.favoriteRestaurant}
-            style={selected ? {tintColor: theme.colors.background_red} : null}
+            style={
+              selected
+                ? {
+                    tintColor: theme.colors.background_red,
+                    width: RFValue(20.5),
+                    height: RFValue(18.2),
+                  }
+                : {width: RFValue(20.5), height: RFValue(18.2)}
+            }
           />
         </HeartButton>
       </HeaderView>

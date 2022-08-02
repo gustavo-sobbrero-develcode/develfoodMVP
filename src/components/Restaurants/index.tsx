@@ -17,7 +17,7 @@ import {
   Avaliation,
   StarRatio,
   NumberRatio,
-} from './styled';
+} from './styles';
 
 interface ListRestaurantProps {
   name: string;

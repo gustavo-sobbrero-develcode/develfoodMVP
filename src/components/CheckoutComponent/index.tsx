@@ -9,6 +9,9 @@ import {
   EndOrder,
   TotalPrice,
   Load,
+  View,
+  View2,
+  View3,
 } from './styles';
 
 interface Props {
@@ -49,9 +52,15 @@ export function CheckoutComponent({loading}: Props) {
           <Load />
         ) : (
           <>
-            <DollarIcon source={theme.icons.dollar} />
-            <EndOrder>Finalizar Pedido</EndOrder>
-            <TotalPrice>R$ {priceFormatted}</TotalPrice>
+            <View>
+              <DollarIcon source={theme.icons.dollar} />
+            </View>
+            <View2>
+              <EndOrder>Finalizar Pedido</EndOrder>
+            </View2>
+            <View3>
+              <TotalPrice>R$ {priceFormatted}</TotalPrice>
+            </View3>
           </>
         )}
       </Container>
