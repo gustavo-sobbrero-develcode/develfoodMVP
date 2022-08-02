@@ -134,13 +134,16 @@ export function Favorites({navigation}: any) {
   }, [datafoodtype]);
 
   useFocusEffect(
-    useCallback((useloadFavorites = loadFavorites) => {
-      useloadFavorites();
-      return () => {
-        setFavoritePlates([]);
-        setIsFiltred({text: '', page: 0});
-      };
-    }, [foodType]),
+    useCallback(
+      (useloadFavorites = loadFavorites) => {
+        useloadFavorites();
+        return () => {
+          setFavoritePlates([]);
+          setIsFiltred({text: '', page: 0});
+        };
+      },
+      [foodType],
+    ),
   );
 
   const renderCategories =
