@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useTheme} from 'styled-components';
-import RNBootSplash from 'react-native-bootsplash';
 import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {Controller, useForm} from 'react-hook-form';
@@ -47,10 +46,6 @@ const schema = Yup.object().shape({
 });
 
 export function RedefinePassword() {
-  useEffect(() => {
-    RNBootSplash.hide({fade: true});
-  }, []);
-
   const theme = useTheme();
 
   const navigation = useNavigation();

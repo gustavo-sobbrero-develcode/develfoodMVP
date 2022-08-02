@@ -1,6 +1,5 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import SplashScreen from 'react-native-splash-screen';
 import {ThemeProvider} from 'styled-components';
 import {useEffect} from 'react';
 import {AuthProvider} from './src/global/context';
@@ -13,29 +12,25 @@ import {useColorScheme} from 'react-native';
 import themes from '@global/styles/themes';
 
 export default function App() {
-  useEffect(() => {
-    SplashScreen.hide();
-  }, []);
-
   const defaultTheme = useColorScheme();
 
   const theme = themes[defaultTheme] || themes.light;
 
   return (
     <GestureHandlerRootView style={{flex: 1}}>
-      <AuthProvider>
-        <CartProvider>
-          <RedefinePasswordProvider>
-            <CreateUserProvider>
-              <ThemeProvider theme={theme}>
-                <NavigationContainer>
+      <NavigationContainer>
+        <AuthProvider>
+          <CartProvider>
+            <RedefinePasswordProvider>
+              <CreateUserProvider>
+                <ThemeProvider theme={theme}>
                   <AppRoutes />
-                </NavigationContainer>
-              </ThemeProvider>
-            </CreateUserProvider>
-          </RedefinePasswordProvider>
-        </CartProvider>
-      </AuthProvider>
+                </ThemeProvider>
+              </CreateUserProvider>
+            </RedefinePasswordProvider>
+          </CartProvider>
+        </AuthProvider>
+      </NavigationContainer>
     </GestureHandlerRootView>
   );
 }
