@@ -3,6 +3,7 @@ import React from 'react';
 import {Container, LoginIcon, TextMask, Error} from './styles';
 
 import {ImageSourcePropType, TextInputProps} from 'react-native';
+import {useTheme} from 'styled-components';
 
 interface Props extends TextInputProps {
   name: string;
@@ -24,6 +25,7 @@ export function InputMaskZipCode({
   value,
   onBlur,
 }: Props) {
+  const theme = useTheme();
   return (
     <>
       <Container>
@@ -33,6 +35,7 @@ export function InputMaskZipCode({
           type="zip-code"
           placeholder={placeholder}
           autoCapitalize="none"
+          placeholderTextColor={theme.colors.text_gray}
           onChangeText={onChangeText}
           value={value}
           editable={editable}

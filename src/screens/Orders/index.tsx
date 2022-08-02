@@ -250,7 +250,7 @@ export function Orders() {
       <HeaderComponent
         backgroudColor={theme.colors.background_red}
         name="Meus Pedidos"
-        Textcolor={theme.colors.text_white}
+        Textcolor={theme.colors.text_light}
       />
 
       <>

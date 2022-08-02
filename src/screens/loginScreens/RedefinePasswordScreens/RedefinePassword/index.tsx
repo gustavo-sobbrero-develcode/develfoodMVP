@@ -80,12 +80,16 @@ export function RedefinePassword() {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Container>
         <>
-          <StatusBar hidden />
+          <StatusBar
+            backgroundColor={theme.colors.background}
+            barStyle={theme.barStyles.dark}
+          />
           <HeaderComponent
             backgroudColor={theme.colors.background}
             name=""
             Textcolor={theme.colors.text_dark}
             source={theme.icons.arrow}
+            iconColor={theme.colors.icon_black}
             onPress={() => navigation.navigate('Login' as never)}
           />
           <Content>

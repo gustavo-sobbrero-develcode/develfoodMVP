@@ -9,6 +9,7 @@ export const Container = styled.View`
 
 export const Label = styled.Text`
   font-size: 14px;
+  color: ${({theme}) => theme.colors.text_dark};
   align-self: flex-start;
   margin-left: ${RFValue(11)}px;
 `;

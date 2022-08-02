@@ -31,6 +31,7 @@ export function About() {
         backgroudColor={theme.colors.background}
         Textcolor={theme.colors.text_dark}
         source={theme.icons.arrow}
+        iconColor={theme.colors.icon_black}
         onPress={() => navigation.goBack()}
       />
       <Content>

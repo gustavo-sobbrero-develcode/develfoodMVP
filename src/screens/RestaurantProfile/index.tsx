@@ -204,7 +204,7 @@ export function RestaurantProfile({route}: RouteParams) {
   return (
     <Container>
       <StatusBar
-        barStyle={'dark-content'}
+        barStyle={theme.barStyles.dark}
         backgroundColor={theme.colors.background}
         animated
       />
@@ -213,7 +213,7 @@ export function RestaurantProfile({route}: RouteParams) {
           backgroudColor={theme.colors.background}
           name={name}
           source={theme.icons.arrow}
-          iconColor={theme.colors.icon_dark}
+          iconColor={theme.colors.icon_black}
           onPress={handlerBackButton}
           animatedStyle={headerTitle}
           Textcolor={theme.colors.icon_dark}

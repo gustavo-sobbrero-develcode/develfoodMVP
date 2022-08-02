@@ -65,7 +65,7 @@ export const Content = styled.View`
 export const LineBetween = styled.View`
   width: ${RFValue(321)}px;
   height: ${RFValue(2)}px;
-  background-color: #f0f0f5;
+  background-color: ${({theme}) => theme.colors.line};
   margin-left: ${RFValue(20)}px;
   margin-bottom: ${RFValue(18)}px;
 `;

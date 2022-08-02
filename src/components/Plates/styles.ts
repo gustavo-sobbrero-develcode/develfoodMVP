@@ -25,6 +25,15 @@ export const Container = styled.View.attrs({
   background-color: ${({theme}) => theme.colors.background};
 `;
 
+export const DeleteView = styled.View`
+  background-color: ${({theme}) => theme.colors.background_red};
+  height: ${RFValue(103)}px;
+  border-radius: ${RFValue(8)}px;
+  width: ${RFValue(100)}px;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const WrapperImage = styled.View`
   left: ${RFValue(5)}px;
   margin: ${RFValue(5)}px;
@@ -143,7 +152,7 @@ export const NumberOfQuantityWrapper = styled.View`
 export const Number = styled.Text`
   font-size: ${RFValue(12)}px;
   font-weight: 700;
-  color: ${({theme}) => theme.colors.text_white};
+  color: ${({theme}) => theme.colors.text_light};
 `;
 
 export const LitterButton = styled.TouchableOpacity`
@@ -176,7 +185,7 @@ export const CleanUpImage = styled.Image`
 
 export const CleanUpTitle = styled.Text`
   font-size: ${RFValue(12)}px;
-  color: ${({theme}) => theme.colors.text_white};
+  color: ${({theme}) => theme.colors.text_light};
   font-weight: 400;
 `;
 

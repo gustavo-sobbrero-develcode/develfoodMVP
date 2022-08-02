@@ -3,28 +3,41 @@ export default {
     background: '#FFFFFF',
     background_red: '#C20C18',
 
-    header: '#C20C18',
+    header: '#FFFFFF',
     button: '#C20C18',
     card: '#F0F0F5',
     cardRemove: '#FF0000',
     favorite_border: '#DEDCDC',
+    input_border: '#DEDCDC',
     separator: '#DDDDDD',
 
     text_white: '#FFFFFF',
     text_gray: '#BFBABA',
     text_dark: '#2B2B2E',
+    text_red: '#C20C18',
     text_login: '#68484A',
+    text_light: '#f2f2f2',
 
     icon_gray: '#BFBABA',
     icon_white: '#FFFFFF',
     icon_red: '#C20C18',
     icon_dark: '#2B2B2E',
+    icon_black: '#000',
     icon_slider: '#C4C4C4',
+    icon_light: '#f2f2f2',
+    favorite_color: '#C4C4C4',
+    line: '#f0f0f5',
+    priceView: '#BFBABA',
 
     modalBackGround: 'rgba(0, 0, 0, 0.5)',
-    modalButtonClose: '#009EFF',
+    modalButtonClose: '#C20C18',
 
     devsBanner: '#102844',
+  },
+
+  barStyles: {
+    dark: 'dark-content',
+    light: 'light-content',
   },
 
   fonts: {

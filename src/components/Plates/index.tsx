@@ -1,9 +1,7 @@
-// import {useAuth} from '@global/context';
 import {useAuth} from '@global/context';
 import {useCreateCart} from '@global/context/Cart';
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
 import {Swipeable} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
@@ -39,6 +37,7 @@ import {
   FavoriteImage,
   ContentContainer,
   PlateButton,
+  DeleteView,
 } from './styles';
 
 interface ListPlatesProps {
@@ -132,10 +131,10 @@ export function Plates({
   const leftSwipe = () => {
     return (
       <CleanUpButton onPress={() => cleanUpSamePlates(id, price)}>
-        <View style={styles.deleteBox}>
+        <DeleteView>
           <CleanUpImage source={theme.icons.cleanUp} />
           <CleanUpTitle>Remover</CleanUpTitle>
-        </View>
+        </DeleteView>
       </CleanUpButton>
     );
   };
@@ -143,8 +142,6 @@ export function Plates({
   useEffect(() => {
     fetchData();
   }, [source]);
-
-  const favoriteWhite = require('../../global/assets/Icons/favoriteRestaurant.png');
 
   const [isFavorite, setIsFavorite] = useState<boolean>(
     favorite ? favorite : false,
@@ -295,8 +292,11 @@ export function Plates({
       <Container>
         <FavoriteButton onPress={likeButtonPressed}>
           <FavoriteImage
-            source={favoriteWhite}
-            style={[isFavorite && styles.tintColor, styles.resizeMode]}
+            source={theme.icons.favorite}
+            style={[
+              isFavorite && {tintColor: theme.colors.background_red},
+              {resizeMode: 'contain'},
+            ]}
           />
         </FavoriteButton>
 
@@ -365,16 +365,3 @@ export function Plates({
     </PlateButton>
   );
 }
-
-const styles = StyleSheet.create({
-  deleteBox: {
-    backgroundColor: '#FF0000',
-    height: RFValue(103),
-    borderRadius: RFValue(8),
-    width: RFValue(100),
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  tintColor: {tintColor: 'red'},
-  resizeMode: {resizeMode: 'contain'},
-});

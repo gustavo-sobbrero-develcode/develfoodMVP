@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useRef} from 'react';
 import {useTheme} from 'styled-components';
@@ -41,7 +40,7 @@ import {useAuth} from '@global/context';
 import ImagePicker from 'react-native-image-crop-picker';
 import {ProfileImage} from '@components/ProfileImage';
 import {Modalize} from 'react-native-modalize';
-import theme from '@global/styles/theme';
+import light from '@global/styles/light';
 import {ModalError} from '@components/ModalError';
 
 interface FormData {
@@ -247,7 +246,7 @@ export function EditProfile() {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Container>
         <StatusBar
-          barStyle={'dark-content'}
+          barStyle={'default'}
           backgroundColor={theme.colors.background}
         />
         <HeaderComponent
@@ -271,6 +270,7 @@ export function EditProfile() {
                   editable={false}
                   keyboardType="email-address"
                   source={theme.icons.name}
+                  placeholder={getLoading === true ? 'carregando...' : 'Nome'}
                   defaultValue={data?.costumer.firstName}
                 />
               </InputWrapperComponent>
@@ -279,6 +279,9 @@ export function EditProfile() {
                 <Input
                   editable={false}
                   keyboardType="email-address"
+                  placeholder={
+                    getLoading === true ? 'carregando...' : 'Sobrenome'
+                  }
                   source={theme.icons.name}
                   defaultValue={data?.costumer.lastName}
                 />
@@ -287,6 +290,7 @@ export function EditProfile() {
                 <Input
                   editable={false}
                   keyboardType="email-address"
+                  placeholder={getLoading === true ? 'carregando...' : 'CPF'}
                   defaultValue={data?.costumer.cpf}
                   source={theme.icons.cpf}
                 />
@@ -317,6 +321,7 @@ export function EditProfile() {
                 <Input
                   editable={false}
                   defaultValue={data?.email}
+                  placeholder={getLoading === true ? 'carregando...' : 'Email'}
                   keyboardType="email-address"
                   source={theme.icons.email}
                 />
@@ -541,7 +546,7 @@ export function EditProfile() {
 const styles = StyleSheet.create({
   input: {
     marginTop: 23,
-    borderColor: theme.colors.text_gray,
+    borderColor: light.colors.text_gray,
     borderWidth: 1,
     borderRadius: 10,
   },

@@ -52,7 +52,7 @@ export const Content = styled.View`
 export const LineBetween = styled.View`
   width: 100%;
   height: ${RFValue(2)}px;
-  background-color: #f0f0f5;
+  background-color: ${({theme}) => theme.colors.line};
 `;
 
 export const WrapperInfoRestaurant = styled.View`

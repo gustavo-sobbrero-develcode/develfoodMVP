@@ -28,6 +28,7 @@ export const IconButton = styled.TouchableOpacity``;
 export const FavoriteIcon = styled.Image`
   width: ${RFValue(26)}px;
   height: ${RFValue(22)}px;
+  margin-top: ${RFValue(16)}px;
   border-color: ${({theme}) => theme.colors.icon_red};
 `;
 
@@ -107,7 +108,7 @@ export const ViewCart = styled.View`
   justify-content: center;
 `;
 export const PlateTotalPrice = styled.Text`
-  color: ${({theme}) => theme.colors.icon_white};
+  color: ${({theme}) => theme.colors.text_light};
   font-weight: 700;
   font-size: ${RFValue(16)}px;
   line-height: ${RFValue(18.75)}px;
@@ -126,7 +127,7 @@ export const WrapperCartButton = styled.View`
 
 export const AddQuantityButtonLabel = styled.Text`
   font-size: ${RFValue(18)}px;
-  color: ${({theme}) => theme.colors.text_white};
+  color: ${({theme}) => theme.colors.icon_light};
   font-weight: 700;
 `;
 export const AddQuantityButton = styled.TouchableOpacity`
@@ -137,7 +138,7 @@ export const AddQuantityButton = styled.TouchableOpacity`
 `;
 
 export const RemoveQuantityButtonLabel = styled.Text`
-  color: ${({theme}) => theme.colors.text_white};
+  color: ${({theme}) => theme.colors.icon_light};
   font-size: ${RFValue(21)}px;
   font-weight: 700;
 `;
@@ -157,13 +158,13 @@ export const NumberOfQuantityWrapper = styled.View`
   justify-content: center;
   margin-left: ${RFValue(45)}px;
   border: ${RFValue(1)}px;
-  border-color: ${({theme}) => theme.colors.text_white};
+  border-color: ${({theme}) => theme.colors.icon_light};
 `;
 
 export const Number = styled.Text`
   font-size: ${RFValue(12)}px;
   font-weight: 700;
-  color: ${({theme}) => theme.colors.text_white};
+  color: ${({theme}) => theme.colors.text_light};
 `;
 
 export const RemoveQuantityButtonImage = styled.Image`
@@ -194,5 +195,5 @@ export const TextButton = styled.Text`
   font-weight: 700;
   font-size: ${RFValue(16)}px;
   line-height: ${RFValue(18.75)}px;
-  color: ${({theme}) => theme.colors.text_white};
+  color: ${({theme}) => theme.colors.text_light};
 `;

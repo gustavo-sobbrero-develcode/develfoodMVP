@@ -20,6 +20,7 @@ export const LoginIcon = styled.Image`
 export const InputLogin = styled.TextInput`
   margin-left: ${RFValue(5)}px;
   width: 88%;
+  color: ${({theme}) => theme.colors.text_dark};
   font-size: ${RFValue(14)}px;
 `;
 

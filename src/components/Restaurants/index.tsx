@@ -85,9 +85,7 @@ export function Restaurants({
           <IconButton onPress={() => setIsPressed(!isPressed)}>
             <FavoriteIcon
               source={theme.icons.favoriteRestaurant}
-              style={
-                isPressed ? {tintColor: theme.colors.background_red} : null
-              }
+              style={isPressed ? {tintColor: theme.colors.icon_red} : null}
             />
           </IconButton>
         </FavoriteIconWrapper>

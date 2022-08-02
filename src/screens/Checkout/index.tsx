@@ -137,8 +137,8 @@ export function Checkout({
         backgroudColor={theme.colors.background_red}
         name="Compras"
         source={theme.icons.exitWhite}
-        iconColor={theme.colors.icon_white}
-        Textcolor={theme.colors.text_white}
+        iconColor={theme.colors.icon_light}
+        Textcolor={theme.colors.icon_light}
         onPress={handlerBackHome}
       />
 

@@ -40,7 +40,7 @@ export const ItemsCircle = styled.View`
   width: ${RFValue(12)}px;
   height: ${RFValue(12)}px;
   border-radius: ${RFValue(12)}px;
-  background-color: ${({theme}) => theme.colors.background};
+  background-color: ${({theme}) => theme.colors.icon_light};
   align-items: center;
   justify-content: center;
 `;
@@ -58,7 +58,7 @@ export const GoToCart = styled.View`
 
 export const ShowCart = styled.Text`
   left: ${RFValue(143)}px;
-  color: ${({theme}) => theme.colors.text_white};
+  color: ${({theme}) => theme.colors.text_light};
   font-weight: 400;
   font-size: ${RFValue(12)}px;
   top: ${RFValue(10)}px;
@@ -66,7 +66,7 @@ export const ShowCart = styled.Text`
 
 export const TotalPrice = styled.Text`
   left: ${RFValue(170)}px;
-  color: ${({theme}) => theme.colors.text_white};
+  color: ${({theme}) => theme.colors.text_light};
   font-weight: 400;
   font-size: ${RFValue(12)}px;
 `;

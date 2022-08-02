@@ -35,6 +35,7 @@ export function Routes() {
             alignItems: 'center',
             alignContent: 'center',
             justifyContent: 'center',
+            backgroundColor: theme.colors.background,
             position: 'absolute',
             height: RFValue(Platform.OS === 'ios' ? 50 : 50),
             paddingVertical: Platform.OS === 'ios' ? 20 : 0,

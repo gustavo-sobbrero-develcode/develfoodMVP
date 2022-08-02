@@ -1,10 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {
-  ActivityIndicator,
-  Dimensions,
-  StatusBar,
-  StyleSheet,
-} from 'react-native';
+import {ActivityIndicator, Dimensions, StatusBar} from 'react-native';
 import {useTheme} from 'styled-components';
 import {Input} from '@components/Input';
 import {useAuth} from '@global/context';
@@ -28,7 +23,7 @@ import {
 } from './styles';
 import {HeaderComponent} from '@components/HeaderComponent';
 import {PhotoSlider} from '@components/PhotoSlider';
-import theme from '@global/styles/theme';
+import light from '@global/styles/light';
 
 interface ListRestaurantProps {
   food_types: ListFoodType[];
@@ -172,8 +167,16 @@ export function Home() {
         <Category
           key={item.id}
           title={item.name}
-          style={activeButton === item.name && styles.activeButton}
-          textStyle={activeButton === item.name && styles.activeText}
+          style={
+            activeButton === item.name && {
+              backgroundColor: light.colors.background,
+              borderWidth: 2,
+              borderColor: light.colors.background_red,
+            }
+          }
+          textStyle={
+            activeButton === item.name && {color: theme.colors.icon_red}
+          }
           onPress={() => onPress(item)}
         />
       );
@@ -211,8 +214,8 @@ export function Home() {
           backgroudColor={theme.colors.background_red}
           name="서울특별시 강남구 도산대로49길 22"
           source={theme.icons.map}
-          iconColor={theme.colors.icon_white}
-          Textcolor={theme.colors.text_white}
+          iconColor={theme.colors.icon_light}
+          Textcolor={theme.colors.text_light}
         />
 
         <FlatList
@@ -282,14 +285,3 @@ export function Home() {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  activeButton: {
-    backgroundColor: theme.colors.background,
-    borderWidth: 2,
-    borderColor: theme.colors.background_red,
-  },
-  activeText: {
-    color: theme.colors.background_red,
-  },
-});

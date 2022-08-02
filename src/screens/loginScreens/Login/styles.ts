@@ -70,7 +70,7 @@ export const ButtonTitle = styled.Text`
   font-family: ${({theme}) => theme.fonts.secondaryBold};
   font-weight: bold;
   font-size: ${RFValue(12)}px;
-  color: ${({theme}) => theme.colors.background_red};
+  color: ${({theme}) => theme.colors.text_red};
 `;
 
 export const FooterImage = styled.Image`

@@ -3,6 +3,7 @@ import React from 'react';
 import {Container, LoginIcon, TextMask, Error} from './styles';
 
 import {ImageSourcePropType, TextInputProps} from 'react-native';
+import {useTheme} from 'styled-components';
 
 interface Props extends TextInputProps {
   error?: string;
@@ -23,6 +24,7 @@ export function InputMask({
   defaultValue,
   value,
 }: Props) {
+  const theme = useTheme();
   return (
     <>
       <Container>
@@ -34,6 +36,7 @@ export function InputMask({
           options={{maskType: 'BRL', withDDD: true, dddMask: '(99) '}}
           placeholder={placeholder}
           autoCapitalize="none"
+          placeholderTextColor={theme.colors.text_gray}
           onChangeText={onChangeText}
           value={value}
           editable={editable}

@@ -16,6 +16,8 @@ import {
   Content,
   WomanImage,
 } from './styles';
+import {StatusBar} from 'react-native';
+import {HeaderComponent} from '@components/HeaderComponent';
 
 export function RegisterSuccess() {
   const navigation = useNavigation();
@@ -34,12 +36,17 @@ export function RegisterSuccess() {
 
   return (
     <Container>
-      <Header>
-        <BackButton onPressed={handlerBackButton} name="exit" />
-        <TittleWrapper>
-          <Title>Cadastro</Title>
-        </TittleWrapper>
-      </Header>
+      <StatusBar
+        backgroundColor={theme.colors.background}
+        barStyle={theme.barStyles.dark}
+      />
+      <HeaderComponent
+        backgroudColor={theme.colors.background}
+        name="Cadastro"
+        onPress={handlerBackButton}
+        source={theme.icons.arrow}
+        iconColor={theme.colors.icon_black}
+      />
 
       <WomanImage source={theme.icons.womansuccess} />
 

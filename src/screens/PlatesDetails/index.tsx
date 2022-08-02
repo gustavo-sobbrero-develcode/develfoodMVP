@@ -1,15 +1,15 @@
-import {BackButton} from '@components/BackButton';
+import {HeaderComponent} from '@components/HeaderComponent';
 import {ItemProps} from '@components/Plates';
 import {useAuth} from '@global/context';
 import {useCreateCart} from '@global/context/Cart';
 import {useDelete} from '@global/services/delete';
 import {useFetch} from '@global/services/get';
 import {usePut} from '@global/services/put';
-import theme from '@global/styles/theme';
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {StatusBar} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
+import {useTheme} from 'styled-components';
 
 import {
   AddButton,
@@ -20,7 +20,6 @@ import {
   FavoriteIcon,
   FavoriteIconWrapper,
   FoodType,
-  Header,
   IconButton,
   LitterButton,
   LitterImage,
@@ -129,26 +128,29 @@ export function PlatesDetails() {
     handlerLikeButton();
   }
 
+  const theme = useTheme();
+
   return (
     <Container>
       <StatusBar
-        barStyle={'dark-content'}
-        translucent
+        barStyle={theme.barStyles.dark}
         backgroundColor={theme.colors.background}
       />
-
-      <Header>
-        <BackButton onPressed={handlerBackButton} name="arrow" />
-
-        <FavoriteIconWrapper>
-          <IconButton onPress={likeButtonPressed}>
-            <FavoriteIcon
-              source={theme.icons.favoriteRestaurant}
-              style={isFavorite && {tintColor: 'red'}}
-            />
-          </IconButton>
-        </FavoriteIconWrapper>
-      </Header>
+      <HeaderComponent
+        backgroudColor={theme.colors.background}
+        name=""
+        onPress={handlerBackButton}
+        source={theme.icons.arrow}
+        iconColor={theme.colors.icon_black}
+      />
+      <FavoriteIconWrapper>
+        <IconButton onPress={likeButtonPressed}>
+          <FavoriteIcon
+            source={theme.icons.favoriteRestaurant}
+            style={isFavorite && {tintColor: theme.colors.icon_red}}
+          />
+        </IconButton>
+      </FavoriteIconWrapper>
 
       <ScrollView>
         <ViewScroll>
@@ -216,7 +218,7 @@ export function PlatesDetails() {
                 }>
                 <LitterImage
                   source={theme.icons.trash}
-                  style={{tintColor: `${theme.colors.text_white}`}}
+                  style={{tintColor: `${theme.colors.icon_light}`}}
                   resizeMode={'contain'}
                 />
               </LitterButton>

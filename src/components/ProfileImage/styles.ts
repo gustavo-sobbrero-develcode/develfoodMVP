@@ -24,9 +24,9 @@ export const Image = styled.Image`
   width: ${RFValue(129)}px;
   height: ${RFValue(129)}px;
   align-self: center;
-  background-color: aliceblue;
+  background-color: ${({theme}) => theme.colors.card};
   border-radius: ${RFValue(65)}px;
-  border: 2px solid ${({theme}) => theme.colors.text_gray};
+  border: 2px solid ${({theme}) => theme.colors.icon_gray};
 `;
 
 export const NotFoundImage = styled.View`
@@ -35,7 +35,7 @@ export const NotFoundImage = styled.View`
   align-items: center;
   justify-content: center;
   align-self: center;
-  background-color: aliceblue;
+  background-color: ${({theme}) => theme.colors.card};
   border-radius: ${RFValue(65)}px;
   border: 2px solid ${({theme}) => theme.colors.text_gray};
 `;

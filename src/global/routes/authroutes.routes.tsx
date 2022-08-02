@@ -1,5 +1,4 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
 import {Login} from '@screens/loginScreens/Login';
 import {Register} from '@screens/loginScreens/Register';
 import {RegisterLocale} from '@screens/loginScreens/RegisterLocale';
@@ -9,13 +8,18 @@ import {ForgotPassword} from '@screens/loginScreens/RedefinePasswordScreens/Forg
 import {AuthCode} from '@screens/loginScreens/RedefinePasswordScreens/AuthCode/index';
 import {RedefinePassword} from '@screens/loginScreens/RedefinePasswordScreens/RedefinePassword';
 import {RedefineSuccess} from '@screens/loginScreens/RedefinePasswordScreens/RedefineSuccess';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-const {Navigator, Screen} = createStackNavigator();
+const {Navigator, Screen} = createNativeStackNavigator();
 
 export function AuthRoutes() {
   return (
     <>
-      <Navigator screenOptions={{headerShown: false}}>
+      <Navigator
+        screenOptions={{
+          headerShown: false,
+          animation: 'slide_from_bottom',
+        }}>
         <Screen name="Login" component={Login} />
         <Screen name="Register" component={Register} />
         <Screen name="RegisterPersonalData" component={RegisterPersonalData} />

@@ -1,21 +1,20 @@
 import {useAuth} from '@global/context';
 import {useFocusEffect} from '@react-navigation/native';
 import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react';
-import {ActivityIndicator, StatusBar, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, StatusBar, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {RFValue} from 'react-native-responsive-fontsize';
+import {useTheme} from 'styled-components';
 import {useDebouncedCallback} from 'use-debounce';
-import {Category} from '@components/CategoryButton';
-import {HeaderComponent} from '@components/HeaderComponent';
-import {Input} from '@components/Input';
-import {ListEmptyComponent} from '@components/ListEmptyComponent';
-import {Plates} from '@components/Plates';
-import {useFetch} from '@global/services/get';
-import theme from '@global/styles/theme';
+import {Category} from '../../components/CategoryButton';
+import {HeaderComponent} from '../../components/HeaderComponent';
+import {Input} from '../../components/Input';
+import {ListEmptyComponent} from '../../components/ListEmptyComponent';
+import {Plates} from '../../components/Plates';
+import {useFetch} from '../../global/services/get';
 import {CategorySelect} from '../Home/styles';
 import {PlatesWrapper} from '../RestaurantProfile/styles';
 import {Container, Content, Footer} from './styles';
-
 export interface FavoritesResponse {
   content: Plate[];
   totalPages: number;
@@ -134,13 +133,16 @@ export function Favorites({navigation}: any) {
   }, [datafoodtype]);
 
   useFocusEffect(
-    useCallback((useloadFavorites = loadFavorites) => {
-      useloadFavorites();
-      return () => {
-        setFavoritePlates([]);
-        setIsFiltred({text: '', page: 0});
-      };
-    }, [foodType]),
+    useCallback(
+      (useloadFavorites = loadFavorites) => {
+        useloadFavorites();
+        return () => {
+          setFavoritePlates([]);
+          setIsFiltred({text: '', page: 0});
+        };
+      },
+      [foodType],
+    ),
   );
 
   const renderCategories =
@@ -150,8 +152,16 @@ export function Favorites({navigation}: any) {
         <Category
           key={item.id}
           title={item.name}
-          style={activeButton === item.name && styles.activeButton}
-          textStyle={activeButton === item.name && styles.activeText}
+          style={
+            activeButton === item.name && {
+              backgroundColor: theme.colors.background,
+              borderWidth: 2,
+              borderColor: theme.colors.background_red,
+            }
+          }
+          textStyle={
+            activeButton === item.name && {color: theme.colors.background_red}
+          }
           onPress={() => onPress(item)}
         />
       );
@@ -180,20 +190,21 @@ export function Favorites({navigation}: any) {
   function handlerBackButton() {
     navigation.navigate('Inicio');
   }
+  const theme = useTheme();
 
   return (
     <Container>
       <StatusBar
-        barStyle={'dark-content'}
+        barStyle={theme.barStyles.dark}
         translucent={false}
         backgroundColor={theme.colors.background}
       />
 
       <HeaderComponent
-        backgroudColor="#ffffff"
+        backgroudColor={theme.colors.background}
         name="Favoritos"
-        Textcolor="#2b2b2e"
-        source={theme.icons.arrow}
+        Textcolor={theme.colors.text_dark}
+        iconColor={theme.colors.icon_gray}
         onPress={handlerBackButton}
       />
 
@@ -242,14 +253,3 @@ export function Favorites({navigation}: any) {
     </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  activeButton: {
-    backgroundColor: theme.colors.background,
-    borderWidth: 2,
-    borderColor: theme.colors.background_red,
-  },
-  activeText: {
-    color: theme.colors.background_red,
-  },
-});

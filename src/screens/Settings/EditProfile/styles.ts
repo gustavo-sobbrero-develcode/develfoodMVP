@@ -39,9 +39,11 @@ export const PerfilImage = styled.Image`
 
 export const ModalContent = styled.View`
   flex: 1;
+  background-color: ${({theme}) => theme.colors.card};
   align-items: center;
   justify-content: center;
   padding-top: ${RFValue(30)}px;
+  padding-bottom: 100%;
 `;
 
 export const ModalTitle = styled.Text`
@@ -73,7 +75,7 @@ export const TakePhoto = styled.TouchableOpacity`
 export const ButtonText = styled.Text`
   font-size: ${RFValue(20)}px;
   font-weight: bold;
-  color: ${({theme}) => theme.colors.text_white};
+  color: ${({theme}) => theme.colors.text_light};
 `;
 
 export const TittleWrapper = styled.View`
