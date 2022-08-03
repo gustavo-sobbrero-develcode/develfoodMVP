@@ -141,10 +141,6 @@ export function Favorites({navigation}: any) {
     ),
   );
 
-  useEffect(() => {
-    console.log(isFiltred.page);
-  }, [isFiltred]);
-
   const renderCategories =
     categories.length > 1 &&
     categories?.map(item => {
