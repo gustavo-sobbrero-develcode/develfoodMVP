@@ -18,7 +18,7 @@ export const Container = styled.View.attrs({
   align-items: center;
   margin-bottom: ${RFValue(18)}px;
   border-radius: ${RFValue(8)}px;
-  background-color: ${({theme}) => theme.colors.background};
+  background-color: ${({theme}) => theme.colors.card};
 `;
 
 export const DeleteView = styled.View`
