@@ -43,6 +43,8 @@ interface Restaurant {
 }
 
 export function Favorites({navigation}: any) {
+  const theme = useTheme();
+
   const [isLoading, setIsLoading] = useState(false);
 
   const {token} = useAuth();
@@ -186,7 +188,6 @@ export function Favorites({navigation}: any) {
   function handlerBackButton() {
     navigation.navigate('Inicio');
   }
-  const theme = useTheme();
 
   return (
     <Container>

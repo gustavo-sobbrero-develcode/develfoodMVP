@@ -1,7 +1,5 @@
-import {BackButton} from '@components/BackButton';
 import {HeaderComponent} from '@components/HeaderComponent';
 import {ItemProps} from '@components/Plates';
-import {Image} from '@components/ProfileImage/styles';
 import {useAuth} from '@global/context';
 import {useCreateCart} from '@global/context/Cart';
 import {useDelete} from '@global/services/delete';
@@ -12,7 +10,6 @@ import React, {useEffect, useState} from 'react';
 import {StatusBar} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useTheme} from 'styled-components';
-
 import {
   AddButton,
   AddQuantityButton,
@@ -23,7 +20,6 @@ import {
   FoodType,
   HeaderView,
   HeartButton,
-  IconButton,
   LitterButton,
   LitterImage,
   Number,
