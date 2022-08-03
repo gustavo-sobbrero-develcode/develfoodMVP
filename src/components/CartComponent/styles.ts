@@ -91,7 +91,6 @@ export const GoToCart = styled.View`
 `;
 
 export const ShowCart = styled.Text`
-  left: ${RFValue(143)}px;
   color: ${({theme}) => theme.colors.text_light};
   font-weight: 400;
   font-size: ${RFValue(12)}px;
@@ -100,7 +99,6 @@ export const ShowCart = styled.Text`
 export const TotalPrice = styled.Text.attrs({
   numberOfLines: 1,
 })`
-  left: ${RFValue(170)}px;
   color: ${({theme}) => theme.colors.text_light};
   font-weight: 400;
   font-size: ${RFValue(12)}px;
