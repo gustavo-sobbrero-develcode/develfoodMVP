@@ -216,7 +216,7 @@ export function RestaurantProfile({route}: RouteParams) {
           iconColor={theme.colors.icon_black}
           onPress={handlerBackButton}
           animatedStyle={headerTitle}
-          Textcolor={theme.colors.icon_dark}
+          Textcolor={theme.colors.icon_black}
         />
         <HeartButton onPress={() => setSelected(!selected)}>
           <Image

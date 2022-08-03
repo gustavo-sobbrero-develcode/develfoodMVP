@@ -103,6 +103,8 @@ export function Favorites({navigation}: any) {
     '',
   );
 
+  const theme = useTheme();
+
   const onPress = (item: ListFoodType) => {
     activeButton === item.name
       ? setActiveButton('')
@@ -190,7 +192,6 @@ export function Favorites({navigation}: any) {
   function handlerBackButton() {
     navigation.navigate('Inicio');
   }
-  const theme = useTheme();
 
   return (
     <Container>
