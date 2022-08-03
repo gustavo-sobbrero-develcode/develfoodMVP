@@ -1,7 +1,6 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {ThemeProvider} from 'styled-components';
-import {useEffect} from 'react';
 import {AuthProvider} from './src/global/context';
 import {AppRoutes} from './src/global/routes';
 import {CreateUserProvider} from './src/global/context/createUserAuth';

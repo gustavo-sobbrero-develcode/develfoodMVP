@@ -2,7 +2,6 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useRef, useState} from 'react';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {useTheme} from 'styled-components';
-import {BackButton} from '@components/BackButton';
 import {Input} from '@components/Input';
 import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
@@ -20,9 +19,6 @@ import {
 
 import {
   Container,
-  Header,
-  TittleWrapper,
-  Title,
   CircleWrapper,
   CircleAdjust,
   Circle,
@@ -108,10 +104,11 @@ export function Register() {
         />
         <HeaderComponent
           backgroudColor={theme.colors.background}
-          name="Cadastro"
-          onPress={handlerBackButton}
+          name={'Cadastro'}
           source={theme.icons.arrow}
           iconColor={theme.colors.icon_black}
+          onPress={handlerBackButton}
+          Textcolor={theme.colors.icon_black}
         />
         <CircleWrapper>
           <CircleAdjust>

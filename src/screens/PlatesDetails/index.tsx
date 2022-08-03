@@ -1,5 +1,7 @@
+import {BackButton} from '@components/BackButton';
 import {HeaderComponent} from '@components/HeaderComponent';
 import {ItemProps} from '@components/Plates';
+import {Image} from '@components/ProfileImage/styles';
 import {useAuth} from '@global/context';
 import {useCreateCart} from '@global/context/Cart';
 import {useDelete} from '@global/services/delete';
@@ -18,8 +20,9 @@ import {
   Container,
   Description,
   FavoriteIcon,
-  FavoriteIconWrapper,
   FoodType,
+  HeaderView,
+  HeartButton,
   IconButton,
   LitterButton,
   LitterImage,
@@ -136,21 +139,23 @@ export function PlatesDetails() {
         barStyle={theme.barStyles.dark}
         backgroundColor={theme.colors.background}
       />
-      <HeaderComponent
-        backgroudColor={theme.colors.background}
-        name=""
-        onPress={handlerBackButton}
-        source={theme.icons.arrow}
-        iconColor={theme.colors.icon_black}
-      />
-      <FavoriteIconWrapper>
-        <IconButton onPress={likeButtonPressed}>
+
+      <HeaderView>
+        <HeaderComponent
+          backgroudColor={theme.colors.background}
+          name={''}
+          source={theme.icons.arrow}
+          iconColor={theme.colors.icon_black}
+          onPress={handlerBackButton}
+          Textcolor={theme.colors.icon_black}
+        />
+        <HeartButton onPress={likeButtonPressed}>
           <FavoriteIcon
             source={theme.icons.favoriteRestaurant}
-            style={isFavorite && {tintColor: theme.colors.icon_red}}
+            style={isFavorite && {tintColor: 'red'}}
           />
-        </IconButton>
-      </FavoriteIconWrapper>
+        </HeartButton>
+      </HeaderView>
 
       <ScrollView>
         <ViewScroll>
@@ -159,7 +164,7 @@ export function PlatesDetails() {
               source={
                 dataPhoto.code ? {uri: dataPhoto.code} : theme.images.noImage
               }
-              resizeMode={'contain'}
+              resizeMode={'cover'}
             />
             <PlateName numberOfLines={1}>{plateData.name}</PlateName>
             <FoodType numberOfLines={1}>

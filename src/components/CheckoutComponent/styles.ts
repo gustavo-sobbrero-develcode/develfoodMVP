@@ -17,8 +17,25 @@ export const CheckoutButton = styled.TouchableOpacity`
   margin: 0 ${RFValue(9)}px;
 `;
 
+export const View = styled.View`
+  flex: 1;
+  align-items: flex-start;
+`;
+
+export const View2 = styled.View`
+  flex: 1;
+  align-items: center;
+`;
+
+export const View3 = styled.View`
+  flex: 1;
+  align-items: flex-end;
+`;
+
 export const DollarIcon = styled.Image`
   margin-left: ${RFValue(14)}px;
+  width: ${RFValue(20)}px;
+  height: ${RFValue(20)}px;
 `;
 
 export const EndOrder = styled.Text`

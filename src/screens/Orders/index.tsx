@@ -1,16 +1,20 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {ActivityIndicator, SectionList, StatusBar} from 'react-native';
 import {useTheme} from 'styled-components';
-import {ListEmptyComponent} from '../../components/ListEmptyComponent';
-import {OrderCard} from '../../components/OrderCard';
+import {ListEmptyComponent} from '@components/ListEmptyComponent';
+import {OrderCard} from '@components/OrderCard';
 import {useAuth} from '@global/context';
-import {useFetch} from '../../global/services/get';
+import {useFetch} from '@global/services/get';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
 import {Container, OrderDate, SubTitle, WrapperInfo, Footer} from './styles';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import {HeaderComponent} from '../../components/HeaderComponent';
+import {
+  useFocusEffect,
+  useNavigation,
+  useScrollToTop,
+} from '@react-navigation/native';
+import {HeaderComponent} from '@components/HeaderComponent';
 
 interface PlateDTOResponse {
   id: number;
@@ -239,6 +243,10 @@ export function Orders() {
     };
   }, []);
 
+  const ref = useRef(null);
+
+  useScrollToTop(ref);
+
   return (
     <Container>
       <StatusBar
@@ -255,6 +263,7 @@ export function Orders() {
 
       <>
         <SectionList
+          ref={ref}
           sections={orderSections}
           keyExtractor={item => item.id.toString()}
           renderItem={({item}) => renderItem({item})}

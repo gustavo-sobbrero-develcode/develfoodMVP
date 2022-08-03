@@ -25,6 +25,7 @@ export const MapImage = styled.Image`
 
 export const WrapperAddresInfo = styled.View`
   left: ${RFValue(10)}px;
+  width: 60%;
 `;
 
 export const SubTitle = styled.Text`

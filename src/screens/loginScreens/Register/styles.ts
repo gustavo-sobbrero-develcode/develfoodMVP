@@ -28,12 +28,12 @@ export const Title = styled.Text`
 export const CircleWrapper = styled.View`
   width: 100%;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0 ${RFValue(60)}px;
 `;
 
 export const CircleAdjust = styled.View`
   align-items: center;
-  justify-content: space-around;
 `;
 
 export const Circle = styled.Image``;
