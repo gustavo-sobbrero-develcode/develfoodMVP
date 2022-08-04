@@ -273,7 +273,7 @@ export function Orders() {
           ListHeaderComponent={
             data.totalPages > 0 ? (
               <WrapperInfo>
-                <SubTitle>Historico</SubTitle>
+                <SubTitle>Histórico</SubTitle>
               </WrapperInfo>
             ) : null
           }
