@@ -202,10 +202,10 @@ export function Settings() {
             Ah não! Você está saindo... {'\n'} Tem certeza?
           </MessageLogOut>
           <CloseModal onPress={() => setIsVisible(false)}>
-            <CloseModalText>Naah, to só brincando</CloseModalText>
+            <CloseModalText>Não, desejo ficar</CloseModalText>
           </CloseModal>
           <LogOutButton onPress={() => logOut()}>
-            <LogOutButtonText>Sim, to vazando</LogOutButtonText>
+            <LogOutButtonText>Sim, quero sair</LogOutButtonText>
           </LogOutButton>
         </ModalContent>
       </CloseAppModal>

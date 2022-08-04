@@ -114,12 +114,12 @@ export const LogOutButton = styled.TouchableOpacity`
   border-color: ${({theme}) => theme.colors.modalButtonClose};
   align-items: center;
   justify-content: center;
-  background-color: ${({theme}) => theme.colors.card};
+  background-color: ${({theme}) => theme.colors.background};
   top: ${RFValue(35)}px;
   margin-bottom: ${RFValue(40)}px;
 `;
 
 export const LogOutButtonText = styled.Text`
   font-size: ${RFValue(14)}px;
-  color: ${({theme}) => theme.colors.icon_black};
+  color: ${({theme}) => theme.colors.background_red};
 `;
