@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 export const ContentContainer = styled.View`
   width: 100%;
   height: ${RFValue(103)}px;
-  background-color: ${({theme}) => theme.colors.cardRemove};
+  background-color: ${({theme}) => theme.colors.background_red};
   border-radius: ${RFValue(8)}px;
   margin-bottom: ${RFValue(18)}px;
 `;
