@@ -169,9 +169,9 @@ export function Home() {
           title={item.name}
           style={
             activeButton === item.name && {
-              backgroundColor: light.colors.background,
+              backgroundColor: theme.colors.background,
               borderWidth: 2,
-              borderColor: light.colors.background_red,
+              borderColor: theme.colors.background_red,
             }
           }
           textStyle={
