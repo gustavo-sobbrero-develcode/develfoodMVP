@@ -53,7 +53,6 @@ const CloseAppModal = ({visible, children}: any) => {
       setShowModal(true);
       Animated.spring(scaleValue, {
         toValue: 1,
-        speed: 0.8,
         useNativeDriver: true,
       }).start();
     } else {
