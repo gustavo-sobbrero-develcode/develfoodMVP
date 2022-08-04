@@ -211,7 +211,7 @@ export function Plates({
 
             <WrapperPlateInfo>
               <PlateTitleWrapper>
-                <PlateTitle>{name}</PlateTitle>
+                <PlateTitle numberOfLines={1}>{name}</PlateTitle>
                 <PlateInfo numberOfLines={3}>{description}</PlateInfo>
               </PlateTitleWrapper>
 
