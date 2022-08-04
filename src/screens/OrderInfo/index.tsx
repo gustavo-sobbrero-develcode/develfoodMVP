@@ -249,7 +249,7 @@ export function OrderInfo({route}: RouteParams) {
             <StatusImage source={statusImage} />
 
             <WrapperText>
-              <StatusText>{statusText}</StatusText>
+              <StatusText numberOfLines={1}>{statusText}</StatusText>
             </WrapperText>
           </WrapperOrderInfo>
         </WrapperRestaurantInfo>
