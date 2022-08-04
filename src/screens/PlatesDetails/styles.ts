@@ -13,7 +13,7 @@ export const HeaderView = styled.View`
 export const HeartButton = styled.TouchableOpacity`
   position: absolute;
   right: 21px;
-  top: ${RFValue(4)}px;
+  top: ${RFValue(3)}px;
 `;
 
 export const FavoriteIcon = styled.Image.attrs({
