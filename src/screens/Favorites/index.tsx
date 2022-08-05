@@ -72,7 +72,7 @@ export function Favorites({navigation}: any) {
   }
 
   async function handleLoadOnEnd() {
-    if (dataFavorites.totalPages < isFiltred.page - 1) {
+    if (isFiltred.page < dataFavorites.totalPages - 1) {
       setIsFiltred({...isFiltred, page: isFiltred.page + 1});
     }
   }
@@ -85,7 +85,7 @@ export function Favorites({navigation}: any) {
 
   function handleSearch(value: string) {
     setIsLoading(true);
-    if (value.length > 1) {
+    if (value.length > 0) {
       setFavoritePlates([]);
       setIsFiltred({text: value, page: 0});
     } else {
@@ -138,14 +138,14 @@ export function Favorites({navigation}: any) {
     useCallback(
       (useloadFavorites = loadFavorites) => {
         useloadFavorites();
-        return () => {
-          setFavoritePlates([]);
-          setIsFiltred({text: '', page: 0});
-        };
       },
-      [foodType],
+      [foodType, isFiltred],
     ),
   );
+
+  useEffect(() => {
+    console.log(isFiltred.page);
+  }, [isFiltred]);
 
   const renderCategories =
     categories.length > 1 &&
@@ -243,7 +243,7 @@ export function Favorites({navigation}: any) {
           </Footer>
         )}
         ListEmptyComponent={
-          !isLoading && !!dataFavorites.totalElements ? (
+          !isLoading && dataFavorites.totalElements === 0 ? (
             <ListEmptyComponent
               source={theme.images.noFavorites}
               title="Você não possui favoritos"

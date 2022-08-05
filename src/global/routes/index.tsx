@@ -1,6 +1,4 @@
-import {ThemeProviderContext, useThemeProvider} from '@global/context/Theme';
-import dark from '@global/styles/dark';
-import light from '@global/styles/light';
+import {useThemeProvider} from '@global/context/Theme';
 import themes from '@global/styles/themes';
 import React, {useEffect} from 'react';
 import {useColorScheme} from 'react-native';
@@ -14,6 +12,7 @@ export function AppRoutes() {
   const {token} = useAuth();
   const {themeSelect} = useThemeProvider();
   const defaultTheme = useColorScheme();
+  const {GetDeviceTheme} = useThemeProvider();
 
   const theme = themes[defaultTheme] || themes.light;
 
@@ -27,6 +26,10 @@ export function AppRoutes() {
   }
 
   const themeSetted = getStatusImage(themeSelect);
+
+  useEffect(() => {
+    GetDeviceTheme();
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {

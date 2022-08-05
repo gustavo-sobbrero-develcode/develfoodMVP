@@ -3,10 +3,17 @@ import React, {useRef} from 'react';
 import {Dimensions, Image} from 'react-native';
 import {Modalize} from 'react-native-modalize';
 import {useTheme} from 'styled-components';
-import {Content, DarkCircle, DarkContent, ModalizeContent} from './styles';
+import {
+  Content,
+  ModalizeContent,
+  ThemeContainer,
+  ThemeContent,
+  ThemeText,
+  ThemeTitle,
+} from './styles';
 
 export function ChangeTheme() {
-  const {themeSelect, setThemeSelect} = useThemeProvider();
+  const {themeSelect, SetDeviceTheme} = useThemeProvider();
   const theme = useTheme();
 
   function getStatusImage(themeSet: string) {
@@ -18,9 +25,8 @@ export function ChangeTheme() {
     return themeSetted;
   }
   const modalizeRef = useRef<Modalize>(null);
-  const modalErrorRef = useRef<Modalize>(null);
 
-  const ModalHeight = Dimensions.get('screen').height * 0.145;
+  const ModalHeight = Dimensions.get('screen').height * 0.265;
 
   const themeSetted = getStatusImage(themeSelect);
 
@@ -43,23 +49,88 @@ export function ChangeTheme() {
           borderTopEndRadius: 30,
         }}>
         <ModalizeContent style={{height: ModalHeight}}>
-          <DarkContent>
-            <DarkCircle
+          <ThemeTitle>Tema</ThemeTitle>
+          <ThemeContainer>
+            <ThemeContent
               onPress={() => {
-                setThemeSelect('light');
-              }}
-            />
-            <DarkCircle
+                SetDeviceTheme('light');
+                modalizeRef.current?.close();
+              }}>
+              <Image
+                style={{
+                  height: 50,
+                  width: 50,
+                  tintColor:
+                    themeSelect === 'light'
+                      ? theme.colors.icon_red
+                      : theme.colors.icon_black,
+                }}
+                source={theme.icons.light}
+              />
+              <ThemeText
+                style={{
+                  color:
+                    themeSelect === 'light'
+                      ? theme.colors.icon_red
+                      : theme.colors.icon_black,
+                }}>
+                Claro
+              </ThemeText>
+            </ThemeContent>
+            <ThemeContent
               onPress={() => {
-                setThemeSelect('dark');
-              }}
-            />
-            <DarkCircle
+                SetDeviceTheme('default');
+                modalizeRef.current?.close();
+              }}>
+              <Image
+                style={{
+                  height: 50,
+                  width: 50,
+                  tintColor:
+                    themeSelect === 'default'
+                      ? theme.colors.icon_red
+                      : theme.colors.icon_black,
+                }}
+                source={theme.icons.default}
+              />
+              <ThemeText
+                style={{
+                  color:
+                    themeSelect === 'default'
+                      ? theme.colors.icon_red
+                      : theme.colors.icon_black,
+                }}>
+                Padrão
+              </ThemeText>
+            </ThemeContent>
+            <ThemeContent
               onPress={() => {
-                setThemeSelect('default');
-              }}
-            />
-          </DarkContent>
+                SetDeviceTheme('dark');
+                modalizeRef.current?.close();
+              }}>
+              <Image
+                style={{
+                  height: 45,
+                  width: 45,
+                  tintColor:
+                    themeSelect === 'dark'
+                      ? theme.colors.icon_red
+                      : theme.colors.icon_black,
+                  marginBottom: 5,
+                }}
+                source={theme.icons.dark}
+              />
+              <ThemeText
+                style={{
+                  color:
+                    themeSelect === 'dark'
+                      ? theme.colors.icon_red
+                      : theme.colors.icon_black,
+                }}>
+                Escuro
+              </ThemeText>
+            </ThemeContent>
+          </ThemeContainer>
         </ModalizeContent>
       </Modalize>
     </>

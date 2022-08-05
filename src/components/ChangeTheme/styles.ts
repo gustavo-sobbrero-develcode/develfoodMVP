@@ -22,21 +22,32 @@ export const Content = styled.TouchableOpacity`
 
 export const ModalizeContent = styled.View`
   flex: 1;
+  align-items: center;
   background-color: ${({theme}) => theme.colors.background};
 `;
 
-export const LightCircle = styled.View`
-  height: ${RFValue(20)}px;
-  width: ${RFValue(20)}px;
-  border-radius: ${RFValue(15)}px;
-  background-color: ${({theme}) => theme.colors.theme_button_circle};
+export const ThemeContainer = styled.View`
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  padding: 20px 50px 5px 50px;
+  background-color: ${({theme}) => theme.colors.background};
 `;
-export const DarkContent = styled.View`
-  align-items: flex-end;
+
+export const ThemeContent = styled.TouchableOpacity`
+  flex-direction: column;
+  align-items: center;
 `;
-export const DarkCircle = styled.TouchableOpacity`
-  height: ${RFValue(20)}px;
-  width: ${RFValue(20)}px;
-  border-radius: ${RFValue(15)}px;
-  background-color: ${({theme}) => theme.colors.theme_button_circle};
+
+export const ThemeText = styled.Text`
+  color: ${({theme}) => theme.colors.icon_black};
+  font-weight: 700;
+  font-size: ${RFValue(14)}px;
+`;
+
+export const ThemeTitle = styled.Text`
+  color: ${({theme}) => theme.colors.icon_black};
+  font-weight: 700;
+  margin-top: ${RFValue(10)}px;
+  font-size: ${RFValue(18)}px;
 `;

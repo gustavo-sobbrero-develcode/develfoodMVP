@@ -9,7 +9,6 @@ import {RedefinePasswordProvider} from './src/global/context/RedefinePassword';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {useColorScheme} from 'react-native';
 import themes from '@global/styles/themes';
-import dark from '@global/styles/dark';
 import {ThemeProviderContext} from '@global/context/Theme';
 
 export default function App() {
