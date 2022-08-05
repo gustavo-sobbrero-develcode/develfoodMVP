@@ -112,7 +112,6 @@ export const WrapperText = styled.View`
   width: ${RFValue(85)}px;
   height: ${RFValue(33)}px;
   align-items: center;
-  background-color: yellow;
 `;
 
 export const StatusText = styled.Text`

@@ -190,7 +190,7 @@ export function OrderInfo({route}: RouteParams) {
   useEffect(() => {
     const timer = setTimeout(() => {
       loadStatus();
-    }, 8000);
+    }, 5000);
     return () => {
       clearTimeout(timer);
     };
