@@ -30,6 +30,7 @@ import {
 } from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {ProfilePageComponent} from '@components/ProfilePageComponent';
+import {ChangeTheme} from '@components/ChangeTheme';
 interface CostumerProps {
   id: number;
   firstName: string;
@@ -209,6 +210,7 @@ export function Settings() {
           </LogOutButton>
         </ModalContent>
       </CloseAppModal>
+      <ChangeTheme />
     </Container>
   );
 }
