@@ -15,6 +15,7 @@ export const Container = styled.View`
 
 export const CheckoutButton = styled.TouchableOpacity`
   margin: 0 ${RFValue(9)}px;
+  height: ${RFValue(40)}px;
 `;
 
 export const View = styled.View`

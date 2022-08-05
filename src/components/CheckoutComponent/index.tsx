@@ -45,7 +45,7 @@ export function CheckoutComponent({loading}: Props) {
   return (
     <CheckoutButton
       onPress={() => handleCheckout()}
-      disable={loading}
+      disabled={loading}
       activeOpacity={0.95}>
       <Container>
         {loading ? (
