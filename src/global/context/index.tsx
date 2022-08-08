@@ -51,7 +51,7 @@ function AuthProvider({children}: AuthProviderProps) {
       token === undefined ||
         token === null ||
         (token === '' && navigation.navigate('Login' as never));
-      await AsyncStorage.clear();
+      await AsyncStorage.removeItem('@userToken');
     } catch (error) {}
   }
 
