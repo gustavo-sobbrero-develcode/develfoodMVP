@@ -154,10 +154,6 @@ export function RegisterLocale() {
     setValue('cep', cep);
   }, [cepData]);
 
-  useEffect(() => {
-    handleCEP();
-  }, [cepData]);
-
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Container>
