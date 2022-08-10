@@ -33,7 +33,7 @@ export function AppRoutes() {
 
   useEffect(() => {
     setTimeout(() => {
-      token !== undefined && RNBootSplash.hide({fade: true});
+      RNBootSplash.hide({fade: true});
     }, 500);
   }, []);
 
