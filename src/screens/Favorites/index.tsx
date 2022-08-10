@@ -43,6 +43,8 @@ interface Restaurant {
 }
 
 export function Favorites({navigation}: any) {
+  const theme = useTheme();
+
   const [isLoading, setIsLoading] = useState(false);
 
   const {token} = useAuth();
@@ -103,8 +105,6 @@ export function Favorites({navigation}: any) {
     '',
   );
 
-  const theme = useTheme();
-
   const onPress = (item: ListFoodType) => {
     activeButton === item.name
       ? setActiveButton('')
@@ -142,10 +142,6 @@ export function Favorites({navigation}: any) {
       [foodType, isFiltred],
     ),
   );
-
-  useEffect(() => {
-    console.log(isFiltred.page);
-  }, [isFiltred]);
 
   const renderCategories =
     categories.length > 1 &&

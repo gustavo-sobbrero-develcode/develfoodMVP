@@ -212,7 +212,7 @@ export function Home() {
 
         <HeaderComponent
           backgroudColor={theme.colors.background_red}
-          name="서울특별시 강남구 도산대로49길 22"
+          name="Rua Arcy da Rocha N., 559"
           source={theme.icons.map}
           iconColor={theme.colors.icon_light}
           Textcolor={theme.colors.text_light}
@@ -266,8 +266,6 @@ export function Home() {
           renderItem={renderItem}
           style={{
             width: '100%',
-            marginTop: 10,
-            margin: 20,
           }}
           onEndReached={() => {
             handleLoadOnEnd();

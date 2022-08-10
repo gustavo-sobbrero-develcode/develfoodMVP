@@ -8,7 +8,6 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {Controller, useForm} from 'react-hook-form';
 import {ContinueButton} from '@components/ContinueButton';
 import {useCreateUser} from '@global/context/createUserAuth';
-
 import {
   Image,
   Keyboard,
@@ -18,10 +17,6 @@ import {
 
 import {
   Container,
-  CircleWrapper,
-  CircleAdjust,
-  Circle,
-  CenterCircle,
   Wrapper,
   RowView,
   NicknameWrapper,
@@ -31,6 +26,12 @@ import {
   NumberWrapper,
   ButtonWrapper,
 } from './styles';
+import {
+  CircleWrapper,
+  CircleAdjust,
+  Circle,
+  CenterCircle,
+} from '../Register/styles';
 import {InputMaskZipCode} from '@components/InputMask/zipcode';
 import {HeaderComponent} from '@components/HeaderComponent';
 import {useState} from 'react';
@@ -153,10 +154,6 @@ export function RegisterLocale() {
     setValue('cep', cep);
   }, [cepData]);
 
-  useEffect(() => {
-    handleCEP();
-  }, [cepData]);
-
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Container>
@@ -164,13 +161,16 @@ export function RegisterLocale() {
           barStyle={theme.barStyles.dark}
           backgroundColor={theme.colors.background}
         />
+
         <HeaderComponent
           backgroudColor={theme.colors.background}
-          name="Cadastro"
-          onPress={handlerBackButton}
+          name={'Cadastro'}
           source={theme.icons.arrow}
           iconColor={theme.colors.icon_black}
+          onPress={handlerBackButton}
+          Textcolor={theme.colors.icon_black}
         />
+
         <CircleWrapper>
           <CircleAdjust>
             <Circle source={theme.icons.circle} />
@@ -188,7 +188,11 @@ export function RegisterLocale() {
 
         <Image
           source={theme.icons.woman}
-          style={{marginTop: RFValue(6), marginBottom: RFValue(20)}}
+          style={{
+            marginTop: RFValue(6),
+            marginBottom: RFValue(20),
+            alignSelf: 'center',
+          }}
         />
 
         <Wrapper>

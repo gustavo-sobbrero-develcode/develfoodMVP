@@ -30,10 +30,10 @@ export const IconPassword = styled.TouchableOpacity`
 `;
 
 export const Error = styled.Text`
-  align-self: center;
+  align-self: flex-start;
   margin-bottom: ${RFValue(8)}px;
   font-family: ${({theme}) => theme.fonts.secondaryBold};
-  font-size: ${RFValue(14)}px;
+  font-size: ${RFValue(12)}px;
   color: ${({theme}) => theme.colors.background_red};
 `;
 

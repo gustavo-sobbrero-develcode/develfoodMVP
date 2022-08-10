@@ -190,7 +190,7 @@ export function OrderInfo({route}: RouteParams) {
   useEffect(() => {
     const timer = setTimeout(() => {
       loadStatus();
-    }, 8000);
+    }, 5000);
     return () => {
       clearTimeout(timer);
     };
@@ -219,8 +219,8 @@ export function OrderInfo({route}: RouteParams) {
 
           <WrapperAddresInfo>
             <SubTitle>Entregar em:</SubTitle>
-            <Street>도산대로49길</Street>
-            <Neighborhood>서울특별시 강남구 도산대로49길 22</Neighborhood>
+            <Street>Rua Arcy da Rocha N., 559</Street>
+            <Neighborhood>Jardim América</Neighborhood>
           </WrapperAddresInfo>
           <DateCard>
             <Day>{moment(date).format('DD')}</Day>
@@ -249,7 +249,7 @@ export function OrderInfo({route}: RouteParams) {
             <StatusImage source={statusImage} />
 
             <WrapperText>
-              <StatusText>{statusText}</StatusText>
+              <StatusText numberOfLines={2}>{statusText}</StatusText>
             </WrapperText>
           </WrapperOrderInfo>
         </WrapperRestaurantInfo>

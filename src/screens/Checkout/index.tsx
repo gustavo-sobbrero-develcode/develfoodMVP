@@ -151,8 +151,8 @@ export function Checkout({
 
             <WrapperAddresInfo>
               <SubTitle>Entregar em:</SubTitle>
-              <Street>도산대로49길</Street>
-              <Neighborhood>서울특별시 강남구 도산대로49길 22</Neighborhood>
+              <Street>Rua Arcy da Rocha N., 559</Street>
+              <Neighborhood>Jardim América</Neighborhood>
             </WrapperAddresInfo>
           </WrapperInfo>
           <Content>

@@ -61,6 +61,7 @@ export const UserName = styled.Text`
 export const UserEditInfoWrapper = styled.View`
   top: ${RFValue(7)}px;
   flex-direction: row;
+  align-items: center;
 `;
 
 export const UserEditInfoText = styled.Text`
@@ -72,7 +73,10 @@ export const UserEditInfoButton = styled.TouchableOpacity`
   left: ${RFValue(6)}px;
 `;
 
-export const EditInfoIcon = styled.Image``;
+export const EditInfoIcon = styled.Image`
+  width: ${RFValue(13.5)}px;
+  height: ${RFValue(13.5)}px;
+`;
 
 export const ModalContent = styled.View`
   align-items: center;
@@ -110,12 +114,12 @@ export const LogOutButton = styled.TouchableOpacity`
   border-color: ${({theme}) => theme.colors.modalButtonClose};
   align-items: center;
   justify-content: center;
-  background-color: ${({theme}) => theme.colors.card};
+  background-color: ${({theme}) => theme.colors.background};
   top: ${RFValue(35)}px;
   margin-bottom: ${RFValue(40)}px;
 `;
 
 export const LogOutButtonText = styled.Text`
   font-size: ${RFValue(14)}px;
-  color: ${({theme}) => theme.colors.icon_black};
+  color: ${({theme}) => theme.colors.background_red};
 `;

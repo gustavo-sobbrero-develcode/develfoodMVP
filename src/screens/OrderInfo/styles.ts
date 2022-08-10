@@ -25,6 +25,8 @@ export const MapImage = styled.Image`
 
 export const WrapperAddresInfo = styled.View`
   left: ${RFValue(10)}px;
+  width: 60%;
+  height: ${RFValue(54)}px;
 `;
 
 export const SubTitle = styled.Text`
@@ -34,7 +36,7 @@ export const SubTitle = styled.Text`
 `;
 
 export const Street = styled.Text`
-  font-size: ${RFValue(14)}px;
+  font-size: ${RFValue(13)}px;
   font-weight: 400;
   color: ${({theme}) => theme.colors.text_dark};
 `;
@@ -100,15 +102,15 @@ export const RestaurantName = styled.Text`
 
 export const WrapperOrderInfo = styled.View`
   position: absolute;
-  right: ${RFValue(22)}px;
+  right: ${RFValue(25)}px;
   align-items: center;
 `;
 
 export const StatusImage = styled.Image``;
 
 export const WrapperText = styled.View`
-  width: ${RFValue(70)}px;
-  height: ${RFValue(30)}px;
+  width: ${RFValue(85)}px;
+  height: ${RFValue(33)}px;
   align-items: center;
 `;
 
