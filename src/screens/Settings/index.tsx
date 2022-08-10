@@ -53,7 +53,6 @@ const CloseAppModal = ({visible, children}: any) => {
       setShowModal(true);
       Animated.spring(scaleValue, {
         toValue: 1,
-        speed: 0.8,
         useNativeDriver: true,
       }).start();
     } else {
@@ -125,7 +124,7 @@ export function Settings() {
       ? {
           uri: `data:image/jpg;base64,${dataPhoto.code}`,
         }
-      : theme.images.eu;
+      : theme.images.noImage;
     return photo;
   }
 
@@ -202,10 +201,10 @@ export function Settings() {
             Ah não! Você está saindo... {'\n'} Tem certeza?
           </MessageLogOut>
           <CloseModal onPress={() => setIsVisible(false)}>
-            <CloseModalText>Naah, to só brincando</CloseModalText>
+            <CloseModalText>Não, desejo ficar</CloseModalText>
           </CloseModal>
           <LogOutButton onPress={() => logOut()}>
-            <LogOutButtonText>Sim, to vazando</LogOutButtonText>
+            <LogOutButtonText>Sim, quero sair</LogOutButtonText>
           </LogOutButton>
         </ModalContent>
       </CloseAppModal>

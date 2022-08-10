@@ -43,6 +43,8 @@ interface Restaurant {
 }
 
 export function Favorites({navigation}: any) {
+  const theme = useTheme();
+
   const [isLoading, setIsLoading] = useState(false);
 
   const {token} = useAuth();
@@ -141,10 +143,6 @@ export function Favorites({navigation}: any) {
     ),
   );
 
-  useEffect(() => {
-    console.log(isFiltred.page);
-  }, [isFiltred]);
-
   const renderCategories =
     categories.length > 1 &&
     categories?.map(item => {
@@ -190,7 +188,6 @@ export function Favorites({navigation}: any) {
   function handlerBackButton() {
     navigation.navigate('Inicio');
   }
-  const theme = useTheme();
 
   return (
     <Container>

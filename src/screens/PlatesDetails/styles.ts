@@ -6,27 +6,20 @@ export const Container = styled.View`
   flex: 1;
 `;
 
-export const Header = styled.View`
-  width: 100%;
-  flex-direction: row;
-  align-items: center;
-  height: ${RFValue(56)}px;
-  top: ${RFValue(22)}px;
+export const HeaderView = styled.View`
+  margin-left: ${RFValue(-5)}px;
 `;
 
-export const FavoriteIconWrapper = styled.View`
-  width: ${RFValue(42)}px;
-  height: ${RFValue(42)}px;
+export const HeartButton = styled.TouchableOpacity`
   position: absolute;
-  right: ${RFValue(16)}px;
-  align-items: center;
-  justify-content: center;
+  right: 21px;
+  top: ${RFValue(3)}px;
 `;
 
-export const IconButton = styled.TouchableOpacity``;
-
-export const FavoriteIcon = styled.Image`
-  width: ${RFValue(26)}px;
+export const FavoriteIcon = styled.Image.attrs({
+  resizeMode: 'contain',
+})`
+  width: ${RFValue(22)}px;
   height: ${RFValue(22)}px;
   margin-top: ${RFValue(16)}px;
   border-color: ${({theme}) => theme.colors.icon_red};
@@ -37,12 +30,14 @@ export const PlateInfoWrapper = styled.View`
   align-self: center;
   margin-top: ${RFValue(24)}px;
 `;
+
 export const PlatePhoto = styled.Image`
   width: ${RFValue(200)}px;
   height: ${RFValue(150.18)}px;
   border-radius: ${RFValue(10)}px;
   align-self: center;
 `;
+
 export const PlateName = styled.Text`
   font-weight: 500;
   font-size: ${RFValue(20)}px;
@@ -54,6 +49,7 @@ export const PlateName = styled.Text`
 export const ViewScroll = styled.View`
   flex: 1;
 `;
+
 export const FoodType = styled.Text`
   text-transform: capitalize;
   font-weight: 400;
@@ -71,6 +67,7 @@ export const Description = styled.Text`
   width: ${RFValue(298)}px;
   line-height: ${RFValue(16.41)}px;
 `;
+
 export const RestaurantWrapper = styled.View`
   width: 100%;
   height: ${RFValue(49)}px;
@@ -82,11 +79,13 @@ export const RestaurantWrapper = styled.View`
   border-radius: ${RFValue(6)}px;
   border-color: ${({theme}) => theme.colors.text_gray};
 `;
+
 export const RestaurantIcon = styled.Image`
   width: ${RFValue(18)}px;
   height: ${RFValue(18)}px;
   left: ${RFValue(14)}px;
 `;
+
 export const RestaurantName = styled.Text`
   font-weight: 400;
   font-size: ${RFValue(12)}px;
@@ -107,6 +106,7 @@ export const ViewCart = styled.View`
   direction: row;
   justify-content: center;
 `;
+
 export const PlateTotalPrice = styled.Text`
   color: ${({theme}) => theme.colors.text_light};
   font-weight: 700;
@@ -130,6 +130,7 @@ export const AddQuantityButtonLabel = styled.Text`
   color: ${({theme}) => theme.colors.icon_light};
   font-weight: 700;
 `;
+
 export const AddQuantityButton = styled.TouchableOpacity`
   width: ${RFValue(25)}px;
   position: absolute;

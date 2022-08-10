@@ -1,14 +1,10 @@
 import {RFValue} from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
-interface CartStyleProps {
-  insideCart: number;
-}
-
 export const ContentContainer = styled.View`
   width: 100%;
   height: ${RFValue(103)}px;
-  background-color: ${({theme}) => theme.colors.cardRemove};
+  background-color: ${({theme}) => theme.colors.background_red};
   border-radius: ${RFValue(8)}px;
   margin-bottom: ${RFValue(18)}px;
 `;
@@ -22,7 +18,7 @@ export const Container = styled.View.attrs({
   align-items: center;
   margin-bottom: ${RFValue(18)}px;
   border-radius: ${RFValue(8)}px;
-  background-color: ${({theme}) => theme.colors.background};
+  background-color: ${({theme}) => theme.colors.card};
 `;
 
 export const DeleteView = styled.View`
@@ -52,7 +48,14 @@ export const WrapperPlateInfo = styled.View`
   right: ${RFValue(20)}px;
 `;
 
-export const PlateTitle = styled.Text`
+export const PlateTitleWrapper = styled.View`
+  width: 80%;
+  height: ${RFValue(60)}px;
+`;
+
+export const PlateTitle = styled.Text.attrs({
+  numberOfLines: 1,
+})`
   text-align: justify;
   font-weight: 500;
   font-size: ${RFValue(14)}px;
@@ -76,11 +79,11 @@ export const FavoriteImage = styled.Image`
 `;
 
 export const WrapperAdvancedInfo = styled.View`
-  position: absolute;
-  width: 100%;
-  top: ${RFValue(62)}px;
+  width: 110%;
+  height: ${RFValue(30)}px;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const PriceWrapper = styled.View`
@@ -94,7 +97,9 @@ export const Price = styled.Text`
 `;
 
 export const AddButton = styled.TouchableOpacity`
-  right: 0;
+  width: ${RFValue(100)}px;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const TextButton = styled.Text`
@@ -103,22 +108,26 @@ export const TextButton = styled.Text`
   color: ${({theme}) => theme.colors.icon_red};
 `;
 
-export const RemoveButton = styled.TouchableOpacity`
-  right: 20;
-`;
+export const RemoveButton = styled.TouchableOpacity``;
 
 export const WrapperCartButton = styled.View`
+  width: 40%;
+  height: ${RFValue(30)}px;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  left: ${(props: CartStyleProps) =>
-    props.insideCart ? props.insideCart : 10}px;
+  justify-content: space-evenly;
 `;
 
-export const AddQuantityButton = styled.TouchableOpacity`
-  position: absolute;
-  margin-left: ${RFValue(75)}px;
+export const AddQuantityButton = styled.TouchableOpacity.attrs({
+  hitSlop: {
+    top: RFValue(10),
+    bottom: RFValue(10),
+    left: RFValue(10),
+    right: RFValue(10),
+  },
+})`
+  width: 30%;
+  align-items: center;
   justify-content: center;
 `;
 
@@ -128,9 +137,16 @@ export const AddQuantityButtonLabel = styled.Text`
   font-weight: 700;
 `;
 
-export const RemoveCartButton = styled.TouchableOpacity`
-  position: absolute;
-  margin-left: ${RFValue(25)}px;
+export const RemoveCartButton = styled.TouchableOpacity.attrs({
+  hitSlop: {
+    top: RFValue(10),
+    bottom: RFValue(10),
+    left: RFValue(10),
+    right: RFValue(10),
+  },
+})`
+  width: 30%;
+  align-items: center;
 `;
 
 export const RemoveQuantityButtonLabel = styled.Text`
@@ -140,13 +156,12 @@ export const RemoveQuantityButtonLabel = styled.Text`
 `;
 
 export const NumberOfQuantityWrapper = styled.View`
-  width: ${RFValue(20)}px;
-  height: ${RFValue(20)}px;
+  width: 25%;
+  height: 80%;
   background-color: ${({theme}) => theme.colors.background_red};
   border-radius: ${RFValue(4)}px;
   align-items: center;
   justify-content: center;
-  margin-left: ${RFValue(45)}px;
 `;
 
 export const Number = styled.Text`
@@ -155,15 +170,21 @@ export const Number = styled.Text`
   color: ${({theme}) => theme.colors.text_light};
 `;
 
-export const LitterButton = styled.TouchableOpacity`
-  justify-content: center;
-  position: absolute;
-  margin-left: ${RFValue(22)}px;
+export const LitterButton = styled.TouchableOpacity.attrs({
+  hitSlop: {
+    top: RFValue(10),
+    bottom: RFValue(10),
+    left: RFValue(10),
+    right: RFValue(10),
+  },
+})`
+  width: 30%;
+  align-items: center;
 `;
 
 export const LitterImage = styled.Image`
-  width: ${RFValue(14)}px;
-  height: ${RFValue(14)}px;
+  width: ${RFValue(15)}px;
+  height: ${RFValue(15)}px;
 `;
 
 export const CleanUpWrapper = styled.View`

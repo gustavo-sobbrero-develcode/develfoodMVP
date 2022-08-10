@@ -45,7 +45,9 @@ function AuthProvider({children}: AuthProviderProps) {
     try {
       setToken('');
       await AsyncStorage.clear();
-    } catch (error) {}
+    } catch (error) {
+      Alert.alert('Erro', 'Erro ao sair');
+    }
   }
 
   const getUserData = async () => {

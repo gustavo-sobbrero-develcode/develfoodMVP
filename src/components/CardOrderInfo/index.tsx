@@ -67,7 +67,7 @@ export function CardOrderInfo({
       </WrapperImage>
 
       <WrapperPlateInfo>
-        <PlateTitle>{name}</PlateTitle>
+        <PlateTitle numberOfLines={1}>{name}</PlateTitle>
         <PlateInfo numberOfLines={3}>{description}</PlateInfo>
 
         <WrapperAdvancedInfo>
