@@ -192,8 +192,6 @@ function CreateUserProvider({children}: AuthProviderProps) {
         ],
       },
     };
-    console.log(signUpData);
-    console.log('||||||||||||||| Address: ', signUpData.costumer.address[0]);
     await handlerPost(signUpData, createUserError, createUserSuccess);
   }
 
