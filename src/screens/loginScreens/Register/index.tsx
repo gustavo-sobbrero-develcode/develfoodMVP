@@ -56,7 +56,7 @@ export function Register() {
 
   const theme = useTheme();
 
-  const {handleSetPostData, loading} = useCreateUser();
+  const {loading} = useCreateUser();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -68,9 +68,22 @@ export function Register() {
     navigation.navigate('Login' as never);
   }
 
+  function handleContinue() {
+    const values = getValues();
+
+    navigation.navigate(
+      'RegisterPersonalData' as never,
+      {
+        email: values.email,
+        password: values.password,
+      } as never,
+    );
+  }
+
   const {
     control,
     handleSubmit,
+    getValues,
     formState: {errors},
   } = useForm<FormData>({
     resolver: yupResolver(schema),
@@ -84,12 +97,7 @@ export function Register() {
         modalizeRef.current?.open();
       })
       .catch(() => {
-        handleSetPostData({
-          email: value.email,
-          password: value.password,
-          creationDate: new Date(),
-        });
-        navigation.navigate('RegisterPersonalData' as never);
+        handleContinue();
       });
     setIsLoading(false);
   };
