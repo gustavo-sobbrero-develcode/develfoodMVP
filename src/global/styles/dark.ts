@@ -33,6 +33,8 @@ export default {
     modalButtonClose: '#a20612',
 
     devsBanner: '#102844',
+    theme_button: '#350887',
+    theme_button_circle: '#0508a7',
   },
 
   barStyles: {
@@ -98,6 +100,9 @@ export default {
     blankcircle: require('../assets/loginIcons/BlanckCircle-dark.png'),
     circle: require('../assets/loginIcons/Circle-dark.png'),
     check: require('../assets/loginIcons/Check-dark.png'),
+    dark: require('../assets/themeIcons/dark.png'),
+    light: require('../assets/themeIcons/light.png'),
+    default: require('../assets/themeIcons/default.png'),
   },
 
   images: {

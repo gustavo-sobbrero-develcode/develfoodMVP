@@ -33,6 +33,8 @@ export default {
     modalButtonClose: '#C20C18',
 
     devsBanner: '#102844',
+    theme_button: '#FaFa00',
+    theme_button_circle: '#34d4ff',
   },
 
   barStyles: {
@@ -98,6 +100,9 @@ export default {
     restaurant: require('../assets/Icons/restaurant.png'),
     trash: require('../assets/Icons/trash.png'),
     camera: require('../assets/Icons/camera.png'),
+    dark: require('../assets/themeIcons/dark.png'),
+    light: require('../assets/themeIcons/light.png'),
+    default: require('../assets/themeIcons/default.png'),
   },
 
   images: {

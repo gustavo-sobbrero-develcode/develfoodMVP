@@ -18,7 +18,7 @@ export function AuthedRoutes() {
     <>
       <CartProvider>
         <Navigator
-          screenOptions={{headerShown: false, animation: 'slide_from_right'}}>
+          screenOptions={{headerShown: false, animation: 'slide_from_bottom'}}>
           <Screen name="Home" component={Routes} />
           <Screen name="RestaurantProfile" component={RestaurantProfile} />
           <Screen name="CartComponent" component={CartComponent} />
