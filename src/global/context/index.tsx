@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useNavigation} from '@react-navigation/native';
 import React, {createContext, useState} from 'react';
 import {useEffect} from 'react';
 import {useContext} from 'react';
@@ -34,8 +35,9 @@ const AuthContext = createContext({
 } as Props);
 
 function AuthProvider({children}: AuthProviderProps) {
-  const {handlerPost, loading} = usePost<LoginRequest, UserData>('/auth');
+  const {data, handlerPost, loading} = usePost<LoginRequest, UserData>('/auth');
   const [token, setToken] = useState('');
+  const navigation = useNavigation();
 
   const loginError = () => {
     Alert.alert('Erro', 'Email ou senha incorretos');
@@ -44,10 +46,13 @@ function AuthProvider({children}: AuthProviderProps) {
   async function logOut() {
     try {
       setToken('');
-      await AsyncStorage.clear();
-    } catch (error) {
-      Alert.alert('Erro', 'Erro ao sair');
-    }
+      setToken(null);
+      setToken(undefined);
+      token === undefined ||
+        token === null ||
+        (token === '' && navigation.navigate('Login' as never));
+      await AsyncStorage.removeItem('@userToken');
+    } catch (error) {}
   }
 
   const getUserData = async () => {
@@ -69,15 +74,15 @@ function AuthProvider({children}: AuthProviderProps) {
   async function userLogin(request: LoginRequest) {
     try {
       await handlerPost(request, loginError, onSuccess);
-      setToken(token);
-      token && (await AsyncStorage.setItem('@userToken', token));
+      setToken(data.token);
+      data.token && (await AsyncStorage.setItem('@userToken', token));
     } catch (error) {}
   }
 
   useEffect(() => {
-    setToken(token);
+    setToken(data.token);
     getUserData();
-  }, [loading, token]);
+  }, [loading, data.token]);
 
   return (
     <AuthContext.Provider value={{userLogin, token, loading, logOut}}>

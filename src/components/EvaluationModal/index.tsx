@@ -13,6 +13,7 @@ import {
   TextInput,
 } from 'react-native';
 import {Modalize} from 'react-native-modalize';
+import {useTheme} from 'styled-components';
 import {Container, Description, RestaurantName, Title} from './styles';
 
 type Props = {
@@ -44,6 +45,8 @@ export function EvaluationModal({
   orderId,
 }: Props) {
   const modalizeRef = useRef<Modalize>(null);
+
+  const theme = useTheme();
 
   const ModalHeight = Dimensions.get('screen').height * 0.605;
 
@@ -118,7 +121,11 @@ export function EvaluationModal({
         velocity={Infinity}
         ref={modalizeRef}
         modalHeight={ModalHeight}
-        modalStyle={styles.modalStyle}>
+        modalStyle={{
+          borderTopStartRadius: 30,
+          borderTopEndRadius: 30,
+          backgroundColor: theme.colors.background,
+        }}>
         <Title>{title}</Title>
         <Container>
           <Description>
@@ -133,7 +140,7 @@ export function EvaluationModal({
               multiline
               numberOfLines={7}
               placeholder="Conte-nos um pouco deste restaurante..."
-              placeholderTextColor="#020202"
+              placeholderTextColor={theme.colors.text_dark}
               textAlignVertical="top"
               onChangeText={text => {
                 setObservation(text);
