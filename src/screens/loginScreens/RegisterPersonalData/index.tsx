@@ -44,42 +44,43 @@ const schema = Yup.object().shape({
     .min(15, 'Telefone inválido.'),
 });
 
-export function RegisterPersonalData() {
+export function RegisterPersonalData({route}: any) {
   const navigation = useNavigation();
+
+  const {email, password} = route.params;
 
   const theme = useTheme();
 
-  const {handleSetPostData, loading, postData} = useCreateUser();
+  const {loading} = useCreateUser();
 
   function handlerBackButton() {
     navigation.navigate('Register' as never);
+  }
+
+  function handleContinue() {
+    const values = getValues();
+
+    navigation.navigate(
+      'RegisterLocale' as never,
+      {
+        email,
+        password,
+        firstName: values.name,
+        lastName: values.lastName,
+        cpf: values.cpf,
+        phone: values.phone,
+      } as never,
+    );
   }
 
   const {
     control,
     handleSubmit,
     formState: {errors},
+    getValues,
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
-
-  const onSubmit = (value: FormData) => {
-    handleSetPostData({
-      ...postData,
-      costumer: {
-        ...postData.costumer,
-        firstName: value.name,
-        lastName: value.lastName,
-        cpf: value.cpf,
-        phone: value.phone,
-        photo: {
-          code: ' ',
-        },
-        ...postData,
-      },
-    });
-    navigation.navigate('RegisterLocale' as never);
-  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -191,7 +192,7 @@ export function RegisterPersonalData() {
 
             <ContinueButton
               title="Continuar"
-              onPressed={handleSubmit(onSubmit)}
+              onPressed={handleSubmit(handleContinue)}
               loading={loading}
             />
           </InputWrapper>

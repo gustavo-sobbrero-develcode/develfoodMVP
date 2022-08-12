@@ -48,35 +48,6 @@ interface FormData {
   cep: string;
 }
 
-interface CreateUserAddress {
-  street: string;
-  number: string;
-  neighborhood: string;
-  city: string;
-  zipCode: string;
-  state: string;
-  nickname: string;
-}
-
-interface CreateUserAccount {
-  email: string;
-  password: string;
-  creationDate: Date;
-  role?: {
-    id: number;
-  };
-  costumer?: {
-    firstName?: string;
-    lastName?: string;
-    cpf?: string;
-    phone?: string;
-    photo?: {
-      code: string;
-    };
-    address?: CreateUserAddress[];
-  };
-}
-
 interface CEPProps {
   endpoint: string;
 }
@@ -93,8 +64,10 @@ const schema = Yup.object().shape({
   nickname: Yup.string().required('Apelido é obrigatório.'),
 });
 
-export function RegisterLocale() {
+export function RegisterLocale({route}: any) {
   const navigation = useNavigation();
+
+  const {email, password, firstName, lastName, cpf, phone} = route.params;
 
   const theme = useTheme();
 
@@ -102,8 +75,7 @@ export function RegisterLocale() {
 
   const {data: cepData, handleCEP} = useCep<CEPProps>(`/${cep}/json/`);
 
-  const {handleSetPostData, loading, createUserAccount, postData} =
-    useCreateUser();
+  const {loading, createUserAccount} = useCreateUser();
 
   function handlerBackButton() {
     navigation.navigate('RegisterPersonalData' as never);
@@ -113,34 +85,40 @@ export function RegisterLocale() {
     control,
     handleSubmit,
     setValue,
+    getValues,
     formState: {errors},
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (value: FormData) => {
-    handleSetPostData({
-      ...postData,
-      costumer: {
-        ...postData.costumer,
-        address: [
-          {
-            street: value.street,
-            city: value.city,
-            number: value.number,
-            neighborhood: value.neighborhood,
-            zipCode: value.cep,
-            state: value.state,
-            nickname: value.nickname,
-          },
-        ],
-      },
-    });
-    function createUserSuccess(data: CreateUserAccount) {
-      data && navigation.navigate('RegisterSuccess' as never);
+  function handleContinue() {
+    const values = getValues();
+
+    function onSuccess() {
+      navigation.navigate('RegisterSuccess' as never);
     }
-    await createUserAccount(createUserSuccess, postData);
-  };
+
+    const userInfo = {
+      email,
+      password,
+      firstName,
+      lastName,
+      cpf,
+      phone,
+      photo: {
+        code: '',
+      },
+      street: values.street,
+      number: values.number,
+      neighborhood: values.neighborhood,
+      city: values.city,
+      zipcode: values.cep,
+      state: values.state,
+      nickname: values.nickname,
+    };
+
+    createUserAccount(onSuccess, userInfo);
+  }
 
   function handleCEPChange() {
     handleCEP();
@@ -358,7 +336,7 @@ export function RegisterLocale() {
         <ButtonWrapper>
           <ContinueButton
             title="Continuar"
-            onPressed={handleSubmit(onSubmit)}
+            onPressed={handleSubmit(handleContinue)}
             loading={loading}
           />
         </ButtonWrapper>

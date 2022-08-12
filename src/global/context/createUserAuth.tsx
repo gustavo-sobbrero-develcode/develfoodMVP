@@ -1,4 +1,4 @@
-import React, {createContext, useState} from 'react';
+import React, {createContext} from 'react';
 import {useContext} from 'react';
 import {Alert} from 'react-native';
 import {usePost} from '@global/services/post';
@@ -74,6 +74,25 @@ interface CreateUserResponse {
   username: string;
 }
 
+interface SignUpProps {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  cpf: string;
+  phone: string;
+  photo: {
+    code: string;
+  };
+  street: string;
+  number: string;
+  neighborhood: string;
+  city: string;
+  zipcode: string;
+  state: string;
+  nickname: string;
+}
+
 interface AuthProviderProps {
   children: React.ReactNode;
 }
@@ -81,8 +100,6 @@ interface AuthProviderProps {
 interface Props {
   createUserAccount: Function;
   loading: boolean;
-  handleSetPostData: (_postData: CreateUserPost) => void;
-  postData: CreateUserPost;
 }
 
 interface CreateUserAddress {
@@ -99,18 +116,18 @@ interface CreateUserPost {
   email: string;
   password: string;
   creationDate: Date;
-  role?: {
+  role: {
     id: number;
   };
-  costumer?: {
-    firstName?: string;
-    lastName?: string;
-    cpf?: string;
-    phone?: string;
-    photo?: {
+  costumer: {
+    firstName: string;
+    lastName: string;
+    cpf: string;
+    phone: string;
+    photo: {
       code: string;
     };
-    address?: CreateUserAddress[];
+    address: CreateUserAddress[];
   };
 }
 
@@ -126,32 +143,60 @@ function CreateUserProvider({children}: AuthProviderProps) {
     '/user',
   );
 
-  const [postData, setPostData] = useState<CreateUserPost>(
-    {} as CreateUserPost,
-  );
-
-  function handleSetPostData(dataPost: CreateUserPost) {
-    setPostData({...postData, ...dataPost});
-  }
-
   const createUserError = () => {
     Alert.alert('Erro', 'Usuário já existe ou dados inválidos');
   };
 
   async function createUserAccount(
     createUserSuccess: () => void,
-    requestData: CreateUserPost,
+    {
+      email,
+      password,
+      firstName,
+      lastName,
+      cpf,
+      phone,
+      photo,
+      street,
+      number,
+      neighborhood,
+      city,
+      zipcode,
+      state,
+      nickname,
+    }: SignUpProps,
   ) {
-    const createUserRequest: CreateUserPost = {
-      ...requestData,
-      role: {id: 2},
+    const signUpData = {
+      email: email,
+      password: password,
+      creationDate: new Date(),
+      role: {
+        id: 2,
+      },
+      costumer: {
+        firstName: firstName,
+        lastName: lastName,
+        cpf: cpf,
+        phone: phone,
+        photo: photo,
+        address: [
+          {
+            street: street,
+            number: number,
+            neighborhood: neighborhood,
+            city: city,
+            zipCode: zipcode,
+            state: state,
+            nickname: nickname,
+          },
+        ],
+      },
     };
-    await handlerPost(createUserRequest, createUserError, createUserSuccess);
+    await handlerPost(signUpData, createUserError, createUserSuccess);
   }
 
   return (
-    <createUser.Provider
-      value={{createUserAccount, loading, handleSetPostData, postData}}>
+    <createUser.Provider value={{createUserAccount, loading}}>
       {children}
     </createUser.Provider>
   );
