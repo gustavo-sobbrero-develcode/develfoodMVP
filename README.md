@@ -1,29 +1,42 @@
-# Develfood-IV
+<h1 align="center">
+  <img src="./src/assets/img/develfoodBanner.png" alt="Logotipo Develcode" width="800px">
+</h1>
 
-<h3 aling="center">Tabela de Conteúdos</h3> 
+<p align="center">Um sistema que irá otimizar as tarefas do dia-a-dia do seu restaurante.</p>
 
-  -- [Sobre](#Sobre)<p></p>
-  -- [Tecnologias](#Sobre)
- 
----
-  
-<h3> Projeto em Construção</h3>
+<p align="center">
+  <a href="#plate_with_cutlery-plataforma">Plataforma</a> •
+  <a href="#crab-layout">Layout</a> •
+  <a href="#computer-tecnologias">Tecnologias</a> •
+  <a href="#chains-licenc-a">Licença</a> 
+</p>
 
----
+## :plate_with_cutlery:	Plataforma
 
-# Sobre
+A plataforma web da Develfood permite ao usuário: 
 
-A Develfood é um projeto no qual os estágairios da Develcode fazem para aprender/adaptar-se mais como
-os Desenvolvedores trabalham no dia-a-dia.
+  - Gerenciamento do menu do restaurante, havendo a possibilidade da inclusão, exclusão ou edição de pratos.  
+  - Controle em tempo real da situação de cada pedido.
+  - Inclusão e exclusão de possíveis promoções.
+  - Visualização do feedback dos clientes.
 
-É desenvolvido para Mobile, simula um aplicativo de delivery.
 
----
+## :art: Layout
 
-# Tecnologias
+<p align="center" style="display: flex; align-items: flex-start; justify-content: space-around;">
+  <img src="./src/assets/img/layoutSignIn.png" width="250px" alt="Layout do login">
+  <img src="./src/assets/img/layoutHome.png" width="250px" alt="Layout do home">
+  <img src="./src/assets/img/layoutMenu.png" width="250px" alt="Layout do menu">
 
--- [TypeScript](https://www.typescriptlang.org/)<p></p>
--- [React Native](https://reactnative.dev/)<p></p>
--- [NodeJS](https://nodejs.org/en/)<p></p>
--- [Styled Components](https://styled-components.com/)<p></p>
+</p>
 
+## :computer: Tecnologias
+
+As ferramentas utilizadas na construção do projeto foram:
+
+- [React Native](https://reactnative.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+
+## :chains:	Licença
+
+Este projeto esta sobe a licença MIT.
