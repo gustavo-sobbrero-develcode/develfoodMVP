@@ -54,7 +54,7 @@ export function RegisterPersonalData({route}: any) {
   const {loading} = useCreateUser();
 
   function handlerBackButton() {
-    navigation.navigate('Register' as never);
+    navigation.goBack();
   }
 
   function handleContinue() {
