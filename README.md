@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="./src/assets/loginImages/develfood.png" alt="Logotipo Develcode" width="800px">
+  <img src="./src/assets/loginImages/develfood.png" width="800px">
 </h1>
 
 <p align="center">Um aplicativo de delivery completo e eficiente.</p>
