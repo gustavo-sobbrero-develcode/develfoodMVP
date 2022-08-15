@@ -1,8 +1,8 @@
 <h1 align="center">
-  <img src="./src/assets/img/develfoodBanner.png" alt="Logotipo Develcode" width="800px">
+  <img src="./src/assets/loginImages/develfood.png" alt="Logotipo Develcode" width="800px">
 </h1>
 
-<p align="center">Um sistema que irá otimizar as tarefas do dia-a-dia do seu restaurante.</p>
+<p align="center">Um aplicativo de delivery completo e eficiente.</p>
 
 <p align="center">
   <a href="#plate_with_cutlery-plataforma">Plataforma</a> •
@@ -11,22 +11,22 @@
   <a href="#chains-licenc-a">Licença</a> 
 </p>
 
-## :plate_with_cutlery:	Plataforma
+## :plate_with_cutlery: Plataforma
 
-A plataforma web da Develfood permite ao usuário: 
+A plataforma mobile da Develfood permite ao usuário consumidor gerenciar todo o fluxo de delivery de comida:
 
-  - Gerenciamento do menu do restaurante, havendo a possibilidade da inclusão, exclusão ou edição de pratos.  
-  - Controle em tempo real da situação de cada pedido.
-  - Inclusão e exclusão de possíveis promoções.
-  - Visualização do feedback dos clientes.
-
+- Cadastro e edição do usuário e suas informações: nome, endereço, telefone, e-mail, senha, etc;
+- Realizar o pedido de comida: escolher o restaurante, o prato, a quantidade e vizualizar o status do pedido em tempo real;
+- Visualizar todos os pedidos do usuário;
+- Favoritar pratos;
 
 ## :art: Layout
 
 <p align="center" style="display: flex; align-items: flex-start; justify-content: space-around;">
-  <img src="./src/assets/img/layoutSignIn.png" width="250px" alt="Layout do login">
-  <img src="./src/assets/img/layoutHome.png" width="250px" alt="Layout do home">
-  <img src="./src/assets/img/layoutMenu.png" width="250px" alt="Layout do menu">
+  <img src="./src/global/assets/Images/LoginPage.png" width="250px" alt="Layout do login">
+  <img src="./src/global/assets/Images/Inicio.png" width="250px" alt="Layout do home">
+  <img src="./src/global/assets/Images/RestauranteX.png" width="250px" alt="Layout do restaurante">
+  <img src="./src/global/assets/Images/MeusPedidos.png" width="250px" alt="Layout do histórico">
 
 </p>
 
@@ -37,6 +37,6 @@ As ferramentas utilizadas na construção do projeto foram:
 - [React Native](https://reactnative.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
 
-## :chains:	Licença
+## :chains: Licença
 
-Este projeto esta sobe a licença MIT.
+Este projeto está sob a licença MIT.
