@@ -26,7 +26,8 @@ export const Image = styled.Image`
   align-self: center;
   background-color: ${({theme}) => theme.colors.card};
   border-radius: ${RFValue(65)}px;
-  border: 2px solid ${({theme}) => theme.colors.icon_gray};
+  border-width: 2px;
+  border-color: ${({theme}) => theme.colors.icon_gray};
 `;
 
 export const NotFoundImage = styled.View`
@@ -37,7 +38,8 @@ export const NotFoundImage = styled.View`
   align-self: center;
   background-color: ${({theme}) => theme.colors.card};
   border-radius: ${RFValue(65)}px;
-  border: 2px solid ${({theme}) => theme.colors.text_gray};
+  border-width: 2px;
+  border-color: ${({theme}) => theme.colors.text_gray};
 `;
 
 export const CameraIconView = styled.TouchableOpacity`

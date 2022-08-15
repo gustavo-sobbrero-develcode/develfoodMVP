@@ -34,7 +34,8 @@ export const PerfilImage = styled.Image`
   background-color: aliceblue;
   border-radius: ${RFValue(129)}px;
   margin-bottom: ${RFValue(30)}px;
-  border: 2px solid ${({theme}) => theme.colors.text_gray};
+  border-width: 2px;
+  border-color: ${({theme}) => theme.colors.text_gray};
 `;
 
 export const ModalContent = styled.View`
@@ -81,6 +82,7 @@ export const ButtonText = styled.Text`
 export const TittleWrapper = styled.View`
   margin-left: ${RFValue(105)}px;
 `;
+
 export const Title = styled.Text`
   font-family: ${({theme}) => theme.fonts.primaryMed};
   font-size: ${RFValue(17)}px;
