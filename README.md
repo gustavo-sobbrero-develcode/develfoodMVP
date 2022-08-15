@@ -23,10 +23,10 @@ A plataforma mobile da Develfood permite ao usuário consumidor gerenciar todo o
 ## :art: Layout
 
 <p align="center" style="display: flex; align-items: flex-start; justify-content: space-around;">
-  <img src="./src/global/assets/Images/LoginPage.png" width="250px" alt="Layout do login">
-  <img src="./src/global/assets/Images/Inicio.png" width="250px" alt="Layout do home">
-  <img src="./src/global/assets/Images/RestauranteX.png" width="250px" alt="Layout do restaurante">
-  <img src="./src/global/assets/Images/MeusPedidos.png" width="250px" alt="Layout do histórico">
+  <img src="./src/global/assets/Images/LoginPage.png" width="200px" alt="Layout do login">
+  <img src="./src/global/assets/Images/Inicio.png" width="200px" alt="Layout do home">
+  <img src="./src/global/assets/Images/RestauranteX.png" width="200px" alt="Layout do restaurante">
+  <img src="./src/global/assets/Images/MeusPedidos.png" width="200px" alt="Layout do histórico">
 
 </p>
 
