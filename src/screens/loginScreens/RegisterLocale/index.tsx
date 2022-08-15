@@ -78,7 +78,7 @@ export function RegisterLocale({route}: any) {
   const {loading, createUserAccount} = useCreateUser();
 
   function handlerBackButton() {
-    navigation.navigate('RegisterPersonalData' as never);
+    navigation.goBack();
   }
 
   const {

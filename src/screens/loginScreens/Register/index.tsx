@@ -65,7 +65,7 @@ export function Register() {
   const ModalHeight = Dimensions.get('screen').height * 0.2;
 
   function handlerBackButton() {
-    navigation.navigate('Login' as never);
+    navigation.goBack();
   }
 
   function handleContinue() {
