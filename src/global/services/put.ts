@@ -1,15 +1,14 @@
 import axios, {AxiosRequestConfig} from 'axios';
 import {useState} from 'react';
-
-const api = axios.create({
-  baseURL: 'https://develfood-3.herokuapp.com',
-});
+import getApi from './api';
 
 export const usePut = <T = unknown, TResponse = unknown>(
   url: string,
   body: T,
   options?: AxiosRequestConfig,
+  useV2Api?: boolean
 ) => {
+  const api = getApi(useV2Api);
   const [data, setData] = useState<TResponse>({} as TResponse);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null | unknown>(null);

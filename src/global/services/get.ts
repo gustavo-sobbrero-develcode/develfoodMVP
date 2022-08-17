@@ -1,14 +1,14 @@
 import axios, {AxiosRequestConfig} from 'axios';
 import {useState} from 'react';
-
-const api = axios.create({
-  baseURL: 'https://develfood-3.herokuapp.com/',
-});
+import getApi from './api';
 
 export function useFetch<T = unknown>(
   url: string,
   options?: AxiosRequestConfig,
+  useV2Api?: boolean
 ) {
+  const api = getApi(useV2Api);
+  
   const [data, setData] = useState<T>({} as T);
 
   const [loading, setLoading] = useState(false);
