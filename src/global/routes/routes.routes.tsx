@@ -12,6 +12,7 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import {useCreateCart} from '../context/Cart';
 import {CartComponent} from '@components/CartComponent';
 import {Orders} from '@screens/Orders';
+import {Coupons} from '@screens/Coupons';
 
 const Tabs = createBottomTabNavigator();
 
@@ -90,6 +91,21 @@ export function Routes() {
           }}
         />
         <Tabs.Screen
+          name="Coupons"
+          component={Coupons}
+          options={{
+            unmountOnBlur: true,
+            tabBarIcon: ({focused}) => (
+              <TabBarButton
+                isPressed={focused}
+                name={'Cupons'}
+                source={theme.icons.coupon}
+                onPressed={() => navigation.navigate('Coupons' as never)}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
           name="Perfil"
           component={Settings}
           options={{
@@ -104,7 +120,6 @@ export function Routes() {
           }}
         />
       </Tabs.Navigator>
-      {/* <TabBar /> */}
       {totalItems > 0 && (
         <CartComponent BottomBar onPress={handlerCheckoutScreen} />
       )}

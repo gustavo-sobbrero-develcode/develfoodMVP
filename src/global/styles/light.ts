@@ -103,6 +103,7 @@ export default {
     dark: require('../assets/themeIcons/dark.png'),
     light: require('../assets/themeIcons/light.png'),
     default: require('../assets/themeIcons/default.png'),
+    coupon: require('../assets/Icons/coupon.png'),
   },
 
   images: {
