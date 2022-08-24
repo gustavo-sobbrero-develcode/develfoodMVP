@@ -28,9 +28,9 @@ import {
   ModalMessage,
   ErrorImage,
 } from './styles';
-import api from '@global/services/api';
 import {Modalize} from 'react-native-modalize';
 import {HeaderComponent} from '@components/HeaderComponent';
+import getApi from '@global/services/api';
 
 interface FormData {
   email: string;
@@ -88,6 +88,8 @@ export function Register() {
   } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
+
+  const api = getApi(false);
 
   const onSubmit = async (value: FormData) => {
     setIsLoading(true);

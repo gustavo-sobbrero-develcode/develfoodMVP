@@ -6,6 +6,9 @@ import {ActivityIndicator, FlatList, StatusBar} from 'react-native';
 import {Container, Footer} from './styles';
 import {CouponCard} from '@components/CouponCard';
 import axios, {AxiosError, AxiosResponse} from 'axios';
+import {useFetch} from '@global/services/get';
+import {UserID} from '@global/context/Cart';
+import {useAuth} from '@global/context';
 
 interface Coupon {
   _id: number;
@@ -17,14 +20,20 @@ interface Coupon {
 }
 
 export function Coupons() {
+  const {token} = useAuth();
   const theme = useTheme();
   const [coupons, setCoupons] = useState<Coupon[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const {data, fetchData} = useFetch<UserID>('/auth', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
   const getCoupons = async () => {
-    setIsLoading(true);
     await axios
-      .get('http://192.168.0.65:9001/develfood/all')
+      .get(`http://192.168.0.65:9001/develfood/${data.id}`)
       .then((response: AxiosResponse) => {
         setCoupons([...coupons, ...response.data]);
       })
@@ -34,9 +43,19 @@ export function Coupons() {
     setIsLoading(false);
   };
 
+  async function loadData() {
+    await fetchData();
+  }
+
   useEffect(() => {
-    getCoupons();
+    loadData();
   }, []);
+
+  useEffect(() => {
+    if (data.id) {
+      getCoupons();
+    }
+  }, [data]);
 
   const renderItem = ({item}: {item: Coupon}) => {
     return (
@@ -49,6 +68,8 @@ export function Coupons() {
       )
     );
   };
+  console.log(coupons);
+  console.log(data);
 
   return (
     <>
@@ -70,7 +91,7 @@ export function Coupons() {
           keyExtractor={item => item._id.toString()}
           renderItem={({item}) => renderItem({item})}
           ListEmptyComponent={
-            !isLoading ? (
+            !isLoading && coupons !== [] ? (
               <ListEmptyComponent
                 source={theme.images.noFavorites}
                 title="Você não possui cupons Develfood"

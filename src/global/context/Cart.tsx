@@ -4,6 +4,7 @@ import {Alert} from 'react-native';
 import {useAuth} from '.';
 import {useFetch} from '@global/services/get';
 import {usePost} from '@global/services/post';
+import axios from 'axios';
 
 interface AuthProviderProps {
   children: React.ReactNode;
@@ -78,7 +79,7 @@ interface ResquestItemsResponse {
   price: number;
   observation: string;
 }
-interface UserID {
+export interface UserID {
   id: number;
 }
 
@@ -401,7 +402,29 @@ function CartProvider({children}: AuthProviderProps) {
     };
   });
 
+  const postOrder = async () => {
+    await axios
+      .post('http://192.168.0.65:9001/develfood/order', {
+        restaurantId: restaurantId.toString(),
+        userId: data.id.toString(),
+        createdAt: new Date(),
+      })
+      .then(() => {})
+      .catch(() => {});
+  };
+
+  const getCoupon = async () => {
+    await axios
+      .get(
+        `http://192.168.0.65:9001/develfood/order/${data.id}/${restaurantId}/${nameRestaurant}/code`,
+      )
+      .then(() => {})
+      .catch(() => {});
+  };
+
   async function userRequestCheckout(CheckoutUserSuccess: () => void) {
+    postOrder();
+
     const createCheckoutRequest: CartRequest = {
       costumer: {
         id: data.id,
@@ -418,6 +441,7 @@ function CartProvider({children}: AuthProviderProps) {
       restaurantPromotion: null,
     };
     await handlerPost(createCheckoutRequest, cartError, CheckoutUserSuccess);
+    getCoupon();
   }
 
   const [plateData, setPlateData] = useState<Plate>({} as Plate);

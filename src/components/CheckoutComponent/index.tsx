@@ -13,7 +13,6 @@ import {
   View2,
   View3,
 } from './styles';
-import axios from 'axios';
 
 interface Props {
   loading?: boolean;
@@ -33,39 +32,9 @@ export function CheckoutComponent({loading}: Props) {
   }
   const priceFormatted = priceConverter();
 
-  const postOrder = async () => {
-    await axios
-      .post('http://192.168.0.65:9001/develfood/order', {
-        counter: 9,
-        restaurantId: '123',
-        userId: '12322',
-        createdAt: new Date(),
-      })
-      .then(response => {
-        if (response.data.counter % 3 === 0) {
-          console.log('divisivel', response.data.counter);
-          postCoupon();
-        }
-      })
-      .catch(() => {});
-  };
-
-  const postCoupon = async () => {
-    await axios
-      .post('http://192.168.0.65:9001/develfood', {
-        percentage: 12,
-        restaurantId: '2',
-        restaurantName: 'Dale Boca',
-        userId: '12',
-        createdAt: new Date(),
-      })
-      .then(() => {});
-  };
-
   function handleCheckout() {
     function CheckoutUserSuccess(data: string) {
       data && navigation.navigate('CheckoutSuccess' as never);
-      postOrder();
       setTimeout(() => {
         clearCart();
       }, 2000);

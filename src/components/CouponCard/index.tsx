@@ -1,11 +1,9 @@
-import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-// import {useTheme} from 'styled-components';
 import {
   Container,
   LeftWrapper,
-  NavigateButton,
-  ButtonLabel,
+  // NavigateButton,
+  // ButtonLabel,
   Percentage,
   RestaurantName,
   Description,
@@ -17,15 +15,7 @@ interface CouponProps {
   percentage: number;
 }
 
-export function CouponCard({id, restaurantName, percentage}: CouponProps) {
-  // const theme = useTheme();
-
-  const navigation = useNavigation();
-
-  const navigateToHome = () => {
-    navigation.navigate('Home' as never);
-  };
-
+export function CouponCard({restaurantName, percentage}: CouponProps) {
   return (
     <Container>
       <LeftWrapper>
@@ -33,9 +23,9 @@ export function CouponCard({id, restaurantName, percentage}: CouponProps) {
           Cupom de desconto
           <RestaurantName> {restaurantName}</RestaurantName>
         </Description>
-        <NavigateButton onPress={navigateToHome}>
+        {/* <NavigateButton onPress={navigateToHome}>
           <ButtonLabel>Ativar e ir para o restaurante</ButtonLabel>
-        </NavigateButton>
+        </NavigateButton> */}
       </LeftWrapper>
       <Percentage>{percentage}%</Percentage>
     </Container>
