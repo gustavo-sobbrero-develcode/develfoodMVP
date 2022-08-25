@@ -404,11 +404,14 @@ function CartProvider({children}: AuthProviderProps) {
 
   const postOrder = async () => {
     await axios
-      .post('http://192.168.0.65:9001/develfood/order', {
-        restaurantId: restaurantId.toString(),
-        userId: data.id.toString(),
-        createdAt: new Date(),
-      })
+      .post(
+        'https://4a8c-2804-14c-7d86-961f-a2d0-731d-3bd7-1d00.sa.ngrok.io/develfood/order',
+        {
+          restaurantId: restaurantId.toString(),
+          userId: data.id.toString(),
+          createdAt: new Date(),
+        },
+      )
       .then(() => {})
       .catch(() => {});
   };
@@ -416,7 +419,7 @@ function CartProvider({children}: AuthProviderProps) {
   const getCoupon = async () => {
     await axios
       .get(
-        `http://192.168.0.65:9001/develfood/order/${data.id}/${restaurantId}/${nameRestaurant}/code`,
+        `https://4a8c-2804-14c-7d86-961f-a2d0-731d-3bd7-1d00.sa.ngrok.io/develfood/order/${data.id}/${restaurantId}/${nameRestaurant}/code`,
       )
       .then(() => {})
       .catch(() => {});

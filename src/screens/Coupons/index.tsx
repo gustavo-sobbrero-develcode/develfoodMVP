@@ -33,7 +33,9 @@ export function Coupons() {
 
   const getCoupons = async () => {
     await axios
-      .get(`http://192.168.0.65:9001/develfood/${data.id}`)
+      .get(
+        `https://4a8c-2804-14c-7d86-961f-a2d0-731d-3bd7-1d00.sa.ngrok.io/develfood/${data.id}`,
+      )
       .then((response: AxiosResponse) => {
         setCoupons([...coupons, ...response.data]);
       })
