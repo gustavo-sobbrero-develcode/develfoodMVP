@@ -2,8 +2,6 @@ import React from 'react';
 import {
   Container,
   LeftWrapper,
-  // NavigateButton,
-  // ButtonLabel,
   Percentage,
   RestaurantName,
   Description,
@@ -23,9 +21,6 @@ export function CouponCard({restaurantName, percentage}: CouponProps) {
           Cupom de desconto
           <RestaurantName> {restaurantName}</RestaurantName>
         </Description>
-        {/* <NavigateButton onPress={navigateToHome}>
-          <ButtonLabel>Ativar e ir para o restaurante</ButtonLabel>
-        </NavigateButton> */}
       </LeftWrapper>
       <Percentage>{percentage}%</Percentage>
     </Container>

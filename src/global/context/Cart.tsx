@@ -405,7 +405,7 @@ function CartProvider({children}: AuthProviderProps) {
   const postOrder = async () => {
     await axios
       .post(
-        'https://4a8c-2804-14c-7d86-961f-a2d0-731d-3bd7-1d00.sa.ngrok.io/develfood/order',
+        'https://3780-2804-14c-7d86-961f-7a32-7028-136e-6935.sa.ngrok.io/develfood/order',
         {
           restaurantId: restaurantId.toString(),
           userId: data.id.toString(),
@@ -419,7 +419,7 @@ function CartProvider({children}: AuthProviderProps) {
   const getCoupon = async () => {
     await axios
       .get(
-        `https://4a8c-2804-14c-7d86-961f-a2d0-731d-3bd7-1d00.sa.ngrok.io/develfood/order/${data.id}/${restaurantId}/${nameRestaurant}/code`,
+        `https://3780-2804-14c-7d86-961f-7a32-7028-136e-6935.sa.ngrok.io/develfood/order/${data.id}/${restaurantId}/${nameRestaurant}/code`,
       )
       .then(() => {})
       .catch(() => {});

@@ -21,19 +21,6 @@ export const LeftWrapper = styled.View`
   justify-content: space-between;
 `;
 
-export const NavigateButton = styled.TouchableOpacity`
-  height: 35%;
-  width: 80%;
-  border-color: ${({theme}) => theme.colors.background_red};
-  border-width: 1px;
-  border-radius: 4px;
-`;
-
-export const ButtonLabel = styled.Text`
-  color: ${({theme}) => theme.colors.background_red};
-  align-self: center;
-`;
-
 export const RestaurantName = styled.Text`
   font-size: ${RFValue(12)}px;
   color: ${({theme}) => theme.colors.text_dark};

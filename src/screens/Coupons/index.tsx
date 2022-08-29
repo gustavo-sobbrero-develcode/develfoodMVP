@@ -5,7 +5,7 @@ import {HeaderComponent} from '@components/HeaderComponent';
 import {ActivityIndicator, FlatList, StatusBar} from 'react-native';
 import {Container, Footer} from './styles';
 import {CouponCard} from '@components/CouponCard';
-import axios, {AxiosError, AxiosResponse} from 'axios';
+import axios, {AxiosResponse} from 'axios';
 import {useFetch} from '@global/services/get';
 import {UserID} from '@global/context/Cart';
 import {useAuth} from '@global/context';
@@ -34,14 +34,12 @@ export function Coupons() {
   const getCoupons = async () => {
     await axios
       .get(
-        `https://4a8c-2804-14c-7d86-961f-a2d0-731d-3bd7-1d00.sa.ngrok.io/develfood/${data.id}`,
+        `https://3780-2804-14c-7d86-961f-7a32-7028-136e-6935.sa.ngrok.io/develfood/${data.id}`,
       )
       .then((response: AxiosResponse) => {
         setCoupons([...coupons, ...response.data]);
       })
-      .catch((error: AxiosError) => {
-        console.log(error);
-      });
+      .catch(() => {});
     setIsLoading(false);
   };
 
@@ -70,8 +68,6 @@ export function Coupons() {
       )
     );
   };
-  console.log(coupons);
-  console.log(data);
 
   return (
     <>
